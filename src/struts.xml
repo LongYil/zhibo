@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    
+	<package name="first" namespace="/" extends="struts-default">
+	
+	<action name="user_*" class="userAction" method="{1}">
+		<result name="success">/index.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
+	
+	
+	
+	</package>
+	
+</struts>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	<!-- 配置数据库信息  必须的 -->
+<!-- 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:mysql:///spring04?characterEncoding=UTF-8</property> -->
+<!-- 		<property name="hibernate.connection.username">root</property> -->
+<!-- 		<property name="hibernate.connection.password">root</property> -->
+		
+		
+	<!-- 配置hibernate信息 可选的 -->
+		<!-- 输出底层的sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		
+		<!-- 格式化sql语句，使语句更整齐 -->
+		<property name="hibernate.format_sql">true</property>
+		
+		<!-- hibernate会帮我们创建数据表，但需要配置才可以
+		为什么用update？
+		update：更新，如果已有数据表，执行更新，如果没有，执行创建
+		 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- 配置数据库的方言  让hibernate框架识别不同类型数据库的语句
+		在mysql里面实现分页 关键字  limit，只能使用在mysql中
+		在oracle里面  使用rownum实现分页   
+		 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+			
+	<!-- 把映射文件放到核心配置文件中 必须的 -->
+		<mapping resource="cn/lxy/po/User.hbm.xml"/>
+
+	</session-factory>
+
+</hibernate-configuration>
