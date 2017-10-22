@@ -3,12 +3,14 @@ package cn.lxy.action;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-@Controller(value="baseAction")
-public class BasicAction extends ActionSupport implements SessionAware {
+public class BasicAction<S> extends ActionSupport implements SessionAware {
+	
+	@Autowired
+	private S servc;
 	
 	private Map sesion;
 	@Override

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<!-- 上述约束文件不能出一毫差错，否则程序无法运行 -->
+<hibernate-mapping>
+
+	<class name="cn.lxy.po.Student" table="Student">
+		<id name="id" column="id">		
+			<generator class="native"></generator>
+		</id>		
+		
+		<property name="username" />
+		<property name="name" />
+		<property name="password" />
+		<property name="tel" />
+		<property name="head" />
+
+	</class>
+</hibernate-mapping>

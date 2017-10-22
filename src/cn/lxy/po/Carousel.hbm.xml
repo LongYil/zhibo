@@ -9,18 +9,13 @@
 	name属性：   实体类的全路径
 	table属性：	 数据库表的名称
 	-->
-	<class name="cn.lxy.po.User" table="User">
-		<id name="uid" column="uid">		
+	<class name="cn.lxy.po.Carousel" table="Carousel">
+		<id name="id" column="id">		
 			<generator class="native"></generator>
 		</id>		
-		<!-- 配置其他的属性和表的字段对应 
-			name:实体类属性名称
-			column:生成表字段名称
-		-->
-		<property name="username" />
+		
+		<property name="face" />
 		<property name="address" />
-	
-	
-	
+
 	</class>
 </hibernate-mapping>
