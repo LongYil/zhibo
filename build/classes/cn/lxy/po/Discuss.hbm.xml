@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	<!-- 上述约束文件不能出一毫差错，否则程序无法运行 -->
+<hibernate-mapping>
+
+	<class name="cn.lxy.po.Discuss" table="Discuss">
+		<id name="id" column="id">		
+			<generator class="native"></generator>
+		</id>		
+		<many-to-one name="course" class="cn.lxy.po.Course" column="course_id"></many-to-one>		
+		<many-to-one name="student" class="cn.lxy.po.Student" column="student_id"></many-to-one>
+		<property name="time" />
+		<property name="content" />
+
+	</class>
+</hibernate-mapping>
