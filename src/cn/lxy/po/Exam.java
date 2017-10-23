@@ -14,6 +14,8 @@ public class Exam {
 	private String face;//实体封面url
 	private String describes;//试题描述
 	private String fileaddress;//试题附件 url
+	//在试题里面表示所属教师，一个试题只能属于一个教师
+	private Teacher teacher;
 	
 	public Integer getId() {
 		return id;
@@ -44,6 +46,12 @@ public class Exam {
 	}
 	public void setFileaddress(String fileaddress) {
 		this.fileaddress = fileaddress;
+	}
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 }

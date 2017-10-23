@@ -8,7 +8,8 @@
 	<class name="cn.lxy.po.Exam" table="Exam">
 		<id name="id" column="id">		
 			<generator class="native"/>
-		</id>		
+		</id>	
+		<many-to-one name="teacher" class="cn.lxy.po.Teacher" column="teacher_id"></many-to-one>	
 		<property name="name" />
 		<property name="face" />
 		<property name="describes" />

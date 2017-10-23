@@ -1,5 +1,8 @@
 package cn.lxy.po;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * <p>Title:Teacher</p>
  * <p>Description:教师实体 </p>
@@ -21,6 +24,10 @@ public class Teacher {
 	private String head;//头像地址
 	private String fms;//
 	private String streamid;//串流码
+	//在教师里面表示直播课程，一个教师拥有多个直播课程
+	private Set<Course> setCourse = new HashSet<Course>();
+	//在教师里面表示试题，一个教师拥有多个试题
+	private Set<Exam> setExam = new HashSet<Exam>();
 	
 	public Integer getId() {
 		return id;
@@ -100,5 +107,17 @@ public class Teacher {
 	public void setStreamid(String streamid) {
 		this.streamid = streamid;
 	}
+	public Set<Course> getSetCourse() {
+		return setCourse;
+	}
+	public void setSetCourse(Set<Course> setCourse) {
+		this.setCourse = setCourse;
+	}
+	public Set<Exam> getSetExam() {
+		return setExam;
+	}
+	public void setSetExam(Set<Exam> setExam) {
+		this.setExam = setExam;
+	}	
 	
 }

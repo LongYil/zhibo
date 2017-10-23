@@ -16,6 +16,10 @@
 		<result name="success">/index.jsp</result>
 		<result name="aaa">/test.jsp</result>
 	</action>
+	<action name="note_*" class="noteAction" method="{1}">
+		<result name="success">/index.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
 	
 	
 	
