@@ -3,13 +3,14 @@ package cn.lxy.service;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lxy.dao.CarouselDao;
 import cn.lxy.dao.Impl.CarouselDaoImpl;
 
 @Transactional
-@Scope(value="carouselServc")
+@Service(value="carouselServc")
 public class CarouselServc extends CommonSevc<CarouselDao, CarouselDaoImpl> {
 
 	@Override

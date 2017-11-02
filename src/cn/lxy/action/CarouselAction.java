@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Carousel;
 import cn.lxy.service.CarouselServc;
 
-public class CarouselAction extends BasicAction<CarouselServc> implements ModelDriven<Carousel>{
+public class CarouselAction extends BasicAction implements ModelDriven<Carousel>{
 	
 	@Autowired
 	private Carousel carousel;

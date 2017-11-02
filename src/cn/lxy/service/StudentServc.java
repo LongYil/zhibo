@@ -3,19 +3,20 @@ package cn.lxy.service;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lxy.dao.Impl.StudentDaoImpl;
 import cn.lxy.po.Student;
 
+
 @Transactional
-@Scope(value="studentServc")
+@Service(value="studentServc")
 public class StudentServc extends CommonSevc<Student, StudentDaoImpl> {
 
 	@Override
 	public void save(Student arg) {
-		//
-		
+		daoImpl.save(arg);		
 	}
 
 	@Override
@@ -26,8 +27,7 @@ public class StudentServc extends CommonSevc<Student, StudentDaoImpl> {
 
 	@Override
 	public List<Student> findAll(String arg) {
-		//
-		return null;
+		return daoImpl.findAll();
 	}
 
 	@Override

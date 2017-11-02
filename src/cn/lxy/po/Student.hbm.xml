@@ -15,6 +15,10 @@
 		<property name="password" />
 		<property name="tel" />
 		<property name="head" />
+		<property name="school" />
+		<property name="department" />
+		<property name="sex" />
+		<property name="classandgrade" />
 		
 		<set name="setNote" inverse="false" cascade="save-update,delete" fetch="select" lazy="extra">
 			<key column="student_id"/>

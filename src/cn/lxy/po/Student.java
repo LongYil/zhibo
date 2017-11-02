@@ -15,8 +15,12 @@ public class Student {
 	private String username;//用户名
 	private String name;//学生姓名
 	private String password;//密码
-	private Character tel;//手机号
+	private String tel;//手机号
 	private String head;//头像地址
+	private String school;//学校
+	private String department;//学院
+	private String sex;//性别
+	private String classandgrade;//班级
 	
 	//在学生里面表示所拥有的笔记，一个学生拥有多个笔记
 	private Set<Note> setNote = new HashSet<Note>();
@@ -47,10 +51,10 @@ public class Student {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Character getTel() {
+	public String getTel() {
 		return tel;
 	}
-	public void setTel(Character tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 	public String getHead() {
@@ -58,6 +62,30 @@ public class Student {
 	}
 	public void setHead(String head) {
 		this.head = head;
+	}
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getClassandgrade() {
+		return classandgrade;
+	}
+	public void setClassandgrade(String classandgrade) {
+		this.classandgrade = classandgrade;
 	}
 	public Set<Note> getSetNote() {
 		return setNote;
@@ -71,6 +99,5 @@ public class Student {
 	public void setSetDiscuss(Set<Discuss> setDiscuss) {
 		this.setDiscuss = setDiscuss;
 	}
-
 	
 }

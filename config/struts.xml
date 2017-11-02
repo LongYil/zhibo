@@ -16,10 +16,44 @@
 		<result name="success">/index.jsp</result>
 		<result name="aaa">/test.jsp</result>
 	</action>
+	
+	<action name="course_*" class="courseAction" method="{1}">
+		<result name="success">/index.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
+	
+	<action name="discuss_*" class="discussAction" method="{1}">
+		<result name="success">/index.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
+	
+	<action name="exam_*" class="examAction" method="{1}">
+		<result name="success">/index.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
+	
+	<action name="manager_*" class="managerAction" method="{1}">
+		<result name="success">/index.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
+	
 	<action name="note_*" class="noteAction" method="{1}">
 		<result name="success">/index.jsp</result>
 		<result name="aaa">/test.jsp</result>
 	</action>
+	
+	<action name="student_*" class="studentAction" method="{1}">
+		<result name="findAll">/studentmanager.jsp</result>
+		<result name="add">/index.html</result>
+	</action>
+	
+	<action name="teacher_*" class="teacherAction" method="{1}">
+		<result name="findAll">/teachermanager.jsp</result>
+		<result name="aaa">/test.jsp</result>
+	</action>
+	
+	
+	
 	
 	
 	

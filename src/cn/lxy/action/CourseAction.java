@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Course;
 import cn.lxy.service.CourseServc;
 
-public class CourseAction extends BasicAction<CourseServc> implements ModelDriven<Course> {
+public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	@Autowired
 	private Course course;
 	

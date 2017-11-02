@@ -19,7 +19,7 @@ public class Teacher {
 	private String subject;//科目
 	private String school;//毕业院校
 	private String teacthage;//教龄
-	private Character tel;//手机号
+	private String tel;//手机号
 	private String email;//邮箱
 	private String head;//头像地址
 	private String fms;//
@@ -77,10 +77,10 @@ public class Teacher {
 	public void setTeacthage(String teacthage) {
 		this.teacthage = teacthage;
 	}
-	public Character getTel() {
+	public String getTel() {
 		return tel;
 	}
-	public void setTel(Character tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 	public String getEmail() {

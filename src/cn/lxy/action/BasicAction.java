@@ -4,13 +4,12 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class BasicAction<S> extends ActionSupport implements SessionAware {
-	
-	@Autowired
-	private S servc;
+@Controller(value="baseAction")
+public class BasicAction extends ActionSupport implements SessionAware {
 	
 	private Map sesion;
 	@Override

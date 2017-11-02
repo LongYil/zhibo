@@ -3,13 +3,14 @@ package cn.lxy.service;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lxy.dao.Impl.DiscussDaoImpl;
 import cn.lxy.po.Discuss;
 
 @Transactional
-@Scope(value="discussServc")
+@Service(value="discussServc")
 public class DiscussServc extends CommonSevc<Discuss, DiscussDaoImpl> {
 
 	@Override

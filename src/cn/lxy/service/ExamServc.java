@@ -3,13 +3,14 @@ package cn.lxy.service;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lxy.dao.Impl.ExamDaoImpl;
 import cn.lxy.po.Exam;
 
 @Transactional
-@Scope(value="examServc")
+@Service(value="examServc")
 public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 
 	@Override

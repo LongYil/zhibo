@@ -2,35 +2,34 @@ package cn.lxy.service;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lxy.dao.Impl.TeacherDaoImpl;
+import cn.lxy.po.Teacher;
 
 @Transactional
-@Scope(value="teacherServc")
-public class TeacherServc extends CommonSevc<TeacherServc, TeacherDaoImpl> {
+@Service(value="teacherServc")
+public class TeacherServc extends CommonSevc<Teacher, TeacherDaoImpl> {
 
 	@Override
-	public void save(TeacherServc arg) {
-		//
-		
+	public void save(Teacher arg) {
+		daoImpl.save(arg);		
 	}
 
 	@Override
-	public TeacherServc find(String arg) throws Exception {
-		//
-		return null;
-	}
-
-	@Override
-	public List<TeacherServc> findAll(String arg) {
+	public Teacher find(String arg) throws Exception {
 		//
 		return null;
 	}
 
 	@Override
-	public void delete(TeacherServc arg) {
+	public List<Teacher> findAll(String arg) {
+		return daoImpl.findAll();
+	}
+
+	@Override
+	public void delete(Teacher arg) {
 		//
 		
 	}

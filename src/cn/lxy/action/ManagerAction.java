@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Manager;
 import cn.lxy.service.ManagerServc;
 
-public class ManagerAction extends BasicAction<ManagerServc> implements ModelDriven<Manager> {
+public class ManagerAction extends BasicAction implements ModelDriven<Manager> {
 
 	@Autowired
 	private Manager manager;

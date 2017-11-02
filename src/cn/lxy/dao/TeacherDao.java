@@ -1,5 +1,9 @@
 package cn.lxy.dao;
 
-public interface TeacherDao {
+import java.util.List;
 
+import cn.lxy.po.Teacher;
+
+public interface TeacherDao {
+	List<Teacher> findAll();
 }

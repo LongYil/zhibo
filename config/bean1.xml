@@ -19,7 +19,6 @@
 			<property name="password" value="1234"></property>
 		</bean>
 		
-		
 <!-- 		sessionFactory创建交给spring管理 
 			配置sessionFactory创建						-->
 		<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> 
@@ -29,16 +28,16 @@
 				<property name="configLocations" value="classpath:hibernate.cfg.xml"></property>
 		</bean>
 <!-- 		配置事务 -->
-<!-- 		第一步  配置事务管理器 -->
+<!-- 		第一步  配置事务管理器   注入sessionFactory -->
 		<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 <!-- 			注入sessionFactory -->
 			<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
+		
 		<!-- 第二步 开始事务注解 -->
 		<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 		
 
-		<bean id="basicAction" class="cn.lxy.action.BasicAction" scope="prototype"/>
 		<bean id="carouselAction" class="cn.lxy.action.CarouselAction" scope="prototype"/>
 		<bean id="courseAction" class="cn.lxy.action.CourseAction" scope="prototype"/>
 		<bean id="discussAction" class="cn.lxy.action.DiscussAction" scope="prototype"/>
@@ -49,15 +48,25 @@
 		<bean id="teacherAction" class="cn.lxy.action.TeacherAction" scope="prototype"/>
 		
 		
-		
-		
-		
-		
-		
-<!-- 		创建hibernateTemplate对象 -->
+		<bean id="student" class="cn.lxy.po.Student" scope="prototype"/>
+		<bean id="carousel" class="cn.lxy.po.Carousel" scope="prototype"/>
+		<bean id="course" class="cn.lxy.po.Course" scope="prototype"/>
+		<bean id="discuss" class="cn.lxy.po.Discuss" scope="prototype"/>
+		<bean id="manager" class="cn.lxy.po.Manager" scope="prototype"/>
+		<bean id="note" class="cn.lxy.po.Note" scope="prototype"/>
+		<bean id="teacher" class="cn.lxy.po.Teacher" scope="prototype"/>
+
+
+<!-- 		创建hibernateTemplate对象   注入sessionFactory -->
 		<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 <!-- 			注入sessionFactory -->
 				<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
-			
+
+<!-- 	开启注解扫描 -->
+<!-- 		1 到包里面扫描类、方法、属性上面是否有注解 -->
+		<context:component-scan base-package="cn.lxy"></context:component-scan>
+<!-- 		只会扫描属性上面的注解 -->
+		<context:annotation-config></context:annotation-config>		
 </beans>
+

@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Discuss;
 import cn.lxy.service.DiscussServc;
 
-public class DiscussAction extends BasicAction<DiscussServc> implements ModelDriven<Discuss> {
+public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 	@Autowired
 	private Discuss discuss;
 	
