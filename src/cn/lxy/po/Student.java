@@ -12,6 +12,7 @@ import java.util.Set;
  */
 public class Student {
 	private Integer id;//序号
+	private Integer userstatus;//学生状态  1：可用  0：禁用   禁用后不可登录系统
 	private String username;//用户名
 	private String name;//学生姓名
 	private String password;//密码
@@ -99,5 +100,12 @@ public class Student {
 	public void setSetDiscuss(Set<Discuss> setDiscuss) {
 		this.setDiscuss = setDiscuss;
 	}
+	public Integer getUserstatus() {
+		return userstatus;
+	}
+	public void setUserstatus(Integer userstatus) {
+		this.userstatus = userstatus;
+	}
+
 	
 }

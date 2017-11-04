@@ -29,10 +29,15 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		return "add";
 	}
 	
+	//查找所有教师
 	public String findAll() {
-		listteacher = servc.findAll("");
+		listteacher = servc.findAll("");	
+		System.out.println("总页数:"+this.getSesion().get("allpage"));
 		return "findAll";
 	}
+	
+	
+	
 	
 	
 	

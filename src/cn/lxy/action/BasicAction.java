@@ -22,5 +22,5 @@ public class BasicAction extends ActionSupport implements SessionAware {
 	public void setSesion(Map sesion) {
 		this.sesion = sesion;
 	}
-
+	
 }

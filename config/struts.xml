@@ -42,21 +42,22 @@
 		<result name="aaa">/test.jsp</result>
 	</action>
 	
-	<action name="student_*" class="studentAction" method="{1}">
-		<result name="findAll">/studentmanager.jsp</result>
-		<result name="add">/index.html</result>
-	</action>
-	
 	<action name="teacher_*" class="teacherAction" method="{1}">
 		<result name="findAll">/teachermanager.jsp</result>
 		<result name="aaa">/test.jsp</result>
 	</action>
 	
-	
-	
-	
-	
-	
+	</package>
+
+	<package name="jsonaction" namespace="/"  extends="json-default">  
+		   <interceptors>              
+		   		<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>          
+		   </interceptors> 	
+		   <action name="student_*" class="studentAction" method="{1}"> 
+				<result name="findAll">/studentmanager.jsp</result>
+				<result name="add">/index.html</result>
+		        <result type="json" name="ajaxresult1"><param name="root">resultinfo</param></result>  
+		   </action>
 	</package>
 	
 </struts>

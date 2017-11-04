@@ -63,7 +63,7 @@
                             </div>
 
 							<div class="form-group">
-                                <label class="col-sm-3 control-label">FMS&nbhsp;URL</label>
+                                <label class="col-sm-3 control-label">FMS  URL</label>
                                 <div class="col-sm-8">
                                     <input name="fms" type="text" placeholder="请输入FMS URL" class="form-control"> 
                                     <span class="help-block m-b-none"></span>
@@ -89,13 +89,13 @@
                 </div>
             </div>
 
-
-
-
-    
-    
-
 </body>
+<script type="text/javascript">
+
+
+
+
+</script>
 
 </html>
     
