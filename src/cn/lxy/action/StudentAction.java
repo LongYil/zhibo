@@ -27,23 +27,19 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private StudentServc servc;
 	
 	private List<Student> liststudent = new ArrayList<Student>();
-	
 	private List<Integer> pages = new ArrayList<Integer>();
-	
 	private List<Student> tempstudent = new ArrayList<Student>();
 	
 	@Override
 	public Student getModel() {
 		return student;
 	}
-	
 	//学生用户注册新用户
 	public String add() {
 		student.setUserstatus(1);
 		servc.save(student);
 		return "add";
 	}
-	
 	//查找所有未禁用学生用户
 	public String findAllEnable() {
 		liststudent.clear();
@@ -55,7 +51,6 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		pages = countAllPage.getStartPages(temp);
 		return "findAll";
 	}
-	
 	//查找所有已禁用学生用户
 	public String findAllDisabled() {
 		liststudent.clear();
@@ -79,7 +74,6 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		this.resultinfo = servc.start(userid);
 		return "ajaxresult1";
 	}
-	
 	//根据页码查找相应页面的数据
 	public String findEnableByPageNumber() {
 		int page = Integer.parseInt(enablePageNumber);
@@ -129,6 +123,5 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	public void setEnablePageNumber(String enablePageNumber) {
 		this.enablePageNumber = enablePageNumber;
 	}
-	
 	
 }

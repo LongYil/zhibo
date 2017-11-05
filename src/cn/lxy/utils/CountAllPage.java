@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class CountAllPage {
 	
 	private List<Integer> pages = new ArrayList<Integer>();
-	
 	//根据总记录数得到总页数
 	public int getAllPage(int items) {
 		int temp = items;
@@ -20,7 +19,6 @@ public class CountAllPage {
 			return (temp/11)+1;
 		}
 	}
-	
 	//得到起始页码组
 	public List<Integer> getStartPages(int all) {
 		pages.clear();
@@ -36,7 +34,6 @@ public class CountAllPage {
 		}
 		return pages;
 	}	
-	
 	//根据指定页码返回响应页码组
 	public List<Integer> getPages(int start,int all) {
 		pages.clear();
@@ -50,7 +47,6 @@ public class CountAllPage {
 		Collections.sort(pages);
 		return pages;
 	}
-	
 	//根据指定页码和总记录数得到终止索引
 	public int getLastIndex(int page,int all) {
 		int a = page*11;
