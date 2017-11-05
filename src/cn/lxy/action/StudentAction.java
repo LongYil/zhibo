@@ -27,8 +27,10 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private StudentServc servc;
 	
 	private List<Student> liststudent = new ArrayList<Student>();
+	
 	private List<Integer> pages = new ArrayList<Integer>();
 	
+	private List<Student> tempstudent = new ArrayList<Student>();
 	
 	@Override
 	public Student getModel() {
@@ -49,6 +51,7 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		liststudent = servc.findAll("");
 		int temp = countAllPage.getAllPage(liststudent.size());
 		this.getSesion().put("allEnableStudentPage",temp);
+		this.getSesion().put("enableListStudent", liststudent);
 		pages = countAllPage.getStartPages(temp);
 		return "findAll";
 	}
@@ -79,13 +82,11 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	
 	//根据页码查找相应页面的数据
 	public String findEnableByPageNumber() {
-
-		System.out.println("页面:"+enablePageNumber+""+liststudent.size());
-		
-		
-		
-		pages.clear();
-		
+		int page = Integer.parseInt(enablePageNumber);
+		tempstudent = (List<Student>) this.getSesion().get("enableListStudent");
+		liststudent = tempstudent.subList((page-1)*11,countAllPage.getLastIndex(page,tempstudent.size()));
+		System.out.println(liststudent.size());
+		pages.clear();	
 		pages = countAllPage.getPages(Integer.parseInt(enablePageNumber),Integer.parseInt(this.getSesion().get("allEnableStudentPage").toString()));
 		return "findAll";
 	}
