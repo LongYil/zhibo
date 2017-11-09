@@ -7,7 +7,6 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="false" />
-    
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
     
 	<package name="first" namespace="/" extends="struts-default">
@@ -42,10 +41,7 @@
 		<result name="aaa">/test.jsp</result>
 	</action>
 	
-	<action name="teacher_*" class="teacherAction" method="{1}">
-		<result name="findAll">/teachermanager.jsp</result>
-		<result name="aaa">/test.jsp</result>
-	</action>
+
 	
 	
 	<action name="addpo_*" class="addPoAction" method="{1}">
@@ -61,11 +57,18 @@
 		   <interceptors>              
 		   		<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>          
 		   </interceptors> 	
+		   
 		   <action name="student_*" class="studentAction" method="{1}"> 
 				<result name="findAll">/studentmanager.jsp</result>
 				<result name="add">/index.html</result>
 		        <result type="json" name="ajaxresult1"><param name="root">resultinfo</param></result>  
 		   </action>
+		   
+		   <action name="teacher_*" class="teacherAction" method="{1}">
+				<result name="findAll">/teachermanager.jsp</result>
+				<result type="json" name="ajaxresult2"><param name="root">resultinfo</param></result>
+		   </action>
+		   
 	</package>
-	
+		   
 </struts>

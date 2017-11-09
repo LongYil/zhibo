@@ -5,7 +5,6 @@
  <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>教师管理</title>
@@ -19,7 +18,6 @@
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
-
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
@@ -28,7 +26,7 @@
                     <div class="ibox-title">
                         <h5>教师信息</h5>
                         <div class="ibox-tools">
-							<button type="button" class="btn btn-w-m btn-info" onClick="tijiao('addteacher.jsp')">添加教师</button>
+							<button type="button" class="btn btn-w-m btn-info" onClick="addTeacher('addteacher.jsp')">添加教师</button>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -66,7 +64,7 @@
 											<td><s:property value="streamid"/></td>
 											<td>
 											 <a class="btn btn-primary btn-rounded" href="#">修改</a>
-										     <a class="btn btn-success btn-rounded" href="#">删除</a>
+										     <a class="btn btn-success btn-rounded" onClick="deleteTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">删除</a>
 											</td>
 										</tr>
 										</c:if>
@@ -103,44 +101,34 @@
             </div>
         </div>
 
-    </div>
-<!--
-
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-
-
-
-    <script src="js/plugins/peity/jquery.peity.min.js"></script>
-
-
-    <script src="js/content.js?v=1.0.0"></script>
-
-
- 
-    <script src="js/plugins/iCheck/icheck.min.js"></script>
-
-
-    <script src="js/demo/peity-demo.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-    </script>
-
- -->   
-    
+    </div> 
+<script src="js/ajaxcommunicate.js"></script>  
 <script>
-function tijiao(url){
+function deleteTeacher(arg1,arg2){
+	parent.layer.confirm('确定删除教师:'+arg2+'？', {
+	    btn: ['确定','取消'], //按钮
+	    shade: false //不显示遮罩
+	}, function(){
+		var text = ajaxSubmit("teacher_delete.action",arg1);
+		if(text=="1"){
+			parent.layer.msg('已删除', {icon: 1});
+			window.location="teacher_findAll.action";
+		}else{
+			parent.layer.msg('删除失败', {icon: 2});
+		}	    
+	}, function(){
+	    parent.layer.msg('已取消', {shift: 6});
+	});
+}
+
+
+
+function addTeacher(url){
 window.location=url;
 }
+
 function To(arg){
 	window.location="teacher_findEnableByPageNumber.action?enablePageNumber="+arg;
-	
 }
 </script>
 

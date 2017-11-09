@@ -5,7 +5,6 @@
 			tijiao(url,arg);
 			return getresult();
 		}
-		
 		function tijiao(url,arg){
 		if(window.XMLHttpRequest){//非IE浏览器
 			rqt = new XMLHttpRequest();

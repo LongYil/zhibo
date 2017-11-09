@@ -3,6 +3,9 @@ package cn.lxy.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
@@ -73,12 +76,23 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		pages = countAllPage.getPages(Integer.parseInt(enablePageNumber),Integer.parseInt(this.getSesion().get("allTeacherPage").toString()));
 		return "findAll";
 	}	
+	//删除指定教师用户
+	public String delete() throws Exception {
+		this.resultinfo="0";
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String teacherId = request.getParameter("info");
+		teacher = servc.find(teacherId);
+		servc.delete(teacher);
+		this.resultinfo="1";
+		return "ajaxresult2";
+	}
+	
+	
 
 	
 	
 	
 	
-
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -94,8 +108,8 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	public String getResultinfo() {
 		return resultinfo;
 	}
-	public void setResultinfo(String resultinfo) {
-		this.resultinfo = resultinfo;
+	public void setResultinfo(String resultinfo1) {
+		this.resultinfo= resultinfo1;
 	}
 	public String getEnablePageNumber() {
 		return enablePageNumber;

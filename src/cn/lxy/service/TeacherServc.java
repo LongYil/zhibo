@@ -19,19 +19,16 @@ public class TeacherServc extends CommonSevc<Teacher, TeacherDaoImpl> {
 
 	@Override
 	public Teacher find(String arg) throws Exception {
-		//
-		return null;
+		return daoImpl.find(arg);
 	}
 
 	@Override
 	public List<Teacher> findAll(String arg) {
 		return daoImpl.findAll();
 	}
-
-	@Override
+	
 	public void delete(Teacher arg) {
-		//
-		
+		daoImpl.delete(arg);		
 	}
-
+	
 }
