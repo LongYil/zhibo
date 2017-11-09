@@ -66,8 +66,11 @@
 		   
 		   <action name="teacher_*" class="teacherAction" method="{1}">
 				<result name="findAll">/teachermanager.jsp</result>
+				<result name="preUpdate">/addteacher.jsp</result>
+				<result name="add">teacher_findAll</result>
 				<result type="json" name="ajaxresult2"><param name="root">resultinfo</param></result>
 		   </action>
+		   
 		   
 	</package>
 		   

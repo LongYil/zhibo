@@ -63,7 +63,7 @@
 											<td><s:property value="fms"/></td>
 											<td><s:property value="streamid"/></td>
 											<td>
-											 <a class="btn btn-primary btn-rounded" href="#">修改</a>
+											 <a class="btn btn-primary btn-rounded" onClick="updateTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">修改</a>
 										     <a class="btn btn-success btn-rounded" onClick="deleteTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">删除</a>
 											</td>
 										</tr>
@@ -104,32 +104,33 @@
     </div> 
 <script src="js/ajaxcommunicate.js"></script>  
 <script>
-function deleteTeacher(arg1,arg2){
-	parent.layer.confirm('确定删除教师:'+arg2+'？', {
-	    btn: ['确定','取消'], //按钮
-	    shade: false //不显示遮罩
-	}, function(){
-		var text = ajaxSubmit("teacher_delete.action",arg1);
-		if(text=="1"){
-			parent.layer.msg('已删除', {icon: 1});
-			window.location="teacher_findAll.action";
-		}else{
-			parent.layer.msg('删除失败', {icon: 2});
-		}	    
-	}, function(){
-	    parent.layer.msg('已取消', {shift: 6});
-	});
-}
-
-
-
-function addTeacher(url){
-window.location=url;
-}
-
-function To(arg){
-	window.location="teacher_findEnableByPageNumber.action?enablePageNumber="+arg;
-}
+	function deleteTeacher(arg1,arg2){
+		parent.layer.confirm('确定删除教师:'+arg2+'？', {
+		    btn: ['确定','取消'], //按钮
+		    shade: false //不显示遮罩
+		}, function(){
+			var text = ajaxSubmit("teacher_delete.action",arg1);
+			if(text=="1"){
+				parent.layer.msg('已删除', {icon: 1});
+				window.location="teacher_findAll.action";
+			}else{
+				parent.layer.msg('删除失败', {icon: 2});
+			}	    
+		}, function(){
+		    parent.layer.msg('已取消', {shift: 6});
+		});
+	}
+	function updateTeacher(arg1,arg2){
+		window.location="teacher_preUpdate.action?teacherTempId="+arg1;
+	}
+	
+	function addTeacher(url){
+		window.location=url;
+	}
+	
+	function To(arg){
+		window.location="teacher_findEnableByPageNumber.action?enablePageNumber="+arg;
+	}
 </script>
 
 </body>

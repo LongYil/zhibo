@@ -23,6 +23,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	@Autowired
 	private CountAllPage countAllPage;
 	
+	private String teacherTempId;
 	private String resultinfo;
 	private String enablePageNumber;
 	
@@ -32,10 +33,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	private List<Teacher> listteacher = new ArrayList<Teacher>();
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<Teacher> tempteacher = new ArrayList<Teacher>();	
-	
-	
 
-	
 	@Override
 	public Teacher getModel() {
 		return teacher;
@@ -44,12 +42,21 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	//添加教师
 	public String add() {
 		servc.save(teacher);
-		return "add";
+		listteacher.clear();
+		pages.clear();
+		listteacher = servc.findAll("");
+		int temp = countAllPage.getAllPage(listteacher.size());
+		pageDirection = countAllPage.getLeftAndRight(0,temp);
+		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
+		this.enablePageNumber="1";
+		this.getSesion().put("allTeacherPage",temp);
+		this.getSesion().put("enableListTeacher", listteacher);
+		pages = countAllPage.getStartPages(temp);
+		return "findAll";
 	}
-	
+
 	//查找所有教师
 	public String findAll() {
-		
 		listteacher.clear();
 		pages.clear();
 		listteacher = servc.findAll("");
@@ -87,7 +94,11 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		return "ajaxresult2";
 	}
 	
-	
+	public String preUpdate() throws Exception {		
+		teacher = servc.find(teacherTempId);
+		System.out.println(teacher.getName());
+		return "preUpdate";
+	}
 
 	
 	
@@ -141,6 +152,14 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	}
 	public void setTempteacher(List<Teacher> tempteacher) {
 		this.tempteacher = tempteacher;
+	}
+
+	public String getTeacherTempId() {
+		return teacherTempId;
+	}
+
+	public void setTeacherTempId(String teacherTempId) {
+		this.teacherTempId = teacherTempId;
 	}
 	
 }
