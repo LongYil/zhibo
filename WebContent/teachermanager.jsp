@@ -51,6 +51,7 @@
                             </thead>
                             <tbody>
                                		<s:iterator value="listteacher" status="ste">
+										<c:if test="${ste.index<11}">
 										<tr>
 											<td>${ste.index+1}</td>
 											<td><s:property value="username"/></td>
@@ -68,6 +69,7 @@
 										     <a class="btn btn-success btn-rounded" href="#">删除</a>
 											</td>
 										</tr>
+										</c:if>
 									</s:iterator>
                                
                                
@@ -75,14 +77,20 @@
 								<tr>
 									<td colspan="12">
 									<div class="btn-group" style="float:right;">
-										<button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-										</button>
-										<button class="btn btn-white">1</button>
-										<button class="btn btn-white  active">2</button>
-										<button class="btn btn-white">3</button>
-										<button class="btn btn-white">4</button>
-										<button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-										</button>
+										<c:if test="${pageDirection[0]==1 }">
+										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
+										</c:if>
+												<c:forEach items="${pages}" var="index" begin="0" >
+												  <c:if test="${index==enablePageNumber}">
+												      <button class="btn btn-white active" onClick="To('${index}')">${index}</button>
+												  </c:if>
+												  <c:if test="${index!=enablePageNumber}">
+												      <button class="btn btn-white" onClick="To('${index}')">${index}</button>
+												  </c:if>					  
+												</c:forEach>
+										<c:if test="${pageDirection[1]==1 }">
+										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
+										</c:if>
 									</div>
 									</td>
 								</tr>
@@ -130,7 +138,10 @@
 function tijiao(url){
 window.location=url;
 }
-
+function To(arg){
+	window.location="teacher_findEnableByPageNumber.action?enablePageNumber="+arg;
+	
+}
 </script>
 
 </body>

@@ -18,7 +18,11 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	
 	private String resultinfo;
 	private String enablePageNumber;
+	private String disablePageNumber;
+	private int userRole;
 	
+	private int[] pageDirection = new int[2];
+	private int[] pageDirectionNumber = new int[2];
 	@Autowired
 	private CountAllPage countAllPage;
 	@Autowired
@@ -42,10 +46,14 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	}
 	//查找所有未禁用学生用户
 	public String findAllEnable() {
+		userRole = 1;
 		liststudent.clear();
 		pages.clear();
 		liststudent = servc.findAll("");
 		int temp = countAllPage.getAllPage(liststudent.size());
+		pageDirection = countAllPage.getLeftAndRight(0,temp);
+		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
+		this.enablePageNumber="1";
 		this.getSesion().put("allEnableStudentPage",temp);
 		this.getSesion().put("enableListStudent", liststudent);
 		pages = countAllPage.getStartPages(temp);
@@ -53,10 +61,16 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	}
 	//查找所有已禁用学生用户
 	public String findAllDisabled() {
+		userRole = 0;
 		liststudent.clear();
+		pages.clear();
 		liststudent = servc.findAllDisabled("");
 		int temp = countAllPage.getAllPage(liststudent.size());
+		pageDirection = countAllPage.getLeftAndRight(0,temp);
+		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
+		this.enablePageNumber="1";
 		this.getSesion().put("allDisabledStudentPage",temp);
+		this.getSesion().put("disabledListStudent", liststudent);
 		pages = countAllPage.getStartPages(temp);
 		return "findAll";
 	}
@@ -74,14 +88,30 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		this.resultinfo = servc.start(userid);
 		return "ajaxresult1";
 	}
-	//根据页码查找相应页面的数据
+	//根据页码查找未禁用学生页面的数据
 	public String findEnableByPageNumber() {
+		userRole = 1;
 		int page = Integer.parseInt(enablePageNumber);
+		int all = Integer.parseInt(this.getSesion().get("allEnableStudentPage").toString());
+		pageDirection = countAllPage.getLeftAndRight(page,all);
+		pageDirectionNumber = countAllPage.getDirectionNumber(page,all);
 		tempstudent = (List<Student>) this.getSesion().get("enableListStudent");
 		liststudent = tempstudent.subList((page-1)*11,countAllPage.getLastIndex(page,tempstudent.size()));
-		System.out.println(liststudent.size());
 		pages.clear();	
 		pages = countAllPage.getPages(Integer.parseInt(enablePageNumber),Integer.parseInt(this.getSesion().get("allEnableStudentPage").toString()));
+		return "findAll";
+	}
+	//根据页码查找已禁用学生页面的数据
+	public String findDisabledByPageNumber() {
+		userRole = 0;
+		int page = Integer.parseInt(disablePageNumber);
+		int all = Integer.parseInt(this.getSesion().get("allDisabledStudentPage").toString());
+		pageDirection = countAllPage.getLeftAndRight(page,all);
+		pageDirectionNumber = countAllPage.getDirectionNumber(page,all);
+		tempstudent = (List<Student>) this.getSesion().get("disabledListStudent");
+		liststudent = tempstudent.subList((page-1)*11,countAllPage.getLastIndex(page,tempstudent.size()));
+		pages.clear();	
+		pages = countAllPage.getPages(Integer.parseInt(disablePageNumber),Integer.parseInt(this.getSesion().get("allDisabledStudentPage").toString()));
 		return "findAll";
 	}
 	
@@ -122,6 +152,30 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	}
 	public void setEnablePageNumber(String enablePageNumber) {
 		this.enablePageNumber = enablePageNumber;
+	}
+	public int[] getPageDirection() {
+		return pageDirection;
+	}
+	public void setPageDirection(int[] pageDirection) {
+		this.pageDirection = pageDirection;
+	}
+	public int[] getPageDirectionNumber() {
+		return pageDirectionNumber;
+	}
+	public void setPageDirectionNumber(int[] pageDirectionNumber) {
+		this.pageDirectionNumber = pageDirectionNumber;
+	}
+	public String getDisablePageNumber() {
+		return disablePageNumber;
+	}
+	public void setDisablePageNumber(String disablePageNumber) {
+		this.disablePageNumber = disablePageNumber;
+	}
+	public int getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(int userRole) {
+		this.userRole = userRole;
 	}
 	
 }

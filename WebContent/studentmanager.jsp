@@ -88,30 +88,50 @@
 												</c:if>
 											</tr>
 										</c:if>									
-									</s:iterator>
-									
+									</s:iterator>	
 								<tr>
 									<td colspan="12">
 									<div class="btn-group" style="float:right;">
-										<button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-										</button>
+										
+									<c:if test="${userRole==1 }">
+										<c:if test="${pageDirection[0]==1 }">
+										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
+										</c:if>
 												<c:forEach items="${pages}" var="index" begin="0" >
 												  <c:if test="${index==enablePageNumber}">
 												      <button class="btn btn-white active" onClick="To('${index}')">${index}</button>
 												  </c:if>
 												  <c:if test="${index!=enablePageNumber}">
 												      <button class="btn btn-white" onClick="To('${index}')">${index}</button>
-												  </c:if>												  
+												  </c:if>					  
 												</c:forEach>
-										<button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-										</button>
+										<c:if test="${pageDirection[1]==1 }">
+										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
+										</c:if>
+									</c:if>	
+									<c:if test="${userRole==0}">
+										<c:if test="${pageDirection[0]==1 }">
+										  <button type="button" class="btn btn-white" onClick="Go('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
+										</c:if>
+												<c:forEach items="${pages}" var="index" begin="0" >
+												  <c:if test="${index==enablePageNumber}">
+												      <button class="btn btn-white active" onClick="Go('${index}')">${index}</button>
+												  </c:if>
+												  <c:if test="${index!=enablePageNumber}">
+												      <button class="btn btn-white" onClick="Go('${index}')">${index}</button>
+												  </c:if>					  
+												</c:forEach>
+										<c:if test="${pageDirection[1]==1 }">
+										  <button type="button" class="btn btn-white" onClick="Go('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
+										</c:if>
+									  </c:if>
+										
 									</div>
 									</td>
 								</tr>
                             </tbody>
                         </table>
-
-
+                        
                     </div>
                 </div>
             </div>
@@ -164,7 +184,9 @@ function start(arg1,arg2){
 
 function To(arg){
 	window.location="student_findEnableByPageNumber.action?enablePageNumber="+arg;
-	
+}
+function Go(arg){
+	window.location="findDisabledByPageNumber.action?disablePageNumber="+arg;
 }
 
 </script>

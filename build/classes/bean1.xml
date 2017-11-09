@@ -17,6 +17,17 @@
 			<property name="jdbcUrl" value="jdbc:mysql:///CollegeLive?characterEncoding=UTF-8"></property>
 			<property name="user" value="root"></property>
 			<property name="password" value="1234"></property>
+			
+			<property name="initialPoolSize" value="3"></property>
+			<property name="minPoolSize" value="10"></property>
+			<property name="maxPoolSize" value="50"></property>
+			<property name="maxIdleTime" value="30"></property>
+			
+			<property name="idleConnectionTestPeriod" value="60"></property>
+			<property name="testConnectionOnCheckin" value="true"></property>
+			<property name="testConnectionOnCheckout" value="true"></property>
+			<property name="automaticTestTable" value="c3p0TestTable"></property>
+			
 		</bean>
 		
 <!-- 		sessionFactory创建交给spring管理 
@@ -55,6 +66,8 @@
 		<bean id="manager" class="cn.lxy.po.Manager" scope="prototype"/>
 		<bean id="note" class="cn.lxy.po.Note" scope="prototype"/>
 		<bean id="teacher" class="cn.lxy.po.Teacher" scope="prototype"/>
+		
+		<bean id="addPoAction" class="cn.lxy.utils.AddPoAction" scope="prototype"/>
 
 
 <!-- 		创建hibernateTemplate对象   注入sessionFactory -->

@@ -30,7 +30,9 @@
 		在oracle里面  使用rownum实现分页   
 		 -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-			
+
+
+
 	<!-- 把映射文件放到核心配置文件中 必须的 -->
 		<mapping resource="cn/lxy/po/Carousel.hbm.xml"/>
 		<mapping resource="cn/lxy/po/Course.hbm.xml"/>
@@ -40,6 +42,7 @@
 		<mapping resource="cn/lxy/po/Student.hbm.xml"/>
 		<mapping resource="cn/lxy/po/Teacther.hbm.xml"/>
 		<mapping resource="cn/lxy/po/Exam.hbm.xml"/>
+
 
 	</session-factory>
 

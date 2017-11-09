@@ -47,6 +47,14 @@
 		<result name="aaa">/test.jsp</result>
 	</action>
 	
+	
+	<action name="addpo_*" class="addPoAction" method="{1}">
+		<result name="success">/index.html</result>
+	</action>
+	
+	
+	
+	
 	</package>
 
 	<package name="jsonaction" namespace="/"  extends="json-default">  

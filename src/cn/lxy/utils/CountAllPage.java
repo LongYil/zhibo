@@ -56,4 +56,48 @@ public class CountAllPage {
 			return all;
 		}
 	}
+	//根据总页数和指定页码数返回 页码左和页码右 的对应值
+	public int[] getLeftAndRight(int start,int all) {
+		int[] pages = new int[2]; 
+		if(start==0) {
+			if(all>5) {
+				pages[0]=0;
+				pages[1]=1;
+			}else {
+				pages[0]=0;
+				pages[1]=0;				
+			}
+		}else {
+			if(start-2-1>0) {
+				pages[0]=1;
+			}else {
+				pages[0]=0;
+			}
+			if(start+2<all) {
+				pages[1]=1;
+			}else {
+				pages[1]=0;
+			}
+		}
+		return pages;
+	}
+	//根据总页数和指定页码得到左右箭头页码
+	public int[] getDirectionNumber(int start,int all) {
+		int[] dir = new int[2];
+		
+		int[] pages = new int[2];
+		pages = getLeftAndRight(start,all);
+		
+		if(pages[0]==1) {
+			dir[0]=start-1;
+		}
+		if(pages[1]==1) {
+			dir[1]=start+1;
+		}
+		return dir;
+	}
+	
+	
+	
+	
 }
