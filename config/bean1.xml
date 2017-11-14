@@ -49,6 +49,8 @@
 		<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 		
 
+		<bean id="loginAction" class="cn.lxy.action.LoginAction" scope="prototype"/>
+		
 		<bean id="carouselAction" class="cn.lxy.action.CarouselAction" scope="prototype"/>
 		<bean id="courseAction" class="cn.lxy.action.CourseAction" scope="prototype"/>
 		<bean id="discussAction" class="cn.lxy.action.DiscussAction" scope="prototype"/>

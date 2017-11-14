@@ -48,15 +48,18 @@
 		<result name="success">/index.html</result>
 	</action>
 	
-	
+	<action name="login_*" class="loginAction" method="{1}">
+		<result name="success">/teacher.jsp</result>
+	</action>
 	
 	
 	</package>
 
+
 	<package name="jsonaction" namespace="/"  extends="json-default">  
-		   <interceptors>              
+		   <interceptors>             
 		   		<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>          
-		   </interceptors> 	
+		   </interceptors>
 		   
 		   <action name="student_*" class="studentAction" method="{1}"> 
 				<result name="findAll">/studentmanager.jsp</result>
@@ -68,8 +71,12 @@
 				<result name="findAll">/teachermanager.jsp</result>
 				<result name="preUpdate">/addteacher.jsp</result>
 				<result name="add">teacher_findAll</result>
-				<result type="json" name="ajaxresult2"><param name="root">resultinfo</param></result>
+				<result name="selfInfo">/teacherinfo.jsp</result>
+				<result type="json" name="delete"><param name="root">resultinfo</param></result>
+				<result type="json" name="updateInfo"><param name="root">resultinfo</param></result>
+				<result type="json" name="updatePassword"><param name="root">resultinfo</param></result>
 		   </action>
+		   
 		   
 		   
 	</package>

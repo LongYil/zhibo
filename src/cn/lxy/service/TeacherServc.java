@@ -14,7 +14,7 @@ public class TeacherServc extends CommonSevc<Teacher, TeacherDaoImpl> {
 
 	@Override
 	public void save(Teacher arg) {
-		daoImpl.save(arg);		
+		daoImpl.save(arg);
 	}
 
 	@Override
@@ -31,4 +31,12 @@ public class TeacherServc extends CommonSevc<Teacher, TeacherDaoImpl> {
 		daoImpl.delete(arg);		
 	}
 	
+	public Teacher login(String arg1,String arg2) throws Exception {
+		return (Teacher) this.getEntity.login("Teacher", "username = '"+arg1+"' and password = '"+arg2+"'", Teacher.class);
+	}
+	
+	public boolean updatePassword(Teacher arg) {
+		daoImpl.save(arg);
+		return true;
+	}
 }

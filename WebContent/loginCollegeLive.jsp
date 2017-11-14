@@ -20,6 +20,31 @@
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
 	<link href="css/login.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    <link href="css/plugins/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+    <link href="css/plugins/cropper/cropper.min.css" rel="stylesheet">
+
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+
+    <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+
+    <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">	
+	
+	
+	
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -37,19 +62,25 @@
             </div>
             <h3>欢迎使用 CollegeLive</h3>
 
-            <form class="m-t" role="form" action="${pageContext.request.contextPath}/index.html" name="myform">
+            <form class="m-t" role="form" action="${pageContext.request.contextPath}/login_login.action" name="myform">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="用户名" required="true">
+                    <input type="email" name="username" class="form-control" placeholder="用户名" required="true">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="密码" required="true">
+                    <input type="password" name="password" class="form-control" placeholder="密码" required="true">
+                </div>
+                <div class="form-group">
+                    <div class="radio radio-info radio-inline" style="text-align:left;">
+                        <span>用户类型:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="inlineRadio1" value="0" name="usertype" >
+                        <label for="inlineRadio1"> 学生 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" id="inlineRadio2" value="1" name="usertype" checked="checked">
+                        <label for="inlineRadio2"> 教师 </label>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b" onClick="login()">登 录</button>
-
-
                 <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="registerstudent.jsp">注册一个新账号</a>
                 </p>
-
             </form>
         </div>
     </div>
@@ -61,11 +92,7 @@
 	 function login(){
 		myform.submit();
 	 }
-
 	 </script>
-    
-    
-
 </body>
 
 </html>

@@ -15,10 +15,10 @@ public class Teacher {
 	private String name;//教师姓名
 	private String username;//教师用户名
 	private String password;//密码
-	private Character sex;//性别
+	private Integer sex;//性别
 	private String subject;//科目
 	private String school;//毕业院校
-	private String teacthage;//教龄
+	private Float teacthage;//教龄
 	private String tel;//手机号
 	private String email;//邮箱
 	private String head;//头像地址
@@ -53,10 +53,10 @@ public class Teacher {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Character getSex() {
+	public Integer getSex() {
 		return sex;
 	}
-	public void setSex(Character sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 	public String getSubject() {
@@ -71,10 +71,10 @@ public class Teacher {
 	public void setSchool(String school) {
 		this.school = school;
 	}
-	public String getTeacthage() {
+	public Float getTeacthage() {
 		return teacthage;
 	}
-	public void setTeacthage(String teacthage) {
+	public void setTeacthage(Float teacthage) {
 		this.teacthage = teacthage;
 	}
 	public String getTel() {

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>添加教师</title>
+    <title>填写教师信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
 
@@ -23,8 +23,10 @@
 
 			<div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins" style="width:60%;margin:0 auto;"> 
-                    <div class="ibox-title">
-                        <h5>添加教师</h5>
+                    <div class="ibox-title" >
+                        <h5 style="font-size:20px;color:#23b7e5;">填写教师信息</h5>
+                        
+                        <div class="fa-hover col-md-3 col-sm-4" style="color:#23b7e5;font-size:20px;width:120px;float:right;margin-right:0px;"><a onClick="Go('teacher_findAll.action')" href="javascript:void(0)"><i class="fa fa-mail-reply"></i> 返回 <span class="text-muted"></span></a></div>                        
                     </div>
                     <div class="ibox-content">
                         <form class="form-horizontal" name="myform" action="${pageContext.request.contextPath}/teacher_add.action">
@@ -93,6 +95,9 @@
 function mySubmit(){
 	parent.layer.msg('修改成功', {icon: 1});
 	myform.submit();
+}
+function Go(url){
+	window.location=url;
 }
 
 </script>

@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.lxy.utils.GetEntity;
+
 public abstract class CommonSevc<E,D> {
 	@Autowired
 	public D daoImpl;
+	@Autowired
+	public GetEntity getEntity;
 	
 	public abstract void save(E arg);
 	public abstract E find(String arg) throws Exception;
