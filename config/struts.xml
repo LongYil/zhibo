@@ -63,6 +63,7 @@
 		   
 		   <action name="student_*" class="studentAction" method="{1}"> 
 				<result name="findAll">/studentmanager.jsp</result>
+				<result name="findByName">/studentquery.jsp</result>
 				<result name="add">/index.html</result>
 		        <result type="json" name="ajaxresult1"><param name="root">resultinfo</param></result>  
 		   </action>
@@ -70,11 +71,12 @@
 		   <action name="teacher_*" class="teacherAction" method="{1}">
 				<result name="findAll">/teachermanager.jsp</result>
 				<result name="preUpdate">/addteacher.jsp</result>
-				<result name="add">teacher_findAll</result>
 				<result name="selfInfo">/teacherinfo.jsp</result>
+				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 				<result type="json" name="updateInfo"><param name="root">resultinfo</param></result>
 				<result type="json" name="updatePassword"><param name="root">resultinfo</param></result>
+				<result type="json" name="saveInfo"><param name="root">resultinfo</param></result>
 		   </action>
 		   
 		   

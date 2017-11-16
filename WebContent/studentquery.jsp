@@ -67,10 +67,8 @@
 									<th>操作</th>
                                 </tr>
                             </thead>
-                            <tbody>
-									
+                            <tbody>	
 									<s:iterator value="liststudent" status="ste">
-										<c:if test="${ste.index<11}">
 											<tr>
 												<td><s:property value="id"/></td>
 												<td><s:property value="username"/></td>
@@ -82,57 +80,16 @@
 												<td><s:property value="classandgrade"/></td>
 												<c:if test="${userstatus=='1'}">
 													<td>
-													 <a class="btn btn-primary btn-rounded" href="javascript:void(0)" onClick="forbidden('<s:property value="id"/>','<s:property value="name"/>')">禁用</a>
+													 <a class="btn btn-primary btn-rounded" href="javascript:void(0)" onClick="forbidden('<s:property value="id"/>','<s:property value="name"/>','<s:property value="id"/>')">禁用</a>
 													</td>											
 												</c:if>
 												<c:if test="${userstatus=='0'}">
 													<td>
-													 <a class="btn btn-success btn-rounded" href="javascript:void(0)" onClick="start('<s:property value="id"/>','<s:property value="name"/>')">取消禁用</a>
+													 <a class="btn btn-success btn-rounded" href="javascript:void(0)" onClick="start('<s:property value="id"/>','<s:property value="name"/>','<s:property value="id"/>')">取消禁用</a>
 													</td>										
 												</c:if>
-											</tr>
-										</c:if>									
+											</tr>						
 									</s:iterator>	
-								<tr>
-									<td colspan="12">
-									<div class="btn-group" style="float:right;">
-										
-									<c:if test="${userRole==1 }">
-										<c:if test="${pageDirection[0]==1 }">
-										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
-										</c:if>
-												<c:forEach items="${pages}" var="index" begin="0" >
-												  <c:if test="${index==enablePageNumber}">
-												      <button class="btn btn-white active" onClick="To('${index}')">${index}</button>
-												  </c:if>
-												  <c:if test="${index!=enablePageNumber}">
-												      <button class="btn btn-white" onClick="To('${index}')">${index}</button>
-												  </c:if>					  
-												</c:forEach>
-										<c:if test="${pageDirection[1]==1 }">
-										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
-										</c:if>
-									</c:if>
-									<c:if test="${userRole==0}">
-										<c:if test="${pageDirection[0]==1 }">
-										  <button type="button" class="btn btn-white" onClick="Go('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
-										</c:if>
-												<c:forEach items="${pages}" var="index" begin="0" >
-												  <c:if test="${index==enablePageNumber}">
-												      <button class="btn btn-white active" onClick="Go('${index}')">${index}</button>
-												  </c:if>
-												  <c:if test="${index!=enablePageNumber}">
-												      <button class="btn btn-white" onClick="Go('${index}')">${index}</button>
-												  </c:if>					  
-												</c:forEach>
-										<c:if test="${pageDirection[1]==1 }">
-										  <button type="button" class="btn btn-white" onClick="Go('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
-										</c:if>
-									  </c:if>
-										
-									</div>
-									</td>
-								</tr>
                             </tbody>
                         </table>
                         
@@ -154,7 +111,7 @@
     
 <script type="text/javascript">
 
-function forbidden(arg1,arg2){
+function forbidden(arg1,arg2,arg3){
 	parent.layer.confirm('确定禁用学生:'+arg2+'？', {
 	    btn: ['确定','取消'], //按钮
 	    shade: false //不显示遮罩
@@ -162,7 +119,7 @@ function forbidden(arg1,arg2){
 		var text = ajaxSubmit("student_forbidden.action",arg1); 
 		if(text=="1"){
 			parent.layer.msg('已禁用', {icon: 1});
-			window.location="student_findAllEnable.action";
+			window.location="student_showByResult.action";
 		}else{
 			parent.layer.msg('禁用失败', {icon: 2});
 		}	    
@@ -170,7 +127,7 @@ function forbidden(arg1,arg2){
 	    parent.layer.msg('已取消', {shift: 6});
 	});
 }
-function start(arg1,arg2){
+function start(arg1,arg2,arg3){
 	parent.layer.confirm('确定取消禁用学生:'+arg2+'？', {
 	    btn: ['确定','取消'], //按钮
 	    shade: false //不显示遮罩
@@ -178,7 +135,7 @@ function start(arg1,arg2){
 		var text = ajaxSubmit("student_start.action",arg1); 
 		if(text=="1"){
 			parent.layer.msg('已取消禁用', {icon: 1});
-			window.location="student_findAllDisabled.action";
+			window.location="student_showByResult.action?";
 		}else{
 			parent.layer.msg('取消失败', {icon: 2});
 		}	    
@@ -186,20 +143,11 @@ function start(arg1,arg2){
 	    parent.layer.msg('已取消', {shift: 6});
 	});
 }
-
-
-function To(arg){
-	window.location="student_findEnableByPageNumber.action?enablePageNumber="+arg;
-}
-function Go(arg){
-	window.location="findDisabledByPageNumber.action?disablePageNumber="+arg;
-}
 function findStudent(){
 	  layer.prompt({title: '请输入学生姓名:', formType: 0},function(value, index, elem){
 	  layer.close(index);
 	  window.location="student_findByName.action?studentName="+value; 
 	});	    
 }
-
 </script>
 </html>

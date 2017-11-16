@@ -18,6 +18,8 @@
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    
+    <link href="css/layui.css" rel="stylesheet">
     <style type="text/css">
     body{
     font-size: 16px;

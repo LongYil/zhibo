@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
+import cn.lxy.po.Student;
+
 
 @Component(value="getEntity")
 public class GetEntity {
@@ -33,5 +35,6 @@ public class GetEntity {
 			return t;
 		}
 	}
-	
+
+
 }

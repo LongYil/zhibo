@@ -22,7 +22,7 @@ public class Teacher {
 	private String tel;//手机号
 	private String email;//邮箱
 	private String head;//头像地址
-	private String fms;//
+	private String fms;//直播码
 	private String streamid;//串流码
 	//在教师里面表示直播课程，一个教师拥有多个直播课程
 	private Set<Course> setCourse = new HashSet<Course>();

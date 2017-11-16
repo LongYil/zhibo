@@ -31,6 +31,15 @@ public class StudentDaoImpl extends CommonDaoImpl<Student> implements StudentDao
 		int b = a+11;
 		return (List<Student>) ht.find("from Student where userstatus = "+"1"+"");
 	}
+
+	@Override
+	public List<Student> findByName(String arg) {
+		return (List<Student>) ht.find("from Student where "+arg+"");
+	}
+	@Override
+	public List<Student> findById(String arg) {
+		return (List<Student>) ht.find("from Student where id = "+arg+"");
+	}
 	
 	
 	

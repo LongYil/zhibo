@@ -1,5 +1,7 @@
 package cn.lxy.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -27,6 +29,11 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	private String teacherTempId;
 	private String resultinfo;
 	private String enablePageNumber;
+	private String username;
+	
+    private File file1 ; //具体上传文件的 引用 , 指向临时目录中的临时文件  
+    private String file1FileName ;  // 上传文件的名字 ,FileName 固定的写法  
+    private String file1ContentType ; //上传文件的类型， ContentType 固定的写法
 	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectionNumber = new int[2];
@@ -41,24 +48,30 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	}
 	
 	//添加教师
-	public String add() {
+	public String saveInfo() throws UnsupportedEncodingException {
+		this.resultinfo="0";
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String info = request.getParameter("info");
+		info = URLDecoder.decode(info,"UTF-8");
+		String[] infos = info.split("-");
+		if(infos[0]!=null&&!infos[0].equals("")) {
+			teacher.setId(Integer.parseInt(infos[0]));
+		}else {
+			;
+		}
+		teacher.setUsername(infos[1]);
+		teacher.setName(infos[2]);
+		teacher.setTel(infos[3]);
+		teacher.setPassword(infos[4]);
+		teacher.setFms(infos[5]);
+		teacher.setStreamid(infos[6]);
 		servc.save(teacher);
-		listteacher.clear();
-		pages.clear();
-		listteacher = servc.findAll("");
-		int temp = countAllPage.getAllPage(listteacher.size());
-		pageDirection = countAllPage.getLeftAndRight(0,temp);
-		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
-		this.enablePageNumber="1";
-		this.getSesion().put("allTeacherPage",temp);
-		this.getSesion().put("enableListTeacher", listteacher);
-		pages = countAllPage.getStartPages(temp);
-		return "findAll";
+		this.resultinfo="1";
+		return "saveInfo";
 	}
 	//教师查询个人资料
 	public String selfInfo() {
 		teacher = (Teacher) this.getSesion().get("Teacher");
-		System.out.println("查找教师信息");
 		return "selfInfo";
 	}
 	//查找所有教师
@@ -99,7 +112,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		return "delete";
 	}
 	//查询教师信息
-	public String preUpdate() throws Exception {		
+	public String preUpdate() throws Exception {
 		teacher = servc.find(teacherTempId);
 		return "preUpdate";
 	}
@@ -128,7 +141,6 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		teacher = (Teacher) this.getSesion().get("Teacher");
 		String infos = request.getParameter("info");
 		infos = URLDecoder.decode(infos,"UTF-8");
-		System.out.println(infos);
 		String[] info = infos.split("-");
 		teacher.setName(info[0]);
 		teacher.setTel(info[1]);
@@ -141,7 +153,10 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		this.resultinfo="1";
 		return "updateInfo";
 	}
-	
+	//保存头像
+	public void updateIcon() throws IOException {
+		
+	}
 	
 	
 	
@@ -194,13 +209,35 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	public void setTempteacher(List<Teacher> tempteacher) {
 		this.tempteacher = tempteacher;
 	}
-
 	public String getTeacherTempId() {
 		return teacherTempId;
 	}
-
 	public void setTeacherTempId(String teacherTempId) {
 		this.teacherTempId = teacherTempId;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public File getFile1() {
+		return file1;
+	}
+	public void setFile1(File file1) {
+		this.file1 = file1;
+	}
+	public String getFile1FileName() {
+		return file1FileName;
+	}
+	public void setFile1FileName(String file1FileName) {
+		this.file1FileName = file1FileName;
+	}
+	public String getFile1ContentType() {
+		return file1ContentType;
+	}
+	public void setFile1ContentType(String file1ContentType) {
+		this.file1ContentType = file1ContentType;
 	}
 	
 }

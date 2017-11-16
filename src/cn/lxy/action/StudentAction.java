@@ -15,7 +15,6 @@ import cn.lxy.service.StudentServc;
 import cn.lxy.utils.CountAllPage;
 
 public class StudentAction extends BasicAction implements ModelDriven<Student> {
-	
 	private String resultinfo;
 	private String enablePageNumber;
 	private String disablePageNumber;
@@ -97,7 +96,7 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		pageDirectionNumber = countAllPage.getDirectionNumber(page,all);
 		tempstudent = (List<Student>) this.getSesion().get("enableListStudent");
 		liststudent = tempstudent.subList((page-1)*11,countAllPage.getLastIndex(page,tempstudent.size()));
-		pages.clear();	
+		pages.clear();
 		pages = countAllPage.getPages(Integer.parseInt(enablePageNumber),Integer.parseInt(this.getSesion().get("allEnableStudentPage").toString()));
 		return "findAll";
 	}
@@ -114,15 +113,27 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		pages = countAllPage.getPages(Integer.parseInt(disablePageNumber),Integer.parseInt(this.getSesion().get("allDisabledStudentPage").toString()));
 		return "findAll";
 	}
+	//根据姓名查找学生,并将查询结果保存在值栈中
+	public String findByName() throws Exception {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String name = request.getParameter("studentName");
+		userRole = 0;
+		liststudent.clear();
+		liststudent = servc.findByName(name);
+		this.getSesion().put("studentQueryInfo",name);
+		return "findByName";
+	}
+	//根据查找记录显示查找过的学生
+	public String showByResult() throws Exception {
+		userRole = 0;
+		liststudent.clear();
+		liststudent = servc.findByName(this.getSesion().get("studentQueryInfo").toString());
+		return "findByName";
+	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
+
 	public Student getStudent() {
 		return student;
 	}

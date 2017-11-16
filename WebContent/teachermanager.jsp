@@ -8,15 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>教师管理</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
+    <link href="css/layui.css" rel="stylesheet">
+    
 </head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -24,9 +23,12 @@
             <div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>教师信息</h5>
-                        <div class="ibox-tools">
-							<button type="button" class="btn btn-w-m btn-info" onClick="addTeacher('addteacher.jsp')">添加教师</button>
+                        <span style="float:left;">教师信息</span>
+                        <div class="ibox-tools" style="margin-bottom:5px;">    
+                            <button type="button" class="btn btn-w-m btn-info" onClick="findTeacher()">查找教师</button>
+                            <span style="margin-right:10px;">&nbsp;</span>
+                            <button type="button" class="btn btn-w-m btn-info" onClick="addTeacher('addteacher.jsp')">添加教师</button>
+                            <span style="margin-right:10px;">&nbsp;</span>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -102,6 +104,7 @@
         </div>
 
     </div> 
+<script src="layui.all.js"></script>    
 <script src="js/ajaxcommunicate.js"></script>  
 <script>
 	function deleteTeacher(arg1,arg2){
@@ -120,7 +123,8 @@
 		    parent.layer.msg('已取消', {shift: 6});
 		});
 	}
-	function updateTeacher(arg1,arg2){
+	
+	function updateTeacher(arg1){
 		window.location="teacher_preUpdate.action?teacherTempId="+arg1;
 	}
 	
@@ -131,6 +135,15 @@
 	function To(arg){
 		window.location="teacher_findEnableByPageNumber.action?enablePageNumber="+arg;
 	}
+	
+	function findTeacher(){
+		  layer.prompt({title: '请输入教师姓名:', formType: 0},function(value, index, elem){
+		  layer.close(index);
+		  window.location="student_findByName.action?studentName="+value; 
+		});	    
+	}
+	
+
 </script>
 
 </body>
