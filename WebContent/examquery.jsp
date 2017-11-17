@@ -35,7 +35,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span style="float:left;">我的试题</span>
-                        <div class="ibox-tools"  style="margin-bottom:5px;">
+                        <div class="ibox-tools">
 							<button type="button" class="btn btn-w-m btn-info" onClick="findExam()">查找试题&nbsp;&nbsp;<i class="fa fa-search"></i></button>
                             <span style="margin-right:10px;">&nbsp;</span>                        
                         </div>
@@ -53,7 +53,6 @@
                             </thead>
                             <tbody>
 									<s:iterator value="listExamVo" status="ste">
-										<c:if test="${ste.index<11}">
 											<tr>
 												<td><s:property value="exam.id"/></td>
 												<td><s:property value="teacherName"/></td>
@@ -64,30 +63,7 @@
 												 <a class="btn btn-danger btn-rounded" href="javascript:void(0)" onClick="delete('<s:property value="exam.id"/>')">删除</a>
 												</td>
 											</tr>
-										</c:if>
 									</s:iterator>
-								<tr>
-									<td colspan="12">
-									<div class="btn-group" style="float:right;">
-										
-										<c:if test="${pageDirection[0]==1 }">
-										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
-										</c:if>
-												<c:forEach items="${pages}" var="index" begin="0" >
-												  <c:if test="${index==pageNumber}">
-												      <button class="btn btn-white active" onClick="To('${index}')">${index}</button>
-												  </c:if>
-												  <c:if test="${index!=pageNumber}">
-												      <button class="btn btn-white" onClick="To('${index}')">${index}</button>
-												  </c:if>					  
-												</c:forEach>
-										<c:if test="${pageDirection[1]==1 }">
-										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
-										</c:if>
-										
-									</div>
-									</td>
-								</tr>
                             </tbody>
                         </table> 
                     </div>
@@ -138,7 +114,6 @@ function findExam(){
 	  window.location="exam_findByName.action?queryInfo="+value; 
 	});
 }
-
 </script>
 
 </html>

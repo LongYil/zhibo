@@ -38,7 +38,7 @@
                     <div class="ibox-title">
                         <span style="float:left;">学生信息</span>
                         <div class="ibox-tools" style="margin-bottom:5px;">    
-                            <button type="button" class="btn btn-w-m btn-info" onClick="findStudent()">查找学生</button>
+                            <button type="button" class="btn btn-w-m btn-info" onClick="findStudent()">查找学生&nbsp;&nbsp;<i class="fa fa-search"></i></button>
                             <span style="margin-right:10px;">&nbsp;</span>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                                 <h3 style="display:inline-block;">切换:</h3>
@@ -73,7 +73,15 @@
 												<td><s:property value="id"/></td>
 												<td><s:property value="username"/></td>
 												<td><s:property value="name"/></td>
-												<td><s:property value="sex"/></td>
+												<c:if test="${liststudent[ste.index].sex==0 }">
+												<td>男</td>
+												</c:if>
+												<c:if test="${liststudent[ste.index].sex==1 }">
+												<td>女</td>
+												</c:if>
+												<c:if test="${liststudent[ste.index].sex!=1&&liststudent[ste.index].sex!=0}">
+												<td></td>
+												</c:if>
 												<td><s:property value="tel"/></td>
 												<td><s:property value="school"/></td>
 												<td><s:property value="department"/></td>

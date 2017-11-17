@@ -76,6 +76,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	}
 	//查找所有教师
 	public String findAll() {
+		this.getSesion().remove("queryTeacherName");
 		listteacher.clear();
 		pages.clear();
 		listteacher = servc.findAll("");
@@ -157,6 +158,33 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	public void updateIcon() throws IOException {
 		
 	}
+	//根据教师姓名进行查询，支持模糊查询
+	public String findByName() {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String info = request.getParameter("teacherName");
+		this.getSesion().put("queryTeacherName", info);
+		listteacher.clear();
+		listteacher = servc.findByName(info);
+		return "findByName";
+	}
+	//删除教师后根据保存的信息重新查询
+	public String requery() throws Exception {
+		this.resultinfo="0";
+		String info = this.getSesion().get("queryTeacherName").toString();
+		listteacher.clear();
+		listteacher = servc.findByName(info);
+		this.resultinfo="1";
+		return "findByName";
+	}	
+	//用户点击填写教师信息页面的返回操作
+	public String backAndQuery() {
+		if(this.getSesion().get("queryTeacherName")!=null) {
+			return "back_requery";
+		}else {
+			return "back_findAll";
+		}
+	}
+	
 	
 	
 	

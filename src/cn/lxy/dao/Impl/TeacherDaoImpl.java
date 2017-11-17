@@ -17,4 +17,8 @@ public class TeacherDaoImpl extends CommonDaoImpl<Teacher> implements TeacherDao
 	public Teacher find(String id) {
 		return (Teacher) ht.find("from Teacher where id = "+id+"").get(0);
 	}
+	@Override
+	public List<Teacher> findByName(String arg) {
+		return (List<Teacher>) ht.find("from Teacher where "+arg+"");
+	}
 }	

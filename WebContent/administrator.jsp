@@ -21,7 +21,9 @@
     <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
+<script type="text/javascript">
+var index = parent.layer.load(0, {shade: false});
+</script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -46,6 +48,7 @@
                         <div class="logo-element">hAdmin
                         </div>
                     </li>
+                    <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">用户管理</span>
                     </li>
@@ -67,7 +70,7 @@
                         <span class="ng-scope">试题管理</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="index_v1.html">
+                        <a class="J_menuItem" href="exam_findAll.action">
                             <i class="fa fa-book"></i>
                             <span class="nav-label">所有试题</span>
                         </a>
@@ -96,7 +99,7 @@
                             <span class="nav-label">退出系统</span>
                         </a>
                     </li>
-
+					<li class="line dk"></li>
 
                 </ul>
             </div>

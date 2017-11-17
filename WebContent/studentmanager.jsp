@@ -13,13 +13,14 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
+    <script src="js/base-loading.js"></script>
+
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
     <link href="css/layui.css" rel="stylesheet">
     
     <style type="text/css">
@@ -38,7 +39,7 @@
                     <div class="ibox-title">
                         <span style="float:left;">学生信息</span>
                         <div class="ibox-tools" style="margin-bottom:5px;">    
-                            <button type="button" class="btn btn-w-m btn-info" onClick="findStudent()">查找学生</button>
+                            <button type="button" class="btn btn-w-m btn-info" onClick="findStudent()">查找学生&nbsp;&nbsp;<i class="fa fa-search"></i></button>
                             <span style="margin-right:10px;">&nbsp;</span>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                                 <h3 style="display:inline-block;">切换:</h3>
@@ -75,7 +76,15 @@
 												<td><s:property value="id"/></td>
 												<td><s:property value="username"/></td>
 												<td><s:property value="name"/></td>
-												<td><s:property value="sex"/></td>
+												<c:if test="${liststudent[ste.index].sex==0 }">
+												<td>男</td>
+												</c:if>
+												<c:if test="${liststudent[ste.index].sex==1 }">
+												<td>女</td>
+												</c:if>
+												<c:if test="${liststudent[ste.index].sex!=1&&liststudent[ste.index].sex!=0}">
+												<td></td>
+												</c:if>
 												<td><s:property value="tel"/></td>
 												<td><s:property value="school"/></td>
 												<td><s:property value="department"/></td>
@@ -145,12 +154,12 @@
 
 </body>
     <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="js/plugins/layer/layer.min.js"></script>
-    <script src="js/content.js?v=1.0.0"></script>
-    <script src="js/ajaxcommunicate.js"></script>
-    <script src="layui.all.js"></script>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/content.js?v=1.0.0"></script>
+<script src="js/ajaxcommunicate.js"></script>
+<script src="layui.all.js"></script>
     
 <script type="text/javascript">
 

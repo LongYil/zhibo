@@ -27,8 +27,8 @@
 	</action>
 	
 	<action name="exam_*" class="examAction" method="{1}">
-		<result name="success">/index.jsp</result>
-		<result name="aaa">/test.jsp</result>
+		<result name="findAll">/exammanager.jsp</result>
+		<result name="findByName">/examquery.jsp</result>
 	</action>
 	
 	<action name="manager_*" class="managerAction" method="{1}">
@@ -45,7 +45,7 @@
 	
 	
 	<action name="addpo_*" class="addPoAction" method="{1}">
-		<result name="success">/index.html</result>
+		<result name="success">/teacher.jsp</result>
 	</action>
 	
 	<action name="login_*" class="loginAction" method="{1}">
@@ -72,6 +72,10 @@
 				<result name="findAll">/teachermanager.jsp</result>
 				<result name="preUpdate">/addteacher.jsp</result>
 				<result name="selfInfo">/teacherinfo.jsp</result>
+				<result name="findByName">/teacherquery.jsp</result>
+				
+				<result name="back_requery">teacher_requery.action</result>
+				<result name="back_findAll">teacher_findAll.action</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 				<result type="json" name="updateInfo"><param name="root">resultinfo</param></result>
@@ -80,7 +84,5 @@
 		   </action>
 		   
 		   
-		   
-	</package>
-		   
+	</package>  
 </struts>

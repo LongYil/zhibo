@@ -10,8 +10,8 @@ package cn.lxy.po;
  */
 public class Exam {
 	private Integer id;
-	private String name;//实体名称
-	private String face;//实体封面url
+	private String name;//试题名称
+	private String face;//试题封面url
 	private String describes;//试题描述
 	private String fileaddress;//试题附件 url
 	//在试题里面表示所属教师，一个试题只能属于一个教师

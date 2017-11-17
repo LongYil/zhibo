@@ -24,7 +24,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span style="float:left;">教师信息</span>
-                        <div class="ibox-tools" style="margin-bottom:5px;">
+                        <div class="ibox-tools" style="margin-bottom:5px;">    
                             <button type="button" class="btn btn-w-m btn-info" onClick="findTeacher()">查找教师&nbsp;&nbsp;<i class="fa fa-search"></i></button>
                             <span style="margin-right:10px;">&nbsp;</span>
                             <button type="button" class="btn btn-w-m btn-info" onClick="addTeacher('addteacher.jsp')">添加教师&nbsp;&nbsp;<i class="fa fa-plus-circle"></i></button>
@@ -51,7 +51,6 @@
                             </thead>
                             <tbody>
                                		<s:iterator value="listteacher" status="ste">
-										<c:if test="${ste.index<11}">
 										<tr>
 											<td>${ste.index+1}</td>
 											<td><s:property value="username"/></td>
@@ -77,33 +76,10 @@
 										     <a class="btn btn-success btn-rounded" onClick="deleteTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">删除</a>
 											</td>
 										</tr>
-										</c:if>
 									</s:iterator>
-                               
-								<tr>
-									<td colspan="12">
-									<div class="btn-group" style="float:right;">
-										<c:if test="${pageDirection[0]==1 }">
-										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
-										</c:if>
-												<c:forEach items="${pages}" var="index" begin="0" >
-												  <c:if test="${index==enablePageNumber}">
-												      <button class="btn btn-white active" onClick="To('${index}')">${index}</button>
-												  </c:if>
-												  <c:if test="${index!=enablePageNumber}">
-												      <button class="btn btn-white" onClick="To('${index}')">${index}</button>
-												  </c:if>					  
-												</c:forEach>
-										<c:if test="${pageDirection[1]==1 }">
-										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[1]}')"><i class="fa fa-chevron-right"></i></button>
-										</c:if>
-									</div>
-									</td>
-								</tr>
+
                             </tbody>
                         </table>
-
-
                     </div>
                 </div>
             </div>
@@ -121,7 +97,7 @@
 			var text = ajaxSubmit("teacher_delete.action",arg1);
 			if(text=="1"){
 				parent.layer.msg('已删除', {icon: 1});
-				window.location="teacher_findAll.action";
+				window.location="teacher_requery.action";
 			}else{
 				parent.layer.msg('删除失败', {icon: 2});
 			}	    
@@ -138,16 +114,13 @@
 		window.location=url;
 	}
 	
-	function To(arg){
-		window.location="teacher_findEnableByPageNumber.action?enablePageNumber="+arg;
-	}
-	
 	function findTeacher(){
 		  layer.prompt({title: '请输入教师姓名:', formType: 0},function(value, index, elem){
 		  layer.close(index);
 		  window.location="teacher_findByName.action?teacherName="+value; 
 		});	    
 	}
+	
 
 </script>
 

@@ -73,6 +73,12 @@
 							                        <input type="radio" id="inlineRadio2" value="1" name="info3" checked="checked">
 							                        <label for="inlineRadio2"> 女 </label>
 						                        </c:if>
+						                        <c:if test="${teacher.sex!=1&&teacher.sex!=0}">
+							                        <input type="radio" id="inlineRadio1" value="0" name="info3" checked="checked">
+							                        <label for="inlineRadio1"> 男 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							                        <input type="radio" id="inlineRadio2" value="1" name="info3">
+							                        <label for="inlineRadio2"> 女 </label>
+						                        </c:if>       
 			                                </div>
 			                            </div>
 			                            
