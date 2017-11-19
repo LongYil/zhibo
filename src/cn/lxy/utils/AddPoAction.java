@@ -45,7 +45,7 @@ public class AddPoAction extends BasicAction{
 	
 	public String addExam() throws Exception {
 		for(int i=0;i<60;i++) {
-			teacher = teacherServc.find("26");
+			teacher = teacherServc.find("28");
 			exam = new Exam();
 			exam.setName("高等数学:"+i);
 			exam.setDescribes("普通高等院校高等数学");

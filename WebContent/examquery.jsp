@@ -18,7 +18,9 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
     <link href="css/layui.css" rel="stylesheet">
-    
+ 
+    <script src="js/base-loading.js"></script>
+       
     <style type="text/css">
     body{
     font-size: 14px;
@@ -59,8 +61,8 @@
 												<td><s:property value="exam.name"/></td>
 												<td><s:property value="exam.describes"/></td>
 												<td>
-												 <a class="btn btn-info btn-rounded" href="javascript:void(0)" onClick="delete('<s:property value="exam.fileaddress"/>')">下载</a>
-												 <a class="btn btn-danger btn-rounded" href="javascript:void(0)" onClick="delete('<s:property value="exam.id"/>')">删除</a>
+												 <a class="btn btn-info btn-rounded" href="javascript:void(0)" onClick="downloadExam('<s:property value="exam.fileaddress"/>')">下载</a>
+												 <a class="btn btn-danger btn-rounded" href="javascript:void(0)" onClick="deleteExam('<s:property value="exam.id"/>','<s:property value="exam.name"/>')">删除</a>
 												</td>
 											</tr>
 									</s:iterator>
@@ -86,23 +88,38 @@
 <script src="js/ajaxcommunicate.js"></script>
 
 <script type="text/javascript">
-function forbidden(arg1,arg2){
-	parent.layer.confirm('确定禁用学生:'+arg2+'？', {
+function deleteExam(arg1,arg2){
+	parent.layer.confirm('确定删除试题:'+arg2+'？', {
 	    btn: ['确定','取消'], //按钮
 	    shade: false //不显示遮罩
 	}, function(){
-		var text = ajaxSubmit("student_forbidden.action",arg1); 
+		var text = ajaxSubmit("exam_delete.action",arg1);
 		if(text=="1"){
-			parent.layer.msg('已禁用', {icon: 1});
-			window.location="student_findAllEnable.action";
+			parent.layer.msg('删除', {icon: 1});
+			window.location="exam_queryAfterDelete.action";
 		}else{
-			parent.layer.msg('禁用失败', {icon: 2});
-		}	    
+			parent.layer.msg('删除失败', {icon: 2});
+		}
 	}, function(){
 	    parent.layer.msg('已取消', {shift: 6});
 	});
 }
 
+
+function To(arg){
+	window.location="exam_findByPageNumber.action?pageNumber="+arg;
+}
+
+function findExam(){
+	  layer.prompt({title: '请输入试题名称、描述:', formType: 0},function(value, index, elem){
+	  layer.close(index);
+	  window.location="exam_findByName.action?queryInfo="+value; 
+	});
+}
+
+function downloadExam(arg){
+	window.location="http://localhost:8080/CollegeLive/exams/lyl.xlsx";
+}
 
 function To(arg){
 	window.location="exam_findByPageNumber.action?pageNumber="+arg;

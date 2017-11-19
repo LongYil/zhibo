@@ -7,4 +7,5 @@ import cn.lxy.po.Exam;
 public interface ExamDao {
 	List<Exam> findAll();
 	List<Exam> findByName(String arg);
+	Exam findById(String arg);
 }

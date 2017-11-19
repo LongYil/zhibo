@@ -44,13 +44,15 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 	
 	@Override
 	public void delete(Exam arg) {
-		//
+		daoImpl.delete(arg);
 	}
 	public List<ExamVo> findByName(String arg){
 		String sql = "name like '%"+arg+"%' or describes like '%"+arg+"%' ";
 		listExam = daoImpl.findByName(sql);
 		return assembleExam.getExamVo(listExam);
 	}
-	
+	public Exam findById(String arg) {
+		return daoImpl.findById(arg);
+	}
 	
 }

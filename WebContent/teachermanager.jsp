@@ -53,7 +53,7 @@
                                		<s:iterator value="listteacher" status="ste">
 										<c:if test="${ste.index<11}">
 										<tr>
-											<td>${ste.index+1}</td>
+											<td><s:property value="id"/></td>
 											<td><s:property value="username"/></td>
 											<td><s:property value="name"/></td>
 											<td><s:property value="tel"/></td>
@@ -124,7 +124,7 @@
 				window.location="teacher_findAll.action";
 			}else{
 				parent.layer.msg('删除失败', {icon: 2});
-			}	    
+			}
 		}, function(){
 		    parent.layer.msg('已取消', {shift: 6});
 		});

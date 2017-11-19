@@ -67,7 +67,7 @@
                         <span class="ng-scope">试题管理</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="exammanager.jsp">
+                        <a class="J_menuItem" href="exam_findAll.action">
                             <i class="fa fa-book"></i>
                             <span class="nav-label">我的试题</span>
                         </a>

@@ -86,22 +86,22 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		this.enablePageNumber="1";
 		this.getSesion().put("allTeacherPage",temp);
 		this.getSesion().put("enableListTeacher", listteacher);
+		this.getSesion().put("enablePageNumber", "1");
 		pages = countAllPage.getStartPages(temp);
 		return "findAll";
 	}
 	//根据页码查找相应页面的数据
-	public String findEnableByPageNumber() {
+	public String findEnableByPageNumber() {		
 		int page = Integer.parseInt(enablePageNumber);
 		int all = Integer.parseInt(this.getSesion().get("allTeacherPage").toString());
 		pageDirection = countAllPage.getLeftAndRight(page,all);
 		pageDirectionNumber = countAllPage.getDirectionNumber(page,all);
-		System.out.println(pageDirectionNumber[0]+"*"+pageDirectionNumber[1]);
 		tempteacher = (List<Teacher>) this.getSesion().get("enableListTeacher");
 		listteacher = tempteacher.subList((page-1)*11,countAllPage.getLastIndex(page,tempteacher.size()));
-		pages.clear();	
-		pages = countAllPage.getPages(Integer.parseInt(enablePageNumber),Integer.parseInt(this.getSesion().get("allTeacherPage").toString()));
+		pages.clear();
+		pages = countAllPage.getPages(page,Integer.parseInt(this.getSesion().get("allTeacherPage").toString()));
 		return "findAll";
-	}	
+	}
 	//删除指定教师用户
 	public String delete() throws Exception {
 		this.resultinfo="0";

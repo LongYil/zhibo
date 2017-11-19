@@ -1,16 +1,21 @@
 package cn.lxy.action;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.lxy.po.Exam;
-import cn.lxy.po.Student;
+import cn.lxy.po.Teacher;
 import cn.lxy.service.ExamServc;
 import cn.lxy.utils.CountAllPage;
+import cn.lxy.utils.FileUtils;
 import cn.lxy.vo.ExamVo;
 
 public class ExamAction extends BasicAction implements ModelDriven<Exam> {
@@ -18,6 +23,10 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private Exam exam;
 	@Autowired
 	private ExamServc servc;
+	@Autowired
+	private FileUtils fileUtils;
+	@Autowired
+	private Teacher teacher;
 	
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();
 	private List<ExamVo> tempListExamVo = new ArrayList<ExamVo>();
@@ -33,6 +42,11 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	@Autowired
 	private CountAllPage countAllPage;	
 	
+	
+    private String usename ;  
+    private List<File> examfile ;  
+    private List<String> examfileFileName ;  
+    private List<String> examfileContentType ;
 	
 	
 	@Override
@@ -72,13 +86,45 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	//根据试题名称或描述查找对应的试题
 	public String findByName() {
 		listExamVo.clear();
-		System.out.println(queryInfo);
 		listExamVo = servc.findByName(queryInfo);
+		this.getSesion().put("examQueryInfo", queryInfo);
 		return "findByName";
 	}
+	//删除试题
+	public String delete() throws Exception {
+		this.resultinfo="0";
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String examId = request.getParameter("info");
+		exam = servc.findById(examId);
+		servc.delete(exam);
+		this.resultinfo="1";		
+		return "delete";
+	}
+	//删除试题后重新查询
+	public String queryAfterDelete() {
+		String info = this.getSesion().get("examQueryInfo").toString();
+		listExamVo.clear();
+		listExamVo = servc.findByName(info);
+		return "findByName";		
+	}
+	//保存试题
+	public String save() throws Exception {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String examPic = request.getParameter("examPic");
+		String[] infos = examPic.split(",");
+		String realpath1 = ServletActionContext.getServletContext().getRealPath("/examimage");
+        String realpath2 = ServletActionContext.getServletContext().getRealPath("/examfile");
+        
+        teacher = (Teacher) this.getSesion().get("Teacher");
+        System.out.println(realpath1);
+        exam.setFace(fileUtils.GenerateImage(infos[1],realpath1,examfileFileName.get(1)));
+        exam.setFileaddress(fileUtils.saveFile(examfile.get(0), realpath2,examfileFileName.get(0)));
+		exam.setTeacher(teacher);
+		servc.save(exam);
+        return "save";
+	}
 	
-	
-	
+
 	public Exam getExam() {
 		return exam;
 	}
@@ -127,8 +173,33 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	public void setQueryInfo(String queryInfo) {
 		this.queryInfo = queryInfo;
 	}
-	
-	
+	public String getUsename() {
+		return usename;
+	}
+	public void setUsename(String usename) {
+		this.usename = usename;
+	}
+	public List<File> getExamfile() {
+		return examfile;
+	}
+	public void setExamfile(List<File> examfile) {
+		this.examfile = examfile;
+	}
+	public List<String> getExamfileFileName() {
+		return examfileFileName;
+	}
+	public void setExamfileFileName(List<String> examfileFileName) {
+		this.examfileFileName = examfileFileName;
+	}
+	public List<String> getExamfileContentType() {
+		return examfileContentType;
+	}
+	public void setExamfileContentType(List<String> examfileContentType) {
+		this.examfileContentType = examfileContentType;
+	}
+
+
+
 
 
 	

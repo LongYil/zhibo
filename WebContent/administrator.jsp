@@ -21,9 +21,7 @@
     <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-<script type="text/javascript">
-var index = parent.layer.load(0, {shade: false});
-</script>
+
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
