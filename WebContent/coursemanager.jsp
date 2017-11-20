@@ -35,8 +35,7 @@
                     <div class="ibox-title">
                         <h5>我的课程</h5>
                         <div class="ibox-tools">                            
- 
- 
+
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -82,8 +81,7 @@
 									</s:iterator>	
 								<tr>
 									<td colspan="12">
-									<div class="btn-group" style="float:right;">
-										
+									<div class="btn-group" style="float:right;">	
 									<c:if test="${userRole==1 }">
 										<c:if test="${pageDirection[0]==1 }">
 										  <button type="button" class="btn btn-white" onClick="To('${pageDirectionNumber[0]}')"><i class="fa fa-chevron-left"></i></button>
@@ -181,6 +179,5 @@ function Go(arg){
 }
 
 </script>
-
 </html>
     

@@ -25,5 +25,6 @@ public class ExamDaoImpl extends CommonDaoImpl<Exam> implements ExamDao {
 	public Exam findById(String arg) {
 		return (Exam) ht.find("from Exam where id = "+arg+"").get(0);
 	}
+
 	
 }

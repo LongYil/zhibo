@@ -18,6 +18,13 @@ import cn.lxy.po.Teacher;
 import cn.lxy.service.TeacherServc;
 import cn.lxy.utils.CountAllPage;
 
+/**
+ * <p>Title:TeacherAction</p>
+ * <p>Description: 教师实体控制器</p>
+ * @author 李银龙
+ *		2017年11月20日
+ *		下午9:52:54
+ */
 public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	@Autowired
 	private Teacher teacher;

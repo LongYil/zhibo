@@ -36,7 +36,7 @@ public class FileUtils {
             out.write(b);
             out.flush();  
             out.close();  
-            return serverInfo.IMAGEADDRESS+name;  
+            return serverInfo.IMAGE_ADDRESS+name;  
         }   
         catch (Exception e)   
         {  
@@ -54,7 +54,7 @@ public class FileUtils {
         }   
         is.close();  
         os.close(); 
-        return serverInfo.FILEADDRESS+name;
+        return serverInfo.FILE_ADDRESS+name;
 	}
 	
 	

@@ -7,6 +7,13 @@ import cn.lxy.po.Teacher;
 import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
 
+/**
+ * <p>Title:LoginAction</p>
+ * <p>Description: 登录实体控制器</p>
+ * @author 李银龙
+ *		2017年11月20日
+ *		下午9:52:04
+ */
 public class LoginAction extends BasicAction {
 	private String username;
 	private String password;

@@ -8,6 +8,6 @@ package cn.lxy.utils;
  *		ионГ10:37:30
  */
 public class ServerInfo {
-	public static final String FILEADDRESS = "http://"+"localhost"+":8080/CollegeLive/examfile/";
-	public static final String IMAGEADDRESS = "http://"+"localhost"+":8080/CollegeLive/examimage/";
+	public static final String FILE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/examfile/";
+	public static final String IMAGE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/examimage/";
 }

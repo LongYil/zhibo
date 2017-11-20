@@ -1,6 +1,7 @@
 package cn.lxy.action;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,17 @@ import cn.lxy.po.Teacher;
 import cn.lxy.service.ExamServc;
 import cn.lxy.utils.CountAllPage;
 import cn.lxy.utils.FileUtils;
+import cn.lxy.vo.AnalysedExam;
 import cn.lxy.vo.ExamVo;
+import jxl.read.biff.BiffException;
 
+/**
+ * <p>Title:ExamAction</p>
+ * <p>Description: 试题实体控制器</p>
+ * @author 李银龙
+ *		2017年11月20日
+ *		下午9:51:45
+ */
 public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	@Autowired
 	private Exam exam;
@@ -27,27 +37,29 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private FileUtils fileUtils;
 	@Autowired
 	private Teacher teacher;
+	@Autowired
+	private CountAllPage countAllPage;	
 	
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();
 	private List<ExamVo> tempListExamVo = new ArrayList<ExamVo>();
 	private List<Integer> pages = new ArrayList<Integer>();
+	private List<AnalysedExam> listAnalysedExam = new ArrayList<AnalysedExam>();
+	private List<String> listAnswerResult = new ArrayList<String>();
 	
 	private String resultinfo;
 	private String pageNumber;
 	private String queryInfo;
 	
+	private String examId;
+	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectionNumber = new int[2];
-	
-	@Autowired
-	private CountAllPage countAllPage;	
-	
 	
     private String usename ;  
     private List<File> examfile ;  
     private List<String> examfileFileName ;  
     private List<String> examfileContentType ;
-	
+    
 	
 	@Override
 	public Exam getModel() {
@@ -113,18 +125,33 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		String examPic = request.getParameter("examPic");
 		String[] infos = examPic.split(",");
 		String realpath1 = ServletActionContext.getServletContext().getRealPath("/examimage");
-        String realpath2 = ServletActionContext.getServletContext().getRealPath("/examfile");
-        
+        String realpath2 = ServletActionContext.getServletContext().getRealPath("/examfile"); 
         teacher = (Teacher) this.getSesion().get("Teacher");
-        System.out.println(realpath1);
         exam.setFace(fileUtils.GenerateImage(infos[1],realpath1,examfileFileName.get(1)));
         exam.setFileaddress(fileUtils.saveFile(examfile.get(0), realpath2,examfileFileName.get(0)));
 		exam.setTeacher(teacher);
 		servc.save(exam);
         return "save";
 	}
+	//根据试题id解析试题
+	public String analyseExam() throws BiffException, IOException {
+//		servc.analyseExam(examId);
+		listAnalysedExam = servc.analyseExam("3");
+		this.getSesion().put("analysedExamList", listAnalysedExam);
+		return "analyseExam";
+	}
+	//根据答题情况计算结果
+	public String calculateResult() {
+		String[] results = null;//前台传来的答题结果
+		listAnalysedExam.clear();
+		listAnalysedExam = (List<AnalysedExam>) this.getSesion().get("analysedExamList");
+		listAnswerResult.clear();
+		listAnswerResult = servc.calculateResult(results, listAnalysedExam);
+		return "calculateResult";
+	}
 	
-
+	
+	
 	public Exam getExam() {
 		return exam;
 	}
@@ -197,10 +224,17 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	public void setExamfileContentType(List<String> examfileContentType) {
 		this.examfileContentType = examfileContentType;
 	}
-
-
-
-
-
+	public String getExamId() {
+		return examId;
+	}
+	public void setExamId(String examId) {
+		this.examId = examId;
+	}
+	public List<AnalysedExam> getListAnalysedExam() {
+		return listAnalysedExam;
+	}
+	public void setListAnalysedExam(List<AnalysedExam> listAnalysedExam) {
+		this.listAnalysedExam = listAnalysedExam;
+	}
 	
 }

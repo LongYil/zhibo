@@ -15,8 +15,7 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 
 	@Override
 	public void save(Course arg) {
-		//
-		
+		daoImpl.save(arg);
 	}
 
 	@Override
@@ -27,14 +26,18 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 
 	@Override
 	public List<Course> findAll(String arg) {
-		//
 		return null;
 	}
 
 	@Override
 	public void delete(Course arg) {
 		//
-		
+	}
+	public List<Course> findByInfo(String arg){
+		return daoImpl.findByInfo(arg);
+	}
+	public List<Course> teacherFindByInfo(String arg,String teacherid){
+		return daoImpl.teacherFindByInfo(arg, teacherid);
 	}
 
 }

@@ -13,6 +13,7 @@ import java.util.Set;
 public class Course {
 	private Integer id;//序号
 	private String name;//课程名称
+	private String subject;//课程科目
 	private String summary;//课程简介
 	private String face;//封面
 	private String time;//开始时间
@@ -77,6 +78,12 @@ public class Course {
 	}
 	public void setSetDiscuss(Set<Discuss> setDiscuss) {
 		this.setDiscuss = setDiscuss;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	

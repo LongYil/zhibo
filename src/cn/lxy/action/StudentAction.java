@@ -14,6 +14,13 @@ import cn.lxy.po.Student;
 import cn.lxy.service.StudentServc;
 import cn.lxy.utils.CountAllPage;
 
+/**
+ * <p>Title:StudentAction</p>
+ * <p>Description: 学生实体控制器</p>
+ * @author 李银龙
+ *		2017年11月20日
+ *		下午9:52:40
+ */
 public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private String resultinfo;
 	private String enablePageNumber;
