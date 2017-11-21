@@ -32,10 +32,7 @@
 		<result name="aaa">/test.jsp</result>
 	</action>
 	
-	<action name="note_*" class="noteAction" method="{1}">
-		<result name="success">/index.jsp</result>
-		<result name="aaa">/test.jsp</result>
-	</action>
+
 	
 
 	
@@ -86,6 +83,14 @@
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
-
+		   
+		   <action name="note_*" class="noteAction" method="{1}">
+			    <result name="success">/index.jsp</result>
+			    <result name="aaa">/test.jsp</result>
+			    <result type="json" name="delete"><param name="root">resultinfo</param></result>
+		   </action>
+		   
+		   
+		   
 	</package>
 </struts>

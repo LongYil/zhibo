@@ -15,8 +15,7 @@ public class DiscussServc extends CommonSevc<Discuss, DiscussDaoImpl> {
 
 	@Override
 	public void save(Discuss arg) {
-		//
-		
+		daoImpl.save(arg);		
 	}
 
 	@Override
@@ -33,8 +32,11 @@ public class DiscussServc extends CommonSevc<Discuss, DiscussDaoImpl> {
 
 	@Override
 	public void delete(Discuss arg) {
-		//
-		
+		daoImpl.delete(arg);		
 	}
-
+	
+	public List<Discuss> findByCourseId(String arg){
+		return daoImpl.findByCourseId(arg);		
+	}
+	
 }

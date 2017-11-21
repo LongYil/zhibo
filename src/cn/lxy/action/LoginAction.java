@@ -27,12 +27,14 @@ public class LoginAction extends BasicAction {
 	private StudentServc studentServc;
 	@Autowired
 	private Student student;
+
 	
 	public String login() throws Exception {
 		System.out.println(username+"*"+password+"*"+usertype);
-		if(usertype==0) {
-			;
-		}else if(usertype==1){
+		if(usertype==0) {//用户类型：学生
+			student = studentServc.login(username, password);
+			this.getSesion().put("Student", student);
+		}else if(usertype==1){//用户类型：教师
 			teacher = teacherServc.login(username, password);
 			this.getSesion().put("Teacher", teacher);
 		}else {

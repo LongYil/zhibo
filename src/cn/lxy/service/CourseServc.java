@@ -39,5 +39,8 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 	public List<Course> teacherFindByInfo(String arg,String teacherid){
 		return daoImpl.teacherFindByInfo(arg, teacherid);
 	}
-
+	public Course findByCourseId(String arg) throws Exception {
+		return (Course) getEntity.getEntity("Course", "id", arg, Course.class);
+	}
+	
 }

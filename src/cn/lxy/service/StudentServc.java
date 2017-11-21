@@ -56,5 +56,11 @@ public class StudentServc extends CommonSevc<Student, StudentDaoImpl> {
 	public List<Student> findById(String arg) throws Exception {
 		return daoImpl.findById(arg);
 	}
+	public Student login(String arg1,String arg2) throws Exception {
+		String sql = "username ='"+arg1+"'and password = '"+arg2+"'";
+		return (Student) getEntity.login("Student", sql, Student.class);
+	}
+	
+	
 	
 }

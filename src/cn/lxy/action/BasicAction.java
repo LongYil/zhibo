@@ -23,4 +23,5 @@ public class BasicAction extends ActionSupport implements SessionAware {
 		this.sesion = sesion;
 	}
 	
+	
 }

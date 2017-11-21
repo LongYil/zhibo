@@ -67,7 +67,11 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		listCourse = servc.findByInfo(queryInfo);
 		return "findByInfo";
 	}
-	
+	//根据课程id查找课程
+	public String findByCourseId() {
+		
+		return null;
+	}
 	
 	
 	

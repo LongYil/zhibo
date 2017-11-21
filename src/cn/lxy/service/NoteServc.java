@@ -12,11 +12,10 @@ import cn.lxy.po.Note;
 @Transactional
 @Service(value="noteServc")
 public class NoteServc extends CommonSevc<Note, NoteDaoImpl> {
-
+	
 	@Override
 	public void save(Note arg) {
-		//
-		
+		daoImpl.save(arg);		
 	}
 
 	@Override
@@ -33,8 +32,13 @@ public class NoteServc extends CommonSevc<Note, NoteDaoImpl> {
 
 	@Override
 	public void delete(Note arg) {
-		//
-		
+		daoImpl.delete(arg);
 	}
-
+	public Note findById(String arg) {
+		return daoImpl.findById(arg);
+	}
+	public List<Note> findAll(String arg1,String arg2){
+		return daoImpl.findAll(arg1, arg2);
+	}
+	
 }
