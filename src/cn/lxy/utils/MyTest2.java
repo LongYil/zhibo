@@ -8,7 +8,7 @@ public class MyTest2 {
 	public static void main(String[] args) throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		long time = format.parse("2017-11-30 23:59:59").getTime()/1000;
+		long time = format.parse("2017-11-24 23:59:59").getTime()/1000;
 		
 //		long time = System.currentTimeMillis();
 //		System.out.println(time);

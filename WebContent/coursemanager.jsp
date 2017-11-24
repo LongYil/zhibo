@@ -34,8 +34,11 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>我的课程</h5>
-                        <div class="ibox-tools">                            
-
+                        <div class="ibox-tools"  style="margin-bottom:5px;">  
+                            <button type="button" class="btn btn-w-m btn-info" onClick="createCourse()">新建课程&nbsp;&nbsp;<i class="fa fa-plus-circle"></i></button>
+                            <span style="margin-right:10px;">&nbsp;</span>  
+							<button type="button" class="btn btn-w-m btn-info" onClick="findCourse()">查找课程&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+                            <span style="margin-right:10px;">&nbsp;</span>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -177,7 +180,9 @@ function To(arg){
 function Go(arg){
 	window.location="findDisabledByPageNumber.action?disablePageNumber="+arg;
 }
-
+function createCourse(){
+	window.location="addcourse.jsp";
+}
 </script>
 </html>
     

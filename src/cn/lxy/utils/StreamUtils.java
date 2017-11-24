@@ -3,19 +3,31 @@ package cn.lxy.utils;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-public class MyTest1 {
 
-    public static void main(String[] args) {
-        System.out.println("11925_bbbbbb?"+"bizid=11925&"+getSafeUrl("2e501ec27812117a0dcb00e801745961", "11925_bbbbbb",1511539199L));
-        
-        
-        
-    }
+/**
+ * <p>Title:StreamUtils</p>
+ * <p>Description: 获取推流码工具类</p>
+ * @author 李银龙
+ *		2017年11月24日
+ *		下午9:48:51
+ */
+public class StreamUtils {
 
+	public static String getStreamId(String roomid,String txTime) {
+		String streamid = "";
+		try {
+			 streamid = ServerInfo.BIZID+"_"+roomid+"?"+"bizid="+ServerInfo.BIZID+"&"+(getSafeUrl(ServerInfo.KEY,ServerInfo.BIZID+"_"+roomid,getLongTime(txTime)));	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return streamid;
+	}
+	
     private static final char[] DIGITS_LOWER =
         {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-//11925_678ca76b63?bizid=11925&txSecret=da8eecc56c113a90d52fd69bc99e8ce7&txTime=59F9EF7F
     /*
      * KEY+ stream_id + txTime
      */
@@ -56,8 +68,17 @@ public class MyTest1 {
         return new String(out);
     }
     
-    public static String outputTxSecret(String arg) {
-    	return new Md5Encrypt(arg).to32MD5();
+    private static String getTxTime(String arg) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		long time = format.parse(arg).getTime()/1000;
+        String t =  Long.toHexString(time);
+        t = t.toUpperCase();
+        return t;
+    }
+    
+    private static long getLongTime(String arg) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		long time = format.parse(arg).getTime()/1000;    	
+		return time;
     }
 }
-

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上传试题</title>
+    <title>添加课程</title>
 
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
@@ -21,42 +21,52 @@
 	<script src="plugins/cover_js/hammer.js" type="text/javascript" charset="utf-8"></script>
 	<script src="plugins/cover_js/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
 	<script src="plugins/cover_js/jquery.photoClip.min.js" type="text/javascript" charset="utf-8"></script>
+	
 </head>
 
 <body class="gray-bg">
 			<div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins" style="width:60%;margin:0 auto;"> 
                     <div class="ibox-title" >
-                        <h5 style="font-size:20px;color:#23b7e5;">填写试题信息</h5>
-                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('exam_findAll.action')" href="javascript:void(0)">返回 </a></div>
+                        <h5 style="font-size:20px;color:#23b7e5;">填写课程信息</h5>
+                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('exam_findAll.action')" href="javascript:void(0)">返回 </a></div>                        
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
 							<form action="exam_save.action" method="post" name="myform()" enctype="multipart/form-data">
 							<div class="form-group">
-                                <label class="col-sm-3 control-label">试题名称：</label>
+                                <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="name" placeholder="试题名称" class="form-control"> 
+                                    <input type="text" name="name" placeholder="课程名称" class="form-control"> 
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
                             
 							<div class="form-group">
-                                <label class="col-sm-3 control-label">试题描述：</label>
+                                <label class="col-sm-3 control-label">课程科目：</label>
                                 <div class="col-sm-8">
-                                <textarea class="form-control" name="describes" rows="3" placeholder="试题描述..." class="form-control"></textarea>
+                                    <input type="text" name="describes" placeholder="课程科目" class="form-control"> 
+                                </div>
+                            </div>
+                            
+							<div class="form-group">
+                                <label class="col-sm-3 control-label">课程简介：</label>
+                                <div class="col-sm-8">
+								    <textarea class="form-control" rows="3" placeholder="课程简介..."></textarea>
+                                </div>
+                            </div>
+                            
+							<div class="form-group">
+                                <label class="col-sm-3 control-label">开始时间：</label>
+                                <div class="col-sm-8">
+                                   <input readonly class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+
                                 </div>
                             </div>
 
-						    <div class="form-group">
-						        <label class="col-sm-3 control-label">试题附件：</label>
-						        <div class="col-sm-9">
-						            <input type="file" name="examfile" class="form-control">
-						        </div>
-						    </div>                          
-
+                          
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">试题封面：</label>
+                                <label class="col-sm-3 control-label">课程封面封面：</label>
                                 <div class="col-sm-8">
 				                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
 							        	<div class="ycupload-mainbox">
@@ -117,6 +127,7 @@
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 <script src="js/ajaxcommunicate.js"></script>
 
+<script src="js/plugins/layer/laydate/laydate.js"></script>
 <script type="text/javascript">
 
 function Go(url){
