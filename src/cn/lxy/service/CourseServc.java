@@ -31,7 +31,7 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 
 	@Override
 	public void delete(Course arg) {
-		//
+		daoImpl.delete(arg);
 	}
 	public List<Course> findByInfo(String arg){
 		return daoImpl.findByInfo(arg);
@@ -41,6 +41,12 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 	}
 	public Course findByCourseId(String arg) throws Exception {
 		return (Course) getEntity.getEntity("Course", "id", arg, Course.class);
+	}
+	public List<Course> findByTeacherId(String arg){
+		return daoImpl.findByTeacherId(arg);
+	}
+	public void update(Course course) {
+		daoImpl.update(course);
 	}
 	
 }

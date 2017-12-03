@@ -22,13 +22,12 @@ public class Teacher {
 	private String tel;//手机号
 	private String email;//邮箱
 	private String head;//头像地址
-	private String fms;//直播码
-	private String streamid;//串流码
+	private String roomid;//房间号
+
 	//在教师里面表示直播课程，一个教师拥有多个直播课程
 	private Set<Course> setCourse = new HashSet<Course>();
 	//在教师里面表示试题，一个教师拥有多个试题
 	private Set<Exam> setExam = new HashSet<Exam>();
-	
 	public Integer getId() {
 		return id;
 	}
@@ -95,17 +94,11 @@ public class Teacher {
 	public void setHead(String head) {
 		this.head = head;
 	}
-	public String getFms() {
-		return fms;
+	public String getRoomid() {
+		return roomid;
 	}
-	public void setFms(String fms) {
-		this.fms = fms;
-	}
-	public String getStreamid() {
-		return streamid;
-	}
-	public void setStreamid(String streamid) {
-		this.streamid = streamid;
+	public void setRoomid(String roomid) {
+		this.roomid = roomid;
 	}
 	public Set<Course> getSetCourse() {
 		return setCourse;
@@ -118,6 +111,8 @@ public class Teacher {
 	}
 	public void setSetExam(Set<Exam> setExam) {
 		this.setExam = setExam;
-	}	
+	}
+	
+
 	
 }

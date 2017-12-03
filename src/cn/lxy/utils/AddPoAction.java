@@ -1,11 +1,16 @@
 package cn.lxy.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.lxy.action.BasicAction;
+import cn.lxy.po.Course;
 import cn.lxy.po.Exam;
 import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
+import cn.lxy.service.CourseServc;
 import cn.lxy.service.ExamServc;
 import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
@@ -19,8 +24,11 @@ public class AddPoAction extends BasicAction{
 	private Teacher teacher;
 	@Autowired
 	private TeacherServc teacherServc;
+	@Autowired
+	private CourseServc courseServc;
 	
 	private Exam exam;
+	private Course course;
 	@Autowired
 	private ExamServc examServc;
 	
@@ -55,6 +63,22 @@ public class AddPoAction extends BasicAction{
 		return "success";
 	}
 	
+	public String addCourse() throws Exception {
+		
+		for(int i=0;i<60;i++) {
+			teacher = teacherServc.find("1");
+			course = new Course();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = sdf.parse("2017-11-12 23:12:12");
+			course.setTime(date);
+			course.setCoursetype(0);
+			course.setName("¿Î³Ì->"+i);
+			course.setTeacher(teacher);
+			courseServc.save(course);
+		}
+		
+		return "success";
+	}
 	
 	
 }

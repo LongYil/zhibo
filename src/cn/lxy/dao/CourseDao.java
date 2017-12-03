@@ -8,5 +8,5 @@ public interface CourseDao {
 	List<Course> findAll();
 	List<Course> findByInfo(String arg);
 	List<Course> teacherFindByInfo(String arg1,String teacherid);
-
+	List<Course> findByTeacherId(String arg);
 }

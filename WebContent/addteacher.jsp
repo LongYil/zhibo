@@ -62,21 +62,7 @@
                                 </div>
                             </div>
 
-							<div class="form-group">
-                                <label class="col-sm-3 control-label">FMS  URL</label>
-                                <div class="col-sm-8">
-                                    <input name="fms" id="fms" type="text" value="<s:property value="teacher.fms"/>" placeholder="请输入FMS URL" class="form-control"> 
-                                    <span class="help-block m-b-none"></span>
-                                </div>
-                            </div>
                             <input type="hidden" name="id" class="userid" value="<s:property value="teacher.id"/>">
-							<div class="form-group">
-                                <label class="col-sm-3 control-label">串流码</label>
-                                <div class="col-sm-8">
-                                    <input name="streamid" id="streamid" type="text" value="<s:property value="teacher.streamid"/>" placeholder="请输入串流码" class="form-control"> 
-                                    <span class="help-block m-b-none"></span>
-                                </div>
-                            </div>
                             
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
@@ -100,7 +86,7 @@ function Go(url){
 	window.location=url;
 }
 function saveTeacherInfo(){
-	var arg = $(".userid").val()+"-"+$("#username").val()+"-"+$("#name").val()+"-"+$("#tel").val()+"-"+$("#password").val()+"-"+$("#fms").val()+"-"+$("#streamid").val();
+	var arg = $(".userid").val()+"-"+$("#username").val()+"-"+$("#name").val()+"-"+$("#tel").val()+"-"+$("#password").val();
 	var result = ajaxSubmit("teacher_saveInfo.action",arg);
 	if(result=="1"){
 		parent.layer.msg('保存成功', {icon: 1});

@@ -68,7 +68,7 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="exam_findAll.action">
-                            <i class="fa fa-book"></i>
+                            <i class="fa fa-file-text-o"></i>
                             <span class="nav-label">我的试题</span>
                         </a>
                     </li>
@@ -79,9 +79,15 @@
                         <span class="ng-scope">课程管理</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="coursemanager.jsp">
+                        <a class="J_menuItem" href="course_findByTeacherId.action">
                             <i class="fa fa-video-camera"></i>
-                            <span class="nav-label">我的课程</span>
+                            <span class="nav-label">直播课程</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="pastcoursemanager.jsp">
+                            <i class="fa fa-file-movie-o"></i>
+                            <span class="nav-label">往期课程</span>
                         </a>
                     </li>
                     <li class="line dk"></li>

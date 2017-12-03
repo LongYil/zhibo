@@ -1,4 +1,4 @@
-package cn.lxy.utils;
+package cn.lxy.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

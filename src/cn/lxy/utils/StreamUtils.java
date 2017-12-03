@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -15,8 +16,9 @@ import java.text.SimpleDateFormat;
  *		下午9:48:51
  */
 public class StreamUtils {
-
+	
 	public static String getStreamId(String roomid,String txTime) {
+		txTime = addThreeday(txTime);
 		String streamid = "";
 		try {
 			 streamid = ServerInfo.BIZID+"_"+roomid+"?"+"bizid="+ServerInfo.BIZID+"&"+(getSafeUrl(ServerInfo.KEY,ServerInfo.BIZID+"_"+roomid,getLongTime(txTime)));	
@@ -80,5 +82,15 @@ public class StreamUtils {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		long time = format.parse(arg).getTime()/1000;    	
 		return time;
+    }
+    public static String addThreeday(String today){   
+        SimpleDateFormat f =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
+        try   {   
+            Date  d  =  new Date(f.parse(today).getTime()+3*24*3600*1000);     
+              return  f.format(d);   
+        }   
+        catch(Exception ex) {   
+            return   "输入格式错误";
+        }   
     }
 }

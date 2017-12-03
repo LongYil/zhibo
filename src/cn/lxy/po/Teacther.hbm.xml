@@ -20,15 +20,14 @@
 		<property name="tel" />
 		<property name="email" />
 		<property name="head" />
-		<property name="fms" />
-		<property name="streamid" />
+		<property name="roomid" />
 
-		<set name="setCourse" inverse="false" cascade="save-update,delete" fetch="select" lazy="extra">
+		<set name="setCourse" inverse="false" cascade="save-update,delete" fetch="select" lazy="false">
 			<key column="teacher_id"/>
 			<one-to-many class="cn.lxy.po.Course"/>
 		</set>
 		
-		<set name="setExam" inverse="false" cascade="save-update,delete" fetch="select" lazy="extra">
+		<set name="setExam" inverse="false" cascade="save-update,delete" fetch="select" lazy="false">
 			<key column="teacher_id"/>
 			<one-to-many class="cn.lxy.po.Exam"/>
 		</set>

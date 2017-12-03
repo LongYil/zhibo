@@ -10,18 +10,21 @@
 			<generator class="native"/>
 		</id>		
 		<many-to-one name="teacher" class="cn.lxy.po.Teacher" column="teacher_id"></many-to-one>
+		<property name="name" />
 		<property name="summary" />
 		<property name="subject" />
+		<property name="coursetype" />
 		<property name="face" />
 		<property name="time" />
 		<property name="address" />
+		<property name="streamid" />
 
-		<set name="setNote" inverse="false" cascade="save-update,delete" fetch="select" lazy="extra">
+		<set name="setNote" inverse="false" cascade="save-update,delete" fetch="select" lazy="false">
 			<key column="course_id"/>
 			<one-to-many class="cn.lxy.po.Note"/>
 		</set>
 
-		<set name="setDiscuss" inverse="false" cascade="save-update,delete" fetch="select" lazy="extra">
+		<set name="setDiscuss" inverse="false" cascade="save-update,delete" fetch="select" lazy="false">
 			<key column="course_id"/>
 			<one-to-many class="cn.lxy.po.Discuss"/>
 		</set>

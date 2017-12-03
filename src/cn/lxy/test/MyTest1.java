@@ -1,8 +1,10 @@
-package cn.lxy.utils;
+package cn.lxy.test;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import cn.lxy.utils.Md5Encrypt;
 
 public class MyTest1 {
 

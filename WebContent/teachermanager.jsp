@@ -44,8 +44,7 @@
                                     <th>毕业院校</th>
                                     <th>教龄</th>
                                     <th>邮箱</th>
-                                    <th>FMS&nbsp;URL</th>
-									<th>串流码</th>
+                                    <th>房间号</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
@@ -70,8 +69,7 @@
 											<td><s:property value="school"/></td>
 											<td><s:property value="teachtage"/></td>
 											<td><s:property value="email"/></td>
-											<td><s:property value="fms"/></td>
-											<td><s:property value="streamid"/></td>
+											<td><s:property value="roomid"/></td>
 											<td>
 											 <a class="btn btn-primary btn-rounded" onClick="updateTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">修改</a>
 										     <a class="btn btn-success btn-rounded" onClick="deleteTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">删除</a>

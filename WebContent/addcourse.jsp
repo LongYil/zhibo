@@ -29,11 +29,11 @@
                 <div class="ibox float-e-margins" style="width:60%;margin:0 auto;"> 
                     <div class="ibox-title" >
                         <h5 style="font-size:20px;color:#23b7e5;">填写课程信息</h5>
-                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('exam_findAll.action')" href="javascript:void(0)">返回 </a></div>                        
+                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('course_findByTeacherId.action')" href="javascript:void(0)">返回 </a></div>                        
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
-							<form action="exam_save.action" method="post" name="myform()" enctype="multipart/form-data">
+							<form action="course_save.action" method="post" name="myform()" enctype="multipart/form-data">
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
@@ -45,26 +45,24 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程科目：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="describes" placeholder="课程科目" class="form-control"> 
+                                    <input type="text" name="subject" placeholder="课程科目" class="form-control"> 
                                 </div>
                             </div>
                             
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程简介：</label>
                                 <div class="col-sm-8">
-								    <textarea class="form-control" rows="3" placeholder="课程简介..."></textarea>
+								    <textarea name="summary" class="form-control" rows="3" placeholder="课程简介..."></textarea>
                                 </div>
                             </div>
                             
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">开始时间：</label>
                                 <div class="col-sm-8">
-                                   <input readonly class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-
+                                   <input readonly name="time" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
                                 </div>
                             </div>
 
-                          
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">课程封面封面：</label>
                                 <div class="col-sm-8">
@@ -83,13 +81,12 @@
 							        			<div class="container">
 										        	<div class="row">
 												        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0;padding-left:36px;">
-												        	<div style="min-height:1px;line-height:160px;text-align:center;position:relative;" ontouchstart="">
+												        	<div style="min-height:1px;line-height:160px;text-align:center;position:relative;">
 												        		<div class="cover-wrap" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.4);z-index: 10000000;text-align:center;">	
-												        			<div class="" style="width:900px;height:600px;margin:100px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
+												        			<div class="" style="width:900px;height:600px;margin:0px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
 												        				<div id="clipArea" style="margin:10px;height: 520px;"></div>
 												        				<div class="" style="height:56px;line-height:36px;text-align: center;padding-top:8px;">
 												        					<button id="clipBtn" style="width:120px;height: 36px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align: center;line-height: 36px;outline: none;">保存封面</button>
-												        				    <span>滚动鼠标滑轮可改变大小</span>
 												        				</div>
 												        			</div>
 												        		</div>
@@ -97,8 +94,8 @@
 													        	<div style="height:10px;"></div>
 													        	<div class="" style="width:140px;height:32px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;margin-left:37px;position:relative;">
 													        		点击上传封面图
-													        		<input type="file" name="examfile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
-													        	    <input type="hidden" name="examPic" id="picFile">
+													        		<input type="file" name="coursefile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
+													        	    <input type="hidden" name="coursePic" id="picFile">
 													        	</div>
 												        	</div>
 											        	</div>

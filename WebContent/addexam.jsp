@@ -50,7 +50,7 @@
 
 						    <div class="form-group">
 						        <label class="col-sm-3 control-label">试题附件：</label>
-						        <div class="col-sm-9">
+						        <div class="col-sm-8">
 						            <input type="file" name="examfile" class="form-control">
 						        </div>
 						    </div>                          
@@ -73,13 +73,12 @@
 							        			<div class="container">
 										        	<div class="row">
 												        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0;padding-left:36px;">
-												        	<div style="min-height:1px;line-height:160px;text-align:center;position:relative;" ontouchstart="">
+												        	<div style="min-height:1px;line-height:160px;text-align:center;position:relative;">
 												        		<div class="cover-wrap" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.4);z-index: 10000000;text-align:center;">	
-												        			<div class="" style="width:900px;height:600px;margin:100px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
+												        			<div class="" style="width:900px;height:600px;margin:0px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
 												        				<div id="clipArea" style="margin:10px;height: 520px;"></div>
 												        				<div class="" style="height:56px;line-height:36px;text-align: center;padding-top:8px;">
 												        					<button id="clipBtn" style="width:120px;height: 36px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align: center;line-height: 36px;outline: none;">保存封面</button>
-												        				    <span>滚动鼠标滑轮可改变大小</span>
 												        				</div>
 												        			</div>
 												        		</div>

@@ -16,10 +16,6 @@
 		<result name="aaa">/test.jsp</result>
 	</action>
 	
-	<action name="course_*" class="courseAction" method="{1}">
-		<result name="success">/index.jsp</result>
-		<result name="aaa">/test.jsp</result>
-	</action>
 	
 	<action name="discuss_*" class="discussAction" method="{1}">
 		<result name="success">/index.jsp</result>
@@ -88,6 +84,16 @@
 			    <result name="success">/index.jsp</result>
 			    <result name="aaa">/test.jsp</result>
 			    <result type="json" name="delete"><param name="root">resultinfo</param></result>
+		   </action>
+		   
+		   <action name="course_*" class="courseAction" method="{1}">
+				<result name="save">course_findByTeacherId.action</result>
+				<result name="findByTeacherId">/livecoursemanager.jsp</result>
+				<result name="findByPageNumber">/livecoursemanager.jsp</result>
+				<result name="teacherFindByInfo">/livecoursequery.jsp</result>
+				<result name="preUpdate">/updatecourse.jsp</result>
+				
+				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
 		   
 		   

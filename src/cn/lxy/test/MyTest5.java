@@ -1,4 +1,4 @@
-package cn.lxy.utils;
+package cn.lxy.test;
 
 public class MyTest5 {
 

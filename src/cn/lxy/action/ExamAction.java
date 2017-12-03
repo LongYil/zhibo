@@ -40,6 +40,7 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	@Autowired
 	private CountAllPage countAllPage;	
 	
+	
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();
 	private List<ExamVo> tempListExamVo = new ArrayList<ExamVo>();
 	private List<Integer> pages = new ArrayList<Integer>();
@@ -124,8 +125,8 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String examPic = request.getParameter("examPic");
 		String[] infos = examPic.split(",");
-		String realpath1 = ServletActionContext.getServletContext().getRealPath("/examimage");
-        String realpath2 = ServletActionContext.getServletContext().getRealPath("/examfile"); 
+		String realpath1 = ServletActionContext.getServletContext().getRealPath("/sourcefile/examimage");
+        String realpath2 = ServletActionContext.getServletContext().getRealPath("/sourcefile/examfile"); 
         teacher = (Teacher) this.getSesion().get("Teacher");
         exam.setFace(fileUtils.GenerateImage(infos[1],realpath1,examfileFileName.get(1)));
         exam.setFileaddress(fileUtils.saveFile(examfile.get(0), realpath2,examfileFileName.get(0)));

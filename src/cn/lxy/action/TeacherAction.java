@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Teacher;
 import cn.lxy.service.TeacherServc;
 import cn.lxy.utils.CountAllPage;
+import cn.lxy.utils.ServerInfo;
 
 /**
  * <p>Title:TeacherAction</p>
@@ -70,8 +73,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		teacher.setName(infos[2]);
 		teacher.setTel(infos[3]);
 		teacher.setPassword(infos[4]);
-		teacher.setFms(infos[5]);
-		teacher.setStreamid(infos[6]);
+		teacher.setRoomid(new SimpleDateFormat("DDMMYYYYhhmmss").format(new Date()));
 		servc.save(teacher);
 		this.resultinfo="1";
 		return "saveInfo";
@@ -79,6 +81,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	//教师查询个人资料
 	public String selfInfo() {
 		teacher = (Teacher) this.getSesion().get("Teacher");
+		teacher.setRoomid("rtmp://"+ServerInfo.BIZID+".livepush.myqcloud.com/live/");
 		return "selfInfo";
 	}
 	//查找所有教师
@@ -131,7 +134,6 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String info = request.getParameter("info");
 		String[] infos = info.split("-");
-		System.out.println(infos[0]+"*"+infos[1]);
 		if(infos[0].equals(teacher.getPassword())) {
 			teacher.setPassword(infos[1]);
 			servc.save(teacher);

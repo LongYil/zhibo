@@ -1,4 +1,6 @@
-package cn.lxy.utils;
+package cn.lxy.test;
+
+import cn.lxy.utils.CountAllPage;
 
 public class MyTest4 {
 

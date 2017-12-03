@@ -1,113 +1,261 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta name="robots" content="all">
-		<title>上传图片，可调图片宽高</title>
-		<meta name="keywords" content="">
-		<meta name="description" content="">
-    	<link rel="stylesheet" type="text/css" href="css/ycbootstrap.css"/>
-		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
-		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-		<script src="plugins/cover_js/iscroll-zoom.js" type="text/javascript" charset="utf-8"></script>
-		<script src="plugins/cover_js/hammer.js" type="text/javascript" charset="utf-8"></script>
-		<script src="plugins/cover_js/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
-		<script src="plugins/cover_js/jquery.photoClip.min.js" type="text/javascript" charset="utf-8"></script>
-		
-	</head>
-	<body>
-		<div class="yc-upload-wrap">
-			<div class="yc-upload-box">
-				<div class="container">
-		        	<div class="row">
-				        <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
-				        <form action="exam_save.action" method="post" name="myform()" enctype="multipart/form-data">
-				        	<div class="ycupload-mainbox">
-				        		<div class="ycupload-main1" style="overflow:hidden;padding-left:25px;">
-				        			<span style="float:left;color:#ff5a5a;font-size:14px;line-height:60px;font-weight:900;margin-right:7px;">
-				        				&middot;
-				        			</span>
-				        			<span style="float:left;color:#333;font-size:16px;line-height:60px;margin-right:28px;">
-				        				
-				        				<button onClick="tijiao()" >提交封面</button>
-				        			</span>
-				        		</div>
-				        		<div class="ycupload-line"></div>
-				        		<div style="height:30px;"></div>
-				        		<div  style="min-height:1px;">
-				        			<div class="container">
-							        	<div class="row">
-									        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0;padding-left:36px;">
-									        	<div style="min-height:1px;line-height:160px;text-align:center;position:relative;" ontouchstart="">
-									        		<div class="cover-wrap" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.4);z-index: 10000000;text-align:center;">	
-									        			<div class="" style="width:900px;height:600px;margin:100px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
-									        				<div id="clipArea" style="margin:10px;height: 520px;"></div>
-									        				<div class="" style="height:56px;line-height:36px;text-align: center;padding-top:8px;">
-									        					<button id="clipBtn" style="width:120px;height: 36px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align: center;line-height: 36px;outline: none;">保存封面</button>
-									        				</div>
-									        			</div>
-									        		</div>
-									        		<div id="view" style="width:214px;height:160.5px;" title="请上传 428*321 的封面图片"></div>
-										        	<div style="height:10px;"></div>
-										        	<div class="" style="width:140px;height:32px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;margin-left:37px;position:relative;">
-										        		点击上传封面图
-										        		<input type="file" name="image" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
-										        	    <input type="hidden" name="picFile" id="picFile">
-										        	</div>
-									        	</div>
-								        	</div>
-							        	</div>
-						        	</div>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>理学院教学直播</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/mainstyle.css" rel="stylesheet" type="text/css">
+  </head>
 
+  <body  class="container-fluid">
+    <header>
+      <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
+          <a href="index.html"><h1>LOGO理学院直播</h1></a>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">  
+         <input type="text" class="form-control input-search" placeholder="Search" />
+         <button class="btn btn-info btn-search"><img src="images/sousuo.png" alt=""></button>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">  
+          <a href="javascript:void(0)" id="linkbt1">登录</a> 
+          <a>|</a>
+          <a href="javascript:void(0)" id="linkbt2">注册</a>
+        </div> 
+      </div>
+    </header>
 
-				        		</div>
-				        		<div style="height:25px;"></div>
-				        	</div>
-				        </form>	
-			        	</div>
-		        	</div>
-	        	</div>	        	
-			</div>
-		</div>
-	    <script type="text/javascript">
-	    //上传封面
-	    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-	    var picFile = $("#picFile");
-		var clipArea = new bjj.PhotoClip("#clipArea", {
-			size: [428, 321],// 截取框的宽和高组成的数组。默认值为[260,260]
-			outputSize: [428, 321], // 输出图像的宽和高组成的数组。默认值为[0,0]，表示输出图像原始大小
-			outputType: "jpg", // 指定输出图片的类型，可选 "jpg" 和 "png" 两种种类型，默认为 "jpg"
-			file: "#file", // 上传图片的<input type="file">控件的选择器或者DOM对象
-			view: "#view", // 显示截取后图像的容器的选择器或者DOM对象
-			ok: "#clipBtn", // 确认截图按钮的选择器或者DOM对象
-			loadStart: function() {
-				// 开始加载的回调函数。this指向 fileReader 对象，并将正在加载的 file 对象作为参数传入
-				$('.cover-wrap').fadeIn();
-				console.log("照片读取中");
-			},
-			loadComplete: function() {
-				 // 加载完成的回调函数。this指向图片对象，并将图片地址作为参数传入
-				console.log("照片读取完成");
-			},
-			//loadError: function(event) {}, // 加载失败的回调函数。this指向 fileReader 对象，并将错误事件的 event 对象作为参数传入
-			clipFinish: function(dataURL) {
-				 // 裁剪完成的回调函数。this指向图片对象，会将裁剪出的图像数据DataURL作为参数传入
-				$('.cover-wrap').fadeOut();
-				$('#view').css('background-size','100% 100%');
-				console.log(dataURL);
-				picFile.val(dataURL);
-			}
-		 });
-		 //阻止表单提交
-		 var submitBtn = document.getElementById("clipBtn");
-		 submitBtn.onclick = function (event) {
-		  return false;
-		 };
-		 //提交表单
-		 function tijiao(){
-			 myform.submit();
-		 }
-	    </script>
-	</body>
+    <div id="light1"></div><!-- 登录弹窗 -->
+    <div id="fade1" class="login-body">
+      <div class="head">
+        <a id="line">登录</a>
+        <a id="turn2">注册</a>
+      </div>
+        <a href="javascript:void(0)" id="closebt1" style="float:right; font-size:30px;margin-top: -55px;margin-right:0;padding:0;color: #dbdbdb;">&times;</a>
+      <div class="content">
+        <p>手机号登录</p>
+        <input type="text" name="" placeholder="输入手机号">
+        <input type="password" name="" placeholder="输入密码">
+        <button class="button">登  录</button>
+      </div>
+    </div>
+
+    <div id="light2"></div><!-- 注册弹窗 -->
+    <div id="fade2" class="register-body">
+      <div class="head">
+        <a id="turn1">登录</a>
+        <a id="line">注册</a>
+        <a href="javascript:void(0)" id="closebt2" style="float:right; font-size:30px;margin-top: -18px;margin-right: -65px;padding:0;color: #dbdbdb;">&times;</a>
+      </div>
+      <div class="content">
+        <p>手机注册</p>
+        <input type="text" name="" placeholder="输入手机号">
+        <input type="password" name="" placeholder="输入密码">
+        <input type="password" name="" placeholder="再次输入密码">
+        <input class="input-yz" type="text" name="" placeholder="输入下图的验证码">
+        <a href="" id="yz"><img src="images/yanzhengma.png" class="img-yz" alt=""></a>
+        <a href="" id="sx"><img src="images/shuaxin.png" class="img-sx" alt=""></a>
+        <button class="button">注  册</button>
+      </div>
+    </div>
+    <div class="clearfix visible-xs-block"></div>
+
+    <div class="row nav">
+      <div class="col-sm-3 col-md-3 col-lg-3"></div>
+      <div class="col-sm-6 col-md-6 col-lg-6">
+          <ul style="padding-left: 0;">
+            <li><a href="#" class="tooltips" style="color: #198fee;">教学直播<span class="triangle"></span></a></li>
+          </ul>
+          <ul>
+            <li><a href="jiaoxuehuigu/review.html" class="tooltips">教学回顾<span></span></a></li>
+          </ul>
+          <ul>
+            <li><a href="shitiku/test.html" class="tooltips">试 题 库<span></span></a></li>
+          </ul>
+      </div>
+      <div class="col-sm-3 col-md-3 col-lg-3"></div>
+    </div>
+
+    <div class="row banner">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="wrap af4">
+          <ul class="slidebox">
+            <li><a href="#"><img src="images/lunbo.png" /></a></li>
+            <li><a href="#"><img src="images/lunbo.png" /></a></li>
+            <li><a href="#"><img src="images/lunbo.png" /></a></li>
+            <li><a href="#"><img src="images/lunbo.png" /></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row content-body">
+      <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+        <div class="data-body">
+          <div class="data">
+            <a href="#"><p>10月15号<br/>星期日</p></a>
+          </div>
+          <div class="data">
+            <a href="#"><p>10月16号<br/>星期一</p></a>
+          </div>
+          <div class="data">
+            <a href="#"><p>10月17号<br/>星期二</p></a>
+          </div>
+          <div class="data">
+            <a href="#"><p>10月18号<br/>星期三</p></a>
+          </div>
+          <div class="data">
+            <a href="#"><p>10月19号<br/>星期四</p></a>
+          </div>
+          <div class="data">
+            <a href="#"><p>10月20号<br/>星期五</p></a>
+          </div>
+          <div class="data">
+            <a href="#"><p>10月21号<br/>星期六</p></a>
+          </div>
+        </div>
+
+        <ul id='timeline'>
+          <li class='work'>
+            <input class='radio' id='work6' name='works' type='radio' checked>
+            <div class="relative content1">
+              <label for='work6'>
+                <span><p>20:00</p></span>
+                <span><img src="images/keti.png" alt=""></span>
+                <span><p>2017第一课堂数学公开课</p></span>
+                <span><p>张三</p></span>
+                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+              </label>
+              <span class="border"><span class='circle'></span></span>
+            </div>
+          </li>
+          <li class='work'>
+            <input class='radio' id='work5' name='works' type='radio'>
+            <div class="relative content2">
+              <label for='work5'>
+                <span><p>20:00</p></span>
+                <span><img src="images/keti.png" alt=""></span>
+                <span><p>2017第一课堂数学公开课</p></span>
+                <span><p>张三</p></span>
+                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+              </label>
+              <span class="border"><span class='circle'></span></span>
+            </div>
+          </li>
+          <li class='work'>
+            <input class='radio' id='work4' name='works' type='radio'>
+            <div class="relative content1">
+              <label for='work4'>
+                <span><p>20:00</p></span>
+                <span><img src="images/keti.png" alt=""></span>
+                <span><p>2017第一课堂数学公开课</p></span>
+                <span><p>张三</p></span>
+                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+              </label>
+              <span class="border"><span class='circle'></span></span>
+            </div>
+          </li>
+          <li class='work'>
+            <input class='radio' id='work3' name='works' type='radio'>
+            <div class="relative  content2">
+              <label for='work3'>
+                <span><p>20:00</p></span>
+                <span><img src="images/keti.png" alt=""></span>
+                <span><p>2017第一课堂数学公开课</p></span>
+                <span><p>张三</p></span>
+                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+              </label>
+              <span class="border"><span class='circle'></span></span>
+            </div>
+          </li>
+          <li class='work'>
+            <input class='radio' id='work2' name='works' type='radio'>
+            <div class="relative content1">
+              <label for='work2'>
+                <span><p>20:00</p></span>
+                <span><img src="images/keti.png" alt=""></span>
+                <span><p>2017第一课堂数学公开课</p></span>
+                <span><p>张三</p></span>
+                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+              </label>
+              <span class="border"><span class='circle'></span></span>
+            </div>
+          </li>
+          <li class='work'>
+            <input class='radio' id='work1' name='works' type='radio'>
+            <div class="relative content2">
+              <label for='work1'>
+                <span><p>20:00</p></span>
+                <span><img src="images/keti.png" alt=""></span>
+                <span><p>2017第一课堂数学公开课</p></span>
+                <span><p>张三</p></span>
+                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+              </label>
+              <span class="border"><span class='circle'></span></span>
+            </div>
+          </li>
+        </ul>
+        <div class="page">
+          <a href="#"><</a>
+          <a href="#">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <p>...</p>
+          <a href="#">10</a>
+          <a href="#">></a>
+        </div>  
+      </div>
+    </div>
+
+    <div class="row footer">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-4 col-md-4 col-lg-4 footer-border footer-right">
+          <h3>联系我们</h3>
+          <p>电话：12345678900</p>
+          <p>邮箱：525000</p>
+          <p>地址：广东石油化工学院（官渡校区）</p>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 footer-border">
+          <h3>课程教材</h3>
+          <p><a href="">论文</a></p>
+          <p><a href="">考研</a></p>
+          <p><a href="">论文</a></p>
+          <p><a href="">考研</a></p>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 footer-border">
+          <h3>友情链接</h3>
+          <p><a href="">云课直播</a></p>
+          <p><a href="">YY直播</a></p>
+          <p><a href="">虎牙直播</a></p>
+          <p><a href="">斗鱼直播</a></p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <h3>关注我们</h3>
+          <img src="images/erweima.png" alt="">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <p class="copyright">版权所有  Copyright© 2015,  YEDA,  All Rights Reserved</p>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bootstrap/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/L_slide.js" type="text/javascript"></script>
+    <script src="js/open.js" type="text/javascript"></script>
+  </body>
 </html>
