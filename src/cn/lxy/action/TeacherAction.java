@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import cn.lxy.po.Teacher;
 import cn.lxy.service.TeacherServc;
-import cn.lxy.utils.CountAllPage;
+import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.ServerInfo;
 
 /**
@@ -34,7 +34,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	@Autowired
 	private TeacherServc servc;
 	@Autowired
-	private CountAllPage countAllPage;
+	private CountAllPage11 countAllPage;
 	
 	private String teacherTempId;
 	private String resultinfo;

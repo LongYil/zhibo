@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -104,117 +108,65 @@
     <div class="row content-body">
       <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
         <div class="data-body">
-          <div class="data">
-            <a href="#"><p>10月15号<br/>星期日</p></a>
-          </div>
-          <div class="data">
-            <a href="#"><p>10月16号<br/>星期一</p></a>
-          </div>
-          <div class="data">
-            <a href="#"><p>10月17号<br/>星期二</p></a>
-          </div>
-          <div class="data">
-            <a href="#"><p>10月18号<br/>星期三</p></a>
-          </div>
-          <div class="data">
-            <a href="#"><p>10月19号<br/>星期四</p></a>
-          </div>
-          <div class="data">
-            <a href="#"><p>10月20号<br/>星期五</p></a>
-          </div>
-          <div class="data">
-            <a href="#"><p>10月21号<br/>星期六</p></a>
-          </div>
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[0]"/>"><p><s:property value="rencentweek1[0]"/><br/>星期日</p></a>
+	          </div>
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[1]"/>"><p><s:property value="rencentweek1[1]"/><br/>星期一</p></a>
+	          </div>		        
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[2]"/>"><p><s:property value="rencentweek1[2]"/><br/>星期二</p></a>
+	          </div>		        
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[3]"/>"><p><s:property value="rencentweek1[3]"/><br/>星期三</p></a>
+	          </div>		        
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[4]"/>"><p><s:property value="rencentweek1[4]"/><br/>星期四</p></a>
+	          </div>		        
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[5]"/>"><p><s:property value="rencentweek1[5]"/><br/>星期五</p></a>
+	          </div>		        
+	          <div class="data">
+	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[6]"/>"><p><s:property value="rencentweek1[6]"/><br/>星期六</p></a>
+	          </div>		        
         </div>
 
         <ul id='timeline'>
-          <li class='work'>
-            <input class='radio' id='work6' name='works' type='radio' checked>
-            <div class="relative content1">
-              <label for='work6'>
-                <span><p>20:00</p></span>
-                <span><img src="images/keti.png" alt=""></span>
-                <span><p>2017第一课堂数学公开课</p></span>
-                <span><p>张三</p></span>
-                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
-              </label>
-              <span class="border"><span class='circle'></span></span>
-            </div>
-          </li>
-          <li class='work'>
-            <input class='radio' id='work5' name='works' type='radio'>
-            <div class="relative content2">
-              <label for='work5'>
-                <span><p>20:00</p></span>
-                <span><img src="images/keti.png" alt=""></span>
-                <span><p>2017第一课堂数学公开课</p></span>
-                <span><p>张三</p></span>
-                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
-              </label>
-              <span class="border"><span class='circle'></span></span>
-            </div>
-          </li>
-          <li class='work'>
-            <input class='radio' id='work4' name='works' type='radio'>
-            <div class="relative content1">
-              <label for='work4'>
-                <span><p>20:00</p></span>
-                <span><img src="images/keti.png" alt=""></span>
-                <span><p>2017第一课堂数学公开课</p></span>
-                <span><p>张三</p></span>
-                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
-              </label>
-              <span class="border"><span class='circle'></span></span>
-            </div>
-          </li>
-          <li class='work'>
-            <input class='radio' id='work3' name='works' type='radio'>
-            <div class="relative  content2">
-              <label for='work3'>
-                <span><p>20:00</p></span>
-                <span><img src="images/keti.png" alt=""></span>
-                <span><p>2017第一课堂数学公开课</p></span>
-                <span><p>张三</p></span>
-                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
-              </label>
-              <span class="border"><span class='circle'></span></span>
-            </div>
-          </li>
-          <li class='work'>
-            <input class='radio' id='work2' name='works' type='radio'>
-            <div class="relative content1">
-              <label for='work2'>
-                <span><p>20:00</p></span>
-                <span><img src="images/keti.png" alt=""></span>
-                <span><p>2017第一课堂数学公开课</p></span>
-                <span><p>张三</p></span>
-                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
-              </label>
-              <span class="border"><span class='circle'></span></span>
-            </div>
-          </li>
-          <li class='work'>
-            <input class='radio' id='work1' name='works' type='radio'>
-            <div class="relative content2">
-              <label for='work1'>
-                <span><p>20:00</p></span>
-                <span><img src="images/keti.png" alt=""></span>
-                <span><p>2017第一课堂数学公开课</p></span>
-                <span><p>张三</p></span>
-                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
-              </label>
-              <span class="border"><span class='circle'></span></span>
-            </div>
-          </li>
+           
+			<s:iterator value="listCourse" status="ste">
+				<c:if test="${ste.index<6}">
+			          <li class='work'>
+			            <input class='radio' id='work6' name='works' type='radio' checked>
+			            <div class="relative content1">
+			              <label for='work6'>
+			                <span><p>20:00</p></span>
+			                <span><img src="images/keti.png" alt=""></span>
+			                <span><p>2017第一课堂数学公开课</p></span>
+			                <span><p>张三</p></span>
+			                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+			              </label>
+			              <span class="border"><span class='circle'></span></span>
+			            </div>
+			          </li>
+				</c:if>
+			</s:iterator>
         </ul>
         <div class="page">
-          <a href="#"><</a>
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <p>...</p>
-          <a href="#">10</a>
-          <a href="#">></a>
+			<c:if test="${pageDirection[0]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumber[0]}')">&lt;</a>
+			</c:if>
+					<c:forEach items="${pages}" var="index" begin="0" >
+					  <c:if test="${index==pageNumber}">
+					      <a href="javascript:void(0)" style="color:blue;font-size:bold;"  onClick="To('${index}')">${index}</a>
+					  </c:if>
+					  <c:if test="${index!=pageNumber}">
+					      <a href="javascript:void(0)" onClick="To('${index}')">${index}</a>
+					  </c:if>		  
+					</c:forEach>
+			<c:if test="${pageDirection[1]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumber[1]}')">&gt;</a>
+			</c:if>
+
         </div>  
       </div>
     </div>
@@ -258,4 +210,9 @@
     <script src="js/L_slide.js" type="text/javascript"></script>
     <script src="js/open.js" type="text/javascript"></script>
   </body>
+  <script type="text/javascript">
+  function To(arg){
+	  window.location="course_findRecentByPage.action?pageNumber="+arg;
+  }
+  </script>
 </html>

@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Exam;
 import cn.lxy.po.Teacher;
 import cn.lxy.service.ExamServc;
-import cn.lxy.utils.CountAllPage;
+import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.FileUtils;
 import cn.lxy.vo.AnalysedExam;
 import cn.lxy.vo.ExamVo;
@@ -38,7 +38,7 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	@Autowired
 	private Teacher teacher;
 	@Autowired
-	private CountAllPage countAllPage;	
+	private CountAllPage11 countAllPage;	
 	
 	
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();

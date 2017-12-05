@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import cn.lxy.po.Student;
 import cn.lxy.service.StudentServc;
-import cn.lxy.utils.CountAllPage;
+import cn.lxy.utils.CountAllPage11;
 
 /**
  * <p>Title:StudentAction</p>
@@ -30,7 +30,7 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectionNumber = new int[2];
 	@Autowired
-	private CountAllPage countAllPage;
+	private CountAllPage11 countAllPage;
 	@Autowired
 	private Student student ;
 	@Autowired

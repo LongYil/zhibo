@@ -15,6 +15,7 @@ import cn.lxy.po.Course;
 public class CourseVo {
 	private Course course;
 	private String time;
+	private String teacher;
 	
 	public Course getCourse() {
 		return course;
@@ -27,6 +28,12 @@ public class CourseVo {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public String getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
 	}
 	
 }

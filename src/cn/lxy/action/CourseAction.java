@@ -18,7 +18,8 @@ import cn.lxy.po.Course;
 import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
 import cn.lxy.service.CourseServc;
-import cn.lxy.utils.CountAllPage;
+import cn.lxy.utils.CountAllPage11;
+import cn.lxy.utils.CountAllPage6;
 import cn.lxy.utils.DateUtils;
 import cn.lxy.utils.FileUtils;
 import cn.lxy.utils.StreamUtils;
@@ -45,22 +46,28 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	@Autowired
 	private DateUtils dateUtils;
 	@Autowired
-	private CountAllPage countAllPage;
+	private CountAllPage11 countAllPage11;
+	@Autowired
+	private CountAllPage6 countAllPage6;
 	
     private List<File> coursefile ;  
     private List<String> coursefileFileName ;  
     private List<String> coursefileContentType ;
+    private String[] rencentweek1;
+    private String[] rencentweek2;
     private String pageNumber;
 	
 	private int[] pageDirection = new int[2];
+	private int[] pageDirectioni = new int[2];
 	private int[] pageDirectionNumber = new int[2];
+	private int[] pageDirectionNumberi = new int[2];
 
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<CourseVo> listCourse = new ArrayList<CourseVo>();
 	private List<CourseVo> tempListCourse = new ArrayList<CourseVo>();
 	
 	private String courseName;
-	
+
 	private String resultinfo;
 	@Override
 	public Course getModel() {
@@ -90,12 +97,12 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		listCourse.clear();
 		pages.clear();
 		listCourse = dateUtils.formatDateTime(servc.findAll(""));
-		int temp = countAllPage.getAllPage(listCourse.size());
-		pageDirection = countAllPage.getLeftAndRight(0,temp);
-		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
+		int temp = countAllPage11.getAllPage(listCourse.size());
+		pageDirection = countAllPage11.getLeftAndRight(0,temp);
+		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
 		this.getSesion().put("allLiveCoursePage",temp);
 		this.getSesion().put("liveCourseList", listCourse);
-		pages = countAllPage.getStartPages(temp);	
+		pages = countAllPage11.getStartPages(temp);	
 		return "findAll";
 	}
 	//教师查找属于自己的所有直播课程
@@ -103,15 +110,12 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		teacher = (Teacher) this.getSesion().get("Teacher");
 		listCourse.clear();
 		pages.clear();
-		listCourse = dateUtils.formatDateTime(servc.findByTeacherId(String.valueOf(teacher.getId())));
-		
-		int temp = countAllPage.getAllPage(listCourse.size());
-		pageDirection = countAllPage.getLeftAndRight(0,temp);
-		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
+		int temp = countAllPage11.getAllPage(listCourse.size());
+		pageDirection = countAllPage11.getLeftAndRight(0,temp);
+		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
 		this.getSesion().put("allLiveCoursePage",temp);
 		this.getSesion().put("liveCourseList", listCourse);
-		pages = countAllPage.getStartPages(temp);
-		
+		pages = countAllPage11.getStartPages(temp);	
 		return "findByTeacherId";
 	}
 	//教师根据页码查找所有直播课程
@@ -119,15 +123,14 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		tempListCourse.clear();
 		listCourse.clear();
 		pages.clear();
-		
 		int page = Integer.parseInt(pageNumber);
 		int all = Integer.parseInt(this.getSesion().get("allLiveCoursePage").toString());
-		pageDirection = countAllPage.getLeftAndRight(page,all);
-		pageDirectionNumber = countAllPage.getDirectionNumber(page,all);
+		pageDirection = countAllPage11.getLeftAndRight(page,all);
+		pageDirectionNumber = countAllPage11.getDirectionNumber(page,all);
 		tempListCourse = (List<CourseVo>) this.getSesion().get("liveCourseList");
-		listCourse = tempListCourse.subList((page-1)*11,countAllPage.getLastIndex(page,tempListCourse.size()));
+		listCourse = tempListCourse.subList((page-1)*11,countAllPage11.getLastIndex(page,tempListCourse.size()));
 		pages.clear();	
-		pages = countAllPage.getPages(Integer.parseInt(pageNumber),Integer.parseInt(this.getSesion().get("allLiveCoursePage").toString()));
+		pages = countAllPage11.getPages(Integer.parseInt(pageNumber),Integer.parseInt(this.getSesion().get("allLiveCoursePage").toString()));
 		return "findByPageNumber";
 	}
 	//教师根据课程名称或科目查找自己的直播课程
@@ -169,15 +172,40 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		return "update";		
 	}
 	//主页
-	public String findRecentCource() {
+	public String findRecentCource() throws ParseException {
+		listCourse.clear();
+		pages.clear();
+		rencentweek1 = dateUtils.getRecentWeek1();
+		rencentweek2 = dateUtils.getRecentWeek2();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		Date d = new Date();
+		String today = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findByDate(today));
+
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allRecentCoursePage",temp);
+		this.getSesion().put("recentCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findRecentCource";
+	}
+	public String findRecentByPage() {
 		
-		
-		
+		return null;
+	}
+	//通过日期查找对应的课程
+	public String findByDate() {
+		listCourse.clear();
+		pages.clear();
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String sdate = request.getParameter("sdate");
+
 		return "";
 	}
 	
 	
-
 	public String findByCourseId() {
 		
 		return null;
@@ -303,8 +331,52 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.courseVo = courseVo;
 	}
 
+	public String[] getRencentweek1() {
+		return rencentweek1;
+	}
 
+	public void setRencentweek1(String[] rencentweek1) {
+		this.rencentweek1 = rencentweek1;
+	}
 
+	public String[] getRencentweek2() {
+		return rencentweek2;
+	}
 
+	public void setRencentweek2(String[] rencentweek2) {
+		this.rencentweek2 = rencentweek2;
+	}
+
+	public CountAllPage11 getCountAllPage11() {
+		return countAllPage11;
+	}
+
+	public void setCountAllPage11(CountAllPage11 countAllPage11) {
+		this.countAllPage11 = countAllPage11;
+	}
+
+	public CountAllPage6 getCountAllPage6() {
+		return countAllPage6;
+	}
+
+	public void setCountAllPage6(CountAllPage6 countAllPage6) {
+		this.countAllPage6 = countAllPage6;
+	}
+
+	public int[] getPageDirectioni() {
+		return pageDirectioni;
+	}
+
+	public void setPageDirectioni(int[] pageDirectioni) {
+		this.pageDirectioni = pageDirectioni;
+	}
+
+	public int[] getPageDirectionNumberi() {
+		return pageDirectionNumberi;
+	}
+
+	public void setPageDirectionNumberi(int[] pageDirectionNumberi) {
+		this.pageDirectionNumberi = pageDirectionNumberi;
+	}
 	
 }

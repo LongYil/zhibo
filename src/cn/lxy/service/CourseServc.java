@@ -48,5 +48,9 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 	public void update(Course course) {
 		daoImpl.update(course);
 	}
+	public List<Course> findByDate(String arg){
+		return daoImpl.findByDate(arg);
+	}
+	
 	
 }
