@@ -63,6 +63,7 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private int[] pageDirectionNumberi = new int[2];
 	
     private String usename ;  
+    private String examName;
     private List<File> examfile ;  
     private List<String> examfileFileName ;  
     private List<String> examfileContentType ;
@@ -171,8 +172,10 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	}
 	//根据试题id解析试题
 	public String analyseExam() throws BiffException, IOException {
-//		servc.analyseExam(examId);
-		listAnalysedExam = servc.analyseExam("3");
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String examId = request.getParameter("examId");
+		examName = servc.findById(examId).getName();
+		listAnalysedExam = servc.analyseExam(examId);
 		this.getSesion().put("analysedExamList", listAnalysedExam);
 		return "analyseExam";
 	}
@@ -295,6 +298,12 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	}
 	public void setPageDirectionNumberi(int[] pageDirectionNumberi) {
 		this.pageDirectionNumberi = pageDirectionNumberi;
+	}
+	public String getExamName() {
+		return examName;
+	}
+	public void setExamName(String examName) {
+		this.examName = examName;
 	}
 	
 }

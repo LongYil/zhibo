@@ -77,10 +77,11 @@
 				<result name="findByName">/examquery.jsp</result>
 				<result name="save">/addexam.jsp</result>
 				<result name="studentFindAll">/shitiku/test_v1.jsp</result>
+				<result name="analyseExam">/shitiku/questions-sublime.jsp</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
-		   
+
 		   <action name="note_*" class="noteAction" method="{1}">
 			    <result name="success">/index.jsp</result>
 			    <result name="aaa">/test.jsp</result>

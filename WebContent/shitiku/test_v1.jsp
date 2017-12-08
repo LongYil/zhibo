@@ -117,7 +117,7 @@
 		              <input class='radio' id='work6' name='works' type='radio' checked>
 		              <div class="relative">
 		                <label for='work6'>
-		                  <p><s:property value="exam.name"/></p><p>上传者：<s:property value="teacherName"/></p><p><s:property value="time"/></p><button class="btn btn-default" type="submit" onClick="startTest()">立即做题</button>
+		                  <p><s:property value="exam.name"/></p><p>上传者：<s:property value="teacherName"/></p><p><s:property value="time"/></p><button class="btn btn-default" type="submit" onClick="startTest(<s:property value="exam.id"/>)">立即做题</button>
 		                </label>
 		                <span class="border"><span class='circle'></span></span>
 		              </div>
@@ -189,6 +189,9 @@
   <script type="text/javascript">
   function To(arg){
 	 window.location="exam_studentFindByPageNumber.action?pageNumber="+arg;
+  }
+  function startTest(arg){
+	 window.location="exam_analyseExam.action?examId="+arg;
   }
   </script>
 </html>

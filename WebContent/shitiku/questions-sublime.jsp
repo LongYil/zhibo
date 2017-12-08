@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -91,102 +95,29 @@
     <div class="row content-body">
       <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
         <div class="content-questions">
-          <div><h1>中国文学四大名著兴趣试题</h1></div>
-          <div class="questions-body">
-            <div><p>1、你最喜欢看什么书？</p></div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios">A.红楼梦</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios">B.水浒传</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios">C.西游记</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios">D.三国演义</label>
-            </div>
-          </div>
-          <div class="questions-body">
-            <div><p>2、你最喜欢看什么书？</p></div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios1">A.红楼梦</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">B.水浒传</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios3">C.西游记</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios4">D.三国演义</label>
-            </div>
-          </div>
-          <div class="questions-body">
-            <div><p>3、你最喜欢看什么书？</p></div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios1">A.红楼梦</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">B.水浒传</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">C.西游记</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">D.三国演义</label>
-            </div>
-          </div>
-          <div class="questions-body">
-            <div><p>4、你最喜欢看什么书？</p></div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios1">A.红楼梦</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">B.水浒传</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">C.西游记</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">D.三国演义</label>
-            </div>
-          </div>
-          <div class="questions-body">
-            <div><p>5、你最喜欢看什么书？</p></div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios1">A.红楼梦</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">B.水浒传</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">C.西游记</label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="optionsRadios" id="optionsRadios2">D.三国演义</label>
-            </div>
-          </div>
+          <div><h1><s:property value="examName"/></h1></div>
+          
+            <s:iterator value="listAnalysedExam" status="ste">
+	            <div class="questions-body">
+	            <div><p><s:property value="id"/>、<s:property value="question"/></p></div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="optionsRadios">A.<s:property value="optionA"/></label>
+	            </div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="optionsRadios">B.<s:property value="optionB"/></label>
+	            </div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="optionsRadios">C.<s:property value="optionC"/></label>
+	            </div>
+	            <div class="checkbox">
+	                <label>
+	                    <input type="checkbox" name="optionsRadios">D.<s:property value="optionD"/></label>
+	            </div>
+                </div>
+			</s:iterator>            
         </div>
         <div class="questions-footer">
           <button onClick=" location='questions.html' ">提&nbsp;&nbsp;交</button>

@@ -74,23 +74,28 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 	}
 	public List<AnalysedExam> analyseExam(String arg) throws BiffException, IOException{
 		exam = this.findById(arg);
-		String fileRealAddress = ServletActionContext.getServletContext().getRealPath("/examfile");
+		String fileRealAddress = ServletActionContext.getServletContext().getRealPath("/sourcefile/examfile");
+		System.out.println(fileRealAddress);
 		String[] tempFileAddress = exam.getFileaddress().split("/");
 		Workbook book = Workbook.getWorkbook(new File(fileRealAddress+"/"+tempFileAddress[tempFileAddress.length-1]));	
 		Sheet sheet = book.getSheets()[0];
 		listResult.clear();
-		int j=0;
-		while(sheet.getCell(0,j)!=null&&!sheet.getCell(0,j).getContents().equals("")) {
-			   analyaedExam = new AnalysedExam();
-			   analyaedExam.setId(j);
-			   analyaedExam.setQuestion(sheet.getCell(0, j).getContents());
-			   analyaedExam.setOptionA(sheet.getCell(1, j).getContents());
-			   analyaedExam.setOptionB(sheet.getCell(2, j).getContents());
-			   analyaedExam.setOptionC(sheet.getCell(3, j).getContents());
-			   analyaedExam.setOptionD(sheet.getCell(4, j).getContents());
-			   analyaedExam.setResult(sheet.getCell(5, j).getContents());
-			   listResult.add(analyaedExam);
-			   j++;
+		int j=1;
+		try {
+			while(sheet.getCell(0,j)!=null&&!sheet.getCell(0,j).getContents().equals("")) {
+				   analyaedExam = new AnalysedExam();
+				   analyaedExam.setId(j);
+				   analyaedExam.setQuestion(sheet.getCell(0, j).getContents());
+				   analyaedExam.setOptionA(sheet.getCell(1, j).getContents());
+				   analyaedExam.setOptionB(sheet.getCell(2, j).getContents());
+				   analyaedExam.setOptionC(sheet.getCell(3, j).getContents());
+				   analyaedExam.setOptionD(sheet.getCell(4, j).getContents());
+				   analyaedExam.setResult(sheet.getCell(5, j).getContents());
+				   listResult.add(analyaedExam);
+				   j++;
+			}
+		}catch(Exception e) {
+			return listResult;
 		}
 		return listResult;
 	}
