@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -23,10 +27,10 @@
       <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
-          <a href="../index.html"><h1>LOGO理学院直播</h1></a>
+          <a href="../index.jsp"><h1>LOGO理学院直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
-         <input type="text" class="form-control input-search" placeholder="Search"/ >
+         <input type="text" class="form-control input-search" placeholder="Search" />
          <button class="btn btn-info btn-search"><img src="../images/sousuo.png" alt=""></button>
         </div>  
         <div class="col-sm-3 col-md-3 col-lg-3">
@@ -76,13 +80,13 @@
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
       <div class="col-sm-6 col-md-6 col-lg-6">
           <ul style="padding-left: 0;">
-            <li><a href="../index.html" class="tooltips">教学直播<span></span></a></li>
+            <li><a href="../index.jsp" class="tooltips">教学直播<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="#" class="tooltips" style="color: #198fee;">教学回顾<span class="triangle"></span></a></li>
+            <li><a href="../review.jsp" class="tooltips" style="color: #198fee;">教学回顾<span class="triangle"></span></a></li>
           </ul>
           <ul>
-            <li><a href="../shitiku/test.html" class="tooltips">试 题 库<span></span></a></li>
+            <li><a href="../shitiku/test.jsp" class="tooltips">试 题 库<span></span></a></li>
           </ul>
       </div>
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
@@ -108,21 +112,28 @@
         </div>
 
         <div class="content-video">
-          <div><a href="../jiaoxuezhibo/live.html"><img src="../images/tu_1.png" alt=""><p>函数的三要素  张三</p></a></div>
-          <div><a href="../jiaoxuezhibo/live.html"><img src="../images/tu_2.png" alt=""><p>函数的三要素  张三</p></a></div>
-          <div><a href="../jiaoxuezhibo/live.html"><img src="../images/tu_3.png" alt=""><p>函数的三要素  张三</p></a></div>
-          <div><a href="../jiaoxuezhibo/live.html"><img src="../images/tu_1.png" alt=""><p>函数的三要素  张三</p></a></div>
-          <div><a href="../jiaoxuezhibo/live.html"><img src="../images/tu_2.png" alt=""><p>函数的三要素  张三</p></a></div>
-          <div><a href="../jiaoxuezhibo/live.html"><img src="../images/tu_3.png" alt=""><p>函数的三要素  张三</p></a></div>
+			<s:iterator value="listCourse" status="ste">
+				<c:if test="${ste.index<6}">
+                   <div><a href="javascript:void(0)" onClick="play(<s:property value='course.address'/>)"><img src="<s:property value='course.face'/>" width="240px" height="152px" alt=""><p><s:property value='course.name'/>  <s:property value='teacher'/></p></a></div>
+				</c:if>
+			</s:iterator>
         </div>
+
         <div class="page">
-          <a href="#"><</a>
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <p>...</p>
-          <a href="#">10</a>
-          <a href="#">></a>
+            <c:if test="${pageDirectioni[0]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[0]}')">&lt;</a>
+			</c:if>
+					<c:forEach items="${pages}" var="index" begin="0" >
+					  <c:if test="${index==pageNumber}">
+					      <a href="javascript:void(0)" style="color:blue;font-size:bold;"  onClick="To('${index}')">${index}</a>
+					  </c:if>
+					  <c:if test="${index!=pageNumber}">
+					      <a href="javascript:void(0)" onClick="To('${index}')">${index}</a>
+					  </c:if>
+					</c:forEach>
+			<c:if test="${pageDirectioni[1]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[1]}')">&gt;</a>
+			</c:if>
         </div>
       </div>
     </div>
@@ -165,5 +176,13 @@
     <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../js/L_slide.js" type="text/javascript"></script>
     <script src="../js/open.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    function To(arg){
+  	  window.location="course_findPastByPage.action?pageNumber="+arg;
+    }
+    function play(arg){
+    	;
+    }
+    </script>
   </body>
 </html>

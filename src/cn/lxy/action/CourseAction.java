@@ -69,6 +69,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	private String courseName;
 
 	private String resultinfo;
+
 	@Override
 	public Course getModel() {
 		return course;
@@ -110,12 +111,13 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		teacher = (Teacher) this.getSesion().get("Teacher");
 		listCourse.clear();
 		pages.clear();
+		listCourse = dateUtils.formatDateTime(servc.findByTeacherId(String.valueOf(teacher.getId())));
 		int temp = countAllPage11.getAllPage(listCourse.size());
 		pageDirection = countAllPage11.getLeftAndRight(0,temp);
 		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
 		this.getSesion().put("allLiveCoursePage",temp);
 		this.getSesion().put("liveCourseList", listCourse);
-		pages = countAllPage11.getStartPages(temp);	
+		pages = countAllPage11.getStartPages(temp);
 		return "findByTeacherId";
 	}
 	//教师根据页码查找所有直播课程
@@ -166,22 +168,23 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.getSesion().put("updateCourseId", courseId);
 		return "preUpdate";
 	}
+	//更新课程
 	public String update() {
 		course.setId(Integer.parseInt(this.getSesion().get("updateCourseId").toString()));
 		servc.update(course);
 		return "update";		
 	}
-	//主页
+	//直播主页
 	public String findRecentCource() throws ParseException {
 		listCourse.clear();
 		pages.clear();
 		rencentweek1 = dateUtils.getRecentWeek1();
 		rencentweek2 = dateUtils.getRecentWeek2();
 		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		SimpleDateFormat sdf2 =  new SimpleDateFormat("MM-dd");
 		Date d = new Date();
-		String today = sdf1.format(d);
-		listCourse = dateUtils.formatDateAndTeacher(servc.findByDate(today));
-
+		String temptoday = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findByDate(temptoday));
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
 		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
@@ -191,18 +194,76 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.pageNumber = "1";
 		return "findRecentCource";
 	}
-	public String findRecentByPage() {
-		
-		return null;
-	}
-	//通过日期查找对应的课程
-	public String findByDate() {
+	//教学回顾
+	public String findPastCource() throws ParseException {
 		listCourse.clear();
 		pages.clear();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		Date d = new Date();
+		String temptoday = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allPastCoursePage",temp);
+		this.getSesion().put("pastCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findPastCource";
+	}
+	//根据页码查找最近课程
+	public String findRecentByPage() throws ParseException {
+		pages.clear();
+		tempListCourse.clear();
+		listCourse.clear();
+		tempListCourse.clear();
+		rencentweek1 = dateUtils.getRecentWeek1();
+		rencentweek2 = dateUtils.getRecentWeek2();
+		int page = Integer.parseInt(pageNumber);
+		int all = Integer.parseInt(this.getSesion().get("allRecentCoursePage").toString());
+		pageDirectioni = countAllPage6.getLeftAndRight(page,all);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(page,all);
+		tempListCourse = (List<CourseVo>) this.getSesion().get("recentCourseList");
+		listCourse = tempListCourse.subList((page-1)*6,countAllPage6.getLastIndex(page,tempListCourse.size()));
+		pages = countAllPage6.getPages(Integer.parseInt(pageNumber),all);
+		return "findRecentCource";
+	}
+	//根据页码查找往期课程
+	public String findPastByPage() throws ParseException {
+		pages.clear();
+		tempListCourse.clear();
+		listCourse.clear();
+		tempListCourse.clear();
+		int page = Integer.parseInt(pageNumber);
+		int all = Integer.parseInt(this.getSesion().get("allPastCoursePage").toString());
+		pageDirectioni = countAllPage6.getLeftAndRight(page,all);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(page,all);
+		tempListCourse = (List<CourseVo>) this.getSesion().get("pastCourseList");
+		listCourse = tempListCourse.subList((page-1)*6,countAllPage6.getLastIndex(page,tempListCourse.size()));
+		pages = countAllPage6.getPages(Integer.parseInt(pageNumber),all);
+		return "findPastCource";
+	}
+	//通过日期查找对应的课程
+	public String findByDate() throws ParseException {
+		listCourse.clear();
+		pages.clear();
+		listCourse.clear();
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String sdate = request.getParameter("sdate");
-
-		return "";
+		rencentweek1 = dateUtils.getRecentWeek1();
+		rencentweek2 = dateUtils.getRecentWeek2();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-"+sdate);
+		Date d = new Date();
+		String day = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findByDate(day));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allRecentCoursePage",temp);
+		this.getSesion().put("recentCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findRecentCource";
 	}
 	
 	
@@ -378,5 +439,6 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	public void setPageDirectionNumberi(int[] pageDirectionNumberi) {
 		this.pageDirectionNumberi = pageDirectionNumberi;
 	}
+
 	
 }

@@ -25,7 +25,9 @@ window.onload=function(){
 
 		linkbt2.onclick=function(){ 
 			light2.style.display='block'; 
-			fade2.style.display='block'; 
+			fade2.style.display='block';
+			
+			
 			} 
 		closebt2.onclick=function(){ 
 			light2.style.display='none'; 

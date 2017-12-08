@@ -16,6 +16,7 @@ import cn.lxy.po.Exam;
 import cn.lxy.po.Teacher;
 import cn.lxy.service.ExamServc;
 import cn.lxy.utils.CountAllPage11;
+import cn.lxy.utils.CountAllPage6;
 import cn.lxy.utils.FileUtils;
 import cn.lxy.vo.AnalysedExam;
 import cn.lxy.vo.ExamVo;
@@ -38,8 +39,9 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	@Autowired
 	private Teacher teacher;
 	@Autowired
-	private CountAllPage11 countAllPage;	
-	
+	private CountAllPage11 countAllPage11;	
+	@Autowired
+	private CountAllPage6 countAllPage6;
 	
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();
 	private List<ExamVo> tempListExamVo = new ArrayList<ExamVo>();
@@ -54,7 +56,9 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private String examId;
 	
 	private int[] pageDirection = new int[2];
+	private int[] pageDirectioni = new int[2];
 	private int[] pageDirectionNumber = new int[2];
+	private int[] pageDirectionNumberi = new int[2];
 	
     private String usename ;  
     private List<File> examfile ;  
@@ -66,7 +70,15 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	public Exam getModel() {
 		return exam;
 	}
-	//查找所有试题
+	//学生用户查找所有试题
+	public String studentFindAll() {
+		
+		
+		
+		return "studentFindAll";
+	}
+	
+	//后台管理用户查找所有试题
 	public String findAll() {
 		if(listExamVo!=null) {
 			listExamVo.clear();
@@ -75,25 +87,25 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		}
 		pages.clear();
 		listExamVo = servc.findAll();
-		int temp = countAllPage.getAllPage(listExamVo.size());
-		pageDirection = countAllPage.getLeftAndRight(0,temp);
-		pageDirectionNumber = countAllPage.getDirectionNumber(1, temp);
+		int temp = countAllPage11.getAllPage(listExamVo.size());
+		pageDirection = countAllPage11.getLeftAndRight(0,temp);
+		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
 		this.pageNumber="1";
 		this.getSesion().put("allExamPage",temp);
 		this.getSesion().put("examList", listExamVo);
-		pages = countAllPage.getStartPages(temp);
+		pages = countAllPage11.getStartPages(temp);
 		return "findAll";
 	}
 	//根据页码查找对应页面的试题
 	public String findByPageNumber() {
 		int page = Integer.parseInt(pageNumber);
 		int all = Integer.parseInt(this.getSesion().get("allExamPage").toString());
-		pageDirection = countAllPage.getLeftAndRight(page,all);
-		pageDirectionNumber = countAllPage.getDirectionNumber(page,all);
+		pageDirection = countAllPage11.getLeftAndRight(page,all);
+		pageDirectionNumber = countAllPage11.getDirectionNumber(page,all);
 		tempListExamVo = (List<ExamVo>) this.getSesion().get("examList");
-		listExamVo = tempListExamVo.subList((page-1)*11,countAllPage.getLastIndex(page,tempListExamVo.size()));
+		listExamVo = tempListExamVo.subList((page-1)*11,countAllPage11.getLastIndex(page,tempListExamVo.size()));
 		pages.clear();
-		pages = countAllPage.getPages(Integer.parseInt(pageNumber),Integer.parseInt(this.getSesion().get("allExamPage").toString()));
+		pages = countAllPage11.getPages(Integer.parseInt(pageNumber),Integer.parseInt(this.getSesion().get("allExamPage").toString()));
 		return "findAll";
 	}
 	//根据试题名称或描述查找对应的试题
@@ -236,6 +248,30 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	}
 	public void setListAnalysedExam(List<AnalysedExam> listAnalysedExam) {
 		this.listAnalysedExam = listAnalysedExam;
+	}
+	public CountAllPage11 getCountAllPage11() {
+		return countAllPage11;
+	}
+	public void setCountAllPage11(CountAllPage11 countAllPage11) {
+		this.countAllPage11 = countAllPage11;
+	}
+	public CountAllPage6 getCountAllPage6() {
+		return countAllPage6;
+	}
+	public void setCountAllPage6(CountAllPage6 countAllPage6) {
+		this.countAllPage6 = countAllPage6;
+	}
+	public int[] getPageDirectioni() {
+		return pageDirectioni;
+	}
+	public void setPageDirectioni(int[] pageDirectioni) {
+		this.pageDirectioni = pageDirectioni;
+	}
+	public int[] getPageDirectionNumberi() {
+		return pageDirectionNumberi;
+	}
+	public void setPageDirectionNumberi(int[] pageDirectionNumberi) {
+		this.pageDirectionNumberi = pageDirectionNumberi;
 	}
 	
 }

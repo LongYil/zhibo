@@ -76,6 +76,7 @@
 				<result name="findAll">/exammanager.jsp</result>
 				<result name="findByName">/examquery.jsp</result>
 				<result name="save">/addexam.jsp</result>
+				<result name="studentFindAll">/shitiku/test_v1.jsp</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
@@ -93,6 +94,7 @@
 				<result name="teacherFindByInfo">/livecoursequery.jsp</result>
 				<result name="preUpdate">/updatecourse.jsp</result>
 				<result name="findRecentCource">/index_v1.jsp</result>
+				<result name="findPastCource">/jiaoxuehuigu/review_v1.jsp</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>

@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
-          <a href="index.html"><h1>LOGO理学院直播</h1></a>
+          <a href="index.jsp"><h1>LOGO理学院直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
          <input type="text" class="form-control input-search" placeholder="Search" />
@@ -65,12 +65,11 @@
       </div>
       <div class="content">
         <p>手机注册</p>
-        <input type="text" name="" placeholder="输入手机号">
+        <input type="text" name="" id="usertel" placeholder="输入手机号">
         <input type="password" name="" placeholder="输入密码">
         <input type="password" name="" placeholder="再次输入密码">
-        <input class="input-yz" type="text" name="" placeholder="输入下图的验证码">
-        <a href="" id="yz"><img src="images/yanzhengma.png" class="img-yz" alt=""></a>
-        <a href="" id="sx"><img src="images/shuaxin.png" class="img-sx" alt=""></a>
+        <input class="input-yz" type="text" name="" placeholder="输入验证码">
+        <a href="javascript:void(0)" id="yz" onClick="hqyzm()">获取验证码</a>
         <button class="button">注  册</button>
       </div>
     </div>
@@ -80,18 +79,17 @@
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
       <div class="col-sm-6 col-md-6 col-lg-6">
           <ul style="padding-left: 0;">
-            <li><a href="#" class="tooltips" style="color: #198fee;">教学直播<span class="triangle"></span></a></li>
+            <li><a href="index.jsp" class="tooltips" style="color: #198fee;">教学直播<span class="triangle"></span></a></li>
           </ul>
           <ul>
-            <li><a href="jiaoxuehuigu/review.html" class="tooltips">教学回顾<span></span></a></li>
+            <li><a href="jiaoxuehuigu/review.jsp" class="tooltips">教学回顾<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="shitiku/test.html" class="tooltips">试 题 库<span></span></a></li>
+            <li><a href="shitiku/test.jsp" class="tooltips">试 题 库<span></span></a></li>
           </ul>
       </div>
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
     </div>
-
     <div class="row banner">
       <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="wrap af4">
@@ -109,41 +107,46 @@
       <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
         <div class="data-body">
 	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[0]"/>"><p><s:property value="rencentweek1[0]"/><br/>星期日</p></a>
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[0]"/>"><p><s:property value="rencentweek1[0]"/><br/>星期日</p></a>
 	          </div>
 	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[1]"/>"><p><s:property value="rencentweek1[1]"/><br/>星期一</p></a>
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[1]"/>"><p><s:property value="rencentweek1[1]"/><br/>星期一</p></a>
+	          </div>
+	          <div class="data">
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[2]"/>"><p><s:property value="rencentweek1[2]"/><br/>星期二</p></a>
+	          </div>
+	          <div class="data">
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[3]"/>"><p><s:property value="rencentweek1[3]"/><br/>星期三</p></a>
+	          </div>
+	          <div class="data">
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[4]"/>"><p><s:property value="rencentweek1[4]"/><br/>星期四</p></a>
 	          </div>		        
 	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[2]"/>"><p><s:property value="rencentweek1[2]"/><br/>星期二</p></a>
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[5]"/>"><p><s:property value="rencentweek1[5]"/><br/>星期五</p></a>          
 	          </div>		        
 	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[3]"/>"><p><s:property value="rencentweek1[3]"/><br/>星期三</p></a>
-	          </div>		        
-	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[4]"/>"><p><s:property value="rencentweek1[4]"/><br/>星期四</p></a>
-	          </div>		        
-	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[5]"/>"><p><s:property value="rencentweek1[5]"/><br/>星期五</p></a>
-	          </div>		        
-	          <div class="data">
-	            <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[6]"/>"><p><s:property value="rencentweek1[6]"/><br/>星期六</p></a>
-	          </div>		        
+	               <a href="course_findByDate.action?sdate=<s:property value="rencentweek2[6]"/>" ><p><s:property value="rencentweek1[6]"/><br/>星期六</p></a>
+	          </div>
         </div>
 
         <ul id='timeline'>
-           
+            
 			<s:iterator value="listCourse" status="ste">
 				<c:if test="${ste.index<6}">
 			          <li class='work'>
 			            <input class='radio' id='work6' name='works' type='radio' checked>
 			            <div class="relative content1">
 			              <label for='work6'>
-			                <span><p>20:00</p></span>
-			                <span><img src="images/keti.png" alt=""></span>
-			                <span><p>2017第一课堂数学公开课</p></span>
-			                <span><p>张三</p></span>
-			                <span><button class="btn button" onClick=" location='jiaoxuezhibo/live.html' " style="background-image: url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">立即观看</button></span>
+			                <span><p><s:property value="time"/></p></span>
+			                <span><img src="<s:property value='course.face'/>" style="width:74px;height:55px;" alt=""></span>
+			                <span><p><s:property value="course.name"/></p></span>
+			                <span><p><s:property value="teacher"/></p></span>
+			                <c:if test="${course.coursetype==0}">
+			                    <span><button class="btn button" onClick="Go(<s:property value='course.address'/>)" style="background-image:url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">观看直播</button></span>
+			                </c:if>
+			                <c:if test="${course.coursetype==1}">
+			                    <span><button class="btn button" onClick="Go(<s:property value='course.address'/>)" style="background-image:url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">观看录播</button></span>
+			                </c:if>
 			              </label>
 			              <span class="border"><span class='circle'></span></span>
 			            </div>
@@ -152,8 +155,8 @@
 			</s:iterator>
         </ul>
         <div class="page">
-			<c:if test="${pageDirection[0]==1 }">
-			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumber[0]}')">&lt;</a>
+			<c:if test="${pageDirectioni[0]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[0]}')">&lt;</a>
 			</c:if>
 					<c:forEach items="${pages}" var="index" begin="0" >
 					  <c:if test="${index==pageNumber}">
@@ -161,12 +164,11 @@
 					  </c:if>
 					  <c:if test="${index!=pageNumber}">
 					      <a href="javascript:void(0)" onClick="To('${index}')">${index}</a>
-					  </c:if>		  
+					  </c:if>
 					</c:forEach>
-			<c:if test="${pageDirection[1]==1 }">
-			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumber[1]}')">&gt;</a>
+			<c:if test="${pageDirectioni[1]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[1]}')">&gt;</a>
 			</c:if>
-
         </div>  
       </div>
     </div>
@@ -203,16 +205,24 @@
       </div>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bootstrap/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/L_slide.js" type="text/javascript"></script>
-    <script src="js/open.js" type="text/javascript"></script>
   </body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="bootstrap/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="js/L_slide.js" type="text/javascript"></script>
+  <script src="js/ajaxcommunicate.js"></script>
+  <script src="js/open.js" type="text/javascript"></script>
   <script type="text/javascript">
   function To(arg){
 	  window.location="course_findRecentByPage.action?pageNumber="+arg;
   }
+  
+  function hqyzm(){
+	  var tel = $("#usertel").val();
+	  ajaxSubmit("exam_delete.action",tel); 
+  }
+  
+  
   </script>
 </html>

@@ -69,7 +69,7 @@ public class AddPoAction extends BasicAction{
 			teacher = teacherServc.find("1");
 			course = new Course();
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = sdf.parse("2017-11-12 23:12:12");
+			Date date = sdf.parse("2017-12-05 23:12:12");
 			course.setTime(date);
 			course.setCoursetype(0);
 			course.setName("¿Î³Ì->"+i);

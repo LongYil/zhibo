@@ -10,4 +10,5 @@ public interface CourseDao {
 	List<Course> teacherFindByInfo(String arg1,String teacherid);
 	List<Course> findByTeacherId(String arg);
 	List<Course> findByDate(String arg);
+	List<Course> findPast(String arg);
 }
