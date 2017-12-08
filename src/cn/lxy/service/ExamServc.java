@@ -54,6 +54,11 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 		listExam = daoImpl.findAll();
 		return assembleExam.getExamVo(listExam);
 	}
+	public List<ExamVo> studentFindAll(){
+		listExam.clear();
+		listExam = daoImpl.studentFindAll();
+		return assembleExam.getExamVo(listExam);
+	}
 	
 	@Override
 	public void delete(Exam arg) {

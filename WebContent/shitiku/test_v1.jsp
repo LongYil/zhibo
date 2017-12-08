@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -25,7 +27,7 @@
       <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
-          <a href="../index.html"><h1>LOGO理学院直播</h1></a>
+          <a href="../index.jsp"><h1>LOGO理学院直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
          <input type="text" class="form-control input-search" placeholder="Search"/ >
@@ -78,13 +80,13 @@
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
       <div class="col-sm-6 col-md-6 col-lg-6">
           <ul style="padding-left: 0;">
-            <li><a href="../index.html" class="tooltips">教学直播<span></span></a></li>
+            <li><a href="../index.jsp" class="tooltips">教学直播<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="../jiaoxuehuigu/review.html" class="tooltips">教学回顾<span></span></a></li>
+            <li><a href="../jiaoxuehuigu/review.jsp" class="tooltips">教学回顾<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="#" class="tooltips" style="color: #198fee;">试 题 库<span class="triangle"></span></a></li>
+            <li><a href="test.jsp" class="tooltips" style="color: #198fee;">试 题 库<span class="triangle"></span></a></li>
           </ul>
       </div>
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
@@ -108,70 +110,39 @@
         <h3 class="test-title">最新题库</h3>
         <div class="content-test">
           <ul id='timeline'>
-            <li class='work'>
-              <input class='radio' id='work6' name='works' type='radio' checked>
-              <div class="relative">
-                <label for='work6'>
-                  <p>数学第三章第五课时三角函数试题</p><p>上传者：张三</p><p>2017年10月28日</p><button class="btn btn-default" type="submit" onClick=" location='questions-sublime.html' ">立即做题</button>
-                </label>
-                <span class="border"><span class='circle'></span></span>
-              </div>
-            </li>
-            <li class='work'>
-              <input class='radio' id='work5' name='works' type='radio'>
-              <div class="relative">
-                <label for='work5'>
-                  <p>数学第三章第五课时三角函数试题</p><p>上传者：张三</p><p>2017年10月28日</p><button class="btn btn-default" type="submit" onClick=" location='questions-sublime.html' ">立即做题</button>
-                </label>
-                <span class="border"><span class='circle'></span></span>
-              </div>
-            </li>
-            <li class='work'>
-              <input class='radio' id='work4' name='works' type='radio'>
-              <div class="relative">
-                <label for='work4'>
-                  <p>数学第三章第五课时三角函数试题</p><p>上传者：张三</p><p>2017年10月28日</p><button class="btn btn-default" type="submit" onClick=" location='questions-sublime.html' ">立即做题</button>
-                </label>
-                <span class="border"><span class='circle'></span></span>
-              </div>
-            </li>
-            <li class='work'>
-              <input class='radio' id='work3' name='works' type='radio'>
-              <div class="relative">
-                <label for='work3'>
-                  <p>数学第三章第五课时三角函数试题</p><p>上传者：张三</p><p>2017年10月28日</p><button class="btn btn-default" type="submit" onClick=" location='questions-sublime.html' ">立即做题</button>
-                </label>
-                <span class="border"><span class='circle'></span></span>
-              </div>
-            </li>
-            <li class='work'>
-              <input class='radio' id='work2' name='works' type='radio'>
-              <div class="relative">
-                <label for='work2'>
-                  <p>数学第三章第五课时三角函数试题</p><p>上传者：张三</p><p>2017年10月28日</p><button class="btn btn-default" type="submit" onClick=" location='questions-sublime.html' ">立即做题</button>
-                </label>
-                <span class="border"><span class='circle'></span></span>
-              </div>
-            </li>
-            <li class='work'>
-              <input class='radio' id='work1' name='works' type='radio'>
-              <div class="relative">
-                <label for='work1'>
-                  <p>数学第三章第五课时三角函数试题</p><p>上传者：张三</p><p>2017年10月28日</p><button class="btn btn-default" type="submit" onClick=" location='questions-sublime.html' ">立即做题</button>
-                </label>
-                <span class="border"><span class='circle'></span></span>
-              </div>
-            </li>
+          
+            <s:iterator value="listExamVo" status="ste">
+				<c:if test="${ste.index<6}">
+		            <li class='work'>
+		              <input class='radio' id='work6' name='works' type='radio' checked>
+		              <div class="relative">
+		                <label for='work6'>
+		                  <p><s:property value="exam.name"/></p><p>上传者：<s:property value="teacherName"/></p><p><s:property value="time"/></p><button class="btn btn-default" type="submit" onClick="startTest()">立即做题</button>
+		                </label>
+		                <span class="border"><span class='circle'></span></span>
+		              </div>
+		            </li>
+				</c:if>
+			</s:iterator>
+
           </ul>
         </div>
+        
         <div class="page">
-          <a href="#"><</a>
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <p>...</p>
-          <a href="#">10</a>
-          <a href="#">></a>
+            <c:if test="${pageDirectioni[0]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[0]}')">&lt;</a>
+			</c:if>
+					<c:forEach items="${pages}" var="index" begin="0">
+					  <c:if test="${index==pageNumber}">
+					      <a href="javascript:void(0)" style="color:blue;font-size:bold;"  onClick="To('${index}')">${index}</a>
+					  </c:if>
+					  <c:if test="${index!=pageNumber}">
+					      <a href="javascript:void(0)" onClick="To('${index}')">${index}</a>
+					  </c:if>
+					</c:forEach>
+			<c:if test="${pageDirectioni[1]==1 }">
+			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[1]}')">&gt;</a>
+			</c:if>
         </div>
       </div>
     </div>
@@ -215,4 +186,9 @@
     <script src="../js/L_slide.js" type="text/javascript"></script>
     <script src="../js/open.js" type="text/javascript"></script>
   </body>
+  <script type="text/javascript">
+  function To(arg){
+	 window.location="exam_studentFindByPageNumber.action?pageNumber="+arg;
+  }
+  </script>
 </html>

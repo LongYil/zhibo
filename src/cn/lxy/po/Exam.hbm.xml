@@ -12,6 +12,7 @@
 		<many-to-one name="teacher" class="cn.lxy.po.Teacher" column="teacher_id"></many-to-one>	
 		<property name="name" />
 		<property name="face" />
+		<property name="time" />
 		<property name="describes" />
 		<property name="fileaddress" />
 

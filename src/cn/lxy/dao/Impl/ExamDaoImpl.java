@@ -26,5 +26,10 @@ public class ExamDaoImpl extends CommonDaoImpl<Exam> implements ExamDao {
 		return (Exam) ht.find("from Exam where id = "+arg+"").get(0);
 	}
 
+	@Override
+	public List<Exam> studentFindAll() {
+		return (List<Exam>) ht.find("from Exam order by id asc");
+	}
+
 	
 }

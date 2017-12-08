@@ -1,5 +1,6 @@
 package cn.lxy.po;
 
+import java.util.Date;
 
 /**
  * <p>Title:Exam</p>
@@ -14,6 +15,7 @@ public class Exam {
 	private String face;//试题封面url
 	private String describes;//试题描述
 	private String fileaddress;//试题附件 url
+	private Date time;//上传时间
 	//在试题里面表示所属教师，一个试题只能属于一个教师
 	private Teacher teacher;
 	
@@ -53,5 +55,12 @@ public class Exam {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	
 
 }

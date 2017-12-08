@@ -2,7 +2,9 @@ package cn.lxy.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,19 +74,35 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	}
 	//学生用户查找所有试题
 	public String studentFindAll() {
-		
-		
-		
+		listExamVo.clear();
+		pages.clear();
+		listExamVo = servc.studentFindAll();
+		int temp = countAllPage6.getAllPage(listExamVo.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.pageNumber="1";
+		this.getSesion().put("studentAllExamPage",temp);
+		this.getSesion().put("studentExamList", listExamVo);
+		pages = countAllPage6.getStartPages(temp);
 		return "studentFindAll";
 	}
-	
+	//根据页码查找对应页面的试题
+	public String studentFindByPageNumber() {
+		tempListExamVo.clear();
+		pages.clear();
+		listExamVo.clear();
+		int page = Integer.parseInt(pageNumber);
+		int all = Integer.parseInt(this.getSesion().get("studentAllExamPage").toString());
+		pageDirectioni = countAllPage6.getLeftAndRight(page,all);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(page,all);
+		tempListExamVo = (List<ExamVo>) this.getSesion().get("studentExamList");
+		listExamVo = tempListExamVo.subList((page-1)*6,countAllPage6.getLastIndex(page,tempListExamVo.size()));
+		pages = countAllPage6.getPages(page,all);
+		return "studentFindAll";
+	}	
 	//后台管理用户查找所有试题
 	public String findAll() {
-		if(listExamVo!=null) {
-			listExamVo.clear();
-		}else {
-			;
-		}
+		listExamVo.clear();
 		pages.clear();
 		listExamVo = servc.findAll();
 		int temp = countAllPage11.getAllPage(listExamVo.size());
@@ -143,6 +161,11 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
         exam.setFace(fileUtils.GenerateImage(infos[1],realpath1,examfileFileName.get(1)));
         exam.setFileaddress(fileUtils.saveFile(examfile.get(0), realpath2,examfileFileName.get(0)));
 		exam.setTeacher(teacher);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		Date d = new Date();
+		String time = sdf.format(d);
+		Date d2 = sdf.parse(time);
+		exam.setTime(d2);
 		servc.save(exam);
         return "save";
 	}

@@ -178,7 +178,7 @@
     <script src="../js/open.js" type="text/javascript"></script>
     <script type="text/javascript">
     function To(arg){
-  	  window.location="course_findPastByPage.action?pageNumber="+arg;
+  	  window.location="course_studentFindByPageNumber.action?pageNumber="+arg;
     }
     function play(arg){
     	;

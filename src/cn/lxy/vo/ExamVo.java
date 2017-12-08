@@ -12,7 +12,7 @@ import cn.lxy.po.Exam;
 public class ExamVo {
 	private Exam exam;
 	private String teacherName;
-	
+	private String time;
 	public Exam getExam() {
 		return exam;
 	}
@@ -24,5 +24,12 @@ public class ExamVo {
 	}
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}	
+	
 }

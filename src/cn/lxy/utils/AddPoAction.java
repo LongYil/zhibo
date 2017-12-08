@@ -53,9 +53,14 @@ public class AddPoAction extends BasicAction{
 	
 	public String addExam() throws Exception {
 		for(int i=0;i<60;i++) {
-			teacher = teacherServc.find("28");
+			teacher = teacherServc.find("1");
 			exam = new Exam();
 			exam.setName("高等数学:"+i);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			Date d = new Date();
+			String time = sdf.format(d);
+			Date d2 = sdf.parse(time);
+			exam.setTime(d2);
 			exam.setDescribes("普通高等院校高等数学");
 			exam.setTeacher(teacher);
 			examServc.save(exam);
