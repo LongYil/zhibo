@@ -79,6 +79,7 @@
 				<result name="studentFindAll">/shitiku/test_v1.jsp</result>
 				<result name="analyseExam">/shitiku/questions-sublime.jsp</result>
 				
+				<result type="json" name="calculateResult"><param name="root">resultinfo</param></result>
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
 

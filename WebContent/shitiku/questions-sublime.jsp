@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
-          <a href="../index.html"><h1>LOGO理学院直播</h1></a>
+          <a href="../index.jsp"><h1>LOGO理学院直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
          <input type="text" class="form-control input-search" placeholder="Search"/ >
@@ -80,13 +80,13 @@
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
       <div class="col-sm-6 col-md-6 col-lg-6">
           <ul style="padding-left: 0;">
-            <li><a href="../index.html" class="tooltips">教学直播<span></span></a></li>
+            <li><a href="../index.jps" class="tooltips">教学直播<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="../jiaoxuehuigu/review.html" class="tooltips">教学回顾<span></span></a></li>
+            <li><a href="../jiaoxuehuigu/review.jsp" class="tooltips">教学回顾<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="test.html" class="tooltips" style="color: #198fee;">试 题 库<span class="triangle"></span></a></li>
+            <li><a href="test.jsp" class="tooltips" style="color: #198fee;">试 题 库<span class="triangle"></span></a></li>
           </ul>
       </div>
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
@@ -95,32 +95,34 @@
     <div class="row content-body">
       <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
         <div class="content-questions">
-          <div><h1><s:property value="examName"/></h1></div>
-          
+          <div><h1><s:property value="examName"/>(共<s:property value="examNumber"/>题)</h1></div>
+          <input type="hidden" value="<s:property value="examNumber"/>" id="examNumber">
             <s:iterator value="listAnalysedExam" status="ste">
-	            <div class="questions-body">
+	            <div class="questions-body" id="question<s:property value="id"/>">
 	            <div><p><s:property value="id"/>、<s:property value="question"/></p></div>
 	            <div class="checkbox">
 	                <label>
-	                    <input type="checkbox" name="optionsRadios">A.<s:property value="optionA"/></label>
+	                    <input type="radio" name="optionsRadios<s:property value="id"/>" value="A" >A.<s:property value="optionA"/></label>
 	            </div>
 	            <div class="checkbox">
 	                <label>
-	                    <input type="checkbox" name="optionsRadios">B.<s:property value="optionB"/></label>
+	                    <input type="radio" name="optionsRadios<s:property value="id"/>" value="B" >B.<s:property value="optionB"/></label>
 	            </div>
 	            <div class="checkbox">
 	                <label>
-	                    <input type="checkbox" name="optionsRadios">C.<s:property value="optionC"/></label>
+	                    <input type="radio" name="optionsRadios<s:property value="id"/>" value="C" >C.<s:property value="optionC"/></label>
 	            </div>
 	            <div class="checkbox">
 	                <label>
-	                    <input type="checkbox" name="optionsRadios">D.<s:property value="optionD"/></label>
+	                    <input type="radio" name="optionsRadios<s:property value="id"/>" value="D" >D.<s:property value="optionD"/></label>
 	            </div>
+	            <p class="result<s:property value="id"/>" style="color:#dea050;"></p>
                 </div>
-			</s:iterator>            
+			</s:iterator>
+			<p class="anwser"></p>
         </div>
         <div class="questions-footer">
-          <button onClick=" location='questions.html' ">提&nbsp;&nbsp;交</button>
+          <button onClick="submitMyAnswer()">提&nbsp;&nbsp;交</button>
         </div>
       </div>
     </div>
@@ -162,5 +164,31 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../js/open.js" type="text/javascript"></script>
+    <script src="../js/ajaxcommunicate.js"></script>
+    
+    <script type="text/javascript">
+    function submitMyAnswer(){
+    	var temp="E";
+    	var examNumber = $("#examNumber").val();
+    	for(var i=1;i<examNumber;i++){
+    		var question = "input[name='optionsRadios"+i+"']:checked";
+    		var answer = $(question).val();
+    		if(answer==undefined){
+    			answer="E";
+    		}
+    		temp = temp+"-"+answer;
+    	}
+    	var tempresult = ajaxSubmit("exam_calculateResult.action",temp);
+		var temp1 = JSON.parse(tempresult);
+		temp1 = eval(temp1.info);
+	    for(var i=0;i<(temp1.length-1);i++){  
+	       var resultinfo = temp1[i].result;
+	       var pname = ".result"+(i+1);
+	       $(pname).html(resultinfo);
+	    }
+    	$(".anwser").html(temp1[temp1.length-1].result);
+    }
+    
+    </script>
   </body>
 </html>

@@ -10,6 +10,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
@@ -56,6 +59,7 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private String queryInfo;
 	
 	private String examId;
+	private String examNumber;
 	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectioni = new int[2];
@@ -176,19 +180,34 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		String examId = request.getParameter("examId");
 		examName = servc.findById(examId).getName();
 		listAnalysedExam = servc.analyseExam(examId);
+		examNumber = String.valueOf(listAnalysedExam.size()+1);
 		this.getSesion().put("analysedExamList", listAnalysedExam);
 		return "analyseExam";
 	}
 	//根据答题情况计算结果
-	public String calculateResult() {
-		String[] results = null;//前台传来的答题结果
+	public String calculateResult() throws JSONException {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String answer = request.getParameter("info").substring(2);		
+		String[] results = answer.split("-");//前台传来的答题结果
+		System.out.println(results);
 		listAnalysedExam.clear();
 		listAnalysedExam = (List<AnalysedExam>) this.getSesion().get("analysedExamList");
 		listAnswerResult.clear();
 		listAnswerResult = servc.calculateResult(results, listAnalysedExam);
+		
+        JSONObject jo = new JSONObject();
+        StringBuffer calculateresult = new StringBuffer();
+        for(int i=0;i<listAnswerResult.size();i++){
+        	calculateresult.append("{'result':'"+listAnswerResult.get(i)+"'}");
+        	if(i!=(listAnswerResult.size()-1)){
+        		calculateresult.append(",");
+        	}
+        }
+        jo.put("info", "["+calculateresult+"]");
+        this.resultinfo = jo.toString();
+        
 		return "calculateResult";
 	}
-	
 	
 	
 	public Exam getExam() {
@@ -304,6 +323,12 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	}
 	public void setExamName(String examName) {
 		this.examName = examName;
+	}
+	public String getExamNumber() {
+		return examNumber;
+	}
+	public void setExamNumber(String examNumber) {
+		this.examNumber = examNumber;
 	}
 	
 }

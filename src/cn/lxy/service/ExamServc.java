@@ -102,13 +102,23 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 	
 	public List<String> calculateResult(String[] arg1,List<AnalysedExam> arg2) {
 		answerResultList.clear();
+		int allNumber = arg1.length;//试题数量
+		int right = 0;//解答正确数量
 		for(int i=0;i<arg1.length;i++) {
 			if(arg1[i].equals(arg2.get(i).getResult())) {
-				answerResultList.add((i+1)+":"+arg1+" 正确");
+				answerResultList.add("正确");
+				right++;
 			}else {
-				answerResultList.add((i+1)+":"+arg1+" 错误"+"正解:"+arg2.get(i).getResult());
+				answerResultList.add("错误 "+"正解:"+arg2.get(i).getResult());
 			}
 		}
+		int goal = 0;
+		if(allNumber==right) {
+			goal = 100;
+		}else {
+			goal = (100/allNumber)*right;
+		}
+		answerResultList.add("正确："+right+"题  "+"错误："+(allNumber-right)+"题  "+"得分："+goal+"分");
 		return answerResultList;
 	}
 	
