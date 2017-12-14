@@ -1,16 +1,18 @@
 package cn.lxy.test;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class MyTest6 {
 
 	public static void main(String[] args) {
-//		System.out.println(new SimpleDateFormat("YYYYMMddHHmmss").format(new Date()));
-		String a = "temp.jsp";
-		String temp[] = a.split("\\.");
-		System.out.println(temp[0]);
-		System.out.println(temp[1]);
+//		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+//		StringBuffer temp = new StringBuffer();
+//		for(int i = 0;i < 4 ;i++) {
+//			temp.append(chars.charAt((int)(Math.random() * 62)));
+//		}
+//		System.out.println(temp.toString());
+		String[] info = "a,b,c,d".split(".");
+		System.out.println(info.toString());
+		
+		
 		
 	}
 

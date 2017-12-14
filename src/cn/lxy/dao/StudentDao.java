@@ -10,4 +10,5 @@ public interface StudentDao {
 	List<Student> findEnableByPageNumber(String arg);
 	List<Student> findByName(String arg);
 	List<Student> findById(String arg);
+	List<Student> checkAccount(String arg);
 }

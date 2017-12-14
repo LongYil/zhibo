@@ -1,5 +1,10 @@
 package cn.lxy.action;
 
+import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.lxy.po.Student;
@@ -28,12 +33,25 @@ public class LoginAction extends BasicAction {
 	@Autowired
 	private Student student;
 
-	
+	//用户登录
 	public String login() throws Exception {
-		System.out.println(username+"*"+password+"*"+usertype);
+		HttpServletRequest request = ServletActionContext.getRequest(); 
+		String url =request.getRequestURI().toString();
 		if(usertype==0) {//用户类型：学生
 			student = studentServc.login(username, password);
-			this.getSesion().put("Student", student);
+			if(student.getTel()!=null&&student.getTel()!="") {
+				this.getSesion().put("Student", student);
+				this.getSesion().put("studentUserStatus",1);
+
+				if(student.getBirth()!=null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String[] tempBirth = sdf.format(student.getBirth()).split("-");					
+					String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
+					this.getSesion().put("birth", birth);
+				}
+			}else {
+				;
+			}
 		}else if(usertype==1){//用户类型：教师
 			teacher = teacherServc.login(username, password);
 			this.getSesion().put("Teacher", teacher);
@@ -42,10 +60,18 @@ public class LoginAction extends BasicAction {
 		}
 		return "success";
 	}
-	
-	
-	
-	
+	//注销用户
+	public String logout() {
+		this.getSesion().clear();
+		return "success";
+	}
+	//个人中心
+	public String personalCenter() {
+		
+		
+		
+		return "personalCenter";
+	}
 	
 	public String getUsername() {
 		return username;

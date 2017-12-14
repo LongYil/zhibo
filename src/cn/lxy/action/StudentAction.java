@@ -1,6 +1,9 @@
 package cn.lxy.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Student;
 import cn.lxy.service.StudentServc;
 import cn.lxy.utils.CountAllPage11;
+import cn.lxy.utils.VerificationCodeUtils;
 
 /**
  * <p>Title:StudentAction</p>
@@ -35,6 +39,8 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private Student student ;
 	@Autowired
 	private StudentServc servc;
+	@Autowired
+	private VerificationCodeUtils verificationCodeUtils;
 	
 	private List<Student> liststudent = new ArrayList<Student>();
 	private List<Integer> pages = new ArrayList<Integer>();
@@ -49,6 +55,39 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		student.setUserstatus(1);
 		servc.save(student);
 		return "add";
+	}
+	public String updatePassword() {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String[] passwordInfo = request.getParameter("info").split("-");		
+		student = (Student) this.getSesion().get("Student");
+		if(passwordInfo[0].equals(student.getPassword())){
+			student.setPassword(passwordInfo[1]);
+			servc.save(student);
+			this.resultinfo = "1";
+		}else {
+			this.resultinfo = "0";
+		}
+		return "updatePassword";
+	}
+	//更新学生用户的基本信息
+	public String updateBasicInfo() throws ParseException {
+		student = (Student) this.getSesion().get("Student");
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String year = request.getParameter("selYear");
+		String month = request.getParameter("selMonth");
+		String day = request.getParameter("selDay");
+		String birth = year + "-" + month + "-" + day;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf.parse(birth);
+		student.setUsername(request.getParameter("username").toString());
+		student.setName(request.getParameter("name").toString());
+		student.setDepartment(request.getParameter("department").toString());
+		student.setClassandgrade(request.getParameter("classandgrade").toString());
+		student.setSelfintroduce(request.getParameter("selfintroduce").toString());
+		student.setBirth(d);
+		servc.save(student);
+		this.getSesion().put("Student",student);
+		return "updateBasicInfo";
 	}
 	//查找所有未禁用学生用户
 	public String findAllEnable() {
@@ -137,9 +176,33 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		liststudent = servc.findByName(this.getSesion().get("studentQueryInfo").toString());
 		return "findByName";
 	}
-	
-	
-	
+	//校验用户手机是否已存在
+	public String checkAccount() {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String tel = request.getParameter("info");		
+		this.resultinfo = String.valueOf(servc.checkAccount(tel));
+		return "checkAccount";
+	}
+	//获取验证码
+	public String getVerificationCode() {
+		String temp = verificationCodeUtils.getCode();
+		this.getSesion().put("VerificationCode", temp);
+		this.resultinfo = temp;
+		return "getVerificationCode";
+	}
+	//校验验证码
+	public String checkVerificationCode() {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String info = request.getParameter("info").toLowerCase();		
+		String[] temp1 = (this.getSesion().get("VerificationCode").toString().toLowerCase()).split(",");
+		String temp = temp1[0] + temp1[1] + temp1[2] + temp1[3];
+		if(info.equals(temp)) {
+			this.resultinfo = "1";
+		}else {
+			this.resultinfo = "0";
+		}
+		return "checkVerificationCode";
+	}
 
 	public Student getStudent() {
 		return student;

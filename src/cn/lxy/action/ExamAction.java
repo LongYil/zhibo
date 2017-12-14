@@ -91,6 +91,19 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		pages = countAllPage6.getStartPages(temp);
 		return "studentFindAll";
 	}
+	//前台用户根据试题信息查找试题
+	public String studentFindByInfo() {
+		pages.clear();
+		listExamVo = servc.studentFindAllByInfo(queryInfo);
+		int temp = countAllPage6.getAllPage(listExamVo.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.pageNumber="1";
+		this.getSesion().put("studentAllExamPage",temp);
+		this.getSesion().put("studentExamList", listExamVo);
+		pages = countAllPage6.getStartPages(temp);
+		return "studentFindAll";
+	}
 	//根据页码查找对应页面的试题
 	public String studentFindByPageNumber() {
 		tempListExamVo.clear();
@@ -186,15 +199,13 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	}
 	//根据答题情况计算结果
 	public String calculateResult() throws JSONException {
-		HttpServletRequest request =  ServletActionContext.getRequest();
+		HttpServletRequest request = ServletActionContext.getRequest();
 		String answer = request.getParameter("info").substring(2);		
 		String[] results = answer.split("-");//前台传来的答题结果
-		System.out.println(results);
 		listAnalysedExam.clear();
 		listAnalysedExam = (List<AnalysedExam>) this.getSesion().get("analysedExamList");
 		listAnswerResult.clear();
 		listAnswerResult = servc.calculateResult(results, listAnalysedExam);
-		
         JSONObject jo = new JSONObject();
         StringBuffer calculateresult = new StringBuffer();
         for(int i=0;i<listAnswerResult.size();i++){
@@ -205,7 +216,6 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
         }
         jo.put("info", "["+calculateresult+"]");
         this.resultinfo = jo.toString();
-        
 		return "calculateResult";
 	}
 	

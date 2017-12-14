@@ -38,7 +38,8 @@
 	</action>
 	
 	<action name="login_*" class="loginAction" method="{1}">
-		<result name="success">/teacher.jsp</result>
+		<result name="success" type="redirect">/index.jsp</result>
+		<result name="personalCenter" type="redirect">/personal_center.jsp</result>
 	</action>
 	
 
@@ -53,10 +54,15 @@
 		   <action name="student_*" class="studentAction" method="{1}"> 
 				<result name="findAll">/studentmanager.jsp</result>
 				<result name="findByName">/studentquery.jsp</result>
-				<result name="add">/index.html</result>
+				<result name="add" type="redirect">/index.jsp</result>
+				<result name="updateBasicInfo" type="redirect">/personal_center.jsp</result>
 		        <result type="json" name="ajaxresult1"><param name="root">resultinfo</param></result>  
+		        <result type="json" name="checkAccount"><param name="root">resultinfo</param></result>  
+		        <result type="json" name="getVerificationCode"><param name="root">resultinfo</param></result>  
+		        <result type="json" name="checkVerificationCode"><param name="root">resultinfo</param></result>  
+		        <result type="json" name="updatePassword"><param name="root">resultinfo</param></result>  
 		   </action>
-		   
+
 		   <action name="teacher_*" class="teacherAction" method="{1}">
 				<result name="findAll">/teachermanager.jsp</result>
 				<result name="preUpdate">/addteacher.jsp</result>
@@ -76,8 +82,8 @@
 				<result name="findAll">/exammanager.jsp</result>
 				<result name="findByName">/examquery.jsp</result>
 				<result name="save">/addexam.jsp</result>
-				<result name="studentFindAll">/shitiku/test_v1.jsp</result>
-				<result name="analyseExam">/shitiku/questions-sublime.jsp</result>
+				<result name="studentFindAll">/test_v1.jsp</result>
+				<result name="analyseExam">/questions-sublime.jsp</result>
 				
 				<result type="json" name="calculateResult"><param name="root">resultinfo</param></result>
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
@@ -96,7 +102,7 @@
 				<result name="teacherFindByInfo">/livecoursequery.jsp</result>
 				<result name="preUpdate">/updatecourse.jsp</result>
 				<result name="findRecentCource">/index_v1.jsp</result>
-				<result name="findPastCource">/jiaoxuehuigu/review_v1.jsp</result>
+				<result name="findPastCource">/review_v1.jsp</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>

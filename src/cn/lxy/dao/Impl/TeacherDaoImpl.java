@@ -19,6 +19,6 @@ public class TeacherDaoImpl extends CommonDaoImpl<Teacher> implements TeacherDao
 	}
 	@Override
 	public List<Teacher> findByName(String arg) {
-		return (List<Teacher>) ht.find("from Teacher where "+arg+"");
+		return (List<Teacher>) ht.find("from Teacher where name like '%"+arg+"%'");
 	}
 }	

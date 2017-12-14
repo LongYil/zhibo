@@ -1,5 +1,6 @@
 package cn.lxy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import cn.lxy.po.Student;
 public class StudentServc extends CommonSevc<Student, StudentDaoImpl> {
 	@Autowired
 	private Student student;	
+	
+	private List<Student> list = new ArrayList<Student>();
+	
 	@Override
 	public void save(Student arg) {
 		daoImpl.save(arg);		
@@ -57,10 +61,18 @@ public class StudentServc extends CommonSevc<Student, StudentDaoImpl> {
 		return daoImpl.findById(arg);
 	}
 	public Student login(String arg1,String arg2) throws Exception {
-		String sql = "username ='"+arg1+"'and password = '"+arg2+"'";
+		String sql = "tel ='"+arg1+"'and password = '"+arg2+"'";
 		return (Student) getEntity.login("Student", sql, Student.class);
 	}
-	
+	public int checkAccount(String arg) {
+		list.clear();
+		list = daoImpl.checkAccount(arg);
+		if(list.size()>0) {
+			return 0;
+		}else {
+			return 1;
+		}
+	}
 	
 	
 }

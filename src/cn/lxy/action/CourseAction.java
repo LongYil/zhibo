@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.lxy.po.Course;
-import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
 import cn.lxy.service.CourseServc;
+import cn.lxy.service.TeacherServc;
 import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.CountAllPage6;
 import cn.lxy.utils.DateUtils;
@@ -39,6 +39,8 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	private CourseVo courseVo;
 	@Autowired
 	private Teacher teacher;
+	@Autowired
+	private TeacherServc teacherServc;
 	@Autowired
 	private CourseServc servc;
 	@Autowired
@@ -63,10 +65,12 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	private int[] pageDirectionNumberi = new int[2];
 
 	private List<Integer> pages = new ArrayList<Integer>();
+	private List<Course> tempCourse = new ArrayList<Course>();
 	private List<CourseVo> listCourse = new ArrayList<CourseVo>();
 	private List<CourseVo> tempListCourse = new ArrayList<CourseVo>();
 	
 	private String courseName;
+	private String queryInfo;
 
 	private String resultinfo;
 
@@ -202,6 +206,26 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		Date d = new Date();
 		String temptoday = sdf1.format(d);
 		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allPastCoursePage",temp);
+		this.getSesion().put("pastCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findPastCource";
+	}
+	//前天用户查看教学回顾
+	public String studentFindByInfo() throws ParseException {
+		listCourse.clear();
+		pages.clear();
+		tempCourse.clear();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		Date d = new Date();
+		String temptoday = sdf1.format(d);
+		tempCourse.addAll((servc.findPastByInfo(temptoday,queryInfo)));
+		tempCourse.addAll(teacherServc.findCourseByName(queryInfo));		
+		listCourse = dateUtils.formatDateAndTeacher(tempCourse);
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
 		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
@@ -438,6 +462,14 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 
 	public void setPageDirectionNumberi(int[] pageDirectionNumberi) {
 		this.pageDirectionNumberi = pageDirectionNumberi;
+	}
+
+	public String getQueryInfo() {
+		return queryInfo;
+	}
+
+	public void setQueryInfo(String queryInfo) {
+		this.queryInfo = queryInfo;
 	}
 
 	

@@ -11,33 +11,50 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>理学院教学直播</title>
     <!-- Bootstrap -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="../css/main.css" rel="stylesheet" type="text/css">
-    <link href="../css/mainstyle.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/mainstyle.css" rel="stylesheet" type="text/css">
   </head>
 
   <body  class="container-fluid">
-    <header>
+    <header style="overflow: visible;">
       <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
-          <a href="../index.jsp"><h1>LOGO理学院直播</h1></a>
+          <a href="index.jsp"><h1>LOGO理学院直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
-         <input type="text" class="form-control input-search" placeholder="Search"/ >
-         <button class="btn btn-info btn-search"><img src="../images/sousuo.png" alt=""></button>
+         <input type="text" class="form-control input-search" placeholder="Search" />
+         <button class="btn btn-info btn-search"><img src="images/sousuo.png" alt=""></button>
         </div>  
-        <div class="col-sm-3 col-md-3 col-lg-3">
-          <a href="javascript:void(0)" id="linkbt1">登录</a> 
-          <a>|</a>
-          <a href="javascript:void(0)" id="linkbt2">注册</a>
-        </div>
+
+        <c:if test="${studentUserStatus==1}">
+	        <div class="col-sm-3 col-md-3 col-lg-3">
+	         <span class="q-person">
+	          <img src="images/touxiang1.png" alt="" class="img-circle">
+	            <div class="btn-group">
+	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
+	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
+	                </button>
+	                <ul class="dropdown-menu" role="menu">
+	                    <li>
+	                        <a href="javascript:void(0)" onClick="personalCenter()">个人中心</a>
+	                    </li>
+	                    <li>
+	                        <a href="javascript:void(0)" onClick="logout()">退出登录</a>
+	                    </li>
+	                </ul>
+	            </div>
+	          </span>
+	        </div>
+        </c:if>
+        
       </div>
     </header>
 
@@ -69,8 +86,8 @@
         <input type="password" name="" placeholder="输入密码">
         <input type="password" name="" placeholder="再次输入密码">
         <input class="input-yz" type="text" name="" placeholder="输入下图的验证码">
-        <a href="" id="yz"><img src="../images/yanzhengma.png" class="img-yz" alt=""></a>
-        <a href="" id="sx"><img src="../images/shuaxin.png" class="img-sx" alt=""></a>
+        <a href="" id="yz"><img src="images/yanzhengma.png" class="img-yz" alt=""></a>
+        <a href="" id="sx"><img src="images/shuaxin.png" class="img-sx" alt=""></a>
         <button class="button">注  册</button>
       </div>
     </div>
@@ -80,10 +97,10 @@
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
       <div class="col-sm-6 col-md-6 col-lg-6">
           <ul style="padding-left: 0;">
-            <li><a href="../index.jps" class="tooltips">教学直播<span></span></a></li>
+            <li><a href="index.jsp" class="tooltips">教学直播<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="../jiaoxuehuigu/review.jsp" class="tooltips">教学回顾<span></span></a></li>
+            <li><a href="review.jsp" class="tooltips">教学回顾<span></span></a></li>
           </ul>
           <ul>
             <li><a href="test.jsp" class="tooltips" style="color: #198fee;">试 题 库<span class="triangle"></span></a></li>
@@ -151,7 +168,7 @@
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
           <h3>关注我们</h3>
-          <img src="../images/erweima.png" alt="">
+          <img src="images/erweima.png" alt="">
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12">
@@ -160,11 +177,11 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../bootstrap/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="bootstrap/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../js/open.js" type="text/javascript"></script>
-    <script src="../js/ajaxcommunicate.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/open.js" type="text/javascript"></script>
+    <script src="js/ajaxcommunicate.js"></script>
     
     <script type="text/javascript">
     function submitMyAnswer(){
@@ -176,7 +193,7 @@
     		if(answer==undefined){
     			answer="E";
     		}
-    		temp = temp+"-"+answer;
+    		temp = temp + "-" + answer;
     	}
     	var tempresult = ajaxSubmit("exam_calculateResult.action",temp);
 		var temp1 = JSON.parse(tempresult);
@@ -188,7 +205,15 @@
 	    }
     	$(".anwser").html(temp1[temp1.length-1].result);
     }
-    
+    function registe(){
+  	  registeform.submit();
+    }
+    function logout(){
+  	  window.location="login_logout.action";
+    }
+    function personalCenter(){
+  	  window.location="login_personalCenter.action";
+    }    
     </script>
   </body>
 </html>

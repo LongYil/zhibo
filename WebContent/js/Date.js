@@ -111,8 +111,11 @@ this.selDay.selectedIndex = day - 1;
 var selYear = window.document.getElementById("selYear"); 
 var selMonth = window.document.getElementById("selMonth"); 
 var selDay = window.document.getElementById("selDay"); 
+var syear = $("#syear").val();
+var smonth = $("#smonth").val();
+var sday = $("#sday").val();
 // 新建一个DateSelector类的实例，将三个select对象传进去 
-new DateSelector(selYear, selMonth, selDay, 2017, 11, 10); 
+new DateSelector(selYear, selMonth, selDay, syear, smonth, sday);
 // 也可以试试下边的代码 
 // var dt = new Date(2004, 1, 29); 
 // new DateSelector(selYear, selMonth ,selDay, dt); 

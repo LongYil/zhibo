@@ -1,5 +1,6 @@
 package cn.lxy.po;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,11 +18,13 @@ public class Student {
 	private String name;//学生姓名
 	private String password;//密码
 	private String tel;//手机号
+	private Date birth;//生日
 	private String head;//头像地址
 	private String school;//学校
 	private String department;//学院
 	private String sex;//性别
 	private String classandgrade;//班级
+	private String selfintroduce;//自我介绍
 	
 	//在学生里面表示所拥有的笔记，一个学生拥有多个笔记
 	private Set<Note> setNote = new HashSet<Note>();
@@ -105,6 +108,18 @@ public class Student {
 	}
 	public void setUserstatus(Integer userstatus) {
 		this.userstatus = userstatus;
+	}
+	public String getSelfintroduce() {
+		return selfintroduce;
+	}
+	public void setSelfintroduce(String selfintroduce) {
+		this.selfintroduce = selfintroduce;
+	}
+	public Date getBirth() {
+		return birth;
+	}
+	public void setBirth(Date birth) {
+		this.birth = birth;
 	}
 
 	
