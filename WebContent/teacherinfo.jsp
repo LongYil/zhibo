@@ -44,12 +44,13 @@
                         <div class="clients-list">
                             <ul class="nav nav-tabs">
 <!--                                 <li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-file-image-o"></i>我的头像</a></li> -->
-                                <li class="active"><a data-toggle="tab" href="#tab-1" id="tab1"><i class="fa fa-user"></i>基本信息</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-1" id="tab1"><i class="fa fa-user"></i>基本信息</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-lock"></i>安全设置</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-3"><i class="fa fa-video-camera"></i>直播信息</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab-4"><i class="fa fa-video-camera"></i>我的头像</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div id="tab-1" class="tab-pane active">
+                                <div id="tab-1" class="tab-pane">
 					                <div class="form-horizontal">	
 										<div class="form-group" style="margin-top:30px;">
 			                                <label class="col-sm-3 control-label">教师姓名：</label>

@@ -61,6 +61,20 @@ public class FileUtils {
         os.close();
         return serverInfo.FILE_ADDRESS+name;
 	}
+	public String saveIcon(File file,String path,String name) throws Exception {
+		String[] tempnames = name.split("\\.");
+		name = tempnames[0]+"_"+(new SimpleDateFormat("YYYYMMddHHmmss").format(new Date()))+"."+tempnames[1];
+		OutputStream os = new FileOutputStream(new File(path,name));       
+		InputStream is = new FileInputStream(file);     
+		byte[] buf = new byte[1024];  
+		int length = 0 ;    
+		while(-1 != (length = is.read(buf))){
+			os.write(buf, 0, length);
+		}   
+		is.close();
+		os.close();
+		return serverInfo.STUDENT_ICON_ADDRESS+name;
+	}
 	
 	public String generateCourseImage(String imgStr,String path,String name){
 		String[] tempnames = name.split("\\.");

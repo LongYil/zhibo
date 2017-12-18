@@ -66,9 +66,9 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private int[] pageDirectionNumber = new int[2];
 	private int[] pageDirectionNumberi = new int[2];
 	
-    private String usename ;  
+    private String usename ;
     private String examName;
-    private List<File> examfile ;  
+    private List<File> examfile;
     private List<String> examfileFileName ;  
     private List<String> examfileContentType ;
     

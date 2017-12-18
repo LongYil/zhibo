@@ -1,5 +1,6 @@
 package cn.lxy.action;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Student;
 import cn.lxy.service.StudentServc;
 import cn.lxy.utils.CountAllPage11;
+import cn.lxy.utils.FileUtils;
 import cn.lxy.utils.VerificationCodeUtils;
 
 /**
@@ -40,12 +42,18 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	@Autowired
 	private StudentServc servc;
 	@Autowired
+	private FileUtils fileUtils;
+	@Autowired
 	private VerificationCodeUtils verificationCodeUtils;
 	
 	private List<Student> liststudent = new ArrayList<Student>();
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<Student> tempstudent = new ArrayList<Student>();
-	
+
+    private List<File> picfile;
+    private List<String> picfileFileName ;  
+    private List<String> picfileContentType ;
+    
 	@Override
 	public Student getModel() {
 		return student;
@@ -203,7 +211,25 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		}
 		return "checkVerificationCode";
 	}
-
+	//学生上传头像文件预览
+	public String previewStudentIcon() throws Exception {
+        String realpath = ServletActionContext.getServletContext().getRealPath("/sourcefile/studenticon"); 
+        String picPath = fileUtils.saveIcon(picfile.get(0), realpath,picfileFileName.get(0));
+        this.getSesion().put("tempPicPath", picPath);
+        this.getSesion().put("tab1","display:none");
+        this.getSesion().put("tab3","");
+		return "previewStudentIcon";
+	}
+	//保存头像文件
+	public String saveStudentIcon() {
+		student = (Student) this.getSesion().get("Student");
+		student.setHead(this.getSesion().get("tempPicPath").toString());
+		servc.save(student);
+        this.getSesion().put("tab1","");
+        this.getSesion().put("tab3","display:none");
+		return "saveStudentIcon";
+	}
+	
 	public Student getStudent() {
 		return student;
 	}
@@ -257,6 +283,24 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	}
 	public void setUserRole(int userRole) {
 		this.userRole = userRole;
+	}
+	public List<File> getPicfile() {
+		return picfile;
+	}
+	public void setPicfile(List<File> picfile) {
+		this.picfile = picfile;
+	}
+	public List<String> getPicfileFileName() {
+		return picfileFileName;
+	}
+	public void setPicfileFileName(List<String> picfileFileName) {
+		this.picfileFileName = picfileFileName;
+	}
+	public List<String> getPicfileContentType() {
+		return picfileContentType;
+	}
+	public void setPicfileContentType(List<String> picfileContentType) {
+		this.picfileContentType = picfileContentType;
 	}
 	
 }

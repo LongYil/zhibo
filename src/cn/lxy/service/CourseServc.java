@@ -54,6 +54,9 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 	public List<Course> findPast(String arg){
 		return daoImpl.findPast(arg);
 	}
+	public List<Course> findPastByDate(String arg){
+		return daoImpl.findPastByDate(arg);
+	}
 	public List<Course> findPastByInfo(String arg1,String arg2){
 		return daoImpl.findPastByInfo(arg1,arg2);
 	}

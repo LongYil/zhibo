@@ -32,12 +32,12 @@
         <div class="col-sm-3 col-md-3 col-lg-3">  
          <input type="text" class="form-control input-search" placeholder="Search" />
          <button class="btn btn-info btn-search"><img src="images/sousuo.png" alt=""></button>
-        </div>  
+        </div>
 
         <c:if test="${studentUserStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
-	          <img src="images/touxiang1.png" alt="" class="img-circle">
+	         <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
 	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
@@ -111,7 +111,7 @@
           </div>
         </div>
 
-        <div class="content-pcenter" id="d1">
+        <div class="content-pcenter" id="d1" style="${tab1}">
           <form action="student_updateBasicInfo.action" method="post" name="form1">
           <div>
             <a>昵称：</a>
@@ -163,12 +163,14 @@
           <button style="margin-top: 28px;" onClick="updatePassword()">保&nbsp;&nbsp;存</button>
         </div>
 
-        <div class="content-pcenter" id="d3" style="display:none">
+        <div class="content-pcenter" id="d3" style="${tab3}">
           <div id="touxiang">
-            <img src="images/shangchuantouxiang.png" alt="">
-            <p>只支持png、jpeg、gif、大小不可超过5M</p>
+          <form action="student_previewStudentIcon.action" method="post" name="myform" enctype="multipart/form-data">  
+            <img src="${tempPicPath}" alt="" width="240px" height="240px">
+            <input type="file" onchange="preview()" name="picfile" accept="image/gif, image/jpeg, image/png" placeholder="请上传图片(仅支持gif,jpeg,png图片格式)" />
+          </form>
           </div>
-          <button >保&nbsp;&nbsp;存</button>
+          <button onClick="save()">保&nbsp;&nbsp;存</button>
         </div>
       </div>
     </div>
@@ -201,12 +203,19 @@
     	var tempInfo = old + "-" + new1 + "-" + new2;
     	if(new1==new2&&new1!=""&&new2!=""){
     		var temp = ajaxSubmit("student_updatePassword.action",tempInfo);
-    		if(temp=="1"){
+    		if(temp == "1"){
     			alert("密码修改成功,请牢记。");
     		}else{
     			alert("旧密码输入错误!");
     		}
     	}
+    }
+    
+    function preview(){
+    	myform.submit();    	
+    }
+    function save(){
+    	window.location = "student_saveStudentIcon.action";
     }
     
     </script>

@@ -42,28 +42,32 @@ public class LoginAction extends BasicAction {
 			if(student.getTel()!=null&&student.getTel()!="") {
 				this.getSesion().put("Student", student);
 				this.getSesion().put("studentUserStatus",1);
-
 				if(student.getBirth()!=null) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					String[] tempBirth = sdf.format(student.getBirth()).split("-");					
 					String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
 					this.getSesion().put("birth", birth);
+			        this.getSesion().put("tab1", "");
+			        this.getSesion().put("tempPicPath",student.getHead());
+			        this.getSesion().put("tab3", "display:none");
 				}
+				return "student";
 			}else {
-				;
+				return "";
 			}
 		}else if(usertype==1){//用户类型：教师
 			teacher = teacherServc.login(username, password);
 			this.getSesion().put("Teacher", teacher);
+			return "teacher";
 		}else {
-			;
+			return "";
 		}
-		return "success";
+
 	}
-	//注销用户
+	//学生用户注销用户
 	public String logout() {
 		this.getSesion().clear();
-		return "success";
+		return "student";
 	}
 	//个人中心
 	public String personalCenter() {

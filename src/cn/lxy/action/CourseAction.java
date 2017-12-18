@@ -205,6 +205,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
 		Date d = new Date();
 		String temptoday = sdf1.format(d);
+		this.getSesion().put("tempCourseDate","");
 		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
@@ -215,7 +216,33 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.pageNumber = "1";
 		return "findPastCource";
 	}
-	//前天用户查看教学回顾
+	//教学回顾根据指定日期查找相应的课程
+	public String findPastCourceByDate() throws ParseException {
+		listCourse.clear();
+		pages.clear();
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String tempDate = request.getParameter("courseDate").toString();
+		this.getSesion().put("tempCourseDate",tempDate);
+		
+		
+		String[] courseDates = request.getParameter("courseDate").split("/");		
+		String courseDate = courseDates[2] + "-" + courseDates[0] + "-" + courseDates[1];
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf1.parse(courseDate);
+		String realDate = sdf1.format(d);
+		
+		
+		listCourse = dateUtils.formatDateAndTeacher(servc.findPastByDate(realDate));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allPastCoursePage",temp);
+		this.getSesion().put("pastCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findPastCource";
+	}
+	//前台用户查看教学回顾
 	public String studentFindByInfo() throws ParseException {
 		listCourse.clear();
 		pages.clear();

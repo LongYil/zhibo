@@ -38,7 +38,8 @@
 	</action>
 	
 	<action name="login_*" class="loginAction" method="{1}">
-		<result name="success" type="redirect">/index.jsp</result>
+		<result name="student" type="redirect">/index.jsp</result>
+		<result name="teacher" type="redirect">/teacher.jsp</result>
 		<result name="personalCenter" type="redirect">/personal_center.jsp</result>
 	</action>
 	
@@ -56,6 +57,9 @@
 				<result name="findByName">/studentquery.jsp</result>
 				<result name="add" type="redirect">/index.jsp</result>
 				<result name="updateBasicInfo" type="redirect">/personal_center.jsp</result>
+				<result name="previewStudentIcon" type="redirect">/personal_center.jsp</result>
+				<result name="saveStudentIcon" type="redirect">/personal_center.jsp</result>
+
 		        <result type="json" name="ajaxresult1"><param name="root">resultinfo</param></result>  
 		        <result type="json" name="checkAccount"><param name="root">resultinfo</param></result>  
 		        <result type="json" name="getVerificationCode"><param name="root">resultinfo</param></result>  

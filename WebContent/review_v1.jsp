@@ -20,6 +20,7 @@
     <![endif]-->
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/mainstyle.css" rel="stylesheet" type="text/css">
+    <link href="css/new_main.css" rel="stylesheet" type="text/css">
   </head>
 
   <body  class="container-fluid">
@@ -37,7 +38,7 @@
         <c:if test="${studentUserStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
-	          <img src="images/touxiang1.png" alt="" class="img-circle">
+	          <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
 	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
@@ -136,10 +137,7 @@
 
     <div class="row content-body">
       <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-        <div class="dateSelect">
-          <div>2017年10月12日<img src="images/rili.png" alt=""></div>
-        </div>
-
+        <input class="container" type="text" value="${tempCourseDate}" onClick="findCourse()" id="demo-1" style="background-image: url('images/rili.png');background-repeat: no-repeat;background-position: 90% 50%;border-radius: 3px;" >
         <div class="content-video">
 			<s:iterator value="listCourse" status="ste">
 				<c:if test="${ste.index<6}">
@@ -207,6 +205,10 @@
     <script src="js/open.js" type="text/javascript"></script>
     <script src="js/ajaxcommunicate.js"></script>
     <script src="js/gVerify.js"></script>
+    <script src="js/foundation-datepicker.js"></script>
+    <script>
+      $('#demo-1').fdatepicker();
+    </script>
     <script type="text/javascript">
     var verifyCode = new GVerify("v_container");
     function To(arg){
@@ -237,7 +239,6 @@
   		  ;
   	  }
     }
-
     function registe(){
   	  registeform.submit();
     }

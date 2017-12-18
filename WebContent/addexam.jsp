@@ -32,7 +32,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
-							<form action="exam_save.action" method="post" name="myform()" enctype="multipart/form-data">
+							<form action="exam_save.action" method="post" name="myform" enctype="multipart/form-data">
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">试题名称：</label>
                                 <div class="col-sm-8">

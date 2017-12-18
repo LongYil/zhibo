@@ -37,7 +37,7 @@
         <c:if test="${studentUserStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
-	          <img src="images/touxiang1.png" alt="" class="img-circle">
+	          <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
 	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
