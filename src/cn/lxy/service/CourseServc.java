@@ -60,6 +60,11 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 	public List<Course> findPastByInfo(String arg1,String arg2){
 		return daoImpl.findPastByInfo(arg1,arg2);
 	}
-	
+	public Course findById(String id) throws Exception {
+		return (Course) getEntity.getEntity("Course", "id", id, Course.class);
+	}
+	public Course findByStreamId(String id) throws Exception {
+		return (Course) getEntity.getEntity("Course", "streamid", id, Course.class);
+	}
 	
 }

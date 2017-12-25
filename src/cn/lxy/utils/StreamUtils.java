@@ -20,8 +20,8 @@ public class StreamUtils {
 	public static String getStreamId(String roomid,String txTime) {
 		txTime = addThreeday(txTime);
 		String streamid = "";
-		try {
-			 streamid = ServerInfo.BIZID+"_"+roomid+"?"+"bizid="+ServerInfo.BIZID+"&"+(getSafeUrl(ServerInfo.KEY,ServerInfo.BIZID+"_"+roomid,getLongTime(txTime)));	
+		try {	
+			 streamid = ServerInfo.STREAM_BASIC+roomid+"?"+"bizid="+ServerInfo.BIZID+"&"+(getSafeUrl(ServerInfo.KEY,ServerInfo.BIZID+"_"+roomid,getLongTime(txTime)));	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

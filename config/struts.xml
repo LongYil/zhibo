@@ -107,6 +107,8 @@
 				<result name="preUpdate">/updatecourse.jsp</result>
 				<result name="findRecentCource">/index_v1.jsp</result>
 				<result name="findPastCource">/review_v1.jsp</result>
+				<result name="watch">/live.jsp</result>
+				<result name="showInfo">/viewcourse.jsp</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>

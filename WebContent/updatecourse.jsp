@@ -52,7 +52,7 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程简介：</label>
                                 <div class="col-sm-8">
-								    <textarea name="summary"  value="<s:property value="courseVo.summary"/>"  class="form-control" rows="3" placeholder="课程简介..."></textarea>
+								    <textarea name="summary" class="form-control" rows="3" placeholder="课程简介..."><s:property value="courseVo.course.summary"/></textarea>
                                 </div>
                             </div>
                             

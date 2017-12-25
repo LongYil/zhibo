@@ -37,7 +37,7 @@
         <c:if test="${studentUserStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
-	         <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
+	          <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
 	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
@@ -173,10 +173,10 @@
 			                <span><p><s:property value="course.name"/></p></span>
 			                <span><p><s:property value="teacher"/></p></span>
 			                <c:if test="${course.coursetype==0}">
-			                    <span><button class="btn button" onClick="Go(<s:property value='course.address'/>)" style="background-image:url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">观看直播</button></span>
+			                    <span><button class="btn button" onClick="watch('<s:property value='course.id'/>')" style="background-image:url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">观看直播</button></span>
 			                </c:if>
 			                <c:if test="${course.coursetype==1}">
-			                    <span><button class="btn button" onClick="Go(<s:property value='course.address'/>)" style="background-image:url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">观看录播</button></span>
+			                    <span><button class="btn button" onClick="watch('<s:property value='course.id'/>')" style="background-image:url('images/blue_bofang.png');background-repeat: no-repeat;background-position: 10% 50%;" onMouseOver="this.style.backgroundImage='url(images/orange_bofang.png)'" onMouseOut="this.style.backgroundImage='url(images/blue_bofang.png)'">观看录播</button></span>
 			                </c:if>
 			              </label>
 			              <span class="border"><span class='circle'></span></span>
@@ -287,6 +287,8 @@
   function personalCenter(){
 	  window.location="login_personalCenter.action";
   }
-
+  function watch(arg){
+	  window.location = "course_watch.action?courseId="+arg;
+  }
   </script>
 </html>

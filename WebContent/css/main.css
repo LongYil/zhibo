@@ -692,14 +692,19 @@ div.page{
 }
 
 .live-video{
-	width: 68.87%;
+	/*width: 68.87%;
     min-width: 929px;
-    max-width: 1483px;
+    max-width: 1483px;*/
+    width: 100%;
 	height: 880px;
-	padding: 0;
-	display: inline-block;
+	float: left;
+	/*padding: 0;*/
+	margin-left: -420px;
+    padding-left: 420px;
+	/*display: inline-block;*/
 	border-right: 2px #4da4f1 solid;
 	background-color: #303030;
+	position: relative;
 }
 
 .live-video footer{
@@ -777,18 +782,19 @@ div.page{
 	border: 1px #fff solid;
 }
 
-.live-video img{
+/*.live-video img{
 	padding: 0 2% 0.2em;
-}
+}*/
 
 .live-video footer a{
+	margin: 0 2%;
 	color: #909090;
 }
 
 #footer-button{
 	width: 4em;
 	height: 2em;
-	margin: 0 0 0.2em 30%;
+	/*margin: 0 0 0.2em 30%;*/
 	font-size: 12px;
 	line-height: 1em;
 	color: #909090;
@@ -798,7 +804,7 @@ div.page{
 }
 
 .yinliangtiao{			/*音量条*/
-	margin: 0 20px 2px -15px;
+	margin: 17px 20px 2px -35px;
 	overflow: hidden;
 	display: inline-block;
 }
@@ -878,7 +884,25 @@ div.page{
 .live-nts .note{
     height: 700px;
     border-bottom: 1px #575757 solid;
+    overflow: auto;
 }
+
+/*滚动条样式*/
+.live-nts .note::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.live-nts .note::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.live-nts .note::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+
 
 .live-nts .bigimg{
 	padding: 70% 25% 8% 0;
@@ -932,6 +956,23 @@ div.page{
 .live-dic .discuss{
 	height: 660px;
 	border-bottom: 1px #575757 solid;
+	overflow: auto;
+}
+
+/*滚动条样式*/
+.live-dic .discuss::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.live-dic .discuss::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.live-dic .discuss::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
 }
 
 .discuss-left{

@@ -13,5 +13,7 @@ public class ServerInfo {
 	public static final String IMAGE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/sourcefile/examimage/";
 	public static final String COURSE_IMAGE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/sourcefile/courseimage/";
 	public static final String BIZID = "11925";
+	public static final String STREAM_BASIC = "rtmp://" + BIZID + ".livepush.myqcloud.com/live/" + BIZID + "_";
+	public static final String STREAMID = "rtmp://" + BIZID + ".livepush.myqcloud.com/live/";
 	public static final String KEY = "2e501ec27812117a0dcb00e801745961";
 }

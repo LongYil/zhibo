@@ -1,12 +1,17 @@
 package cn.lxy.action;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -22,8 +27,11 @@ import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.CountAllPage6;
 import cn.lxy.utils.DateUtils;
 import cn.lxy.utils.FileUtils;
+import cn.lxy.utils.ServerInfo;
 import cn.lxy.utils.StreamUtils;
 import cn.lxy.vo.CourseVo;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * <p>Title:CourseAction</p>
@@ -94,6 +102,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		course.setTeacher(teacher);
 		course.setStreamid(StreamUtils.getStreamId(teacher.getRoomid(),tempTime));
 		course.setCoursetype(0);
+		course.setAddress("http://" + ServerInfo.BIZID + ".liveplay.myqcloud.com/live/" + ServerInfo.BIZID + "_"+teacher.getRoomid() + "");
 		servc.save(course);
 		return "save";
 	}
@@ -107,7 +116,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
 		this.getSesion().put("allLiveCoursePage",temp);
 		this.getSesion().put("liveCourseList", listCourse);
-		pages = countAllPage11.getStartPages(temp);	
+		pages = countAllPage11.getStartPages(temp);
 		return "findAll";
 	}
 	//教师查找属于自己的所有直播课程
@@ -223,15 +232,11 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String tempDate = request.getParameter("courseDate").toString();
 		this.getSesion().put("tempCourseDate",tempDate);
-		
-		
 		String[] courseDates = request.getParameter("courseDate").split("/");		
 		String courseDate = courseDates[2] + "-" + courseDates[0] + "-" + courseDates[1];
 		SimpleDateFormat sdf1 =  new SimpleDateFormat("yyyy-MM-dd");
 		Date d = sdf1.parse(courseDate);
 		String realDate = sdf1.format(d);
-		
-		
 		listCourse = dateUtils.formatDateAndTeacher(servc.findPastByDate(realDate));
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
@@ -316,12 +321,59 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.pageNumber = "1";
 		return "findRecentCource";
 	}
-	
-	
-	public String findByCourseId() {
-		
+	//观看视频
+	public String watch() throws Exception {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String tempId = request.getParameter("courseId");
+		course = servc.findByCourseId(tempId);
+		courseVo.setTeacher(course.getTeacher().getName());
+		courseVo.setCourse(course);
+		return "watch";
+	}
+	//直播回调函数
+	public String callback() throws Exception {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream(), "utf-8"));
+		StringBuffer sb = new StringBuffer("");
+		String temp;
+		teacher = (Teacher) this.getSesion().get("Teacher");
+		while ((temp = br.readLine()) != null) {
+		sb.append(temp);
+		}
+		br.close();
+		String params = "[" + sb.toString() + "]";
+       	JSONArray jsonArray = JSONArray.fromObject(params);
+       	JSONObject jsonObject = jsonArray.getJSONObject(0);
+       	String streamId = ServerInfo.STREAM_BASIC + teacher.getRoomid() + "?" + (jsonObject.get("stream_param").toString());
+       	int event_type = Integer.parseInt(jsonObject.get("event_type").toString());
+       	course = servc.findByStreamId(streamId);
+       	if(event_type==100) {
+       		String address = (String) jsonObject.get("video_id");
+       		course.setAddress(address);
+       		course.setCoursetype(0);
+       		servc.save(course);
+       	}else {
+       		;
+       	}		
 		return null;
 	}
+	
+	public String showInfo() throws Exception {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String courseId = request.getParameter("courseId");
+		course = servc.findByCourseId(courseId);
+		String[] infos = course.getStreamid().split("/");
+		
+		courseVo.setTeacher(course.getTeacher().getName());
+		courseVo.setCourse(course);				
+		courseVo.setLiveId(ServerInfo.STREAMID);
+		courseVo.setStreamId(infos[infos.length-1]);
+		
+		return "showInfo";
+	}
+	
+	
+	
 	
 	public Course getCourse() {
 		return course;

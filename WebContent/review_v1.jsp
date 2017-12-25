@@ -141,7 +141,7 @@
         <div class="content-video">
 			<s:iterator value="listCourse" status="ste">
 				<c:if test="${ste.index<6}">
-                   <div><a href="javascript:void(0)" onClick="play(<s:property value='course.address'/>)"><img src="<s:property value='course.face'/>" width="240px" height="152px" alt=""><p><s:property value='course.name'/>  <s:property value='teacher'/></p></a></div>
+                   <div><a href="javascript:void(0)" onClick="watch('<s:property value='course.id'/>')"><img src="<s:property value='course.face'/>" width="240px" height="152px" alt=""><p><s:property value='course.name'/>  <s:property value='teacher'/></p></a></div>
 				</c:if>
 			</s:iterator>
         </div>
@@ -247,6 +247,9 @@
     }
     function personalCenter(){
   	  window.location="login_personalCenter.action";
+    }
+    function watch(arg){
+  	  window.location = "course_watch.action?courseId="+arg;
     }
     </script>
   </body>

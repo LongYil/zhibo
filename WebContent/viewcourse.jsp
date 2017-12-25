@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>添加课程</title>
+    <title>课程信息</title>
 
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
@@ -26,43 +26,35 @@
 
 <body class="gray-bg">
 			<div class="col-sm-6" style="width:100%;">
-                <div class="ibox float-e-margins" style="width:60%;margin:0 auto;"> 
+                <div class="ibox float-e-margins" style="width:60%;height:80%;margin:0 auto;"> 
                     <div class="ibox-title" >
-                        <h5 style="font-size:20px;color:#23b7e5;">填写课程信息</h5>
+                        <h5 style="font-size:20px;color:#23b7e5;">课程信息</h5>
                         <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('course_findByTeacherId.action')" href="javascript:void(0)">返回 </a></div>                        
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
-							<form action="course_save.action" method="post" name="myform()" enctype="multipart/form-data">
+							
+							
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="name" placeholder="课程名称" class="form-control"> 
-                                    <span class="help-block m-b-none"></span>
+                                    <input type="text" style="width:80%;" value="<s:property value="courseVo.course.name"/>" name="name" placeholder="课程名称" class="form-control"> 
                                 </div>
                             </div>
 
+                            
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程科目：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="subject" placeholder="课程科目" class="form-control"> 
+                                    <input type="text" style="width:80%;" value="<s:property value="courseVo.course.subject"/>" name="subject" placeholder="课程科目" class="form-control"> 
                                 </div>
                             </div>
-
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程简介：</label>
                                 <div class="col-sm-8">
-								    <textarea name="summary" class="form-control" rows="3" placeholder="课程简介..."></textarea>
+								    <textarea style="width:80%;" class="form-control" rows="3" placeholder="课程简介..."><s:property value="courseVo.course.summary"/></textarea>
                                 </div>
                             </div>
-
-							<div class="form-group">
-                                <label class="col-sm-3 control-label">开始时间：</label>
-                                <div class="col-sm-8">
-                                   <input readonly name="time" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">课程封面封面：</label>
                                 <div class="col-sm-8">
@@ -70,10 +62,8 @@
 							        	<div class="ycupload-mainbox">
 							        		<div class="ycupload-main1" style="overflow:hidden;padding-left:25px;">
 							        			<span style="float:left;color:#ff5a5a;font-size:24px;line-height:60px;font-weight:bold;margin-right:7px;">
-							        				&middot;
 							        			</span>
 							        			<span style="float:left;color:#333;font-size:16px;line-height:60px;margin-right:28px;">
-							        				上传封面
 							        			</span>
 							        		</div>
 							        		<div class="ycupload-line"></div>
@@ -90,13 +80,8 @@
 												        				</div>
 												        			</div>
 												        		</div>
-												        		<div id="view" style="width:214px;height:160.5px;" title="请上传 428*321 的封面图片"></div>
+												        		<img style="margin-left:-35px;width:214px;height:160.5px;float:left;" src="<s:property value='courseVo.course.face'/>">
 													        	<div style="height:10px;"></div>
-													        	<div class="" style="width:140px;height:32px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;margin-left:37px;position:relative;">
-													        		点击上传封面图
-													        		<input type="file" name="coursefile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
-													        	    <input type="hidden" name="coursePic" id="picFile">
-													        	</div>
 												        	</div>
 											        	</div>
 										        	</div>
@@ -108,12 +93,38 @@
 
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-8">
-                                    <button class="btn btn-sm btn-info" onClick="saveExam()">保 存</button>
+                                                        
+							<div class="form-group">
+                                <label class="col-sm-3 control-label">开始时间：</label>
+                                <div class="col-sm-8">
+                                   <input value="<s:property value="courseVo.course.time"/>" style="width:80%;" class="form-control" >
                                 </div>
                             </div>
-                            </form>
+                            
+                            <div class="form-group" style="margin-top:30px;">
+                                <label class="col-sm-3 control-label">直播码(fms)：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="fms" class="form-control" style="width:80%;display:inline-block;" value="<s:property value='courseVo.liveId'/>">
+									<button onClick="copyToBoard('fms')" type="button" class="btn btn-w-m btn-link" style="width:20%;float:right;display:inline-block;text-align:left;">点击复制</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">串流码：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="streamid" class="form-control" style="width:80%;display:inline-block;" value="<s:property value='courseVo.streamId'/>">
+									<button onClick="copyToBoard('streamid')" type="button" class="btn btn-w-m btn-link" style="width:20%;float:right;display:inline-block;text-align:left;">点击复制</button>
+                                </div>
+                            </div>
+
+
+
+
+
+                            
+                            
+                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,41 +151,19 @@ function saveTeacherInfo(){
 	}
 }
 
-var picFile = $("#picFile");
-var clipArea = new bjj.PhotoClip("#clipArea", {
-	size: [428, 321],// 截取框的宽和高组成的数组。默认值为[260,260]
-	outputSize: [428, 321], // 输出图像的宽和高组成的数组。默认值为[0,0]，表示输出图像原始大小
-	outputType: "jpg", // 指定输出图片的类型，可选 "jpg" 和 "png" 两种种类型，默认为 "jpg"
-	file: "#file", // 上传图片的<input type="file">控件的选择器或者DOM对象
-	view: "#view", // 显示截取后图像的容器的选择器或者DOM对象
-	ok: "#clipBtn", // 确认截图按钮的选择器或者DOM对象
-	loadStart: function() {
-		// 开始加载的回调函数。this指向 fileReader 对象，并将正在加载的 file 对象作为参数传入
-		$('.cover-wrap').fadeIn();
-		console.log("照片读取中");
-	},
-	loadComplete: function() {
-		 // 加载完成的回调函数。this指向图片对象，并将图片地址作为参数传入
-		console.log("照片读取完成");
-	},
-	//loadError: function(event) {}, // 加载失败的回调函数。this指向 fileReader 对象，并将错误事件的 event 对象作为参数传入
-	clipFinish: function(dataURL) {
-		 // 裁剪完成的回调函数。this指向图片对象，会将裁剪出的图像数据DataURL作为参数传入
-		$('.cover-wrap').fadeOut();
-		$('#view').css('background-size','100% 100%');
-		console.log(dataURL);
-		picFile.val(dataURL);
+function copyToBoard(arg){
+	   var e=document.getElementById(arg);//对象是contents   
+	   e.select(); //选择对象   
+	   tag=document.execCommand("Copy"); //执行浏览器复制命令  
+	   if(tag){  
+	   parent.layer.msg('文本复制成功', {icon: 1});
+	   }   
 	}
- });
  //阻止表单提交
  var submitBtn = document.getElementById("clipBtn");
  submitBtn.onclick = function (event) {
   return false;
  };
- //提交表单
- function saveExam(){
-	 myform.submit();
- }
 
 </script>
 </html>

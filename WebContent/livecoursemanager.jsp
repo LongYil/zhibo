@@ -165,6 +165,9 @@ function findCourse(){
 	  window.location="course_teacherFindByInfo.action?courseName="+value; 
 	});
 }
+function showinfo(arg){
+	window.location="course_showInfo.action?courseId="+arg;
+}
 </script>
 </html>
     

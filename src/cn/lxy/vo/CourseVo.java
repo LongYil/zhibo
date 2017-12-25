@@ -17,6 +17,9 @@ public class CourseVo {
 	private String time;
 	private String teacher;
 	
+	private String liveId;//Ö±²¥Âë
+	private String streamId;//´®Á÷Âë
+	
 	public Course getCourse() {
 		return course;
 	}
@@ -34,6 +37,18 @@ public class CourseVo {
 	}
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
+	}
+	public String getLiveId() {
+		return liveId;
+	}
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+	public String getStreamId() {
+		return streamId;
+	}
+	public void setStreamId(String streamId) {
+		this.streamId = streamId;
 	}
 	
 }
