@@ -2,9 +2,7 @@ package cn.lxy.action;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,8 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.lxy.po.Course;
+import cn.lxy.po.Discuss;
+import cn.lxy.po.Note;
+import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
 import cn.lxy.service.CourseServc;
+import cn.lxy.service.DiscussServc;
+import cn.lxy.service.NoteServc;
+import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
 import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.CountAllPage6;
@@ -46,6 +50,10 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	@Autowired
 	private CourseVo courseVo;
 	@Autowired
+	private Student student;
+	@Autowired
+	private StudentServc studentServc;
+	@Autowired
 	private Teacher teacher;
 	@Autowired
 	private TeacherServc teacherServc;
@@ -59,6 +67,10 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	private CountAllPage11 countAllPage11;
 	@Autowired
 	private CountAllPage6 countAllPage6;
+	@Autowired
+	private NoteServc noteServc;
+	@Autowired
+	private DiscussServc discussServc;
 	
     private List<File> coursefile ;  
     private List<String> coursefileFileName ;  
@@ -76,12 +88,17 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	private List<Course> tempCourse = new ArrayList<Course>();
 	private List<CourseVo> listCourse = new ArrayList<CourseVo>();
 	private List<CourseVo> tempListCourse = new ArrayList<CourseVo>();
+	private List<Note> listNote = new ArrayList<Note>();
+	private List<Discuss> listDiscuss = new ArrayList<Discuss>();
+	
 	
 	private String courseName;
 	private String queryInfo;
 
 	private String resultinfo;
 
+	private int noteSize;
+	private int discussSize;
 	@Override
 	public Course getModel() {
 		return course;
@@ -323,11 +340,19 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	}
 	//观看视频
 	public String watch() throws Exception {
+		listNote.clear();
+		listDiscuss.clear();
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String tempId = request.getParameter("courseId");
+		student = (Student) this.getSesion().get("Student");
 		course = servc.findByCourseId(tempId);
 		courseVo.setTeacher(course.getTeacher().getName());
 		courseVo.setCourse(course);
+		listNote = noteServc.findAll(String.valueOf(student.getId()),tempId);
+		listDiscuss = discussServc.findByCourseId(tempId);
+		this.getSesion().put("liveCourse",course);
+		this.noteSize = listNote.size();
+		this.discussSize = listDiscuss.size();
 		return "watch";
 	}
 	//直播回调函数
@@ -357,18 +382,16 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
        	}		
 		return null;
 	}
-	
+	//查看课程信息
 	public String showInfo() throws Exception {
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String courseId = request.getParameter("courseId");
 		course = servc.findByCourseId(courseId);
 		String[] infos = course.getStreamid().split("/");
-		
 		courseVo.setTeacher(course.getTeacher().getName());
 		courseVo.setCourse(course);				
 		courseVo.setLiveId(ServerInfo.STREAMID);
-		courseVo.setStreamId(infos[infos.length-1]);
-		
+		courseVo.setStreamId(infos[infos.length-1]);	
 		return "showInfo";
 	}
 	
@@ -550,6 +573,39 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	public void setQueryInfo(String queryInfo) {
 		this.queryInfo = queryInfo;
 	}
+
+	public List<Note> getListNote() {
+		return listNote;
+	}
+
+	public void setListNote(List<Note> listNote) {
+		this.listNote = listNote;
+	}
+
+	public List<Discuss> getListDiscuss() {
+		return listDiscuss;
+	}
+
+	public void setListDiscuss(List<Discuss> listDiscuss) {
+		this.listDiscuss = listDiscuss;
+	}
+
+	public int getNoteSize() {
+		return noteSize;
+	}
+
+	public void setNoteSize(int noteSize) {
+		this.noteSize = noteSize;
+	}
+
+	public int getDiscussSize() {
+		return discussSize;
+	}
+
+	public void setDiscussSize(int discussSize) {
+		this.discussSize = discussSize;
+	}
+
 
 	
 }

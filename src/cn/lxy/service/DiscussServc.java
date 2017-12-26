@@ -20,14 +20,12 @@ public class DiscussServc extends CommonSevc<Discuss, DiscussDaoImpl> {
 
 	@Override
 	public Discuss find(String arg) throws Exception {
-		//
 		return null;
 	}
 
 	@Override
 	public List<Discuss> findAll(String arg) {
-		//
-		return null;
+		return (List<Discuss>) daoImpl.findByCourseId(arg);
 	}
 
 	@Override

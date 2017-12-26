@@ -1,5 +1,7 @@
 package cn.lxy.action;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.lxy.po.Course;
 import cn.lxy.po.Note;
 import cn.lxy.po.Student;
 import cn.lxy.service.NoteServc;
@@ -31,6 +34,9 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 	private Student student;
 	@Autowired
 	private GetDateAndTime getDateAndTime;
+	@Autowired
+	private Course course;
+	
 	
 	private String resultinfo;
 	
@@ -42,21 +48,20 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 		return note;
 	}
 	
-	
 	//±£´æ±Ê¼Ç
-	public String save() {
+	public String save() throws UnsupportedEncodingException {
 		this.resultinfo = "0";
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String noteContent = request.getParameter("info");
-		
+		noteContent = URLDecoder.decode(noteContent,"UTF-8");
 		student = (Student) this.getSesion().get("Student");
-		
-		note.setCourse(null);
-		
+		course = (Course) this.getSesion().get("liveCourse");
+		note.setCourse(course);
 		note.setStudent(student);
+		note.setContent(noteContent);
 		note.setTime(getDateAndTime.getNowTime());
 		servc.save(note);
-		
+
 		this.resultinfo = "1";
 		return null;
 	}

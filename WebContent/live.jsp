@@ -25,7 +25,7 @@
   
   <body class="live">
     <header class="live">
-      <span><a href="jiaoxuehuigu/review.html"><&nbsp;&nbsp;<s:property value='courseVo.course.name'/>&nbsp;&nbsp;<s:property value='courseVo.teacher.name'/></a></span>
+      <span><a href="index.jsp"><&nbsp;&nbsp;<s:property value='courseVo.course.name'/>&nbsp;&nbsp;<s:property value='courseVo.teacher.name'/></a></span>
       <span class="person">
         <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
         <div class="btn-group">
@@ -81,16 +81,34 @@
       </div>
 
       <div class="live-nts" id="d2" style="display:none">
-        <div class="live-nts-leftside">
-          <div class="note">
-            <h4>课程笔记</h4>
-            <img src="images/yonghu_big_biji.png" alt="" class="bigimg">
-            <p>还没有任何笔记哦</p>
-          </div>
+         <div class="live-nts-leftside">
+          
+          <c:if test="${noteSize>0}">
+	          <div class="note_new">
+	            <h4>课程笔记</h4>
+	            <div class="clearfloat"></div>
+					<s:iterator value="listNote" status="ste">
+	                   <li>
+	                       <s:property value="time"/>：&nbsp;<s:property value="content"/>.
+	                   </li>
+					</s:iterator>
+	          </div>
+          </c:if>
+          
+          <c:if test="${noteSize<1}">
+	          <div class="note_new">
+	            <h4>课程笔记</h4>
+	            <img src="images/yonghu_big_biji.png" alt="" class="bigimg">
+	            <p class="emptyNote">还没有任何笔记哦</p >
+	          </div>
+          </c:if>
+
+
+
           <div>
-            <textarea maxlength="2000" placeholder="输入笔记"></textarea>
+            <textarea maxlength="2000" placeholder="输入笔记" id="notearea"></textarea>
           </div>
-          <button>确定</button>
+          <button onClick="saveNote()">确定</button>
         </div>
 
         <div id="box2">
@@ -110,9 +128,11 @@
         </div>
       </div>
 
+
       <div class="live-dic" id="d3" style="display:none">
         <div class="live-dic-leftside">
           <div class="discuss">
+            
             <div class="discuss-left">
               <img src="images/touxiang1.png" alt="" class="img-circle">
               <a href="">李丽丽</a>
@@ -125,7 +145,7 @@
               <img src="images/touxiang1.png" alt="" class="img-circle">
               <a href="">李四</a>
               <div>
-                <a class="discuss-left-a">这堂课学到很多东西这堂课学到很多东西这堂课学到很多东西这堂课学到很多东西这堂课学到很多东西这堂课学到很多东西这堂课学到很多东西</a>
+                <a class="discuss-left-a">这堂课学到</a>
               </div>
             </div>
 
@@ -171,6 +191,7 @@
     <script src="js/Change.js" type="text/javascript"></script>
     <script src="js/open.js" type="text/javascript"></script>
     <script src="js/chouti.js" type="text/javascript"></script>
+    <script src="js/ajaxcommunicate.js"></script>
     <script type="text/javascript">
     function logout(){
   	  window.location="login_logout.action";
@@ -187,6 +208,24 @@
    	 "width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
    	 "height" : '100%'//视频的显示高度，请尽量使用视频分辨率高度
    	 });
+    
+    function saveNote(){
+    	$(".bigimg").remove();
+    	$(".emptyNote").remove();
+    	var info = $("#notearea").val();
+    	if(info==""){
+    		;
+    	}else{
+        	$("#notearea").val("");
+        	ajaxSubmit("note_save.action",info);
+        	var myDate = new Date();
+        	var h = myDate.getHours();       //获取当前小时数(0-23)
+        	var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+        	var s = myDate.getSeconds();
+        	var time = h + ":" + m + ":" + s + "：";
+        	$(".note_new").append("<li id='hz'>" + time + "" + info + "</li>");    		
+    	}
+    }
     </script>
   </body>
 </html>

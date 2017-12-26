@@ -887,23 +887,6 @@ div.page{
     overflow: auto;
 }
 
-/*滚动条样式*/
-.live-nts .note::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 4px;
-}
-.live-nts .note::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 5px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: rgba(0,0,0,0.2);
-}
-.live-nts .note::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    border-radius: 0;
-    background: rgba(0,0,0,0.1);
-}
-
-
 .live-nts .bigimg{
 	padding: 70% 25% 8% 0;
 }
@@ -942,6 +925,43 @@ div.page{
 	width: 360px;
 	position: absolute;
 }
+
+.live-nts .note_new{
+    height: 700px;
+    border-bottom: 1px #575757 solid;
+    overflow: auto;
+}
+
+.live-nts .note_new h4{
+	width: 100%;
+    text-align: left;
+	padding: 14px;
+	border-bottom: 1px #575757 solid;
+	font-size: 14px;
+}
+
+.live-nts .note_new li{
+    font-size: 12px;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+/*滚动条样式*/
+.live-nts .note_new::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.live-nts .note_new::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.live-nts .note_new::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+
 
 /*教学直播-讨论*/
 .live-dic{

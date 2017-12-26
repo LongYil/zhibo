@@ -28,7 +28,7 @@
                 <div class="ibox float-e-margins" style="width:60%;margin:0 auto;"> 
                     <div class="ibox-title" >
                         <h5 style="font-size:20px;color:#23b7e5;">填写试题信息</h5>
-                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('exam_findAll.action')" href="javascript:void(0)">返回 </a></div>
+                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('exam_findAll.action')" href="javascript:void(0)" style="color:#23B7E5">返回 </a></div>
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">

@@ -21,7 +21,6 @@
 	<script src="plugins/cover_js/hammer.js" type="text/javascript" charset="utf-8"></script>
 	<script src="plugins/cover_js/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
 	<script src="plugins/cover_js/jquery.photoClip.min.js" type="text/javascript" charset="utf-8"></script>
-	
 </head>
 
 <body class="gray-bg">
@@ -29,12 +28,10 @@
                 <div class="ibox float-e-margins" style="width:60%;height:80%;margin:0 auto;"> 
                     <div class="ibox-title" >
                         <h5 style="font-size:20px;color:#23b7e5;">课程信息</h5>
-                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" onClick="Go('course_findByTeacherId.action')" href="javascript:void(0)">返回 </a></div>                        
+                        <div class="fa-hover col-md-3 col-sm-4" style="font-size:20px;width:120px;float:right;margin-right:0px;"><a class="back" style="color:#23B7E5" onClick="Go('course_findByTeacherId.action')" style="color:#23B7E5" href="javascript:void(0)">返回 </a></div>                        
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
-							
-							
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
