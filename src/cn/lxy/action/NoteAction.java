@@ -37,20 +37,17 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 	@Autowired
 	private Course course;
 	
-	
 	private String resultinfo;
 	
 	private List<Note> listNote = new ArrayList<Note>();
 	
 	@Override
 	public Note getModel() {
-		//
 		return note;
 	}
 	
 	//保存笔记
 	public String save() throws UnsupportedEncodingException {
-		this.resultinfo = "0";
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String noteContent = request.getParameter("info");
 		noteContent = URLDecoder.decode(noteContent,"UTF-8");
@@ -61,8 +58,6 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 		note.setContent(noteContent);
 		note.setTime(getDateAndTime.getNowTime());
 		servc.save(note);
-
-		this.resultinfo = "1";
 		return null;
 	}
 	//学生删除笔记
@@ -72,7 +67,6 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 		String noteId = request.getParameter("info");
 		note = servc.findById(noteId);
 		servc.delete(note);
-		
 		this.resultinfo = "1";
 		return null;
 	}

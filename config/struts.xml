@@ -8,6 +8,7 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="false" />
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.action.excludePattern" value="/ws/.*,ws://.*"></constant>
     
 	<package name="first" namespace="/" extends="struts-default">
 	

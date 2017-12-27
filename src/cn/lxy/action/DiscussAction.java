@@ -1,9 +1,12 @@
 package cn.lxy.action;
 
+import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import cn.lxy.po.Discuss;
 import cn.lxy.po.Student;
 import cn.lxy.service.CourseServc;
 import cn.lxy.service.DiscussServc;
+import cn.lxy.utils.GetDateAndTime;
 
 /**
  * <p>Title:DiscussAction</p>
@@ -34,7 +38,8 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 	private Course course;
 	@Autowired
 	private CourseServc courseServc;
-	
+	@Autowired
+	private GetDateAndTime getDateAndTime;
 	
 	private List<Discuss> listDiscuss = new ArrayList<Discuss>();
 	
@@ -46,14 +51,14 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 	//±£¥ÊÃ÷¬€
 	public String save() throws Exception {
 		HttpServletRequest request =  ServletActionContext.getRequest();
-		String discussContent = request.getParameter("info");		
-		String course_id = null;
-		course = courseServc.findByCourseId(course_id);
+		String discussContent = request.getParameter("info");
+		discussContent = URLDecoder.decode(discussContent,"UTF-8");
+		course = (Course) this.getSesion().get("liveCourse");
 		student = (Student) this.getSesion().get("Student");
 		discuss.setContent(discussContent);
 		discuss.setStudent(student);
 		discuss.setCourse(course);
-		
+		discuss.setTime(getDateAndTime.getNowTime());
 		servc.save(discuss);
 		return null;
 	}
@@ -62,9 +67,9 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 		String id = null;
 		listDiscuss.clear();
 		listDiscuss = servc.findByCourseId(id);
+		
 		return null;
 	}
-	
 	
 	
 	

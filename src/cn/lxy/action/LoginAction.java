@@ -41,6 +41,7 @@ public class LoginAction extends BasicAction {
 			student = studentServc.login(username, password);
 			if(student.getTel()!=null&&student.getTel()!="") {
 				this.getSesion().put("Student", student);
+				this.getSesion().put("StudentId", student.getId());
 				this.getSesion().put("studentUserStatus",1);
 				if(student.getBirth()!=null) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

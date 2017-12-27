@@ -47,7 +47,6 @@
 		
 		<!-- 第二步 开始事务注解 -->
 		<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
-		
 
 		<bean id="loginAction" class="cn.lxy.action.LoginAction" scope="prototype"/>
 		
@@ -71,6 +70,7 @@
 		<bean id="exam" class="cn.lxy.po.Exam" scope="prototype"/>
 		
 		<bean id="addPoAction" class="cn.lxy.utils.AddPoAction" scope="prototype"/>
+		<bean id="chatAnnotation" class="cn.lxy.action.ChatAnnotation" scope="prototype"/>
 
 
 <!-- 		创建hibernateTemplate对象   注入sessionFactory -->
@@ -85,4 +85,3 @@
 <!-- 		只会扫描属性上面的注解 -->
 		<context:annotation-config></context:annotation-config>		
 </beans>
-

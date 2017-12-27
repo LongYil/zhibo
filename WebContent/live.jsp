@@ -46,6 +46,8 @@
     <div class="row">
       <div class="live-video">
         <input type="hidden" id="liveaddress" value="<s:property value='course.address'/>" >
+        <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
+        <input type="hidden" id="studentname" value="${Student.name}"> 
         <div class="video" id="video" style="padding-top:20px;">
         </div>
         <div class="jindutiao">
@@ -90,7 +92,7 @@
 					<s:iterator value="listNote" status="ste">
 	                   <li>
 	                       <s:property value="time"/>：&nbsp;<s:property value="content"/>.
-	                   </li>
+	                   </li> 
 					</s:iterator>
 	          </div>
           </c:if>
@@ -98,7 +100,7 @@
           <c:if test="${noteSize<1}">
 	          <div class="note_new">
 	            <h4>课程笔记</h4>
-	            <img src="images/yonghu_big_biji.png" alt="" class="bigimg">
+	            <img src="images/yonghu_big_biji.png" class="bigimg">
 	            <p class="emptyNote">还没有任何笔记哦</p >
 	          </div>
           </c:if>
@@ -131,38 +133,35 @@
 
       <div class="live-dic" id="d3" style="display:none">
         <div class="live-dic-leftside">
-          <div class="discuss">
+          <div class="discuss" id="discussArea">
             
-            <div class="discuss-left">
-              <img src="images/touxiang1.png" alt="" class="img-circle">
-              <a href="">李丽丽</a>
-              <div>
-                <a class="discuss-left-a">这堂课学到很多东西</a>
-              </div>
-            </div>
-            
-            <div class="discuss-left">
-              <img src="images/touxiang1.png" alt="" class="img-circle">
-              <a href="">李四</a>
-              <div>
-                <a class="discuss-left-a">这堂课学到</a>
-              </div>
-            </div>
+            <s:iterator value="listDiscuss" status="ste">
+	            <c:if test="${student.id==StudentId}">
+		            <div class="discuss-right">
+		              <a href="javascript:void(0)"><s:property value="student.name"/>&nbsp;&nbsp;</a>
+		              <img src="<s:property value="student.head"/>" class="img-circle" width="28px" height="28px">
+		              <div>
+		                <a class="discuss-left-a"><s:property value="time"/>：<s:property value="content"/></a>
+		              </div>
+		            </div>
+	            </c:if>
+	            <c:if test="${student.id!=StudentId}">
+		            <div class="discuss-left">
+		              <img src="<s:property value="student.head"/>" class="img-circle" width="28px" height="28px">
+		              <a href="javascript:void(0)"><s:property value="student.name"/>&nbsp;&nbsp;</a>
+		              <div>
+		                <a class="discuss-left-a"><s:property value="time"/>：<s:property value="content"/></a>
+		              </div>
+		            </div>
+	            </c:if>
+            </s:iterator>
 
-            <div class="discuss-right">
-              <a href="">张三</a>
-              <img src="images/touxiang1.png" alt="" class="img-circle">
-              <div>
-                <a class="discuss-right-a">这堂课学到很多东西</a>
-              </div>
-            </div>
-            
           </div>
           <img src="images/yonghu_biaoqing.png" alt="" class="biaoqing">
           <div>
-            <textarea maxlength="2000" placeholder="立即参与讨论"></textarea>
+            <textarea maxlength="2000" placeholder="立即参与讨论" id="discussContent"></textarea>
           </div>
-          <button>发送</button>
+          <button onClick="saveDiscuss()">发送</button>
         </div>
 
         <div id="box3">
@@ -226,6 +225,28 @@
         	$(".note_new").append("<li id='hz'>" + time + "" + info + "</li>");    		
     	}
     }
+    function saveDiscuss(){
+    	var info = $("#discussContent").val();
+    	if(info==""){
+    		;
+    	}else{
+        	$("#discussContent").val("");
+        	var face = $("#faceaddress").val();
+        	ajaxSubmit("discuss_save.action",info);
+        	var myDate = new Date();
+        	var username = $("#studentname").val();
+        	var h = myDate.getHours();       //获取当前小时数(0-23)
+        	var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+        	var s = myDate.getSeconds();
+        	var time = h + ":" + m + ":" + s + "：";
+        	var div = document.getElementById("discussArea");
+        	$(".discuss").append("<div class='discuss-right'><a href='javascript:void(0)''>"+username+" </a><img width='28px' height='28px' src='"+face+"' class='img-circle'><div><a class='discuss-right-a'>"+time+":"+info+"</a></div></div>");
+        	div.scrollTop = div.scrollHeight;
+    	}
+    }
+    
+    
+    
     </script>
   </body>
 </html>
