@@ -21,6 +21,12 @@
 	<script src="plugins/cover_js/hammer.js" type="text/javascript" charset="utf-8"></script>
 	<script src="plugins/cover_js/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
 	<script src="plugins/cover_js/jquery.photoClip.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+    body{
+    font-size: 14px;
+    text-align: center;
+    }
+    </style>	
 </head>
 
 <body class="gray-bg">

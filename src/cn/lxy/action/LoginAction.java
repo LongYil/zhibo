@@ -35,8 +35,6 @@ public class LoginAction extends BasicAction {
 
 	//用户登录
 	public String login() throws Exception {
-		HttpServletRequest request = ServletActionContext.getRequest(); 
-		String url =request.getRequestURI().toString();
 		if(usertype==0) {//用户类型：学生
 			student = studentServc.login(username, password);
 			if(student.getTel()!=null&&student.getTel()!="") {
@@ -48,10 +46,10 @@ public class LoginAction extends BasicAction {
 					String[] tempBirth = sdf.format(student.getBirth()).split("-");					
 					String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
 					this.getSesion().put("birth", birth);
-			        this.getSesion().put("tab1", "");
 			        this.getSesion().put("tempPicPath",student.getHead());
-			        this.getSesion().put("tab3", "display:none");
 				}
+				this.getSesion().put("tab1", "");
+				this.getSesion().put("tab3", "display:none");
 				return "student";
 			}else {
 				return "";
@@ -63,7 +61,6 @@ public class LoginAction extends BasicAction {
 		}else {
 			return "";
 		}
-
 	}
 	//学生用户注销用户
 	public String logout() {

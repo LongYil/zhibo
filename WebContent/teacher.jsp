@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="pastcoursemanager.jsp">
+                        <a class="J_menuItem" href="course_teacherFindPastCource.action">
                             <i class="fa fa-file-movie-o"></i>
                             <span class="nav-label">往期课程</span>
                         </a>

@@ -49,7 +49,15 @@ public class CourseDaoImpl extends CommonDaoImpl<Course> implements CourseDao {
 	public List<Course> findPastByDate(String arg) {
 		return (List<Course>) ht.find("from Course where time like '%"+arg+"%' and coursetype = 1 order by time desc");
 	}
-	
-	
+
+	@Override
+	public List<Course> findPastCourse(String arg) {
+		return (List<Course>) ht.find("from Course where coursetype = 1 and teacher_id = " + arg + "order by time desc");
+	}
+
+	@Override
+	public List<Course> findPastCourseByInfo(String arg1, String arg2) {
+		return (List<Course>) ht.find("from Course where name like '%" + arg1 + "%' or subject like '%" + arg1 + "%' and teacher_id = " + arg2 + " and coursetype = 1 ");
+	}
 	
 }

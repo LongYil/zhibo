@@ -60,6 +60,7 @@
 				<result name="findAll">/studentmanager.jsp</result>
 				<result name="findByName">/studentquery.jsp</result>
 				<result name="add" type="redirect">/index.jsp</result>
+				<result name="student" type="redirect">/index.jsp</result>
 				<result name="updateBasicInfo" type="redirect">/personal_center.jsp</result>
 				<result name="previewStudentIcon" type="redirect">/personal_center.jsp</result>
 				<result name="saveStudentIcon" type="redirect">/personal_center.jsp</result>
@@ -113,11 +114,10 @@
 				<result name="findPastCource">/review_v1.jsp</result>
 				<result name="watch">/live.jsp</result>
 				<result name="showInfo">/viewcourse.jsp</result>
+				<result name="teacherFindPastCource">/pastcoursemanager.jsp</result>
 				
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
-		   
-		   
 		   
 	</package>
 </struts>

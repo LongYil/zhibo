@@ -54,7 +54,6 @@
 	          </span>
 	        </div>
         </c:if>
-
       </div>
     </header>
 
@@ -166,7 +165,7 @@
         <div class="content-pcenter" id="d3" style="${tab3}">
           <div id="touxiang">
           <form action="student_previewStudentIcon.action" method="post" name="myform" enctype="multipart/form-data">  
-            <img src="${tempPicPath}" alt="" width="240px" height="240px">
+            <img src="${tempPicPath}" width="240px" height="240px">
             <input type="file" onchange="preview()" name="picfile" accept="image/gif, image/jpeg, image/png" placeholder="请上传图片(仅支持gif,jpeg,png图片格式)" />
           </form>
           </div>

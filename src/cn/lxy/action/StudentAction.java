@@ -18,6 +18,7 @@ import cn.lxy.po.Student;
 import cn.lxy.service.StudentServc;
 import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.FileUtils;
+import cn.lxy.utils.ServerInfo;
 import cn.lxy.utils.VerificationCodeUtils;
 
 /**
@@ -61,9 +62,23 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	//学生用户注册新用户
 	public String add() {
 		student.setUserstatus(1);
+		student.setHead("http://"+ServerInfo.SERVER_IP+":8080/CollegeLive/Image/temphead.png");
 		servc.save(student);
-		return "add";
+		this.getSesion().put("Student", student);
+		this.getSesion().put("StudentId", student.getId());
+		this.getSesion().put("studentUserStatus",1);
+		if(student.getBirth()!=null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String[] tempBirth = sdf.format(student.getBirth()).split("-");					
+			String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
+			this.getSesion().put("birth", birth);
+		}
+		this.getSesion().put("tempPicPath",student.getHead());
+        this.getSesion().put("tab1", "");
+        this.getSesion().put("tab3", "display:none");
+		return "student";
 	}
+	
 	public String updatePassword() {
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String[] passwordInfo = request.getParameter("info").split("-");		
