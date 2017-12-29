@@ -40,14 +40,13 @@
     </div>
 
     <script type="text/javascript">
-        var Console = {};  
-
-        Console.log = (function(message) {  
+        var Console = {};
+        Console.callBack = (function(message) {  
             var console = document.getElementById('console');  
             var p = document.createElement('p');  
             p.style.wordWrap = 'break-word';  
             p.innerHTML = message;  
-            console.appendChild(p);  
+            console.appendChild(p);
             while (console.childNodes.length > 25) {  
                 console.removeChild(console.firstChild);  
             }  
@@ -79,26 +78,24 @@
 
             Chat.socket.onclose = function() {
                 document.getElementById('chat').onkeydown = null;
-                Console.log('Info: WebSocket closed.');
             };
 
             Chat.socket.onmessage = function(message) {
-                Console.log(message.data);
+                Console.callBack(message.data);
             };
         });
 
         Chat.initialize = function() {
-            Chat.connect('ws://localhost:8080/CollegeLive/chat/123456789');
+            Chat.connect('ws://localhost:8080/CollegeLive/discuss/123456789');
         };
 
         Chat.sendMessage = (function() {
             var message = document.getElementById('chat').value;
             if (message != '') {
                 Chat.socket.send(message);
-                document.getElementById('chat').value = '';
+//发送消息
             }
         });
-
         Chat.initialize();
     </script>
 </body>

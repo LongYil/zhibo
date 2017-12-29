@@ -48,6 +48,9 @@
         <input type="hidden" id="liveaddress" value="<s:property value='course.address'/>" >
         <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
         <input type="hidden" id="studentname" value="${Student.name}"> 
+        <input type="hidden" id="studenthead" value="${Student.head}"> 
+        <input type="hidden" id="studentid" value="${Student.id}"> 
+        <input type="hidden" id="courseid" value="${courseVo.course.id}"> 
         <div class="video" id="video" style="padding-top:20px;">
         </div>
         <div class="jindutiao">
@@ -232,7 +235,6 @@
     	}else{
         	$("#discussContent").val("");
         	var face = $("#faceaddress").val();
-        	ajaxSubmit("discuss_save.action",info);
         	var myDate = new Date();
         	var username = $("#studentname").val();
         	var h = myDate.getHours();       //获取当前小时数(0-23)
@@ -241,12 +243,64 @@
         	var time = h + ":" + m + ":" + s + "：";
         	var div = document.getElementById("discussArea");
         	$(".discuss").append("<div class='discuss-right'><a href='javascript:void(0)''>"+username+" </a><img width='28px' height='28px' src='"+face+"' class='img-circle'><div><a class='discuss-right-a'>"+time+":"+info+"</a></div></div>");
+        	info = $("#courseid").val() + "-" + $("#studentid").val() + "-" + info + "-" + $("#studentname").val() + "-" + $("#studenthead").val();
+        	Chat.sendMessage(info);
         	div.scrollTop = div.scrollHeight;
     	}
     }
-    
-    
-    
+    var Console = {};
+    Console.callBack = (function(message) {
+    	var results = message.split("-");
+    	var studentid = results[4];
+    	var course = results[5];
+    	var courseid = $("#courseid").val();
+    	var userid = $("#studentid").val();
+    	if(userid != studentid && course == courseid){
+    		var div = document.getElementById("discussArea");
+        	$(".discuss").append("<div class='discuss-left'><img width='28px' height='28px' src='" + results[1] + "' class='img-circle'><a href='javascript:void(0)''>  "+ results[0] + " </a><div><a class='discuss-left-a'>" + results[2] + ":" + results[3] + "</a></div></div>");
+        	div.scrollTop = div.scrollHeight;
+    	}else{
+  		    ;
+    	}
+    });
+    var Chat = {};
+    Chat.socket = null;
+    Chat.connect = (function(host) {
+        if ('WebSocket' in window) {
+            Chat.socket = new WebSocket(host);
+        } else if ('MozWebSocket' in window) {
+            Chat.socket = new MozWebSocket(host);
+        } else {
+            return;
+        }
+
+        Chat.socket.onopen = function() {
+            document.getElementById('chat').onkeydown = function(event) {
+                if (event.keyCode == 13) {
+                    Chat.sendMessage();
+                }
+            };
+        };
+        
+        Chat.socket.onclose = function() {
+            document.getElementById('chat').onkeydown = null;
+        };
+
+        Chat.socket.onmessage = function(message) {
+            Console.callBack(message.data);
+        };
+    });
+
+    Chat.initialize = function(arg) {
+        Chat.connect('ws://localhost:8080/CollegeLive/discuss/'+arg);
+    };
+
+    Chat.sendMessage = (function(arg) {
+        if (arg != '') {
+            Chat.socket.send(arg);
+        }
+    });
+    Chat.initialize($("#studentid").val());
     </script>
   </body>
 </html>

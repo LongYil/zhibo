@@ -67,7 +67,6 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 		String id = null;
 		listDiscuss.clear();
 		listDiscuss = servc.findByCourseId(id);
-		
 		return null;
 	}
 	
