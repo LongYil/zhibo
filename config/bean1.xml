@@ -79,6 +79,8 @@
 				<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
 
+
+
 <!-- 	开启注解扫描 -->
 <!-- 		1 到包里面扫描类、方法、属性上面是否有注解 -->
 		<context:component-scan base-package="cn.lxy"></context:component-scan>

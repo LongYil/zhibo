@@ -34,12 +34,12 @@
          <button class="btn btn-info btn-search"><img src="images/sousuo.png" alt=""></button>
         </div>  
 
-        <c:if test="${studentUserStatus==1}">
+        <c:if test="${userStaticStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
 	          <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
-	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
+	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${userName}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;"/>
 	                </button>
 	                <ul class="dropdown-menu" role="menu">

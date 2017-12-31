@@ -74,7 +74,7 @@
         <a id="turn2">注册</a>
       </div>
 
-        <a href="javascript:void(0)" id="closebt1" style="float:right; font-size:30px;margin-top: -55px;margin-right:0;padding:0;color: #dbdbdb;">&times;</a>
+      <a href="javascript:void(0)" id="closebt1" style="float:right; font-size:30px;margin-top: -55px;margin-right:0;padding:0;color: #dbdbdb;">&times;</a>
       <div class="content">
         <p class="loginInfo">手机号登录</p>
         <form action="login_login.action" name="myRegistForm" method="post">
@@ -255,6 +255,14 @@
     function watch(arg){
   	  window.location = "course_watch2.action?courseId="+arg;
     }
+    function openlogin(){
+		var fade1=document.getElementById('fade1');
+		var fade2=document.getElementById('fade2');
+		var light1=document.getElementById('light1'); 
+		light1.style.display='block';
+		fade1.style.display='block';
+		fade2.style.display='none';
+    }
     
     function submit(){
   	  var username = $("#username").val().toString();
@@ -263,7 +271,7 @@
   	  var tempinfo = (usertype+"-"+username+"-"+password).toString();
   	  var resultinfo = ajaxSubmit("login_preLogin.action",tempinfo);
   	  if(resultinfo == 1){
-  		myRegistForm.submit();  
+  		 myRegistForm.submit();  
   	  }else{
   		  $(".loginInfo").html("用户名和密码不匹配").css("color","#e9686b");
   		  $("#username").val("");
@@ -274,5 +282,10 @@
   	  }
     }
     </script>
+      <c:if test="${loginstatus == 0}">
+	  <script type="text/javascript">
+          openlogin();
+	  </script>
+      </c:if>
   </body>
 </html>

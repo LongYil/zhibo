@@ -29,7 +29,7 @@
       <span class="person">
         <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
         <div class="btn-group">
-            <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="person-btn">${Student.name}
+            <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="person-btn">${userName}
               <img src="images/xialakuang.png" alt="">
             </button>
             <ul class="dropdown-menu" role="menu">
@@ -47,7 +47,7 @@
       <div class="live-video">
         <input type="hidden" id="liveaddress" value="<s:property value='course.address'/>" >
         <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
-        <input type="hidden" id="studentname" value="${Student.name}"> 
+        <input type="hidden" id="studentname" value="${userName}"> 
         <input type="hidden" id="studenthead" value="${Student.head}"> 
         <input type="hidden" id="studentid" value="${Student.id}"> 
         <input type="hidden" id="courseid" value="${courseVo.course.id}"> 

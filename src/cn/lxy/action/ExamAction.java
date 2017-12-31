@@ -91,6 +91,20 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		pages = countAllPage6.getStartPages(temp);
 		return "studentFindAll";
 	}
+	//学生用户查找所有试题
+	public String studentFindAllTemp() {
+		listExamVo.clear();
+		pages.clear();
+		listExamVo = servc.studentFindAll();
+		int temp = countAllPage6.getAllPage(listExamVo.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.pageNumber="1";
+		this.getSesion().put("studentAllExamPage",temp);
+		this.getSesion().put("studentExamList", listExamVo);
+		pages = countAllPage6.getStartPages(temp);
+		return "studentFindAllTemp";
+	}
 	//前台用户根据试题信息查找试题
 	public String studentFindByInfo() {
 		pages.clear();

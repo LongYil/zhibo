@@ -224,20 +224,59 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.pageNumber = "1";
 		return "findRecentCource";
 	}
-	//教学回顾 前台
-	public String findPastCource() throws ParseException {
-		teacher = (Teacher) this.getSesion().get("Teacher");
+	//直播主页2
+	public String findRecentCourceTemp() throws ParseException {
 		listCourse.clear();
 		pages.clear();
-		listCourse = dateUtils.formatDateTime(servc.findByTeacherId(String.valueOf(teacher.getId())));
-		int temp = countAllPage11.getAllPage(listCourse.size());
-		pageDirection = countAllPage11.getLeftAndRight(0,temp);
-		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
-		this.getSesion().put("allLiveCoursePage",temp);
-		this.getSesion().put("liveCourseList", listCourse);
-		pages = countAllPage11.getStartPages(temp);
+		rencentweek1 = dateUtils.getRecentWeek1();
+		rencentweek2 = dateUtils.getRecentWeek2();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		SimpleDateFormat sdf2 =  new SimpleDateFormat("MM-dd");
+		Date d = new Date();
+		String temptoday = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findByDate(temptoday));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allRecentCoursePage",temp);
+		this.getSesion().put("recentCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findRecentCourceTemp";
+	}
+	//教学回顾 前台
+	public String findPastCource() throws ParseException {
+		listCourse.clear();
+		pages.clear();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		Date d = new Date();
+		String temptoday = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allPastCoursePage",temp);
+		this.getSesion().put("pastCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
 		this.pageNumber = "1";
 		return "findPastCource";
+	}
+	//教学回顾 前台2
+	public String findPastCourceTemp() throws ParseException {
+		listCourse.clear();
+		pages.clear();
+		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
+		Date d = new Date();
+		String temptoday = sdf1.format(d);
+		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
+		int temp = countAllPage6.getAllPage(listCourse.size());
+		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
+		pageDirectionNumberi = countAllPage6.getDirectionNumber(1, temp);
+		this.getSesion().put("allPastCoursePage",temp);
+		this.getSesion().put("pastCourseList",listCourse);
+		pages = countAllPage6.getStartPages(temp);
+		this.pageNumber = "1";
+		return "findPastCourceTemp";
 	}
 	//教学回顾 后台
 	public String teacherFindPastCource() throws ParseException {
@@ -296,7 +335,6 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		Date d = new Date();
 		String temptoday = sdf1.format(d);
 		tempCourse.addAll((servc.findPastByInfo(temptoday,queryInfo)));
-		tempCourse.addAll(teacherServc.findCourseByName(queryInfo));		
 		listCourse = dateUtils.formatDateAndTeacher(tempCourse);
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
@@ -362,7 +400,24 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		return "findRecentCource";
 	}
 	//观看视频
-	public String watch() throws Exception {
+	public String watch1() throws Exception {
+		listNote.clear();
+		listDiscuss.clear();
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		String tempId = request.getParameter("courseId");
+		student = (Student) this.getSesion().get("Student");
+		course = servc.findByCourseId(tempId);
+		courseVo.setTeacher(course.getTeacher().getName());
+		courseVo.setCourse(course);
+		listNote = noteServc.findAll(String.valueOf(student.getId()),tempId);
+		listDiscuss = discussServc.findByCourseId(tempId);
+		this.getSesion().put("liveCourse",course);
+		this.noteSize = listNote.size();
+		this.discussSize = listDiscuss.size();
+		return "watch";
+	}
+	//观看视频2
+	public String watch2() throws Exception {
 		listNote.clear();
 		listDiscuss.clear();
 		HttpServletRequest request =  ServletActionContext.getRequest();

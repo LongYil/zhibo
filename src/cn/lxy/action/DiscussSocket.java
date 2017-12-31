@@ -79,7 +79,7 @@ public class DiscussSocket {
             conn.close();
         } catch (SQLException ex) {
         	;
-        }        
+        }
         
         for (Map.Entry<String, DiscussSocket> entry : webSocketMap.entrySet()) {
             DiscussSocket item = entry.getValue();

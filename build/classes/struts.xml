@@ -9,53 +9,60 @@
     <constant name="struts.devMode" value="false" />
     <constant name="struts.i18n.encoding" value="UTF-8"></constant>
     <constant name="struts.action.excludePattern" value="/ws/.*,ws://.*"></constant>
-    
+ 			
 	<package name="first" namespace="/" extends="struts-default">
 	
-	<action name="carousel_*" class="carouselAction" method="{1}">
-		<result name="success">/index.jsp</result>
-		<result name="aaa">/test.jsp</result>
-	</action>
-	
-	
-	<action name="discuss_*" class="discussAction" method="{1}">
-		<result name="success">/index.jsp</result>
-		<result name="aaa">/test.jsp</result>
-	</action>
-
-	
-	<action name="manager_*" class="managerAction" method="{1}">
-		<result name="success">/index.jsp</result>
-		<result name="aaa">/test.jsp</result>
-	</action>
-	
-
-	
-
-	
-	
-	<action name="addpo_*" class="addPoAction" method="{1}">
-		<result name="success">/teacher.jsp</result>
-	</action>
-	
-	<action name="discussSocket_*" class="disscussSocket" method="{1}"/>
-	
-	
-	<action name="login_*" class="loginAction" method="{1}">
-		<result name="student" type="redirect">/index.jsp</result>
-		<result name="teacher" type="redirect">/teacher.jsp</result>
-		<result name="personalCenter" type="redirect">/personal_center.jsp</result>
-	</action>
-	
-
 	</package>
 
+	<package name="jsonaction" namespace="/"  extends="json-default">
+	
+				
+			<interceptors>
+			     <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/> 
+			     <interceptor name="login" class="cn.lxy.action.CheckLoginInterceptor"/>
+			           <interceptor-stack name="teamwareStack">
+			               <interceptor-ref name="defaultStack"/>
+			               <interceptor-ref name="login"/>
+			           </interceptor-stack>
+			   </interceptors>
+			<default-interceptor-ref name="teamwareStack"/>
+			
+			<global-results>
+  		         <result name="pleaselogin1" type="redirect">/course_findRecentCourceTemp.action</result> 
+  		         <result name="watchTemp1" type="redirect">/course_findRecentCource.action</result> 
+  		         <result name="pleaselogin2" type="redirect">/course_findPastCourceTemp.action</result> 
+  		         <result name="watchTemp2" type="redirect">/course_findPastCource.action</result> 
+  		         <result name="pleaselogin3" type="redirect">/exam_studentFindAllTemp.action</result> 
+  		         <result name="analyseExamTemp" type="redirect">/exam_studentFindAll.action</result> 
+ 	        </global-results>
+ 	        
+			<action name="carousel_*" class="carouselAction" method="{1}">
+				<result name="success">/index.jsp</result>
+				<result name="aaa">/test.jsp</result>
+			</action>
+			
+			<action name="discuss_*" class="discussAction" method="{1}">
+				<result name="success">/index.jsp</result>
+				<result name="aaa">/test.jsp</result>
+			</action>
+			
+			<action name="manager_*" class="managerAction" method="{1}">
+				<result name="success">/index.jsp</result>
+				<result name="aaa">/test.jsp</result>
+			</action>
 
-	<package name="jsonaction" namespace="/"  extends="json-default">  
-		   <interceptors>             
-		   		<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>          
-		   </interceptors>
-		   
+			<action name="addpo_*" class="addPoAction" method="{1}">
+				<result name="success">/teacher.jsp</result>
+			</action>	
+			
+			<action name="login_*" class="loginAction" method="{1}">
+				<result name="student" type="redirect">/index.jsp</result>
+				<result name="teacher" type="redirect">/teacher.jsp</result>
+				<result name="personalCenter" type="redirect">/personal_center.jsp</result>
+				
+				<result type="json" name="preLogin"><param name="root">resultinfo</param></result>
+			</action>
+			   
 		   <action name="student_*" class="studentAction" method="{1}"> 
 				<result name="findAll">/studentmanager.jsp</result>
 				<result name="findByName">/studentquery.jsp</result>
@@ -93,8 +100,10 @@
 				<result name="save">/addexam.jsp</result>
 				<result name="studentFindAll">/test_v1.jsp</result>
 				<result name="analyseExam">/questions-sublime.jsp</result>
+				<result name="studentFindAllTemp">/test_v2.jsp</result>
+				<result name="calculateResult">/test_v2.jsp</result>
 				
-				<result type="json" name="calculateResult"><param name="root">resultinfo</param></result>
+<!-- 				<result type="json" name="calculateResult"><param name="root">resultinfo</param></result> -->
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
 
@@ -111,7 +120,9 @@
 				<result name="teacherFindByInfo">/livecoursequery.jsp</result>
 				<result name="preUpdate">/updatecourse.jsp</result>
 				<result name="findRecentCource">/index_v1.jsp</result>
+				<result name="findRecentCourceTemp">/index_v2.jsp</result>
 				<result name="findPastCource">/review_v1.jsp</result>
+				<result name="findPastCourceTemp">/review_v2.jsp</result>
 				<result name="watch">/live.jsp</result>
 				<result name="showInfo">/viewcourse.jsp</result>
 				<result name="teacherFindPastCource">/pastcoursemanager.jsp</result>

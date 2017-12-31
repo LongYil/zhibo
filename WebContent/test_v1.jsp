@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
@@ -34,12 +35,12 @@
          <button class="btn btn-info btn-search" onClick="query()"><img src="images/sousuo.png" alt=""></button>
         </div> 
          
-        <c:if test="${studentUserStatus==1}">
+        <c:if test="${userStaticStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
 	          <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
-	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
+	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${userName}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
 	                </button>
 	                <ul class="dropdown-menu" role="menu">
@@ -55,12 +56,12 @@
 	        </div>
         </c:if>
         
-        <c:if test="${studentUserStatus!=1}">
+        <c:if test="${userStaticStatus!=1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	          <a href="javascript:void(0)" id="linkbt1">登录</a>
 	          <a>|</a>
 	          <a href="javascript:void(0)" id="linkbt2">注册</a>
-	        </div>        
+	        </div>
         </c:if>
         
       </div>
@@ -72,16 +73,20 @@
         <a id="line">登录</a>
         <a id="turn2">注册</a>
       </div>
-      <form action="login_login.action" method="post">
+
         <a href="javascript:void(0)" id="closebt1" style="float:right; font-size:30px;margin-top: -55px;margin-right:0;padding:0;color: #dbdbdb;">&times;</a>
       <div class="content">
-        <p>手机号登录</p>
-        <input type="text" name="username" placeholder="输入手机号">
-        <input type="password" name="password" placeholder="输入密码">
-        <input type="hidden" name="usertype">
-        <button class="button">登  录</button>
+        <p class="loginInfo">手机号登录</p>
+        <form action="login_login.action" name="myRegistForm" method="post">
+        <input type="text" name="username" id="username" placeholder="输入手机号">
+        <input type="password" name="password" id="password" placeholder="输入密码">
+                 学生<input type="radio" style="height:13px;width:30px;display:inline-block;" checked name="usertype" value="0">
+                 教师<input type="radio" style="height:13px;width:30px;display:inline-block;" name="usertype" value="1">
+                 管理员<input type="radio" style="height:13px;width:30px;display:inline-block;" name="usertype" value="2">
+        </form>
+        <button class="button" onClick="submit()">登  录</button>
       </div>
-      </form>
+
     </div>
 	
 	<form action="student_add.action" method="post" name="registeform">
@@ -225,6 +230,9 @@
   function startTest(arg){
 	 window.location="exam_analyseExam.action?examId="+arg;
   }
+  function startTestI(){
+	 window.location="exam_analyseExam.action?";
+  }
   function query(){
 	 var queryInfo = $("#searchbox").val();
 	 window.location="exam_studentFindByInfo.action?queryInfo="+queryInfo;
@@ -256,6 +264,24 @@
   }
   function personalCenter(){
 	  window.location="login_personalCenter.action";
+  }
+  
+  function submit(){
+	  var username = $("#username").val().toString();
+	  var password = $("#password").val().toString();
+	  var usertype = $("input[name='usertype']:checked").val().toString();
+	  var tempinfo = (usertype+"-"+username+"-"+password).toString();
+	  var resultinfo = ajaxSubmit("login_preLogin.action",tempinfo);
+	  if(resultinfo == 1){
+		  myRegistForm.submit();  
+	  }else{
+		  $(".loginInfo").html("用户名和密码不匹配").css("color","#e9686b");
+		  $("#username").val("");
+		  $("#password").val("");
+		  setTimeout(function(){
+			  $(".loginInfo").html("手机号登录").css("color","#000000");
+			  }, 2500);
+	  }
   }
   </script>
 </html>

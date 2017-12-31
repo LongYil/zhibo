@@ -20,7 +20,6 @@
     <![endif]-->
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/mainstyle.css" rel="stylesheet" type="text/css">
-    <link href="css/new_main.css" rel="stylesheet" type="text/css">
   </head>
 
   <body  class="container-fluid">
@@ -31,16 +30,16 @@
           <a href="index.jsp"><h1>LOGO理学院直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
-         <input type="text" class="form-control input-search" placeholder="请输入教师姓名、课程名称" id="searchbox"/>
+         <input type="text" class="form-control input-search" placeholder="请输入上传者姓名、试题名称" id="searchbox"/>
          <button class="btn btn-info btn-search" onClick="query()"><img src="images/sousuo.png" alt=""></button>
-        </div>  
-        
+        </div> 
+         
         <c:if test="${userStaticStatus==1}">
 	        <div class="col-sm-3 col-md-3 col-lg-3">
 	         <span class="q-person">
 	          <img src="${tempPicPath}" alt="" width="28px" height="28px" class="img-circle">
 	            <div class="btn-group">
-	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${userName}
+	                <button type="button" class="btn  dropdown-toggle btn-sm" data-toggle="dropdown" id="q-person-btn">${Student.name}
 	                  <img src="images/xialakuang_black.png" alt="" style="padding-bottom: 3px;">
 	                </button>
 	                <ul class="dropdown-menu" role="menu">
@@ -67,14 +66,14 @@
       </div>
     </header>
 
-    <div id="light1"></div><!-- 登录弹窗 -->
+<div id="light1"></div><!-- 登录弹窗 -->
     <div id="fade1" class="login-body">
       <div class="head">
         <a id="line">登录</a>
         <a id="turn2">注册</a>
       </div>
 
-        <a href="javascript:void(0)" id="closebt1" style="float:right; font-size:30px;margin-top: -55px;margin-right:0;padding:0;color: #dbdbdb;">&times;</a>
+      <a href="javascript:void(0)" id="closebt1" style="float:right; font-size:30px;margin-top: -55px;margin-right:0;padding:0;color: #dbdbdb;">&times;</a>
       <div class="content">
         <p class="loginInfo">手机号登录</p>
         <form action="login_login.action" name="myRegistForm" method="post">
@@ -117,10 +116,10 @@
             <li><a href="index.jsp" class="tooltips">教学直播<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="review.jsp" class="tooltips" style="color: #198fee;">教学回顾<span class="triangle"></span></a></li>
+            <li><a href="review.jsp" class="tooltips">教学回顾<span></span></a></li>
           </ul>
           <ul>
-            <li><a href="test.jsp" class="tooltips">试 题 库<span></span></a></li>
+            <li><a href="test.jsp" class="tooltips" style="color: #198fee;">试 题 库<span class="triangle"></span></a></li>
           </ul>
       </div>
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
@@ -141,20 +140,32 @@
 
     <div class="row content-body">
       <div class="col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-        <input class="container" type="text" value="${tempCourseDate}" onClick="findCourse()" id="demo-1" style="background-image: url('images/rili.png');background-repeat: no-repeat;background-position: 90% 50%;border-radius: 3px;" >
-        <div class="content-video">
-			<s:iterator value="listCourse" status="ste">
+        <h3 class="test-title">最新题库</h3>
+        <div class="content-test">
+          <ul id='timeline'>
+          
+            <s:iterator value="listExamVo" status="ste">
 				<c:if test="${ste.index<6}">
-                   <div><a href="javascript:void(0)" onClick="watch('<s:property value='course.id'/>')"><img src="<s:property value='course.face'/>" width="240px" height="152px" alt=""><p><s:property value='course.name'/>  <s:property value='teacher'/></p></a></div>
+		            <li class='work'>
+		              <input class='radio' id='work6' name='works' type='radio' checked>
+		              <div class="relative">
+		                <label for='work6'>
+		                  <p><s:property value="exam.name"/></p><p>上传者：<s:property value="teacherName"/></p><p><s:property value="time"/></p><button class="btn btn-default" type="submit" onClick="startTest(<s:property value="exam.id"/>)">立即做题</button>
+		                </label>
+		                <span class="border"><span class='circle'></span></span>
+		              </div>
+		            </li>
 				</c:if>
 			</s:iterator>
-        </div>
 
+          </ul>
+        </div>
+        
         <div class="page">
             <c:if test="${pageDirectioni[0]==1 }">
 			  <a href="javascript:void(0)" onClick="To('${pageDirectionNumberi[0]}')">&lt;</a>
 			</c:if>
-					<c:forEach items="${pages}" var="index" begin="0" >
+					<c:forEach items="${pages}" var="index" begin="0">
 					  <c:if test="${index==pageNumber}">
 					      <a href="javascript:void(0)" style="color:blue;font-size:bold;"  onClick="To('${index}')">${index}</a>
 					  </c:if>
@@ -208,71 +219,85 @@
     <script src="js/L_slide.js" type="text/javascript"></script>
     <script src="js/open.js" type="text/javascript"></script>
     <script src="js/ajaxcommunicate.js"></script>
-    <script src="js/gVerify.js"></script>
-    <script src="js/foundation-datepicker.js"></script>
-    <script>
-      $('#demo-1').fdatepicker();
-    </script>
-    <script type="text/javascript">
-    var verifyCode = new GVerify("v_container");
-    function To(arg){
-  	  window.location="course_findPastByPage.action?pageNumber="+arg;
-    }
-    function play(arg){
-    	;
-    }
-    function query(){
-  	  var info = $("#searchbox").val();
-  	  window.location="course_studentFindByInfo.action?queryInfo="+info;
-    }
-    function checkAccount(){
-  	  var tel = $("#usertel").val();
-  	  var result = ajaxSubmit("student_checkAccount.action",tel);
-  	  if(result=="0"){
-  		  alert("该手机号已存在");
-  	  }else{
-  		  ;
-  	  }
-    }
-    function checkVC(){
-  	  var vc = $("#vc").val();
-  	  var result = ajaxSubmit("student_checkVerificationCode.action",vc);
-  	  if(result=="0"){
-  		  alert("验证码错误");
-  	  }else{
-  		  ;
-  	  }
-    }
-    function registe(){
-  	  registeform.submit();
-    }
-    function logout(){
-  	  window.location="login_logout.action";
-    }
-    function personalCenter(){
-  	  window.location="login_personalCenter.action";
-    }
-    function watch(arg){
-  	  window.location = "course_watch2.action?courseId="+arg;
-    }
-    
-    function submit(){
-  	  var username = $("#username").val().toString();
-  	  var password = $("#password").val().toString();
-  	var usertype = $("input[name='usertype']:checked").val().toString();
-  	  var tempinfo = (usertype+"-"+username+"-"+password).toString();
-  	  var resultinfo = ajaxSubmit("login_preLogin.action",tempinfo);
-  	  if(resultinfo == 1){
-  		myRegistForm.submit();  
-  	  }else{
-  		  $(".loginInfo").html("用户名和密码不匹配").css("color","#e9686b");
-  		  $("#username").val("");
-  		  $("#password").val("");
-  		  setTimeout(function(){
-  			  $(".loginInfo").html("手机号登录").css("color","#000000");
-  			  }, 2500);
-  	  }
-    }
-    </script>
+    <script src="js/gVerify.js"></script>    
   </body>
+  <script type="text/javascript">
+  var verifyCode = new GVerify("v_container");
+  function To(arg){
+	 window.location="exam_studentFindByPageNumber.action?pageNumber="+arg;
+  }
+  function startTest(arg){
+	 window.location="exam_analyseExam.action?examId="+arg;
+  }
+  function query(){
+	 var queryInfo = $("#searchbox").val();
+	 window.location="exam_studentFindByInfo.action?queryInfo="+queryInfo;
+  }
+  function checkAccount(){
+	  var tel = $("#usertel").val();
+	  var result = ajaxSubmit("student_checkAccount.action",tel);
+	  if(result=="0"){
+		  alert("该手机号已存在");
+	  }else{
+		  ;
+	  }
+  }
+  function checkVC(){
+	  var vc = $("#vc").val();
+	  var result = ajaxSubmit("student_checkVerificationCode.action",vc);
+	  if(result=="0"){
+		  alert("验证码错误");
+	  }else{
+		  ;
+	  }
+  }
+  
+  function registe(){
+	  registeform.submit();
+  }
+  function logout(){
+	  window.location="login_logout.action";
+  }
+  function personalCenter(){
+	  window.location="login_personalCenter.action";
+  }
+  function registeUser(){
+	  var light2=document.getElementById('light2'); 
+	  var fade2=document.getElementById('fade2'); 
+	  light2.style.display='block'; 
+	  fade2.style.display='block';
+  }
+  function openlogin(){
+		var fade1=document.getElementById('fade1');
+		var fade2=document.getElementById('fade2');
+		var light1=document.getElementById('light1'); 
+		light1.style.display='block';
+		fade1.style.display='block';
+		fade2.style.display='none';
+  }
+  
+  function submit(){
+	  var username = $("#username").val().toString();
+	  var password = $("#password").val().toString();
+	  var usertype = $("input[name='usertype']:checked").val().toString();
+	  var tempinfo = (usertype+"-"+username+"-"+password).toString();
+	  var resultinfo = ajaxSubmit("login_preLogin.action",tempinfo);
+	  if(resultinfo == 1){
+		  myRegistForm.submit();  
+	  }else{
+		  $(".loginInfo").html("用户名和密码不匹配").css("color","#e9686b");
+		  $("#username").val("");
+		  $("#password").val("");
+		  setTimeout(function(){
+			  $(".loginInfo").html("手机号登录").css("color","#000000");
+			  }, 2500);
+	  }
+   }
+  </script>
+      <c:if test="${loginstatus == 0}">
+	  <script type="text/javascript">
+          openlogin();
+	  </script>
+      </c:if>
+
 </html>
