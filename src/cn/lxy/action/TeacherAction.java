@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
+import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
 import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.ServerInfo;
@@ -33,6 +35,10 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	private Teacher teacher;
 	@Autowired
 	private TeacherServc servc;
+	@Autowired
+	private Student student;
+	@Autowired
+	private StudentServc studentServc;
 	@Autowired
 	private CountAllPage11 countAllPage;
 	
@@ -57,6 +63,11 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		return teacher;
 	}
 	
+	//用户执行添加教师操作
+	public String addTeacher() {
+		return "addTeacher";
+	}
+	
 	//添加教师
 	public String saveInfo() throws UnsupportedEncodingException {
 		this.resultinfo="0";
@@ -76,6 +87,12 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		teacher.setHead("http://"+ServerInfo.SERVER_IP+":8080/CollegeLive/Image/teacher.png");
 		teacher.setRoomid(new SimpleDateFormat("DDMMYYYYhhmmss").format(new Date()));
 		servc.save(teacher);
+		student.setUsername(teacher.getUsername());
+		student.setName(teacher.getName());
+		student.setTel(teacher.getTel());
+		student.setPassword(teacher.getPassword());
+		student.setHead(teacher.getHead());
+		studentServc.save(student);
 		this.resultinfo="1";
 		return "saveInfo";
 	}

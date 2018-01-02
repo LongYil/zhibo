@@ -8,7 +8,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>试题管理</title>
+
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
@@ -16,7 +18,9 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
     <link href="css/layui.css" rel="stylesheet">
-    <script src="js/base-loading.js"></script>   
+
+    <script src="js/base-loading.js"></script>
+       
     <style type="text/css">
     body{
     font-size: 14px;
@@ -32,7 +36,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span style="float:left;">我的试题</span>
-                        <div class="ibox-tools"  style="margin-bottom:5px;">   
+                        <div class="ibox-tools"  style="margin-bottom:5px;">  
+                            <button type="button" class="btn btn-w-m btn-info" onClick="uploadExam()">上传试题&nbsp;&nbsp;<i class="fa fa-upload"></i></button>
+                            <span style="margin-right:10px;">&nbsp;</span>  
 							<button type="button" class="btn btn-w-m btn-info" onClick="findExam()">查找试题&nbsp;&nbsp;<i class="fa fa-search"></i></button>
                             <span style="margin-right:10px;">&nbsp;</span>                                                                            
                         </div>

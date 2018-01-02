@@ -17,8 +17,8 @@ public class ExamDaoImpl extends CommonDaoImpl<Exam> implements ExamDao {
 	}
 
 	@Override
-	public List<Exam> findByName(String arg) {
-		return (List<Exam>) ht.find("from Exam where "+arg);
+	public List<Exam> findByName(String arg1) {
+		return (List<Exam>) ht.find("from Exam where name like '%" + arg1 + "%' or describes like '%" + arg1 + "%' order by id desc");
 	}
 
 	@Override
@@ -34,6 +34,16 @@ public class ExamDaoImpl extends CommonDaoImpl<Exam> implements ExamDao {
 	@Override
 	public List<Exam> studentFindAllByInfo(String arg) {
 		return (List<Exam>) ht.find("from Exam where name like '%" + arg + "%' order by id desc");
+	}
+
+	@Override
+	public List<Exam> teacherFindByName(String arg1,String arg2) {
+		return (List<Exam>) ht.find("from Exam where ( name like '%" + arg1 + "%' or describes like '%" + arg1 + "%') and teacher_id = " + arg2 + "order by id desc");
+	}
+
+	@Override
+	public List<Exam> teacherFindAll(String arg) {
+		return (List<Exam>) ht.find("from Exam where teacher_id = " + arg + "");
 	}
 
 	

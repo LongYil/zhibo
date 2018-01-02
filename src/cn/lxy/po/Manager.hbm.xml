@@ -10,6 +10,8 @@
 			<generator class="native"></generator>
 		</id>		
 		
+		<property name="name" />
+		<property name="head" />
 		<property name="username" />
 		<property name="password" />
 

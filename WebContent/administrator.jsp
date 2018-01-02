@@ -34,7 +34,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)" onClick="backindex()">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
@@ -80,7 +80,7 @@
                         <span class="ng-scope">课程管理</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="index_v1.html">
+                        <a class="J_menuItem" href="course_findAll.action">
                             <i class="fa fa-video-camera"></i>
                             <span class="nav-label">所有课程</span>
                         </a>
@@ -92,7 +92,7 @@
                         <span class="ng-scope">系统管理</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="loginCollegeLive.jsp">
+                        <a class="J_menuItem" href="javascript:void(0)" onClick="exit()">
                             <i class="fa fa-power-off"></i>
                             <span class="nav-label">退出系统</span>
                         </a>
@@ -194,7 +194,7 @@
                 </nav>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe id="J_iframe" width="100%" height="100%" src="teachermanager.jsp" frameborder="0" data-id="index_v1.html" seamless></iframe>
+                <iframe id="J_iframe" width="100%" height="100%" src="teacher_findAll.action" frameborder="0" data-id="index_v1.html" seamless></iframe>
             </div>
         </div>
         <!--右侧部分结束-->
@@ -213,7 +213,14 @@
 
     <!-- 第三方插件 -->
     <script src="js/plugins/pace/pace.min.js"></script>
-
+	<script type="text/javascript">
+	function exit(){
+		$(window).attr('location','login_logout.action');
+	}
+	function backindex(){
+		$(window).attr('location','course_findRecentCource.action');
+	}
+	</script>
 </body>
 
 </html>

@@ -33,7 +33,11 @@
   		         <result name="pleaselogin2" type="redirect">/course_findPastCourceTemp.action</result> 
   		         <result name="watchTemp2" type="redirect">/course_findPastCource.action</result> 
   		         <result name="pleaselogin3" type="redirect">/exam_studentFindAllTemp.action</result> 
-  		         <result name="analyseExamTemp" type="redirect">/exam_studentFindAll.action</result> 
+  		         <result name="analyseExamTemp" type="redirect">/exam_studentFindAll.action</result>
+  		          
+  		         <result name="studentPersonalCenter" type="redirect">/personal_center.jsp</result> 
+  		         <result name="teacherPersonalCenter" type="redirect">/teacher.jsp</result> 
+  		         <result name="administratorPersonalCenter" type="redirect">/administrator.jsp</result> 
  	        </global-results>
  	        
 			<action name="carousel_*" class="carouselAction" method="{1}">
@@ -43,12 +47,10 @@
 			
 			<action name="discuss_*" class="discussAction" method="{1}">
 				<result name="success">/index.jsp</result>
-				<result name="aaa">/test.jsp</result>
 			</action>
 			
 			<action name="manager_*" class="managerAction" method="{1}">
-				<result name="success">/index.jsp</result>
-				<result name="aaa">/test.jsp</result>
+				<result name="initialization">/index.jsp</result>
 			</action>
 
 			<action name="addpo_*" class="addPoAction" method="{1}">
@@ -58,7 +60,6 @@
 			<action name="login_*" class="loginAction" method="{1}">
 				<result name="student" type="redirect">/index.jsp</result>
 				<result name="teacher" type="redirect">/teacher.jsp</result>
-				<result name="personalCenter" type="redirect">/personal_center.jsp</result>
 				
 				<result type="json" name="preLogin"><param name="root">resultinfo</param></result>
 			</action>
@@ -84,6 +85,7 @@
 				<result name="preUpdate">/addteacher.jsp</result>
 				<result name="selfInfo">/teacherinfo.jsp</result>
 				<result name="findByName">/teacherquery.jsp</result>
+				<result name="addTeacher">/addteacher.jsp</result>
 				
 				<result name="back_requery">teacher_requery.action</result>
 				<result name="back_findAll">teacher_findAll.action</result>
@@ -96,14 +98,14 @@
 		   
 		   <action name="exam_*" class="examAction" method="{1}">
 				<result name="findAll">/exammanager.jsp</result>
+				<result name="teacherFindAll">/teacherexammanager.jsp</result>
 				<result name="findByName">/examquery.jsp</result>
 				<result name="save">/addexam.jsp</result>
 				<result name="studentFindAll">/test_v1.jsp</result>
 				<result name="analyseExam">/questions-sublime.jsp</result>
 				<result name="studentFindAllTemp">/test_v2.jsp</result>
-				<result name="calculateResult">/test_v2.jsp</result>
 				
-<!-- 				<result type="json" name="calculateResult"><param name="root">resultinfo</param></result> -->
+				<result type="json" name="calculateResult"><param name="root">resultinfo</param></result>
 				<result type="json" name="delete"><param name="root">resultinfo</param></result>
 		   </action>
 
@@ -118,12 +120,15 @@
 				<result name="findByTeacherId">/livecoursemanager.jsp</result>
 				<result name="findByPageNumber">/livecoursemanager.jsp</result>
 				<result name="teacherFindByInfo">/livecoursequery.jsp</result>
+				<result name="findByInfo">/livecoursequery.jsp</result>
 				<result name="preUpdate">/updatecourse.jsp</result>
+				<result name="findAll">/alllivecourse.jsp</result>
 				<result name="findRecentCource">/index_v1.jsp</result>
 				<result name="findRecentCourceTemp">/index_v2.jsp</result>
 				<result name="findPastCource">/review_v1.jsp</result>
 				<result name="findPastCourceTemp">/review_v2.jsp</result>
 				<result name="watch">/live.jsp</result>
+				<result name="update">/course_findByTeacherId.action</result>
 				<result name="showInfo">/viewcourse.jsp</result>
 				<result name="teacherFindPastCource">/pastcoursemanager.jsp</result>
 				

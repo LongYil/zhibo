@@ -17,7 +17,7 @@ public class CourseDaoImpl extends CommonDaoImpl<Course> implements CourseDao {
 
 	@Override
 	public List<Course> findByInfo(String arg) {
-		return (List<Course>) ht.find("from Course where name like '%?%' or subject like '%?%'", arg,arg);
+		return (List<Course>) ht.find("from Course where name like '%" + arg + "%' or subject like '%" + arg + "%'");
 	}
 
 	@Override

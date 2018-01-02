@@ -48,6 +48,8 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	@Autowired
 	private Course course;
 	@Autowired
+	private Course flagCourse;
+	@Autowired
 	private CourseVo courseVo;
 	@Autowired
 	private Student student;
@@ -174,8 +176,8 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	}
 	//根据课程名称或科目查找课程
 	public String findByInfo() {
-		String queryInfo = "";
 		listCourse.clear();
+		System.out.println(queryInfo);
 		listCourse = dateUtils.formatDateTime(servc.findByInfo(queryInfo));
 		return "findByInfo";
 	}
@@ -199,10 +201,21 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		return "preUpdate";
 	}
 	//更新课程
-	public String update() {
-		course.setId(Integer.parseInt(this.getSesion().get("updateCourseId").toString()));
-		servc.update(course);
-		return "update";		
+	public String update() throws Exception {
+		HttpServletRequest request =  ServletActionContext.getRequest();
+		flagCourse = servc.findById(this.getSesion().get("updateCourseId").toString());
+		String tempTime = request.getParameter("time");
+		String name = request.getParameter("name");
+		String subject = request.getParameter("subject");
+		String summary = request.getParameter("summary");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = sdf.parse(tempTime);
+		flagCourse.setTime(date);
+		flagCourse.setName(name);
+		flagCourse.setSubject(subject);
+		flagCourse.setSummary(summary);
+		servc.update(flagCourse);
+		return "update";
 	}
 	//直播主页
 	public String findRecentCource() throws ParseException {

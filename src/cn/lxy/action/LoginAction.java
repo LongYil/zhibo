@@ -1,6 +1,5 @@
 package cn.lxy.action;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 
@@ -9,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.lxy.po.Manager;
 import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
+import cn.lxy.service.ManagerServc;
 import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
 
@@ -32,7 +33,11 @@ public class LoginAction extends BasicAction {
 	private Teacher teacher;
 	@Autowired
 	private StudentServc studentServc;
-
+	@Autowired
+	private Manager manager;
+	@Autowired
+	private ManagerServc managerServc;
+	
 	private Student student;
 
 	private String resultinfo;
@@ -79,33 +84,41 @@ public class LoginAction extends BasicAction {
 			}else {
 				return "student";
 			}
-		}else if(usertype == 2){
+		}else if(usertype == 1){
 			//用户类型：教师
 			teacher = teacherServc.login(username, password);
+			student = studentServc.login(username, password);
 			this.getSesion().put("userType","1");
-			
-			
-			
 			this.getSesion().put("Teacher", teacher);
-			return "teacher";
+			this.getSesion().put("userName", teacher.getName());
+			this.getSesion().put("userStaticStatus",1);
+			this.getSesion().put("userStatus","1");
+	        this.getSesion().put("tempPicPath",teacher.getHead());
+			this.getSesion().put("Student", student);
+			this.getSesion().put("StudentId", student.getId());
+			return "student";
 		}else {
 			//用户类型：超级管理员
 			this.getSesion().put("userType","2");
-			
-			
-			
+			manager = managerServc.login(username, password);
+			student = studentServc.login(username, password);
+			this.getSesion().put("Manager", manager);
+			this.getSesion().put("userName", manager.getName());
+			this.getSesion().put("userStaticStatus",1);
+			this.getSesion().put("userStatus","1");
+	        this.getSesion().put("tempPicPath",manager.getHead());
+			this.getSesion().put("Student", student);
+			this.getSesion().put("StudentId", student.getId());
 			return "student";
 		}
 	}
 	
-	public String preLogin() throws Exception {
-		
+	public String preLogin() throws Exception {	
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String info = request.getParameter("info");
 		info = URLDecoder.decode(info,"UTF-8");
 		this.resultinfo = "0";
 		String[] infos = info.split("-");//用户信息  用户类型-用户名-用户密码 用户类型：0 学生 1 教师 2 管理员
-		
 		this.getSesion().put("username", infos[1]);
 		this.getSesion().put("password", infos[2]);
 		this.getSesion().put("usertype", infos[0]);
@@ -124,12 +137,6 @@ public class LoginAction extends BasicAction {
 			//教师用户
 			teacher = teacherServc.login(infos[1], infos[2]);
 			if(teacher.getPassword() != null && teacher.getPassword() != "") {
-				this.getSesion().put("Teacher", teacher);
-				this.getSesion().put("userName", teacher.getName());
-				this.getSesion().put("userStaticStatus",1);
-				this.getSesion().put("userStatus","1");
-				this.getSesion().put("userType","1");
-		        this.getSesion().put("tempPicPath",teacher.getHead());
 				this.resultinfo = "1";
 				return "preLogin";
 			}else {
@@ -138,11 +145,18 @@ public class LoginAction extends BasicAction {
 			}
 		}else {
 			//管理员用户
-			
-			return "personalCenter";
+			manager = managerServc.login(infos[1], infos[2]);
+			if(manager.getPassword() != null && manager.getPassword() != "") {
+
+				this.resultinfo = "1";
+				return "preLogin";
+			}else {
+				 this.resultinfo = "0";
+				return "preLogin";
+			}			
 		}
 	}
-	
+
 	//学生用户注销用户
 	public String logout() {
 		this.getSesion().clear();
@@ -150,10 +164,20 @@ public class LoginAction extends BasicAction {
 	}
 	//个人中心
 	public String personalCenter() {
-		
-		
-		
-		return "personalCenter";
+		String tempUserType = this.getSesion().get("userType").toString();
+		if(tempUserType.equals("0")) {
+			//学生用户
+			
+			return "studentPersonalCenter";
+		}else if(tempUserType.equals("1")) {
+			//教师用户
+			
+			return "teacherPersonalCenter";
+		}else {
+			//管理员用户
+			
+			return "administratorPersonalCenter";
+		}
 	}
 	
 	public String getUsername() {
@@ -180,6 +204,5 @@ public class LoginAction extends BasicAction {
 	public void setResultinfo(String resultinfo) {
 		this.resultinfo = resultinfo;
 	}
-	
 
 }

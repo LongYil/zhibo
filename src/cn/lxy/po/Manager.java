@@ -9,6 +9,8 @@ package cn.lxy.po;
  */
 public class Manager {
 	private Integer id;//序号
+	private String name;//用户姓名
+	private String head;//头像
 	private String username;//用户名
 	private String password;//密码
 	
@@ -29,6 +31,18 @@ public class Manager {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getHead() {
+		return head;
+	}
+	public void setHead(String head) {
+		this.head = head;
 	}
 	
 }

@@ -2,7 +2,6 @@ package cn.lxy.service;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +14,7 @@ public class ManagerServc extends CommonSevc<Manager, ManagerDaoImpl> {
 
 	@Override
 	public void save(Manager arg) {
-		//
-		
+		daoImpl.save(arg);		
 	}
 
 	@Override
@@ -27,8 +25,7 @@ public class ManagerServc extends CommonSevc<Manager, ManagerDaoImpl> {
 
 	@Override
 	public List<Manager> findAll(String arg) {
-		//
-		return null;
+		return daoImpl.findAll();
 	}
 
 	@Override
@@ -36,5 +33,10 @@ public class ManagerServc extends CommonSevc<Manager, ManagerDaoImpl> {
 		//
 		
 	}
-
+	
+	public Manager login(String arg1,String arg2) throws Exception {
+		return (Manager) this.getEntity.login("Manager", "username = '"+arg1+"' and password = '"+arg2+"'", Manager.class);
+	}
+	
+	
 }

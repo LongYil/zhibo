@@ -1,5 +1,9 @@
 package cn.lxy.dao;
 
-public interface ManagerDao {
+import java.util.List;
 
+import cn.lxy.po.Manager;
+
+public interface ManagerDao {
+	List<Manager> findAll();
 }

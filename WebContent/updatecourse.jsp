@@ -37,7 +37,7 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value="<s:property value="courseVo.name"/>" name="name" placeholder="课程名称" class="form-control"> 
+                                    <input type="text" value="<s:property value="courseVo.course.name"/>" name="name" placeholder="课程名称" class="form-control"> 
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程科目：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value="<s:property value="courseVo.subject"/>" name="subject" placeholder="课程科目" class="form-control"> 
+                                    <input type="text" value="<s:property value="courseVo.course.subject"/>" name="subject" placeholder="课程科目" class="form-control"> 
                                 </div>
                             </div>
                             
@@ -63,51 +63,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">课程封面封面：</label>
-                                <div class="col-sm-8">
-				                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0;">
-							        	<div class="ycupload-mainbox">
-							        		<div class="ycupload-main1" style="overflow:hidden;padding-left:25px;">
-							        			<span style="float:left;color:#ff5a5a;font-size:24px;line-height:60px;font-weight:bold;margin-right:7px;">
-							        				&middot;
-							        			</span>
-							        			<span style="float:left;color:#333;font-size:16px;line-height:60px;margin-right:28px;">
-							        				上传封面
-							        			</span>
-							        		</div>
-							        		<div class="ycupload-line"></div>
-							        		<div  style="min-height:1px;">
-							        			<div class="container">
-										        	<div class="row">
-												        <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0;padding-left:36px;">
-												        	<div style="min-height:1px;line-height:160px;text-align:center;position:relative;">
-												        		<div class="cover-wrap" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.4);z-index: 10000000;text-align:center;">	
-												        			<div class="" style="width:900px;height:600px;margin:0px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
-												        				<div id="clipArea" style="margin:10px;height: 520px;"></div>
-												        				<div class="" style="height:56px;line-height:36px;text-align: center;padding-top:8px;">
-												        					<button id="clipBtn" style="width:120px;height: 36px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align: center;line-height: 36px;outline: none;">保存封面</button>
-												        				</div>
-												        			</div>
-												        		</div>
-												        		<div id="view" style="width:214px;height:160.5px;" title="请上传 428*321 的封面图片"></div>
-													        	<div style="height:10px;"></div>
-													        	<div class="" style="width:140px;height:32px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;margin-left:37px;position:relative;">
-													        		点击上传封面图
-													        		<input type="file" name="coursefile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
-													        	    <input type="hidden" name="coursePic" id="picFile">
-													        	</div>
-												        	</div>
-											        	</div>
-										        	</div>
-									        	</div>
-							        		</div>
-							        	</div>
-							        
-						        	</div>                                    
 
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
                                     <button class="btn btn-sm btn-info" onClick="saveExam()">保 存</button>

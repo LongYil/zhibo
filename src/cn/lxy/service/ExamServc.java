@@ -50,6 +50,10 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 	public List<Exam> findAll(String arg) {
 		return daoImpl.findAll();
 	}
+
+	public List<ExamVo> teacherFindAll(String arg) {
+		return assembleExam.getExamVo(daoImpl.teacherFindAll(arg));
+	}
 	
 	public List<ExamVo> findAll(){
 		listExam.clear();
@@ -72,8 +76,11 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 		daoImpl.delete(arg);
 	}
 	public List<ExamVo> findByName(String arg){
-		String sql = "name like '%"+arg+"%' or describes like '%"+arg+"%' ";
-		listExam = daoImpl.findByName(sql);
+		listExam = daoImpl.findByName(arg);
+		return assembleExam.getExamVo(listExam);
+	}
+	public List<ExamVo> teacherFindByName(String arg1,String arg2){
+		listExam = daoImpl.teacherFindByName(arg1,arg2);
 		return assembleExam.getExamVo(listExam);
 	}
 	public Exam findById(String arg) {

@@ -136,7 +136,13 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	public String findAll() {
 		listExamVo.clear();
 		pages.clear();
-		listExamVo = servc.findAll();
+		int userType = Integer.parseInt(this.getSesion().get("userType").toString());
+		if(userType == 1) {
+			teacher = (Teacher) this.getSesion().get("Teacher");
+			listExamVo = servc.teacherFindAll(String.valueOf(teacher.getId()));
+		}else {
+			listExamVo = servc.findAll();
+		}
 		int temp = countAllPage11.getAllPage(listExamVo.size());
 		pageDirection = countAllPage11.getLeftAndRight(0,temp);
 		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
@@ -144,7 +150,12 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		this.getSesion().put("allExamPage",temp);
 		this.getSesion().put("examList", listExamVo);
 		pages = countAllPage11.getStartPages(temp);
-		return "findAll";
+		if(userType == 1) {
+			return "teacherFindAll";
+		}else {
+			return "findAll";
+		}
+		
 	}
 	//根据页码查找对应页面的试题
 	public String findByPageNumber() {
@@ -161,7 +172,13 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	//根据试题名称或描述查找对应的试题
 	public String findByName() {
 		listExamVo.clear();
-		listExamVo = servc.findByName(queryInfo);
+		int userType = Integer.parseInt(this.getSesion().get("userType").toString());
+		if(userType == 1) {
+			teacher = (Teacher) this.getSesion().get("Teacher");
+			listExamVo = servc.teacherFindByName(queryInfo,String.valueOf(teacher.getId()));
+		}else {
+			listExamVo = servc.findByName(queryInfo);
+		}
 		this.getSesion().put("examQueryInfo", queryInfo);
 		return "findByName";
 	}

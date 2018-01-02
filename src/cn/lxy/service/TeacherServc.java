@@ -47,7 +47,7 @@ public class TeacherServc extends CommonSevc<Teacher, TeacherDaoImpl> {
 	}
 	
 	public Teacher login(String arg1,String arg2) throws Exception {
-		return (Teacher) this.getEntity.login("Teacher", "username = '"+arg1+"' and password = '"+arg2+"'", Teacher.class);
+		return (Teacher) this.getEntity.login("Teacher", "tel = '"+arg1+"' and password = '"+arg2+"'", Teacher.class);
 	}
 	
 	public boolean updatePassword(Teacher arg) {

@@ -26,7 +26,7 @@ public class CourseServc extends CommonSevc<Course, CourseDaoImpl> {
 
 	@Override
 	public List<Course> findAll(String arg) {
-		return null;
+		return daoImpl.findAll();
 	}
 
 	@Override

@@ -15,12 +15,12 @@ public class CheckLoginInterceptor extends AbstractInterceptor {
 	private Map session;
 	
     public String intercept(ActionInvocation actionInvocation) throws Exception {
-        System.out.println("begin check login interceptor!");
+//        System.out.println("begin check login interceptor!");
         
-        System.out.println("调用的方法是："+actionInvocation.getProxy().getMethod());
+//        System.out.println("调用的方法是："+actionInvocation.getProxy().getMethod());
         
         // 对LoginAction不做该项拦截
-        String[] methods = {"preLogin","findRecentCource","findRecentCourceTemp","getVerificationCode","findByDate","findRecentByPage","findPastCource","findPastByPage","findPastCourceTemp","studentFindAll","studentFindAllTemp","checkAccount","add","logout","login"};
+        String[] methods = {"initialization","preLogin","findRecentCource","findRecentCourceTemp","getVerificationCode","findByDate","findRecentByPage","findPastCource","findPastByPage","findPastCourceTemp","studentFindAll","studentFindAllTemp","checkAccount","add","logout","login"};
         String actionMethod = actionInvocation.getProxy().getMethod();
         
         Map session = actionInvocation.getInvocationContext().getSession();
@@ -30,7 +30,7 @@ public class CheckLoginInterceptor extends AbstractInterceptor {
         
         for(int i = 0; i < methods.length ; i ++) {
         	if(actionMethod.equals(methods[i])) {
-        		System.out.println("放行---------------------");
+//        		System.out.println("放行---------------------");
         		flag = true;
         		flag1 = true;
         		actionInvocation.invoke();
