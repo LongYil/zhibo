@@ -10,4 +10,9 @@ import cn.lxy.po.Carousel;
 @Component(value="carouselDaoImpl")
 public class CarouselDaoImpl extends CommonDaoImpl<Carousel> implements CarouselDao {
 
+	@Override
+	public List<Carousel> findAll() {
+		return (List<Carousel>) ht.find("from Carousel");
+	}
+	
 }

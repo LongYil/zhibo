@@ -22,7 +22,7 @@ import cn.lxy.po.Student;
 import cn.lxy.utils.ConnectDb;
 import cn.lxy.utils.GetDateAndTime;
 
-@ServerEndpoint("/discuss/{userId}") // 该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
+@ServerEndpoint("/discuss/{userId}") //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
 public class DiscussSocket {
     // 用来存放每个客户端对应的ChatAnnotation对象，实现服务端与单一客户端通信的话，使用Map来存放，其中Key可以为用户标识，hashtable比hashmap线程安全
     private static Map<String, DiscussSocket> webSocketMap = new Hashtable<String, DiscussSocket>();
@@ -36,9 +36,7 @@ public class DiscussSocket {
      */
     @OnOpen
     public void onOpen(@PathParam(value="userId") String userId, Session session) {
-        this.session = session;
-        webSocketMap.put(userId, this);//加入map中
-//        System.out.println(userId+"---连接加入！当前在线人数为" + getOnlineCount());
+    	//
     }
 
     /**
@@ -46,10 +44,8 @@ public class DiscussSocket {
      */
     @OnClose
     public void onClose(@PathParam(value="userId") String userId) {
-        webSocketMap.remove(userId);
-//        System.out.println(userId+"关闭连接！当前在线人数为" + getOnlineCount());
+    	//
     }
-
     /**
      * 收到客户端消息后调用的方法
      * 
@@ -80,7 +76,6 @@ public class DiscussSocket {
         } catch (SQLException ex) {
         	;
         }
-        
         for (Map.Entry<String, DiscussSocket> entry : webSocketMap.entrySet()) {
             DiscussSocket item = entry.getValue();
             try {
@@ -91,7 +86,6 @@ public class DiscussSocket {
             }
         }
     }
-
     /**
      * 发生错误时调用
      * 
@@ -111,9 +105,7 @@ public class DiscussSocket {
      */
     public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
-        // this.session.getAsyncRemote().sendText(message);
     }
-
     public static synchronized int getOnlineCount() {
         return webSocketMap.size();
     }

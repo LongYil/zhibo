@@ -10,15 +10,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.lxy.po.Carousel;
 import cn.lxy.po.Exam;
 import cn.lxy.po.Teacher;
+import cn.lxy.service.CarouselServc;
 import cn.lxy.service.ExamServc;
 import cn.lxy.utils.CountAllPage11;
 import cn.lxy.utils.CountAllPage6;
@@ -47,32 +48,25 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	private CountAllPage11 countAllPage11;	
 	@Autowired
 	private CountAllPage6 countAllPage6;
-	
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();
 	private List<ExamVo> tempListExamVo = new ArrayList<ExamVo>();
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<AnalysedExam> listAnalysedExam = new ArrayList<AnalysedExam>();
 	private List<String> listAnswerResult = new ArrayList<String>();
-	
 	private String resultinfo;
 	private String pageNumber;
 	private String queryInfo;
-	
 	private String examId;
 	private String examNumber;
-	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectioni = new int[2];
 	private int[] pageDirectionNumber = new int[2];
 	private int[] pageDirectionNumberi = new int[2];
-	
     private String usename ;
     private String examName;
     private List<File> examfile;
     private List<String> examfileFileName ;  
     private List<String> examfileContentType ;
-    
-	
 	@Override
 	public Exam getModel() {
 		return exam;
@@ -108,6 +102,7 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	//前台用户根据试题信息查找试题
 	public String studentFindByInfo() {
 		pages.clear();
+		listExamVo.clear();
 		listExamVo = servc.studentFindAllByInfo(queryInfo);
 		int temp = countAllPage6.getAllPage(listExamVo.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
@@ -155,7 +150,6 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		}else {
 			return "findAll";
 		}
-		
 	}
 	//根据页码查找对应页面的试题
 	public String findByPageNumber() {
@@ -249,8 +243,6 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
         this.resultinfo = jo.toString();
 		return "calculateResult";
 	}
-	
-	
 	public Exam getExam() {
 		return exam;
 	}
@@ -371,5 +363,10 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	public void setExamNumber(String examNumber) {
 		this.examNumber = examNumber;
 	}
-	
+	public List<String> getListAnswerResult() {
+		return listAnswerResult;
+	}
+	public void setListAnswerResult(List<String> listAnswerResult) {
+		this.listAnswerResult = listAnswerResult;
+	}
 }

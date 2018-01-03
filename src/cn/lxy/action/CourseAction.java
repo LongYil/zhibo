@@ -17,11 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.lxy.po.Carousel;
 import cn.lxy.po.Course;
 import cn.lxy.po.Discuss;
 import cn.lxy.po.Note;
 import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
+import cn.lxy.service.CarouselServc;
 import cn.lxy.service.CourseServc;
 import cn.lxy.service.DiscussServc;
 import cn.lxy.service.NoteServc;
@@ -73,39 +75,34 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	private NoteServc noteServc;
 	@Autowired
 	private DiscussServc discussServc;
-	
+	@Autowired
+	private CarouselServc carouselServc;
     private List<File> coursefile ;  
     private List<String> coursefileFileName ;  
     private List<String> coursefileContentType ;
     private String[] rencentweek1;
     private String[] rencentweek2;
     private String pageNumber;
-	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectioni = new int[2];
 	private int[] pageDirectionNumber = new int[2];
 	private int[] pageDirectionNumberi = new int[2];
-
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<Course> tempCourse = new ArrayList<Course>();
 	private List<CourseVo> listCourse = new ArrayList<CourseVo>();
 	private List<CourseVo> tempListCourse = new ArrayList<CourseVo>();
 	private List<Note> listNote = new ArrayList<Note>();
 	private List<Discuss> listDiscuss = new ArrayList<Discuss>();
-	
-	
+	private List<Carousel> listCarousel = new ArrayList<Carousel>();
 	private String courseName;
 	private String queryInfo;
-
 	private String resultinfo;
-
 	private int noteSize;
 	private int discussSize;
 	@Override
 	public Course getModel() {
 		return course;
 	}
-	
 	//教师创建一个直播课程
 	public String save() throws ParseException {
 		HttpServletRequest request =  ServletActionContext.getRequest();
@@ -221,10 +218,17 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	public String findRecentCource() throws ParseException {
 		listCourse.clear();
 		pages.clear();
+		listCarousel.clear();
 		rencentweek1 = dateUtils.getRecentWeek1();
 		rencentweek2 = dateUtils.getRecentWeek2();
 		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
 		SimpleDateFormat sdf2 =  new SimpleDateFormat("MM-dd");
+		listCarousel = carouselServc.findAll("");
+		String[] arrayCarousel = new String[listCarousel.size()];
+		for(int i = 0;i < arrayCarousel.length;i ++) {
+			arrayCarousel[i] = listCarousel.get(i).getFace();
+		}
+		this.getSesion().put("arrayCarousel",arrayCarousel);
 		Date d = new Date();
 		String temptoday = sdf1.format(d);
 		listCourse = dateUtils.formatDateAndTeacher(servc.findByDate(temptoday));
@@ -261,9 +265,11 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	public String findPastCource() throws ParseException {
 		listCourse.clear();
 		pages.clear();
+		listCarousel.clear();
 		SimpleDateFormat sdf1 =  new SimpleDateFormat("YYYY-MM-dd");
 		Date d = new Date();
 		String temptoday = sdf1.format(d);
+		listCarousel = carouselServc.findAll("");
 		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);
@@ -485,218 +491,160 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		courseVo.setStreamId(infos[infos.length-1]);	
 		return "showInfo";
 	}
-	
-	
-	
-	
 	public Course getCourse() {
 		return course;
 	}
-
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-
 	public Teacher getTeacher() {
 		return teacher;
 	}
-
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-
 	public FileUtils getFileUtils() {
 		return fileUtils;
 	}
-
 	public void setFileUtils(FileUtils fileUtils) {
 		this.fileUtils = fileUtils;
 	}
-
 	public DateUtils getDateUtils() {
 		return dateUtils;
 	}
-
 	public void setDateUtils(DateUtils dateUtils) {
 		this.dateUtils = dateUtils;
 	}
-
 	public List<File> getCoursefile() {
 		return coursefile;
 	}
-
 	public void setCoursefile(List<File> coursefile) {
 		this.coursefile = coursefile;
 	}
-
 	public List<String> getCoursefileFileName() {
 		return coursefileFileName;
 	}
-
 	public void setCoursefileFileName(List<String> coursefileFileName) {
 		this.coursefileFileName = coursefileFileName;
 	}
-
 	public List<String> getCoursefileContentType() {
 		return coursefileContentType;
 	}
-
 	public void setCoursefileContentType(List<String> coursefileContentType) {
 		this.coursefileContentType = coursefileContentType;
 	}
-
 	public List<CourseVo> getListCourse() {
 		return listCourse;
 	}
-
 	public void setListCourse(List<CourseVo> listCourse) {
 		this.listCourse = listCourse;
 	}
-
 	public int[] getPageDirection() {
 		return pageDirection;
 	}
-
 	public void setPageDirection(int[] pageDirection) {
 		this.pageDirection = pageDirection;
 	}
-
 	public int[] getPageDirectionNumber() {
 		return pageDirectionNumber;
 	}
-
 	public void setPageDirectionNumber(int[] pageDirectionNumber) {
 		this.pageDirectionNumber = pageDirectionNumber;
 	}
-
 	public List<Integer> getPages() {
 		return pages;
 	}
-
 	public void setPages(List<Integer> pages) {
 		this.pages = pages;
 	}
-
 	public String getPageNumber() {
 		return pageNumber;
 	}
-
 	public void setPageNumber(String pageNumber) {
 		this.pageNumber = pageNumber;
 	}
-
 	public String getCourseName() {
 		return courseName;
 	}
-
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-
 	public String getResultinfo() {
 		return resultinfo;
 	}
-
 	public void setResultinfo(String resultinfo) {
 		this.resultinfo = resultinfo;
 	}
-
 	public CourseVo getCourseVo() {
 		return courseVo;
 	}
-
 	public void setCourseVo(CourseVo courseVo) {
 		this.courseVo = courseVo;
 	}
-
 	public String[] getRencentweek1() {
 		return rencentweek1;
 	}
-
 	public void setRencentweek1(String[] rencentweek1) {
 		this.rencentweek1 = rencentweek1;
 	}
-
 	public String[] getRencentweek2() {
 		return rencentweek2;
 	}
-
 	public void setRencentweek2(String[] rencentweek2) {
 		this.rencentweek2 = rencentweek2;
 	}
-
 	public CountAllPage11 getCountAllPage11() {
 		return countAllPage11;
 	}
-
 	public void setCountAllPage11(CountAllPage11 countAllPage11) {
 		this.countAllPage11 = countAllPage11;
 	}
-
 	public CountAllPage6 getCountAllPage6() {
 		return countAllPage6;
 	}
-
 	public void setCountAllPage6(CountAllPage6 countAllPage6) {
 		this.countAllPage6 = countAllPage6;
 	}
-
 	public int[] getPageDirectioni() {
 		return pageDirectioni;
 	}
-
 	public void setPageDirectioni(int[] pageDirectioni) {
 		this.pageDirectioni = pageDirectioni;
 	}
-
 	public int[] getPageDirectionNumberi() {
 		return pageDirectionNumberi;
 	}
-
 	public void setPageDirectionNumberi(int[] pageDirectionNumberi) {
 		this.pageDirectionNumberi = pageDirectionNumberi;
 	}
-
 	public String getQueryInfo() {
 		return queryInfo;
 	}
-
 	public void setQueryInfo(String queryInfo) {
 		this.queryInfo = queryInfo;
 	}
-
 	public List<Note> getListNote() {
 		return listNote;
 	}
-
 	public void setListNote(List<Note> listNote) {
 		this.listNote = listNote;
 	}
-
 	public List<Discuss> getListDiscuss() {
 		return listDiscuss;
 	}
-
 	public void setListDiscuss(List<Discuss> listDiscuss) {
 		this.listDiscuss = listDiscuss;
 	}
-
 	public int getNoteSize() {
 		return noteSize;
 	}
-
 	public void setNoteSize(int noteSize) {
 		this.noteSize = noteSize;
 	}
-
 	public int getDiscussSize() {
 		return discussSize;
 	}
-
 	public void setDiscussSize(int discussSize) {
 		this.discussSize = discussSize;
 	}
-
-
-	
 }

@@ -40,9 +40,7 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 	private CourseServc courseServc;
 	@Autowired
 	private GetDateAndTime getDateAndTime;
-	
 	private List<Discuss> listDiscuss = new ArrayList<Discuss>();
-	
 	private String resultinfo;
 	@Override
 	public Discuss getModel() {
@@ -69,10 +67,7 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 		listDiscuss = servc.findByCourseId(id);
 		return null;
 	}
-	
-	
-	
-	public Discuss getDiscuss() {
+    public Discuss getDiscuss() {
 		return discuss;
 	}
 	public void setDiscuss(Discuss discuss) {
@@ -102,5 +97,4 @@ public class DiscussAction extends BasicAction implements ModelDriven<Discuss> {
 	public void setListDiscuss(List<Discuss> listDiscuss) {
 		this.listDiscuss = listDiscuss;
 	}
-	
 }

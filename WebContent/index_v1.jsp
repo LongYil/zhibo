@@ -130,10 +130,9 @@
       <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="wrap af4">
           <ul class="slidebox">
-            <li><a href="#"><img src="images/lunbo.png" /></a></li>
-            <li><a href="#"><img src="images/lunbo.png" /></a></li>
-            <li><a href="#"><img src="images/lunbo.png" /></a></li>
-            <li><a href="#"><img src="images/lunbo.png" /></a></li>
+	          <c:forEach items="${arrayCarousel}" var="item">
+	              <li><a href="javascript:void(0)"><img  src="${item}"></a></li>
+	          </c:forEach>
           </ul>
         </div>
       </div>

@@ -36,16 +36,12 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 	private GetDateAndTime getDateAndTime;
 	@Autowired
 	private Course course;
-	
 	private String resultinfo;
-	
 	private List<Note> listNote = new ArrayList<Note>();
-	
 	@Override
 	public Note getModel() {
 		return note;
 	}
-	
 	//±£´æ±Ê¼Ç
 	public String save() throws UnsupportedEncodingException {
 		HttpServletRequest request =  ServletActionContext.getRequest();
@@ -78,10 +74,6 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 		listNote = servc.findAll(String.valueOf(student.getId()), course_id);
 		return null;
 	}
-	
-	
-	
-	
 	public Note getNote() {
 		return note;
 	}
@@ -100,6 +92,4 @@ public class NoteAction extends BasicAction implements ModelDriven<Note> {
 	public void setListNote(List<Note> listNote) {
 		this.listNote = listNote;
 	}
-	
-	
 }

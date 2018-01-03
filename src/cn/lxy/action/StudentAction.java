@@ -33,7 +33,6 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private String enablePageNumber;
 	private String disablePageNumber;
 	private int userRole;
-	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectionNumber = new int[2];
 	@Autowired
@@ -46,15 +45,12 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	private FileUtils fileUtils;
 	@Autowired
 	private VerificationCodeUtils verificationCodeUtils;
-	
 	private List<Student> liststudent = new ArrayList<Student>();
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<Student> tempstudent = new ArrayList<Student>();
-
     private List<File> picfile;
     private List<String> picfileFileName ;  
     private List<String> picfileContentType ;
-    
 	@Override
 	public Student getModel() {
 		return student;
@@ -78,7 +74,7 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
         this.getSesion().put("tab3", "display:none");
 		return "student";
 	}
-	
+	//Ñ§ÉúÐÞ¸ÄÃÜÂë
 	public String updatePassword() {
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String[] passwordInfo = request.getParameter("info").split("-");		
@@ -244,7 +240,6 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
         this.getSesion().put("tab3","display:none");
 		return "saveStudentIcon";
 	}
-	
 	public Student getStudent() {
 		return student;
 	}
@@ -317,5 +312,4 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	public void setPicfileContentType(List<String> picfileContentType) {
 		this.picfileContentType = picfileContentType;
 	}
-	
 }

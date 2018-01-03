@@ -14,7 +14,6 @@ import cn.lxy.service.StudentServc;
 import cn.lxy.utils.ServerInfo;
 
 public class ManagerAction extends BasicAction implements ModelDriven<Manager> {
-
 	@Autowired
 	private Manager manager;
 	@Autowired
@@ -23,14 +22,11 @@ public class ManagerAction extends BasicAction implements ModelDriven<Manager> {
 	private Student student;
 	@Autowired
 	private StudentServc studentServc;
-	
 	private List<Manager> listManager = new ArrayList<Manager>();
-	
 	@Override
 	public Manager getModel() {
 		return manager;
 	}
-	
 	public String initialization() {
 		listManager.clear();
 		listManager = servc.findAll("");
@@ -47,5 +43,4 @@ public class ManagerAction extends BasicAction implements ModelDriven<Manager> {
 		}
 		return "initialization";
 	}
-	
 }

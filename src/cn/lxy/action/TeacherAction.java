@@ -41,33 +41,26 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	private StudentServc studentServc;
 	@Autowired
 	private CountAllPage11 countAllPage;
-	
 	private String teacherTempId;
 	private String resultinfo;
 	private String enablePageNumber;
 	private String username;
-	
     private File file1 ; //具体上传文件的 引用 , 指向临时目录中的临时文件  
     private String file1FileName ;  // 上传文件的名字 ,FileName 固定的写法  
     private String file1ContentType ; //上传文件的类型， ContentType 固定的写法
-	
 	private int[] pageDirection = new int[2];
 	private int[] pageDirectionNumber = new int[2];
-	
 	private List<Teacher> listteacher = new ArrayList<Teacher>();
 	private List<Integer> pages = new ArrayList<Integer>();
-	private List<Teacher> tempteacher = new ArrayList<Teacher>();	
-
+	private List<Teacher> tempteacher = new ArrayList<Teacher>();
 	@Override
 	public Teacher getModel() {
 		return teacher;
 	}
-	
 	//用户执行添加教师操作
 	public String addTeacher() {
 		return "addTeacher";
 	}
-	
 	//添加教师
 	public String saveInfo() throws UnsupportedEncodingException {
 		this.resultinfo="0";
@@ -211,10 +204,6 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 			return "back_findAll";
 		}
 	}
-	
-	
-	
-	
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -293,6 +282,5 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	}
 	public void setFile1ContentType(String file1ContentType) {
 		this.file1ContentType = file1ContentType;
-	}
-	
+	}	
 }

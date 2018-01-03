@@ -9,10 +9,11 @@ package cn.lxy.utils;
  */
 public class ServerInfo {
 	public static final String SERVER_IP = "localhost";
-	public static final String STUDENT_ICON_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/sourcefile/studenticon/";
-	public static final String FILE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/sourcefile/examfile/";
-	public static final String IMAGE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/sourcefile/examimage/";
-	public static final String COURSE_IMAGE_ADDRESS = "http://"+"localhost"+":8080/CollegeLive/sourcefile/courseimage/";
+	public static final String STUDENT_ICON_ADDRESS = "http://" + SERVER_IP + ":8080/CollegeLive/sourcefile/studenticon/";
+	public static final String FILE_ADDRESS = "http://" + SERVER_IP + ":8080/CollegeLive/sourcefile/examfile/";
+	public static final String IMAGE_ADDRESS = "http://" + SERVER_IP + ":8080/CollegeLive/sourcefile/examimage/";
+	public static final String COURSE_IMAGE_ADDRESS = "http://"+SERVER_IP+":8080/CollegeLive/sourcefile/courseimage/";
+	public static final String CAROUSEL_IMAGE_ADDRESS = "http://"+SERVER_IP+":8080/CollegeLive/Image/";
 	public static final String BIZID = "11925";
 	public static final String STREAM_BASIC = "rtmp://" + BIZID + ".livepush.myqcloud.com/live/" + BIZID + "_";
 	public static final String STREAMID = "rtmp://" + BIZID + ".livepush.myqcloud.com/live/";

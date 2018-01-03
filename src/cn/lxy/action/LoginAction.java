@@ -2,15 +2,19 @@ package cn.lxy.action;
 
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.lxy.po.Carousel;
 import cn.lxy.po.Manager;
 import cn.lxy.po.Student;
 import cn.lxy.po.Teacher;
+import cn.lxy.service.CarouselServc;
 import cn.lxy.service.ManagerServc;
 import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
@@ -26,7 +30,6 @@ public class LoginAction extends BasicAction {
 	private String username;
 	private String password;
 	private int usertype;
-	
 	@Autowired
 	private TeacherServc teacherServc;
 	@Autowired
@@ -37,9 +40,7 @@ public class LoginAction extends BasicAction {
 	private Manager manager;
 	@Autowired
 	private ManagerServc managerServc;
-	
 	private Student student;
-
 	private String resultinfo;
 	//用户登录
 	public String login() throws Exception {
@@ -112,7 +113,7 @@ public class LoginAction extends BasicAction {
 			return "student";
 		}
 	}
-	
+	//ajax验证用户登录
 	public String preLogin() throws Exception {	
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String info = request.getParameter("info");
@@ -156,7 +157,6 @@ public class LoginAction extends BasicAction {
 			}			
 		}
 	}
-
 	//学生用户注销用户
 	public String logout() {
 		this.getSesion().clear();
@@ -166,20 +166,16 @@ public class LoginAction extends BasicAction {
 	public String personalCenter() {
 		String tempUserType = this.getSesion().get("userType").toString();
 		if(tempUserType.equals("0")) {
-			//学生用户
-			
+			//学生用户	
 			return "studentPersonalCenter";
 		}else if(tempUserType.equals("1")) {
-			//教师用户
-			
+			//教师用户	
 			return "teacherPersonalCenter";
 		}else {
-			//管理员用户
-			
+			//管理员用户	
 			return "administratorPersonalCenter";
 		}
 	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -204,5 +200,22 @@ public class LoginAction extends BasicAction {
 	public void setResultinfo(String resultinfo) {
 		this.resultinfo = resultinfo;
 	}
-
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+	public Manager getManager() {
+		return manager;
+	}
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
 }

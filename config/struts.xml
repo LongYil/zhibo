@@ -41,8 +41,11 @@
  	        </global-results>
  	        
 			<action name="carousel_*" class="carouselAction" method="{1}">
-				<result name="success">/index.jsp</result>
-				<result name="aaa">/test.jsp</result>
+				<result name="findAll">/carouselmanager.jsp</result>
+				<result name="uploadImg">/uploadimg.jsp</result>
+				<result name="addImg">carousel_findAll.action</result>
+				
+				<result type="json" name="deleteImg"><param name="root">resultinfo</param></result>
 			</action>
 			
 			<action name="discuss_*" class="discussAction" method="{1}">
