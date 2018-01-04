@@ -31,3 +31,26 @@
 			   }
 			   }
 	   }
+	   function checkPhone(arg){ 
+		    var phone = arg;
+		    if(!(/^1[34578]\d{9}$/.test(phone))){  
+		        return false; 
+		    }else{
+		    	return true;
+		    }
+		}
+	    function checkNumber(arg){
+	      if(!/^\d+(?=\.{0,1}\d+$|$)/.test(arg)){
+	          return false;
+	      }else{
+	    	  return true;
+	      }
+	    }
+	    function checkEmail(arg) {
+	    	var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    	    if(!myreg.test(arg)){
+    	      return false;
+    	    }else{
+    		  return true;
+    	    }
+	    }

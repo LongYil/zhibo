@@ -171,16 +171,54 @@
 <script type="text/javascript">
 
 function updatepassword(){
-	var arg = $("#pwd1").val()+"-"+$("#pwd2").val();
-	var result = ajaxSubmit("teacher_updatePassword.action",arg);
-	if(result=="1"){
-		parent.layer.msg('修改成功', {icon: 1});
+	var info1 = $("#pwd1").val();
+	var info2 = $("#pwd2").val();
+	var info3 = $("#pwd3").val();
+	if(info1 == "" || info2 == "" || info3 == ""){
+		parent.layer.msg('信息填写不完整!', {icon: 2});
 	}else{
-		parent.layer.msg('旧密码错误，修改失败', {icon: 2});
+		if(info2 == info3){
+			var arg = info1 + "-" + info2;
+			var result = ajaxSubmit("teacher_updatePassword.action",arg);
+			if(result=="1"){
+				parent.layer.msg('修改成功', {icon: 1});
+			}else{
+				parent.layer.msg('旧密码错误，修改失败', {icon: 2});
+			}			
+		}else{
+			parent.layer.msg('两次密码不一致!', {icon: 2});
+		}		
 	}
 }
 
 function updateinfo(){
+	var info1 = $("#info1").val();
+	var info2 = $("#info2").val();//tel
+	var info4 = $("#info4").val();
+	var info5 = $("#info5").val();
+	var info6 = $("#info6").val();//age
+	var info7 = $("#info7").val();//email
+	
+	var info8 = checkPhone(info2);
+	var info9 = checkNumber(info6);
+	var info10 = checkEmail(info7);
+	
+	if(info1 == "" || info2 == "" || info4 == "" || info5 == "" || info6 == "" || info7 == ""){
+		parent.layer.msg('信息填写不完整!', {icon: 2});
+		return ;
+	}
+	if(!info8){
+		parent.layer.msg('手机号码格式错误!', {icon: 2});
+		return ;
+	}
+	if(!info9){
+		parent.layer.msg('教龄格式错误!', {icon: 2});
+		return ;
+	}
+	if(!info10){
+		parent.layer.msg('邮箱格式错误!', {icon: 2});
+		return ;
+	}
 	var arg = $("#info1").val()+"-"+$("#info2").val()+"-"+$("input:radio:checked").val()+"-"+$("#info4").val()+"-"+$("#info5").val()+"-"+$("#info6").val()+"-"+$("#info7").val();
 	var result = ajaxSubmit("teacher_updateInfo.action",arg);
 	if(result=="1"){

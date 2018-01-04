@@ -48,6 +48,17 @@
                     </li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span class="ng-scope">用户中心</span>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="manager_queryInfo.action">
+                            <i class="fa fa-user"></i>
+                            <span class="nav-label">个人中心</span>
+                        </a>
+                    </li>
+
+                    <li class="line dk"></li>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">用户管理</span>
                     </li>
                     <li>

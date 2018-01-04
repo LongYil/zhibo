@@ -120,7 +120,7 @@ function deleteExam(arg1,arg2){
 	}, function(){
 		var text = ajaxSubmit("exam_delete.action",arg1); 
 		if(text=="1"){
-			parent.layer.msg('删除', {icon: 1});
+			parent.layer.msg('删除成功', {icon: 1});
 			window.location="exam_findAll.action";
 		}else{
 			parent.layer.msg('删除失败', {icon: 2});

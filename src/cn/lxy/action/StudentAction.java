@@ -60,16 +60,19 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		student.setUserstatus(1);
 		student.setHead("http://"+ServerInfo.SERVER_IP+":8080/CollegeLive/Image/temphead.png");
 		servc.save(student);
-		this.getSesion().put("Student", student);
-		this.getSesion().put("StudentId", student.getId());
-		this.getSesion().put("studentUserStatus",1);
 		if(student.getBirth()!=null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String[] tempBirth = sdf.format(student.getBirth()).split("-");					
 			String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
 			this.getSesion().put("birth", birth);
 		}
-		this.getSesion().put("tempPicPath",student.getHead());
+		this.getSesion().put("Student", student);
+		this.getSesion().put("userName", student.getName());
+		this.getSesion().put("StudentId", student.getId());
+		this.getSesion().put("userStaticStatus",1);
+		this.getSesion().put("userStatus","1");
+		this.getSesion().put("userType","0");
+		this.getSesion().put("tempPicPath",student.getHead());		
         this.getSesion().put("tab1", "");
         this.getSesion().put("tab3", "display:none");
 		return "student";

@@ -18,6 +18,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="css/layui.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/mainstyle.css" rel="stylesheet" type="text/css">
     <link href="css/new_main.css" rel="stylesheet" type="text/css">
@@ -89,26 +90,26 @@
 
     </div>
 	
-	<form action="student_add.action" method="post" name="registeform">
     <div id="light2"></div><!-- 注册弹窗 -->
     <div id="fade2" class="register-body">
       <div class="head">
-        <a id="turn1">登录</a>
-        <a id="line">注册</a>
+        <a id="turn1" href="javascript:void(0)">登录</a>
+        <a id="line" href="javascript:void(0)">注册</a>
         <a href="javascript:void(0)" id="closebt2" style="float:right; font-size:30px;margin-top: -18px;margin-right: -65px;padding:0;color: #dbdbdb;">&times;</a>
       </div>
       <div class="content">
         <p>手机注册</p>
-        <input type="text" name="tel" id="usertel" placeholder="输入手机号" onblur="checkAccount()">
-        <input type="password" name="password" placeholder="输入密码">
-        <input type="password" name="" placeholder="再次输入密码">
-        <input class="input-yz" type="text" id="vc" name="" placeholder="输入验证码" onblur="checkVC()">
+        <form action="student_add.action" method="post" name="registeform">
+        <input type="text" name="tel" id="usertel" class="info1" placeholder="输入手机号" onblur="checkAccount()">
+        <input type="password" name="password" class="info2" placeholder="输入密码">
+        <input type="password" name="" class="info3" placeholder="再次输入密码">
+        <input class="input-yz" type="text" id="vc" name="" placeholder="输入验证码">
         <a id="yz"><span id="v_container" class="img-yz" style="width:131px;height:51px;"></span></a>
+        </form>
         <button class="button" onClick="registe()">注  册</button>
       </div>
     </div>
     <div class="clearfix visible-xs-block"></div>
-    </form>
 
     <div class="row nav">
       <div class="col-sm-3 col-md-3 col-lg-3"></div>
@@ -209,6 +210,7 @@
     <script src="js/ajaxcommunicate.js"></script>
     <script src="js/gVerify.js"></script>
     <script src="js/foundation-datepicker.js"></script>
+    <script src="layui.all.js"></script>
     <script>
       $('#demo-1').fdatepicker();
     </script>
@@ -228,22 +230,40 @@
   	  var tel = $("#usertel").val();
   	  var result = ajaxSubmit("student_checkAccount.action",tel);
   	  if(result=="0"){
-  		  alert("该手机号已存在");
-  	  }else{
-  		  ;
-  	  }
-    }
-    function checkVC(){
-  	  var vc = $("#vc").val();
-  	  var result = ajaxSubmit("student_checkVerificationCode.action",vc);
-  	  if(result=="0"){
-  		  alert("验证码错误");
+  		parent.layer.msg('该手机号注册!', {icon: 2});
   	  }else{
   		  ;
   	  }
     }
     function registe(){
-  	  registeform.submit();
+  	  var info1 = $(".info1").val();
+  	  var info2 = $(".info2").val();
+  	  var info3 = $(".info3").val();
+  	  var info5 = checkPhone(info1);
+  	  var vc = $("#vc").val();
+  	  if(info1 == "" || info2 == "" || info3 == "" || vc == ""){
+  		  parent.layer.msg('信息填写不完整!', {icon: 2});
+  	  }else{
+  		  if(info5){
+  			  if(info2 == info3){
+  				  if(info2.length >8){
+  					  var info4 = ajaxSubmit("student_checkVerificationCode.action",vc); 
+  					  if(info4 == "0"){
+  						  parent.layer.msg('验证码输入错误!', {icon: 2});
+  						  verifyCode.refresh();
+  					  }else{
+  						  registeform.submit();
+  					  }					  
+  				  }else{
+  					  parent.layer.msg('密码至少为9位!', {icon: 2});
+  				  }				  
+  			  }else{
+  				  parent.layer.msg('两次密码不一致!', {icon: 2});
+  			  }
+  		  }else{
+  			  parent.layer.msg('手机号码格式错误!', {icon: 2}); 
+  		  }
+  	  }
     }
     function logout(){
   	  window.location="login_logout.action";
@@ -258,7 +278,11 @@
     function submit(){
   	  var username = $("#username").val().toString();
   	  var password = $("#password").val().toString();
-  	var usertype = $("input[name='usertype']:checked").val().toString();
+	  if(username == "" || password == ""){
+		  parent.layer.msg('登录信息不完整!', {icon: 2}); 
+		  return ;
+	  }  	  
+  	  var usertype = $("input[name='usertype']:checked").val().toString();
   	  var tempinfo = (usertype+"-"+username+"-"+password).toString();
   	  var resultinfo = ajaxSubmit("login_preLogin.action",tempinfo);
   	  if(resultinfo == 1){

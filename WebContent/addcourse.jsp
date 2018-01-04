@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>添加课程</title>
 
-    <link rel="shortcut icon" href="favicon.ico"> 
+    <link rel="shortcut icon" href="favicon.ico">
     <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
 
@@ -33,11 +33,11 @@
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
-							<form action="course_save.action" method="post" name="myform()" enctype="multipart/form-data">
+							<form action="course_save.action" method="post" name="myform" enctype="multipart/form-data">
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="name" placeholder="课程名称" class="form-control"> 
+                                    <input type="text" name="name" id="info1" placeholder="课程名称" class="form-control"> 
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
@@ -45,21 +45,21 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程科目：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="subject" placeholder="课程科目" class="form-control"> 
+                                    <input type="text" name="subject" id="info2" placeholder="课程科目" class="form-control"> 
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程简介：</label>
                                 <div class="col-sm-8">
-								    <textarea name="summary" class="form-control" rows="3" placeholder="课程简介..."></textarea>
+								    <textarea name="summary" id="info3" class="form-control" rows="3" placeholder="课程简介..."></textarea>
                                 </div>
                             </div>
 
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">开始时间：</label>
                                 <div class="col-sm-8">
-                                   <input readonly name="time" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                   <input readonly name="time" id="info4" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@
 													        	<div style="height:10px;"></div>
 													        	<div class="" style="width:140px;height:32px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;margin-left:37px;position:relative;">
 													        		点击上传封面图
-													        		<input type="file" name="coursefile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
+													        		<input type="file" class="info5" name="coursefile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
 													        	    <input type="hidden" name="coursePic" id="picFile">
 													        	</div>
 												        	</div>
@@ -108,12 +108,12 @@
 
                                 </div>
                             </div>
+                            </form>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <button class="btn btn-sm btn-info" onClick="saveExam()">保 存</button>
+                                    <button class="btn btn-sm btn-info" onClick="saveCourse()">保 存</button>
                                 </div>
-                            </div>
-                            </form>
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -172,8 +172,18 @@ var clipArea = new bjj.PhotoClip("#clipArea", {
   return false;
  };
  //提交表单
- function saveExam(){
-	 myform.submit();
+ function saveCourse(){
+	 var info1 = $("#info1").val();
+	 var info2 = $("#info2").val();
+	 var info3 = $("#info3").val();
+	 var info4 = $("#info4").val();
+	 var info5 = $(".info5").val();
+	 if(info1 == "" || info2 == "" || info3 == "" || info4 == "" || info5 == ""){
+		 parent.layer.msg('信息填写不完整!', {icon: 2});
+		 return ;
+	 }else{
+		 myform.submit();
+	 }
  }
 
 </script>

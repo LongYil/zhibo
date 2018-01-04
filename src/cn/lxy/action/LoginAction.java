@@ -58,12 +58,12 @@ public class LoginAction extends BasicAction {
 				this.getSesion().put("userStaticStatus",1);
 				this.getSesion().put("userStatus","1");
 				this.getSesion().put("userType","0");
+				this.getSesion().put("tempPicPath",student.getHead());
 				if(student.getBirth()!=null) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					String[] tempBirth = sdf.format(student.getBirth()).split("-");					
 					String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
 					this.getSesion().put("birth", birth);
-			        this.getSesion().put("tempPicPath",student.getHead());
 				}
 				this.getSesion().put("tab1", "");
 				this.getSesion().put("tab3", "display:none");
@@ -126,7 +126,7 @@ public class LoginAction extends BasicAction {
 		if(infos[0].equals("0")) {
 			//学生用户
 			student = studentServc.login(infos[1], infos[2]);
-			if(student.getUsername() != null && student.getUsername() != "") {
+			if(student.getPassword() != null && student.getPassword() != "") {
 			  //学生存在
 			  this.resultinfo = "1";
 			  return "preLogin";

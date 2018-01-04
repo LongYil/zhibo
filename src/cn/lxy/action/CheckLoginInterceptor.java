@@ -20,7 +20,7 @@ public class CheckLoginInterceptor extends AbstractInterceptor {
 //        System.out.println("调用的方法是："+actionInvocation.getProxy().getMethod());
         
         // 对LoginAction不做该项拦截
-        String[] methods = {"initialization","preLogin","findRecentCource","findRecentCourceTemp","getVerificationCode","findByDate","findRecentByPage","findPastCource","findPastByPage","findPastCourceTemp","studentFindAll","studentFindAllTemp","checkAccount","add","logout","login"};
+        String[] methods = {"checkVerificationCode","initialization","preLogin","findRecentCource","findRecentCourceTemp","getVerificationCode","findByDate","findRecentByPage","findPastCource","findPastByPage","findPastCourceTemp","studentFindAll","studentFindAllTemp","checkAccount","add","logout","login"};
         String actionMethod = actionInvocation.getProxy().getMethod();
         
         Map session = actionInvocation.getInvocationContext().getSession();

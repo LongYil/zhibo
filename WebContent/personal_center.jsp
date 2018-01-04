@@ -18,6 +18,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="css/layui.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/mainstyle.css" rel="stylesheet" type="text/css">
   </head>
@@ -114,19 +115,19 @@
           <form action="student_updateBasicInfo.action" method="post" name="form1">
           <div>
             <a>昵称：</a>
-            <input type="text" name="username"  value="${Student.username}" maxlength="20">
+            <input type="text" id="info1" name="username"  value="${Student.username}" maxlength="20">
           </div>
           <div>
             <a>姓名：</a>
-            <input type="text" name="name" value="${Student.name}" maxlength="20">
+            <input type="text" id="info2" name="name" value="${Student.name}" maxlength="20">
           </div>
           <div>
             <a>学院：</a>
-            <input type="text" name="department" value="${Student.department}" maxlength="20">
+            <input type="text" id="info3" name="department" value="${Student.department}" maxlength="20">
           </div>
           <div>
             <a>班级：</a>
-            <input type="text" name="classandgrade" value="${Student.classandgrade}" maxlength="20">
+            <input type="text" id="info4" name="classandgrade" value="${Student.classandgrade}" maxlength="20">
           </div>
           <div>
             <a>出生日期：</a>
@@ -139,10 +140,10 @@
           </div>
           <div>
             <a>一句话介绍：</a>
-            <textarea class="introduce" name="selfintroduce" maxlength="20" placeholder="20字以内">${Student.selfintroduce}</textarea>
+            <textarea class="introduce" id="info5" name="selfintroduce" maxlength="20" placeholder="20字以内">${Student.selfintroduce}</textarea>
           </div>
-          <button onClick="saveBasicInfo()">保&nbsp;&nbsp;存</button>
           </form>
+          <button onClick="saveBasicInfo()">保&nbsp;&nbsp;存</button>
         </div>
 
         <div class="content-pcenter" id="d2" style="display:none">
@@ -182,6 +183,8 @@
     <script src="js/Change.js" type="text/javascript"></script>
     <script src="js/open.js" type="text/javascript"></script>
     <script src="js/ajaxcommunicate.js"></script>
+
+    <script src="layui.all.js"></script>
     <script type="text/javascript">
     function registe(){
   	  registeform.submit();
@@ -193,30 +196,43 @@
   	  window.location="login_personalCenter.action";
     }
     function saveBasicInfo(){
-    	form1.submit();
+    	var info1 = $("#info1").val();
+    	var info2 = $("#info2").val();
+    	var info3 = $("#info3").val();
+    	var info4 = $("#info4").val();
+    	var info5 = $("#info5").val();
+    	if(info1 == "" || info2 == "" || info3 == "" || info4 == "" || info5 == ""){
+    		parent.layer.msg('信息填写不完整!', {icon: 2});
+    	}else{
+    		form1.submit();
+    	}
     }
     function updatePassword(){
     	var old = $(".ps1").val();
     	var new1 = $(".ps2").val();
     	var new2 = $(".ps3").val();
     	var tempInfo = old + "-" + new1 + "-" + new2;
-    	if(new1==new2&&new1!=""&&new2!=""){
+    	if(old == "" || new1 == "" || new2 == ""){
+    		parent.layer.msg('信息填写不完整!', {icon: 2});
+    		return ;
+    	}
+    	if(new1 == new2){
     		var temp = ajaxSubmit("student_updatePassword.action",tempInfo);
     		if(temp == "1"){
-    			alert("密码修改成功,请牢记。");
+    			parent.layer.msg('密码修改成功!', {icon: 1});
     		}else{
-    			alert("旧密码输入错误!");
+    			parent.layer.msg('旧密码错误!', {icon: 2});
     		}
+    	}else{
+    		parent.layer.msg('两次密码不一致!', {icon: 2});
     	}
-    }
-    
+    }   
     function preview(){
-    	myform.submit();    	
+    	myform.submit();
     }
     function save(){
     	window.location = "student_saveStudentIcon.action";
     }
-    
     </script>
   </body>
 </html>

@@ -54,6 +54,10 @@
 			
 			<action name="manager_*" class="managerAction" method="{1}">
 				<result name="initialization">/index.jsp</result>
+				<result name="queryInfo">/administratorinfo.jsp</result>
+				
+				<result type="json" name="updatePassword"><param name="root">resultinfo</param></result>
+				<result type="json" name="updateInfo"><param name="root">resultinfo</param></result>
 			</action>
 
 			<action name="addpo_*" class="addPoAction" method="{1}">

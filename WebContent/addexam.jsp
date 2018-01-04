@@ -36,7 +36,7 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">试题名称：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="name" placeholder="试题名称" class="form-control"> 
+                                    <input type="text" name="name" placeholder="试题名称" id="info1" class="form-control"> 
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
@@ -44,14 +44,14 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">试题描述：</label>
                                 <div class="col-sm-8">
-                                <textarea class="form-control" name="describes" rows="3" placeholder="试题描述..." class="form-control"></textarea>
+                                <textarea class="form-control" name="describes" rows="3" id="info2" placeholder="试题描述..." class="form-control"></textarea>
                                 </div>
                             </div>
 
 						    <div class="form-group">
 						        <label class="col-sm-3 control-label">试题附件：</label>
 						        <div class="col-sm-8">
-						            <input type="file" name="examfile" class="form-control">
+						            <input type="file" name="examfile" id="info3" class="form-control">
 						        </div>
 						    </div>                          
 
@@ -86,7 +86,7 @@
 													        	<div style="height:10px;"></div>
 													        	<div class="" style="width:140px;height:32px;border-radius: 4px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;margin-left:37px;position:relative;">
 													        		点击上传封面图
-													        		<input type="file" name="examfile" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
+													        		<input type="file" name="examfile" class="info4" id="file" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
 													        	    <input type="hidden" name="examPic" id="picFile">
 													        	</div>
 												        	</div>
@@ -100,12 +100,12 @@
 
                                 </div>
                             </div>
-                            <div class="form-group">
+                            </form>
+                           <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
                                     <button class="btn btn-sm btn-info" onClick="saveExam()">保 存</button>
                                 </div>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -164,7 +164,15 @@ var clipArea = new bjj.PhotoClip("#clipArea", {
  };
  //提交表单
  function saveExam(){
-	 myform.submit();
+	 var info1 = $("#info1").val();
+	 var info2 = $("#info2").val();
+	 var info3 = $("#info3").val();
+	 var info4 = $(".info4").val();
+	 if(info1 == "" || info2 == "" || info3 == "" || info4 == ""){
+		 parent.layer.msg('信息填写不完整!', {icon: 2});
+	 }else{
+		 myform.submit(); 
+	 }
  }
 
 </script>

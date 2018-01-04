@@ -33,11 +33,11 @@
                     </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
-							<form action="course_update.action" method="post" name="myform()" enctype="multipart/form-data">
+							<form action="course_update.action" method="post" name="myform" enctype="multipart/form-data">
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程名称：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value="<s:property value="courseVo.course.name"/>" name="name" placeholder="课程名称" class="form-control"> 
+                                    <input type="text" id="info1" value="<s:property value="courseVo.course.name"/>" name="name" placeholder="课程名称" class="form-control"> 
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
@@ -45,31 +45,29 @@
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程科目：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" value="<s:property value="courseVo.course.subject"/>" name="subject" placeholder="课程科目" class="form-control"> 
+                                    <input type="text" id="info2" value="<s:property value="courseVo.course.subject"/>" name="subject" placeholder="课程科目" class="form-control"> 
                                 </div>
                             </div>
                             
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">课程简介：</label>
                                 <div class="col-sm-8">
-								    <textarea name="summary" class="form-control" rows="3" placeholder="课程简介..."><s:property value="courseVo.course.summary"/></textarea>
+								    <textarea name="summary" id="info3" class="form-control" rows="3" placeholder="课程简介..."><s:property value="courseVo.course.summary"/></textarea>
                                 </div>
                             </div>
                             
 							<div class="form-group">
                                 <label class="col-sm-3 control-label">开始时间：</label>
                                 <div class="col-sm-8">
-                                   <input readonly name="time" value="<s:property value="courseVo.time"/>" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                   <input readonly name="time" id="info4" value="<s:property value="courseVo.time"/>" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
                                 </div>
                             </div>
-
-
+                            </form>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
                                     <button class="btn btn-sm btn-info" onClick="saveExam()">保 存</button>
                                 </div>
-                            </div>
-                            </form>
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -129,7 +127,16 @@ var clipArea = new bjj.PhotoClip("#clipArea", {
  };
  //提交表单
  function saveExam(){
-	 myform.submit();
+	 var info1 = $("#info1").val();
+	 var info2 = $("#info2").val();
+	 var info3 = $("#info3").val();
+	 var info4 = $("#info4").val();
+	 if(info1 == "" || info2 == "" || info3 == "" || info4 == ""){
+		 parent.layer.msg('信息填写不完整!', {icon: 2});
+		 return ;
+	 }else{
+		 myform.submit();
+	 }
  }
 
 </script>

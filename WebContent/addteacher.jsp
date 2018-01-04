@@ -86,12 +86,29 @@ function Go(url){
 	window.location=url;
 }
 function saveTeacherInfo(){
-	var arg = $(".userid").val()+"-"+$("#username").val()+"-"+$("#name").val()+"-"+$("#tel").val()+"-"+$("#password").val();
-	var result = ajaxSubmit("teacher_saveInfo.action",arg);
-	if(result=="1"){
-		parent.layer.msg('保存成功', {icon: 1});
+	var info1 = $("#username").val();
+	var info2 = $("#name").val();
+	var info3 = $("#tel").val();
+	var info4 = $("#password").val();
+	var info5 = checkPhone(info3);
+	if(info1 == "" || info2 == "" || info3 == "" || info4 == ""){	
+		parent.layer.msg('信息填写不完整!', {icon: 2});
 	}else{
-		parent.layer.msg('修改失败', {icon: 2});
+		if(info5){
+			var arg = $(".userid").val()+"-"+$("#username").val()+"-"+$("#name").val()+"-"+$("#tel").val()+"-"+$("#password").val();
+			var result = ajaxSubmit("teacher_saveInfo.action",arg);
+			if(result=="1"){
+				parent.layer.msg('保存成功', {icon: 1});
+				var info1 = $("#username").val("");
+				var info2 = $("#name").val("");
+				var info3 = $("#tel").val("");
+				var info4 = $("#password").val("");
+			}else{
+				parent.layer.msg('修改失败!', {icon: 2});
+			}
+		}else{
+			parent.layer.msg('手机号码格式错误!', {icon: 2});
+		}
 	}
 }
 </script>

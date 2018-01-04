@@ -43,7 +43,7 @@ public class StudentDaoImpl extends CommonDaoImpl<Student> implements StudentDao
 
 	@Override
 	public List<Student> checkAccount(String arg) {
-		return (List<Student>) ht.find("from Student where tel = " + arg + "");
+		return (List<Student>) ht.find("from Student where tel = '" + arg + "'");
 	}
 	
 	
