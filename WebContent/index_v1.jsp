@@ -230,8 +230,8 @@
           <p><a href="">云课直播</a></p>
           <p><a href="">YY直播</a></p>
           <p><a href="">虎牙直播</a></p>
-<!--           <p><a href="">斗鱼直播</a></p> -->
-          <p><a href="initialization.jsp">系统初始化</a></p>
+          <p><a href="">斗鱼直播</a></p>
+<!--           <p><a href="initialization.jsp">系统初始化</a></p> -->
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
           <h3>关注我们</h3>

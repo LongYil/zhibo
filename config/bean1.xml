@@ -14,9 +14,9 @@
 		<bean id="datas" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 <!-- 		注入属性值 -->
 			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-			<property name="jdbcUrl" value="jdbc:mysql:///CollegeLive?characterEncoding=UTF-8"></property>
+			<property name="jdbcUrl" value="jdbc:mysql://120.78.133.12:3306/collegelive?characterEncoding=UTF-8"></property>
 			<property name="user" value="root"></property>
-			<property name="password" value="1234"></property>
+			<property name="password" value="winzkj123456"></property>
 			
 			<property name="initialPoolSize" value="3"></property>
 			<property name="minPoolSize" value="10"></property>
