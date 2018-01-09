@@ -77,7 +77,7 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 		teacher.setName(infos[2]);
 		teacher.setTel(infos[3]);
 		teacher.setPassword(infos[4]);
-		teacher.setHead("http://"+ServerInfo.SERVER_IP+":8080/CollegeLive/Image/teacher.png");
+		teacher.setHead("http://"+ServerInfo.SERVER_IP+"/CollegeLive/Image/teacher.png");
 		teacher.setRoomid(new SimpleDateFormat("DDMMYYYYhhmmss").format(new Date()));
 		servc.save(teacher);
 		student.setUsername(teacher.getUsername());
@@ -92,7 +92,6 @@ public class TeacherAction extends BasicAction implements ModelDriven<Teacher> {
 	//教师查询个人资料
 	public String selfInfo() {
 		teacher = (Teacher) this.getSesion().get("Teacher");
-		teacher.setRoomid("rtmp://"+ServerInfo.BIZID+".livepush.myqcloud.com/live/");
 		return "selfInfo";
 	}
 	//查找所有教师

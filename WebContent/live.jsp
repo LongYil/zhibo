@@ -45,7 +45,7 @@
     </header>
     <div class="row">
       <div class="live-video">
-        <input type="hidden" id="liveaddress" value="<s:property value='course.address'/>" >
+        <input type="hidden" id="liveaddress" value="${liveAddress}" >
         <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
         <input type="hidden" id="studentname" value="${userName}"> 
         <input type="hidden" id="studenthead" value="${Student.head}"> 
@@ -205,6 +205,7 @@
     var player =  new TcPlayer('video', {
    	 "m3u8": address + ".m3u8",
    	 "flv": address + ".flv", //增加了一个flv的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
+   	 "mp4": address,
    	 "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
    	 "coverpic" : "img/a1.jpg",
    	 "width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
@@ -292,7 +293,7 @@
     });
 
     Chat.initialize = function(arg) {
-        Chat.connect('ws://localhost:8080/CollegeLive/discuss/'+arg);
+        Chat.connect('ws://120.78.208.115/CollegeLive/discuss/'+arg);
     };
 
     Chat.sendMessage = (function(arg) {

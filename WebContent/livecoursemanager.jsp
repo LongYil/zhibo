@@ -65,7 +65,7 @@
 												<td width="15%"><s:property value="course.subject"/></td>
 												<td width="35%"><s:property value="course.summary"/></td>
 												<td width="15%"><s:property value="time"/></td>
-												<td width="15%">
+												<td width="15%" style="min-width:30px;">
 												 <a class="btn btn-primary btn-rounded" href="javascript:void(0)" onClick="showinfo('<s:property value="course.id"/>')">查看</a>
 												 <a class="btn btn-success btn-rounded" href="javascript:void(0)" onClick="updateCourse('<s:property value="course.id"/>')">修改</a>
 												 <a class="btn btn-danger btn-rounded" href="javascript:void(0)" onClick="deleteCourse('<s:property value="course.id"/>','<s:property value="course.name"/>')">删除</a>

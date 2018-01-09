@@ -55,8 +55,7 @@ public class TeacherServc extends CommonSevc<Teacher, TeacherDaoImpl> {
 		return true;
 	}
 	public List<Teacher> findByName(String arg){
-		String sql = "username like '%"+arg+"%' or name like '%"+arg+"%'";
-		return daoImpl.findByName(sql);
+		return daoImpl.findByName(arg);
 	}
 	public List<Course> findCourseByName(String arg){
 		String sql = "username like '%"+arg+"%' or name like '%"+arg+"%'";

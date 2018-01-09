@@ -30,9 +30,9 @@
                     <div class="ibox-title">
                         <span style="float:left;">教师信息</span>
                         <div class="ibox-tools" style="margin-bottom:5px;">
-                            <button type="button" class="btn btn-w-m btn-info" onClick="findTeacher()">查找教师&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-                            <span style="margin-right:10px;">&nbsp;</span>
                             <button type="button" class="btn btn-w-m btn-info" onClick="addTeacher('teacher_addTeacher.action')">添加教师&nbsp;&nbsp;<i class="fa fa-plus-circle"></i></button>
+                            <span style="margin-right:10px;">&nbsp;</span>                        
+                            <button type="button" class="btn btn-w-m btn-info" onClick="findTeacher()">查找教师&nbsp;&nbsp;<i class="fa fa-search"></i></button>
                             <span style="margin-right:10px;">&nbsp;</span>
                         </div>
                     </div>

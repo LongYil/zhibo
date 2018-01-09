@@ -232,7 +232,11 @@
   }
   function query(){
 	 var queryInfo = $("#searchbox").val();
-	 window.location="exam_studentFindByInfo.action?queryInfo="+queryInfo;
+	  if(info == ""){
+		  ;
+	  }else{
+		  window.location="exam_studentFindByInfo.action?queryInfo="+queryInfo;
+	  }
   }
   function checkAccount(){
 	  var tel = $("#usertel").val();

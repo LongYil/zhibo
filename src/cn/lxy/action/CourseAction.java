@@ -118,7 +118,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		course.setTeacher(teacher);
 		course.setStreamid(StreamUtils.getStreamId(teacher.getRoomid(),tempTime));
 		course.setCoursetype(0);
-		course.setAddress("http://" + ServerInfo.BIZID + ".liveplay.myqcloud.com/live/" + ServerInfo.BIZID + "_"+teacher.getRoomid() + "");
+		course.setAddress("http://" + ServerInfo.BIZID + ".liveplay.myqcloud.com/live/" + ServerInfo.BIZID + "_"+teacher.getRoomid());
 		servc.save(course);
 		return "save";
 	}
@@ -137,17 +137,22 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	}
 	//教师查找属于自己的所有直播课程
 	public String findByTeacherId() {
-		teacher = (Teacher) this.getSesion().get("Teacher");
-		listCourse.clear();
-		pages.clear();
-		listCourse = dateUtils.formatDateTime(servc.findByTeacherId(String.valueOf(teacher.getId())));
-		int temp = countAllPage11.getAllPage(listCourse.size());
-		pageDirection = countAllPage11.getLeftAndRight(0,temp);
-		pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
-		this.getSesion().put("allLiveCoursePage",temp);
-		this.getSesion().put("liveCourseList", listCourse);
-		pages = countAllPage11.getStartPages(temp);
-		return "findByTeacherId";
+		String userType = this.getSesion().get("userType").toString();
+		if(userType.equals("1")) {
+			teacher = (Teacher) this.getSesion().get("Teacher");
+			listCourse.clear();
+			pages.clear();
+			listCourse = dateUtils.formatDateTime(servc.findByTeacherId(String.valueOf(teacher.getId())));
+			int temp = countAllPage11.getAllPage(listCourse.size());
+			pageDirection = countAllPage11.getLeftAndRight(0,temp);
+			pageDirectionNumber = countAllPage11.getDirectionNumber(1, temp);
+			this.getSesion().put("allLiveCoursePage",temp);
+			this.getSesion().put("liveCourseList", listCourse);
+			pages = countAllPage11.getStartPages(temp);
+			return "findByTeacherId";			
+		}else {
+			return "adminFindAll";
+		}
 	}
 	//教师根据页码查找所有直播课程
 	public String findByPageNumber() {
@@ -174,7 +179,6 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	//根据课程名称或科目查找课程
 	public String findByInfo() {
 		listCourse.clear();
-		System.out.println(queryInfo);
 		listCourse = dateUtils.formatDateTime(servc.findByInfo(queryInfo));
 		return "findByInfo";
 	}
@@ -182,7 +186,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	public String delete() throws Exception {
 		this.resultinfo = "0";
 		HttpServletRequest request =  ServletActionContext.getRequest();
-		String courseId = request.getParameter("info");		
+		String courseId = request.getParameter("info");
 		course = servc.findByCourseId(courseId);
 		servc.delete(course);
 		this.resultinfo = "1";
@@ -431,6 +435,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		listNote = noteServc.findAll(String.valueOf(student.getId()),tempId);
 		listDiscuss = discussServc.findByCourseId(tempId);
 		this.getSesion().put("liveCourse",course);
+		this.getSesion().put("liveAddress",course.getAddress());
 		this.noteSize = listNote.size();
 		this.discussSize = listDiscuss.size();
 		return "watch";
@@ -448,6 +453,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		listNote = noteServc.findAll(String.valueOf(student.getId()),tempId);
 		listDiscuss = discussServc.findByCourseId(tempId);
 		this.getSesion().put("liveCourse",course);
+		this.getSesion().put("liveAddress",course.getAddress());
 		this.noteSize = listNote.size();
 		this.discussSize = listDiscuss.size();
 		return "watch";
@@ -458,7 +464,6 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream(), "utf-8"));
 		StringBuffer sb = new StringBuffer("");
 		String temp;
-		teacher = (Teacher) this.getSesion().get("Teacher");
 		while ((temp = br.readLine()) != null) {
 		sb.append(temp);
 		}
@@ -466,13 +471,14 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		String params = "[" + sb.toString() + "]";
        	JSONArray jsonArray = JSONArray.fromObject(params);
        	JSONObject jsonObject = jsonArray.getJSONObject(0);
-       	String streamId = ServerInfo.STREAM_BASIC + teacher.getRoomid() + "?" + (jsonObject.get("stream_param").toString());
+       	String tempStreamId = jsonObject.get("channel_id").toString();
+       	String streamId = ServerInfo.STREAM_SHORT + tempStreamId + "?" + (jsonObject.get("stream_param").toString());
        	int event_type = Integer.parseInt(jsonObject.get("event_type").toString());
-       	course = servc.findByStreamId(streamId);
        	if(event_type==100) {
-       		String address = (String) jsonObject.get("video_id");
+       		course = servc.findByStreamId(streamId);
+       		String address = (String) jsonObject.get("video_url");
        		course.setAddress(address);
-       		course.setCoursetype(0);
+       		course.setCoursetype(1);
        		servc.save(course);
        	}else {
        		;

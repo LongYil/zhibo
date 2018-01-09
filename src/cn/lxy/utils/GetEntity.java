@@ -19,7 +19,7 @@ public class GetEntity {
 	
 	public Object getEntity(String table,String column,String info,Class type) throws Exception{
 		t = type.newInstance();
-		list = (List<Object>) ht.find("from "+table+" where "+column+" = "+info+"");
+		list = (List<Object>) ht.find("from "+table+" where "+column+" = '"+info+"'");
 		if(list!=null&&list.size()>0){
 			return list.get(0);
 		}else{

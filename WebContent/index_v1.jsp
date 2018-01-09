@@ -266,7 +266,11 @@
   }
   function query(){
 	  var info = $("#searchbox").val();
-	  window.location="course_studentFindByInfo.action?queryInfo="+info;
+	  if(info == ""){
+		  ;
+	  }else{
+		  window.location="course_studentFindByInfo.action?queryInfo="+info;  
+	  }
   }
   function checkAccount(){
 	  var tel = $("#usertel").val();

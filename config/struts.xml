@@ -107,7 +107,7 @@
 				<result name="findAll">/exammanager.jsp</result>
 				<result name="teacherFindAll">/teacherexammanager.jsp</result>
 				<result name="findByName">/examquery.jsp</result>
-				<result name="save">/addexam.jsp</result>
+				<result name="save">exam_findAll.action</result>
 				<result name="studentFindAll">/test_v1.jsp</result>
 				<result name="analyseExam">/questions-sublime.jsp</result>
 				<result name="studentFindAllTemp">/test_v2.jsp</result>
@@ -130,6 +130,7 @@
 				<result name="findByInfo">/livecoursequery.jsp</result>
 				<result name="preUpdate">/updatecourse.jsp</result>
 				<result name="findAll">/alllivecourse.jsp</result>
+				<result name="adminFindAll">course_findAll.action</result>
 				<result name="findRecentCource">/index_v1.jsp</result>
 				<result name="findRecentCourceTemp">/index_v2.jsp</result>
 				<result name="findPastCource">/review_v1.jsp</result>

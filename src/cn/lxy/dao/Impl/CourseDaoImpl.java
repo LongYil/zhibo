@@ -32,12 +32,13 @@ public class CourseDaoImpl extends CommonDaoImpl<Course> implements CourseDao {
 
 	@Override
 	public List<Course> findByDate(String arg) {
-		return (List<Course>) ht.find("from Course where time like '%"+arg+"%' order by time desc");
+		return (List<Course>) ht.find("from Course where coursetype = 0 and time like '%"+arg+"%' order by time desc");
 	}
 
 	@Override
 	public List<Course> findPast(String arg) {
-		return (List<Course>) ht.find("from Course where time < '"+arg+"' order by time desc");
+		return (List<Course>) ht.find("from Course where coursetype = 1 order by time desc");
+//		return (List<Course>) ht.find("from Course where time < '"+arg+"' and coursetype = 1 order by time desc");
 	}
 
 	@Override

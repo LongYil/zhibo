@@ -58,7 +58,7 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	//学生用户注册新用户
 	public String add() {
 		student.setUserstatus(1);
-		student.setHead("http://"+ServerInfo.SERVER_IP+":8080/CollegeLive/Image/temphead.png");
+		student.setHead("http://"+ServerInfo.SERVER_IP+"/CollegeLive/Image/temphead.png");
 		servc.save(student);
 		if(student.getBirth()!=null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
