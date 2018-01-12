@@ -28,12 +28,13 @@
             <div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span style="float:left;">教师信息</span>
-                        <div class="ibox-tools" style="margin-bottom:5px;">    
-                            <button type="button" class="btn btn-w-m btn-info" onClick="findTeacher()">查找教师&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-                            <span style="margin-right:10px;">&nbsp;</span>
-                            <button type="button" class="btn btn-w-m btn-info" onClick="addTeacher('addteacher.jsp')">添加教师&nbsp;&nbsp;<i class="fa fa-plus-circle"></i></button>
-                            <span style="margin-right:10px;">&nbsp;</span>
+                        <div class="ibox-tools"  style="margin-bottom:5px;"> 
+                        <span style="float:left;">教师管理</span> 
+                            <button type="button" class="btn btn-w-m btn-info" style="float:right;margin-left:10px;" onClick="addTeacher('teacher_addTeacher.action')">添加教师&nbsp;&nbsp;<i class="fa fa-plus-circle"></i></button>	                        
+	                        <div class="input-group" style="width:20%;float:right;">
+	                            <input type="text" id="searchInfo" placeholder="请输入教师姓名" class="input-sm form-control"> <span class="input-group-btn">
+	                                <button type="button" class="btn btn-w-m btn-info" onClick="findTeacher()"> 搜索</button> </span>
+	                        </div>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -74,7 +75,6 @@
 											<td><s:property value="teachtage"/></td>
 											<td><s:property value="email"/></td>
 											<td><s:property value="roomid"/></td>
-											<td><s:property value="streamid"/></td>
 											<td>
 											 <a class="btn btn-primary btn-rounded" onClick="updateTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">修改</a>
 										     <a class="btn btn-success btn-rounded" onClick="deleteTeacher('<s:property value="id"/>','<s:property value="username"/>')" href="javascript:void(0)">删除</a>
@@ -90,6 +90,7 @@
         </div>
 
     </div> 
+<script src="js/jquery.min.js?v=2.1.4"></script>   
 <script src="layui.all.js"></script>    
 <script src="js/ajaxcommunicate.js"></script>  
 <script>
@@ -119,16 +120,9 @@
 	}
 	
 	function findTeacher(){
-		  layer.prompt({title: '请输入教师姓名:', formType: 0},function(value, index, elem){
-		  layer.close(index);
-		  window.location="teacher_findByName.action?teacherName="+value; 
-		});	    
+	      var value = $("#searchInfo").val();
+		  window.location="teacher_findByName.action?teacherName="+value; 	    
 	}
-	
-
 </script>
-
 </body>
-
 </html>
-    

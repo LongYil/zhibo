@@ -34,12 +34,14 @@
             <div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>往期课程</h5>
-                        <div class="ibox-tools"  style="margin-bottom:5px;">  
-							<button type="button" class="btn btn-w-m btn-info" onClick="findCourse()">查找课程&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-                            <span style="margin-right:10px;">&nbsp;</span>
+                        <div class="ibox-tools"  style="margin-bottom:5px;"> 
+                        <span style="float:left;">直播课程</span> 
+	                        <div class="input-group" style="width:20%;float:right;">
+	                            <input type="text" id="searchInfo" placeholder="请输入课程相关信息" class="input-sm form-control"> <span class="input-group-btn">
+	                                <button type="button" class="btn btn-w-m btn-info" onClick="findCourse()"> 搜索</button> </span>
+	                        </div>
                         </div>
-                    </div>
+                    </div>                       
                     <div class="ibox-content">
                         <table class="table table-bordered table-hover" width="800px" style="text-align:center;">
 							<thead align="center">
@@ -113,10 +115,8 @@ function To(arg){
 	window.location="course_findByPageNumber.action?pageNumber="+arg;
 }
 function findCourse(){
-	  layer.prompt({title: '请输入课程相关信息:', formType: 0},function(value, index, elem){
-	  layer.close(index);
-	  window.location="course_teacherFindPastCourceByInfo.action?courseName="+value;
-	});
+	  var value = $("#searchInfo").val();
+	  window.location="course_teacherFindByInfo.action?courseName="+value; 
 }
 function showinfo(arg){
 	window.location="course_showInfo.action?courseId="+arg;

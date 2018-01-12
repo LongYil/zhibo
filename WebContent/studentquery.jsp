@@ -36,11 +36,9 @@
             <div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span style="float:left;">学生信息</span>
-                        <div class="ibox-tools" style="margin-bottom:5px;">    
-                            <button type="button" class="btn btn-w-m btn-info" onClick="findStudent()">查找学生&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-                            <span style="margin-right:10px;">&nbsp;</span>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                        <div class="ibox-tools"  style="margin-bottom:5px;"> 
+                        <span style="float:left;">学生信息</span> 
+                            <a class="dropdown-toggle" style="float:right;margin-left:10px;" data-toggle="dropdown" href="javascript:void(0)">
                                 <h3 style="display:inline-block;">切换:</h3>
                                 <i class="fa fa-chevron-down"></i>
                             </a>
@@ -49,7 +47,11 @@
                                 </li>
                                 <li><a href="student_findAllDisabled.action" style="font-size:14px;">已禁用</a>
                                 </li>
-                            </ul>
+                            </ul>	                        
+	                        <div class="input-group" style="width:20%;float:right;">
+	                            <input type="text" id="searchInfo" placeholder="请输入学生姓名" class="input-sm form-control"> <span class="input-group-btn">
+	                                <button type="button" class="btn btn-w-m btn-info" onClick="findStudent()"> 搜索</button> </span>
+	                        </div>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -152,10 +154,8 @@ function start(arg1,arg2,arg3){
 	});
 }
 function findStudent(){
-	  layer.prompt({title: '请输入学生姓名:', formType: 0},function(value, index, elem){
-	  layer.close(index);
-	  window.location="student_findByName.action?studentName="+value; 
-	});	    
+	  var value = $("#searchInfo").val();
+	  window.location="student_findByName.action?studentName="+value;    
 }
 </script>
 </html>

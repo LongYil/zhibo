@@ -31,10 +31,12 @@
             <div class="col-sm-6" style="width:100%;">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span style="float:left;">我的试题</span>
-                        <div class="ibox-tools"  style="margin-bottom:5px;">   
-							<button type="button" class="btn btn-w-m btn-info" onClick="findExam()">查找试题&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-                            <span style="margin-right:10px;">&nbsp;</span>                                                                            
+                        <div class="ibox-tools"  style="margin-bottom:5px;"> 
+                        <span style="float:left;">我的试题</span> 
+	                        <div class="input-group" style="width:20%;float:right;">
+	                            <input type="text" id="searchInfo" placeholder="请输入试题名称、描述" class="input-sm form-control"> <span class="input-group-btn">
+	                                <button type="button" class="btn btn-w-m btn-info" onClick="findExam()"> 搜索</button> </span>
+	                        </div>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -136,10 +138,8 @@ function uploadExam(){
 }
 
 function findExam(){
-	  layer.prompt({title: '请输入试题名称、描述:', formType: 0},function(value, index, elem){
-	  layer.close(index);
-	  window.location="exam_findByName.action?queryInfo="+value;
-	});
+	value = $("#searchInfo").val();
+	window.location="exam_findByName.action?queryInfo="+value;
 }
 
 </script>

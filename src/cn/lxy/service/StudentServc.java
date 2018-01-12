@@ -54,7 +54,7 @@ public class StudentServc extends CommonSevc<Student, StudentDaoImpl> {
 		return "1";
 	}
 	public List<Student> findByName(String arg) throws Exception {
-		String sql = "username like '%"+arg+"%' or name like '%"+arg+"%'";
+		String sql = "(username like '%"+arg+"%' or name like '%"+arg+"%' ) and ( userstatus = 0 or userstatus = 1)";
 		return  daoImpl.findByName(sql);
 	}
 	public List<Student> findById(String arg) throws Exception {
