@@ -1,6 +1,8 @@
 package cn.lxy.action;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,23 +94,30 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		return "updatePassword";
 	}
 	//更新学生用户的基本信息
-	public String updateBasicInfo() throws ParseException {
+	public String updateBasicInfo() throws ParseException, UnsupportedEncodingException {
+		this.resultinfo = "0";
 		student = (Student) this.getSesion().get("Student");
 		HttpServletRequest request =  ServletActionContext.getRequest();
-		String year = request.getParameter("selYear");
-		String month = request.getParameter("selMonth");
-		String day = request.getParameter("selDay");
-		String birth = year + "-" + month + "-" + day;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String info = request.getParameter("info");
+		info = URLDecoder.decode(info,"UTF-8");
+		String[] infos = info.split("-");
+		String userName = infos[0];
+		String name = infos[1];
+		String department = infos[2];
+		String classandgrade = infos[3];
+		String birth = infos[4];
+		String selfintroduce = infos[5];
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd");
 		Date d = sdf.parse(birth);
-		student.setUsername(request.getParameter("username").toString());
-		student.setName(request.getParameter("name").toString());
-		student.setDepartment(request.getParameter("department").toString());
-		student.setClassandgrade(request.getParameter("classandgrade").toString());
-		student.setSelfintroduce(request.getParameter("selfintroduce").toString());
+		student.setUsername(userName);
+		student.setName(name);
+		student.setDepartment(department);
+		student.setClassandgrade(classandgrade);
+		student.setSelfintroduce(selfintroduce);
 		student.setBirth(d);
 		servc.save(student);
 		this.getSesion().put("Student",student);
+		this.resultinfo = "1";
 		return "updateBasicInfo";
 	}
 	//查找所有未禁用学生用户

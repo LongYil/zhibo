@@ -200,11 +200,18 @@
     	var info2 = $("#info2").val();
     	var info3 = $("#info3").val();
     	var info4 = $("#info4").val();
-    	var info5 = $("#info5").val();
-    	if(info1 == "" || info2 == "" || info3 == "" || info4 == "" || info5 == ""){
+    	var info5 = $("#selYear").val() + "_" + $("#selMonth").val() + "_" + $("#selDay").val();
+    	var info6 = $("#info5").val();
+    	if(info1 == "" || info2 == "" || info3 == "" || info4 == "" || info6 == ""){
     		parent.layer.msg('信息填写不完整!', {icon: 2});
     	}else{
-    		form1.submit();
+    		var tempInfo = info1+"-"+info2+"-"+info3+"-"+info4+"-"+info5+"-"+info6;
+    		var temp = ajaxSubmit("student_updateBasicInfo.action",tempInfo);
+    		if(temp == "1"){
+    			parent.layer.msg('保存成功!', {icon: 1});
+    		}else{
+    			parent.layer.msg('保存失败!', {icon: 2});
+    		}
     	}
     }
     function updatePassword(){

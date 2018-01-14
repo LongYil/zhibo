@@ -85,6 +85,7 @@
 		        <result type="json" name="getVerificationCode"><param name="root">resultinfo</param></result>  
 		        <result type="json" name="checkVerificationCode"><param name="root">resultinfo</param></result>  
 		        <result type="json" name="updatePassword"><param name="root">resultinfo</param></result>  
+		        <result type="json" name="updateBasicInfo"><param name="root">resultinfo</param></result>  
 		   </action>
 
 		   <action name="teacher_*" class="teacherAction" method="{1}">
