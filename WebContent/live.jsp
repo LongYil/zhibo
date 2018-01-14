@@ -51,6 +51,7 @@
         <input type="hidden" id="studenthead" value="${Student.head}"> 
         <input type="hidden" id="studentid" value="${Student.id}"> 
         <input type="hidden" id="courseid" value="${courseVo.course.id}"> 
+        <input type="hidden" id="ip" value="${ip}"> 
         <div class="video" id="video" style="padding-top:20px;">
         </div>
         <div class="jindutiao">
@@ -293,7 +294,9 @@
     });
 
     Chat.initialize = function(arg) {
-        Chat.connect('ws://120.78.208.115/CollegeLive/discuss/'+arg);
+    	var ip = $("#ip").val();
+    	alert(ip);
+        Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
     };
 
     Chat.sendMessage = (function(arg) {

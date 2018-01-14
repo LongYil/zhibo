@@ -18,6 +18,7 @@ import cn.lxy.service.CarouselServc;
 import cn.lxy.service.ManagerServc;
 import cn.lxy.service.StudentServc;
 import cn.lxy.service.TeacherServc;
+import cn.lxy.utils.ServerInfo;
 
 /**
  * <p>Title:LoginAction</p>
@@ -48,6 +49,7 @@ public class LoginAction extends BasicAction {
 		username = request.getParameter("username");
 		password = request.getParameter("password");
 		usertype = Integer.parseInt(request.getParameter("usertype"));
+		this.getSesion().put("ip", ServerInfo.SERVER_IP);
 		if(usertype == 0) {
 			//用户类型：学生
 			student = studentServc.login(username, password);
