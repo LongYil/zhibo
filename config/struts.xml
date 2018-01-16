@@ -136,7 +136,8 @@
 				<result name="findRecentCourceTemp">/index_v2.jsp</result>
 				<result name="findPastCource">/review_v1.jsp</result>
 				<result name="findPastCourceTemp">/review_v2.jsp</result>
-				<result name="watch">/live.jsp</result>
+				<result name="watch1">/live1.jsp</result>
+				<result name="watch2">/live2.jsp</result>
 				<result name="update">/course_findByTeacherId.action</result>
 				<result name="showInfo">/viewcourse.jsp</result>
 				<result name="teacherFindPastCource">/pastcoursemanager.jsp</result>

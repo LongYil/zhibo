@@ -438,7 +438,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.getSesion().put("liveAddress",course.getAddress());
 		this.noteSize = listNote.size();
 		this.discussSize = listDiscuss.size();
-		return "watch";
+		return "watch1";
 	}
 	//观看视频2
 	public String watch2() throws Exception {
@@ -456,7 +456,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.getSesion().put("liveAddress",course.getAddress());
 		this.noteSize = listNote.size();
 		this.discussSize = listDiscuss.size();
-		return "watch";
+		return "watch2";
 	}
 	//直播回调函数
 	public String callback() throws Exception {

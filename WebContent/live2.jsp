@@ -21,6 +21,7 @@
     <![endif]-->
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/cyberplayer.js"></script>
   </head>
   
   <body class="live">
@@ -43,8 +44,9 @@
         </div>
       </span>
     </header>
-    <div class="row">
-      <div class="live-video">
+    <div class="row" style="height:100%;margin:0px;padding:0px;">
+     <div style="width:78%;height:100%;float:left;">
+        <div id="playercontainer">
         <input type="hidden" id="liveaddress" value="${liveAddress}" >
         <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
         <input type="hidden" id="studentname" value="${userName}"> 
@@ -54,13 +56,8 @@
         <input type="hidden" id="ip" value="${ip}"> 
         <div class="video" id="video" style="padding-top:20px;">
         </div>
-        <div class="jindutiao">
-            <div class="jindu">
-                  <ul id="jdskill">
-                  <li><span class="expand jdhtml5"></span></li>
-                  </ul>
-              </div>
-          </div>
+        </div>
+
       </div>
       <div class="live-itr" id="d1">
         <div class="live-itr-leftside">
@@ -203,16 +200,25 @@
   	  window.location="login_personalCenter.action";
     }
     var address = $("#liveaddress").val();
-    var player =  new TcPlayer('video', {
-   	 "m3u8": address + ".m3u8",
-   	 "flv": address + ".flv", //增加了一个flv的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
-   	 "mp4": address,
-   	 "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-   	 "coverpic" : "img/a1.jpg",
-   	 "width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
-   	 "height" : '100%'//视频的显示高度，请尽量使用视频分辨率高度
-   	 });
-    
+    var player = cyberplayer("playercontainer").setup({
+        width: document.body.scrollWidth*0.78, // 宽度，也可以支持百分比(不过父元素宽度要有)
+        height: document.body.scrollHeight*0.91, // 高度，也可以支持百分比
+        file: address, // 播放地址
+        image: "http://gcqq450f71eywn6bv7u.exp.bcevod.com/mda-hbqagik5sfq1jsai/mda-hbqagik5sfq1jsai.jpg", // 预览图
+        autostart: false, // 是否自动播放
+        repeat: false, // 是否重复播放
+        volume: 100, // 音量
+        controls: true, // controlbar是否显示
+        starttime: 0, // 视频开始播放时间点(单位s)，如果不设置，则可以从上次播放时间点续播
+        logo: { // logo设置
+        linktarget: "_blank",
+        margin: 8,
+        hide: false,
+        position: "top-right", // 位置
+        file: "./img/logo.png" // 图片地址
+        },
+        ak: "c8731d89f53149f1b4f22a29e25146f9" // 公有云平台注册即可获得accessKey
+    });
     function saveNote(){
     	$(".bigimg").remove();
     	$(".emptyNote").remove();
@@ -295,8 +301,7 @@
 
     Chat.initialize = function(arg) {
     	var ip = $("#ip").val();
-//         Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
-        Chat.connect('ws://localhost:8080/CollegeLive/discuss/'+arg);
+        Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
     };
 
     Chat.sendMessage = (function(arg) {
