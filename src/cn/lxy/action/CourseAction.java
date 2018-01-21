@@ -109,7 +109,9 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		String coursePic = request.getParameter("coursePic");
 		String tempTime = request.getParameter("time");
 		String[] infos = coursePic.split(",");
-		String realpath = ServletActionContext.getServletContext().getRealPath("/sourcefile/courseimage");
+		String realpath = ServerInfo.SOURCEFILE_REALPATH + "courseimage";
+//		String realpath = ServletActionContext.getServletContext().getRealPath("sourcefile/courseimage");
+		System.out.println(realpath);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = sdf.parse(tempTime);
 		course.setTime(date);

@@ -57,13 +57,6 @@
         <div class="video" id="video" style="padding-top:20px;">
         </div>
         </div>
-        <div class="jindutiao">
-            <div class="jindu">
-                  <ul id="jdskill">
-                  <li><span class="expand jdhtml5"></span></li>
-                  </ul>
-              </div>
-          </div>
       </div>
       <div class="live-itr" id="d1">
         <div class="live-itr-leftside">

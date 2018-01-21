@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.lxy.po.Carousel;
 import cn.lxy.service.CarouselServc;
 import cn.lxy.utils.FileUtils;
+import cn.lxy.utils.ServerInfo;
 
 /**
  * <p>Title:CarouselAction</p>
@@ -44,7 +45,8 @@ public class CarouselAction extends BasicAction implements ModelDriven<Carousel>
 	public String addImg() throws Exception {
 		for(int i = 0;i < imgfile.size();i ++) {
 			if(imgfile.get(i) != null) {
-				String realpath = ServletActionContext.getServletContext().getRealPath("/Image");
+				String realpath = ServerInfo.SOURCEFILE_REALPATH + "Image";
+//				String realpath = ServletActionContext.getServletContext().getRealPath("/sourcefile/Image");
 				carousel = new Carousel();
 				carousel.setFace(fileUtils.saveImg(imgfile.get(i),realpath,imgfileFileName.get(i)));
 				servc.save(carousel);

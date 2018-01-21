@@ -22,24 +22,24 @@ public class FileUtils {
 		String pathAndName = path+"/"+name;
         if (imgStr == null) //图像数据为空
             return null;
-        BASE64Decoder decoder = new BASE64Decoder();  
+        BASE64Decoder decoder = new BASE64Decoder();
         try
         {
             //Base64解码
-            byte[] b = decoder.decodeBuffer(imgStr);  
-            for(int i=0;i<b.length;++i)  
+            byte[] b = decoder.decodeBuffer(imgStr);
+            for(int i=0;i<b.length;++i)
             {
-                if(b[i]<0)  
-                {//调整异常数据  
-                    b[i]+=256;  
+                if(b[i]<0)
+                {//调整异常数据
+                    b[i]+=256;
                 }
             }
             //生成jpeg图片  
             OutputStream out = new FileOutputStream(pathAndName);      
             out.write(b);
-            out.flush();  
+            out.flush();
             out.close();  
-            return serverInfo.IMAGE_ADDRESS+name;  
+            return serverInfo.IMAGE_ADDRESS+name;
         }   
         catch (Exception e)   
         {  

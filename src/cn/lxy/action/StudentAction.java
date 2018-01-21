@@ -60,7 +60,7 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	//学生用户注册新用户
 	public String add() {
 		student.setUserstatus(1);
-		student.setHead("http://"+ServerInfo.SERVER_IP+"/CollegeLive/Image/temphead.png");
+		student.setHead("http://"+ServerInfo.CAROUSEL_IMAGE_ADDRESS+"temphead.png");
 		servc.save(student);
 		if(student.getBirth()!=null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -236,7 +236,8 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	}
 	//学生上传头像文件预览
 	public String previewStudentIcon() throws Exception {
-        String realpath = ServletActionContext.getServletContext().getRealPath("/sourcefile/studenticon"); 
+        String realpath = ServerInfo.SOURCEFILE_REALPATH + "studenticon";
+//        String realpath = ServletActionContext.getServletContext().getRealPath("/sourcefile/studenticon"); 
         String picPath = fileUtils.saveIcon(picfile.get(0), realpath,picfileFileName.get(0));
         this.getSesion().put("tempPicPath", picPath);
         this.getSesion().put("tab1","display:none");
