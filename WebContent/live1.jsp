@@ -24,7 +24,7 @@
     <script type="text/javascript" src="js/cyberplayer.js"></script>
   </head>
   
-  <body class="live">
+  <body class="live" style="background:#303030;margin-top:-10px;">
     <header class="live">
       <span><a href="index.jsp"><&nbsp;&nbsp;<s:property value='courseVo.course.name'/>&nbsp;&nbsp;<s:property value='courseVo.teacher.name'/></a></span>
       <span class="person">

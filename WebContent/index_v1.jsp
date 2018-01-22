@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>     
 <%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -66,7 +67,6 @@
 
       </div>
     </header>
-    
 	
     <div id="light1"></div><!-- 登录弹窗 -->
     <div id="fade1" class="login-body">

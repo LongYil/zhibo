@@ -41,7 +41,7 @@ public class ManagerAction extends BasicAction implements ModelDriven<Manager> {
 			manager.setUsername("admin");
 			manager.setPassword("admin");
 			manager.setName("π‹¿Ì‘±");
-			manager.setHead("http://"+ServerInfo.SERVER_IP+"/CollegeLive/Image/manager.png");
+			manager.setHead(ServerInfo.CAROUSEL_IMAGE_ADDRESS+"manager.png");
 			servc.save(manager);
 			student.setHead(manager.getHead());
 			student.setName(manager.getName());

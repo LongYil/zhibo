@@ -24,7 +24,7 @@
     <script type="text/javascript" src="js/cyberplayer.js"></script>
   </head>
   
-  <body class="live">
+  <body class="live" style="background:#303030;margin-top:-10px;">
     <header class="live">
       <span><a href="index.jsp"><&nbsp;&nbsp;<s:property value='courseVo.course.name'/>&nbsp;&nbsp;<s:property value='courseVo.teacher.name'/></a></span>
       <span class="person">
@@ -204,7 +204,7 @@
         width: document.body.scrollWidth*0.78, // 宽度，也可以支持百分比(不过父元素宽度要有)
         height: document.body.scrollHeight*0.91, // 高度，也可以支持百分比
         file: address, // 播放地址
-        image: "http://gcqq450f71eywn6bv7u.exp.bcevod.com/mda-hbqagik5sfq1jsai/mda-hbqagik5sfq1jsai.jpg", // 预览图
+        image: "img/preview.png", // 预览图
         autostart: false, // 是否自动播放
         repeat: false, // 是否重复播放
         volume: 100, // 音量
