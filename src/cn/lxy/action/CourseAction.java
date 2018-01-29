@@ -276,6 +276,11 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		Date d = new Date();
 		String temptoday = sdf1.format(d);
 		listCarousel = carouselServc.findAll("");
+		String[] arrayCarousel = new String[listCarousel.size()];
+		for(int i = 0;i < arrayCarousel.length;i ++) {
+			arrayCarousel[i] = listCarousel.get(i).getFace();
+		}
+		this.getSesion().put("arrayCarousel",arrayCarousel);
 		listCourse = dateUtils.formatDateAndTeacher(servc.findPast(temptoday));
 		int temp = countAllPage6.getAllPage(listCourse.size());
 		pageDirectioni = countAllPage6.getLeftAndRight(0,temp);

@@ -57,10 +57,11 @@ public class DiscussSocket {
      */
     @OnMessage
     public void onMessage(@PathParam(value="userId") String userId, String message, Session session) throws Exception {
-        System.out.println("来自客户端---------"+userId+"的消息:" + message);
+//        System.out.println("来自客户端---------"+userId+"的消息:" + message);
         // 群发消息
         String[] infos = message.split("-");//课程id-学生id-讨论内容 
         String time = "";
+        Connection conn = null;
         try {
             //新建QueryRunner对象
             QueryRunner qr = new QueryRunner();
@@ -70,11 +71,11 @@ public class DiscussSocket {
             time = getDateAndTime.getNowTime();
             Object[] params = {infos[0],infos[1],time,infos[2]};
             //执行Update，返回受影响的记录
-            Connection conn = ConnectDb.Connect();
+            conn = ConnectDb.Connect();
             qr.update(conn,sql, params);
             conn.close();
         } catch (SQLException ex) {
-        	;
+        	conn.close();
         }
         for (Map.Entry<String, DiscussSocket> entry : webSocketMap.entrySet()) {
             DiscussSocket item = entry.getValue();

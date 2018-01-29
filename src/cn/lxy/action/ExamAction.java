@@ -48,9 +48,12 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 	@Autowired
 	private CountAllPage11 countAllPage11;	
 	@Autowired
+	private CarouselServc carouselServc;
+	@Autowired
 	private CountAllPage6 countAllPage6;
 	private List<ExamVo> listExamVo = new ArrayList<ExamVo>();
 	private List<ExamVo> tempListExamVo = new ArrayList<ExamVo>();
+	private List<Carousel> listCarousel = new ArrayList<Carousel>();
 	private List<Integer> pages = new ArrayList<Integer>();
 	private List<AnalysedExam> listAnalysedExam = new ArrayList<AnalysedExam>();
 	private List<String> listAnswerResult = new ArrayList<String>();
@@ -84,6 +87,12 @@ public class ExamAction extends BasicAction implements ModelDriven<Exam> {
 		this.getSesion().put("studentAllExamPage",temp);
 		this.getSesion().put("studentExamList", listExamVo);
 		pages = countAllPage6.getStartPages(temp);
+		listCarousel = carouselServc.findAll("");
+		String[] arrayCarousel = new String[listCarousel.size()];
+		for(int i = 0;i < arrayCarousel.length;i ++) {
+			arrayCarousel[i] = listCarousel.get(i).getFace();
+		}
+		this.getSesion().put("arrayCarousel",arrayCarousel);
 		return "studentFindAll";
 	}
 	//学生用户查找所有试题

@@ -44,9 +44,9 @@
         </div>
       </span>
     </header>
-    <div class="row" style="height:100%;margin:0px;padding:0px;">
-      <div style="width:78%;height:100%;float:left;">
-        <div id="playercontainer">
+    <div class="row" style="padding:0px;">
+      <div class="live-video" style="float:left;" id="parentdiv">
+        <div id="playercontainer" style="padding:0px;">
         <input type="hidden" id="liveaddress" value="${liveAddress}" >
         <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
         <input type="hidden" id="studentname" value="${userName}"> 
@@ -104,13 +104,10 @@
 	            <p class="emptyNote">还没有任何笔记哦</p >
 	          </div>
           </c:if>
-
-
-
           <div>
-            <textarea maxlength="2000" placeholder="输入笔记" id="notearea"></textarea>
+            <textarea maxlength="2000" style="width:100%;" placeholder="输入笔记" id="notearea"></textarea>
           </div>
-          <button onClick="saveNote()">确定</button>
+          <button onClick="saveNote()" style="float:left;margin-left:20px;">确定</button>
         </div>
 
         <div id="box2">
@@ -131,10 +128,9 @@
       </div>
 
 
-      <div class="live-dic" id="d3" style="display:none">
-        <div class="live-dic-leftside">
-          <div class="discuss" id="discussArea">
-            
+      <div class="live-dic" id="d3" style="display:none;padding:0px;">
+        <div class="live-dic-leftside" style="padding-right:60px;margin:0;width:100%;">
+          <div class="discuss" id="discussArea" >
             <s:iterator value="listDiscuss" status="ste">
 	            <c:if test="${student.id==StudentId}">
 		            <div class="discuss-right">
@@ -155,13 +151,12 @@
 		            </div>
 	            </c:if>
             </s:iterator>
-
           </div>
           <img src="images/yonghu_biaoqing.png" alt="" class="biaoqing">
-          <div>
-            <textarea maxlength="2000" placeholder="立即参与讨论" id="discussContent"></textarea>
+          <div style="width:100%;">
+            <textarea maxlength="2000" style="width:100%;" placeholder="立即参与讨论" id="discussContent"></textarea>
           </div>
-          <button onClick="saveDiscuss()">发送</button>
+          <button onClick="saveDiscuss()" style="float:left;margin-left:20px;">发送</button>
         </div>
 
         <div id="box3">
@@ -188,119 +183,134 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/Change.js" type="text/javascript"></script>
-    <script src="js/open.js" type="text/javascript"></script>
-    <script src="js/chouti.js" type="text/javascript"></script>
     <script src="js/ajaxcommunicate.js"></script>
+    
     <script type="text/javascript">
+    
+  	var face = $("#faceaddress").val();
+  	var username = $("#studentname").val();
+  	var discuss1 = $("#courseid").val() + "-" + $("#studentid").val() + "-";
+  	var discuss2 = "-" + $("#studentname").val() + "-" + $("#studenthead").val();
     function logout(){
-  	  window.location="login_logout.action";
-    }
-    function personalCenter(){
-  	  window.location="login_personalCenter.action";
-    }
-    var address = $("#liveaddress").val();
-    var player = cyberplayer("playercontainer").setup({
-        width: document.body.scrollWidth*0.78, // 宽度，也可以支持百分比(不过父元素宽度要有)
-        height: document.body.scrollHeight*0.91, // 高度，也可以支持百分比
-        isLive: true, // 标明是否是直播
-        file: address+".flv", // flv直播地址（×一定要支持跨域访问，否则要设置primary参数）
-        autostart: true,
-        stretching: "uniform",
-        volume: 100,
-        controls: true,
-        ak: "c8731d89f53149f1b4f22a29e25146f9" // 公有云平台注册即可获得accessKey
-    });
-    function saveNote(){
-    	$(".bigimg").remove();
-    	$(".emptyNote").remove();
-    	var info = $("#notearea").val();
-    	if(info==""){
-    		;
-    	}else{
-        	$("#notearea").val("");
-        	ajaxSubmit("note_save.action",info);
-        	var myDate = new Date();
-        	var h = myDate.getHours();       //获取当前小时数(0-23)
-        	var m = myDate.getMinutes();     //获取当前分钟数(0-59)
-        	var s = myDate.getSeconds();
-        	var time = h + ":" + m + ":" + s + "：";
-        	$(".note_new").append("<li id='hz'>" + time + "" + info + "</li>");    		
-    	}
-    }
-    function saveDiscuss(){
-    	var info = $("#discussContent").val();
-    	if(info==""){
-    		;
-    	}else{
-        	$("#discussContent").val("");
-        	var face = $("#faceaddress").val();
-        	var myDate = new Date();
-        	var username = $("#studentname").val();
-        	var h = myDate.getHours();       //获取当前小时数(0-23)
-        	var m = myDate.getMinutes();     //获取当前分钟数(0-59)
-        	var s = myDate.getSeconds();
-        	var time = h + ":" + m + ":" + s + "：";
-        	var div = document.getElementById("discussArea");
-        	$(".discuss").append("<div class='discuss-right'><a href='javascript:void(0)''>"+username+" </a><img width='28px' height='28px' src='"+face+"' class='img-circle'><div><a class='discuss-right-a'>"+time+":"+info+"</a></div></div>");
-        	info = $("#courseid").val() + "-" + $("#studentid").val() + "-" + info + "-" + $("#studentname").val() + "-" + $("#studenthead").val();
-        	Chat.sendMessage(info);
-        	div.scrollTop = div.scrollHeight;
-    	}
-    }
-    var Console = {};
-    Console.callBack = (function(message) {
-    	var results = message.split("-");
-    	var studentid = results[4];
-    	var course = results[5];
-    	var courseid = $("#courseid").val();
-    	var userid = $("#studentid").val();
-    	if(userid != studentid && course == courseid){
-    		var div = document.getElementById("discussArea");
-        	$(".discuss").append("<div class='discuss-left'><img width='28px' height='28px' src='" + results[1] + "' class='img-circle'><a href='javascript:void(0)''>  "+ results[0] + " </a><div><a class='discuss-left-a'>" + results[2] + ":" + results[3] + "</a></div></div>");
-        	div.scrollTop = div.scrollHeight;
-    	}else{
-  		    ;
-    	}
-    });
-    var Chat = {};
-    Chat.socket = null;
-    Chat.connect = (function(host) {
-        if ('WebSocket' in window) {
-            Chat.socket = new WebSocket(host);
-        } else if ('MozWebSocket' in window) {
-            Chat.socket = new MozWebSocket(host);
-        } else {
-            return;
-        }
+    	  window.location="login_logout.action";
+      }
+      function personalCenter(){
+    	  window.location="login_personalCenter.action";
+      }
+      var address = $("#liveaddress").val();
+      
+      $(function(){
+      	$("#notearea").keydown(function(event){
+      		if(event.keyCode == 13){
+      			saveNote();
+      		}
+      	})
+      })    
+      $(function(){
+      	$("#discussContent").keydown(function(event){
+      		if(event.keyCode == 13){
+      			saveDiscuss();
+      		}
+      	})
+      })
 
-        Chat.socket.onopen = function() {
-            document.getElementById('chat').onkeydown = function(event) {
-                if (event.keyCode == 13) {
-                    Chat.sendMessage();
-                }
-            };
-        };
-        
-        Chat.socket.onclose = function() {
-            document.getElementById('chat').onkeydown = null;
-        };
+      var player = cyberplayer("playercontainer").setup({
+              width: $('#parentdiv').width(), // 宽度，也可以支持百分比(不过父元素宽度要有)
+              height: $('#d1').height(), // 高度，也可以支持百分比
+              isLive: true, // 标明是否是直播
+              file: address+".flv", // flv直播地址（×一定要支持跨域访问，否则要设置primary参数）
+              autostart: true,
+              stretching: "uniform",
+              volume: 100,
+              controls: true,
+              ak: "c8731d89f53149f1b4f22a29e25146f9" // 公有云平台注册即可获得accessKey
+      });
+      function saveNote(){
+      	$(".bigimg").remove();
+      	$(".emptyNote").remove();
+      	var info = $("#notearea").val();
+      	if(info==""){
+      		;
+      	}else{
+          	$("#notearea").val("");
+          	ajaxSubmit("note_save.action",info);
+          	var myDate = new Date();
+          	var h = myDate.getHours();       //获取当前小时数(0-23)
+          	var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+          	var s = myDate.getSeconds();
+          	var time = h + ":" + m + ":" + s + "：";
+          	$(".note_new").append("<li id='hz'>" + time + "" + info + "</li>");    		
+      	}
+      }
+      function saveDiscuss(){
+      	var info = $("#discussContent").val();
 
-        Chat.socket.onmessage = function(message) {
-            Console.callBack(message.data);
-        };
-    });
+      	if(info==""){
+      		;
+      	}else{
+          	$("#discussContent").val("");
+          	var myDate = new Date();
+          	var h = myDate.getHours();       //获取当前小时数(0-23)
+          	var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+          	var s = myDate.getSeconds();
+          	var time = h + ":" + m + ":" + s + "：";
+          	var div = document.getElementById("discussArea");
+          	$(".discuss").append("<div class='discuss-right'><a href='javascript:void(0)''>"+username+" </a><img width='28px' height='28px' src='"+face+"' class='img-circle'><div><a class='discuss-right-a'>"+time+":"+info+"</a></div></div>");
+          	info = discuss1 + info + discuss2;
+          	Chat.sendMessage(info);
+          	div.scrollTop = div.scrollHeight;
+      	}
+      }
+      var Console = {};
+      Console.callBack = (function(message) {
+      	var results = message.split("-");
+      	var studentid = results[4];
+      	var course = results[5];
+      	var courseid = $("#courseid").val();
+      	var userid = $("#studentid").val();
+      	if(userid != studentid && course == courseid){
+      		var div = document.getElementById("discussArea");
+          	$(".discuss").append("<div class='discuss-left'><img width='28px' height='28px' src='" + results[1] + "' class='img-circle'><a href='javascript:void(0)''>  "+ results[0] + " </a><div><a class='discuss-left-a'>" + results[2] + ":" + results[3] + "</a></div></div>");
+          	div.scrollTop = div.scrollHeight;
+      	}else{
+    		    ;
+      	}
+      });
+      var Chat = {};
+      Chat.socket = null;
+      Chat.connect = (function(host) {
+          if ('WebSocket' in window) {
+              Chat.socket = new WebSocket(host);
+          } else if ('MozWebSocket' in window) {
+              Chat.socket = new MozWebSocket(host);
+          } else {
+              return;
+          }
 
-    Chat.initialize = function(arg) {
-    	var ip = $("#ip").val();
-        Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
-    };
+          Chat.socket.onopen = function() {
 
-    Chat.sendMessage = (function(arg) {
-        if (arg != '') {
-            Chat.socket.send(arg);
-        }
-    });
-    Chat.initialize($("#studentid").val());
+          };
+          
+          Chat.socket.onclose = function() {
+
+          };
+
+          Chat.socket.onmessage = function(message) {
+              Console.callBack(message.data);
+          };
+      });
+
+      Chat.initialize = function(arg) {
+      	var ip = $("#ip").val();
+          Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
+      };
+
+      Chat.sendMessage = (function(arg) {
+          if (arg != '') {
+              Chat.socket.send(arg);
+          }
+      });
+      Chat.initialize($("#studentid").val());
     </script>
   </body>
 </html>

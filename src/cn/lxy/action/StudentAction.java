@@ -60,7 +60,8 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 	//学生用户注册新用户
 	public String add() {
 		student.setUserstatus(1);
-		student.setHead("http://"+ServerInfo.CAROUSEL_IMAGE_ADDRESS+"temphead.png");
+		student.setHead(ServerInfo.CAROUSEL_IMAGE_ADDRESS+"temphead.png");
+		student.setUsername("学霸" + student.getTel().substring(7));
 		servc.save(student);
 		if(student.getBirth()!=null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,7 +117,9 @@ public class StudentAction extends BasicAction implements ModelDriven<Student> {
 		student.setSelfintroduce(selfintroduce);
 		student.setBirth(d);
 		servc.save(student);
-		this.getSesion().put("Student",student);
+		this.getSesion().put("Student", student);
+		this.getSesion().put("userName", student.getName());
+		this.getSesion().put("StudentId", student.getId());
 		this.resultinfo = "1";
 		return "updateBasicInfo";
 	}

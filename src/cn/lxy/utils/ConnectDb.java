@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class ConnectDb {  
     private static String driveClassName = "com.mysql.jdbc.Driver";  
-    private static String url = "jdbc:mysql://"+ServerInfo.SERVER_IP+":3306/collegelive?useUnicode=true&characterEncoding=utf8";   
+    private static String url = "jdbc:mysql://"+ServerInfo.SERVER_IP2+":3306/"+ServerInfo.DBNAME+"?useUnicode=true&characterEncoding=utf8";   
       
-    private static String user = "root";
-    private static String password = "neighbour123";  
+    private static String user = ServerInfo.DBUSER;
+    private static String password = ServerInfo.DBPASS;  
       
     public static Connection Connect(){  
         Connection conn = null;   
