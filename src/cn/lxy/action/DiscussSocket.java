@@ -37,6 +37,9 @@ public class DiscussSocket {
     @OnOpen
     public void onOpen(@PathParam(value="userId") String userId, Session session) {
     	//
+        this.session = session;
+        webSocketMap.put(userId, this);//加入map中
+        System.out.println(userId+"连接加入！当前在线人数为" + getOnlineCount());
     }
 
     /**

@@ -19,6 +19,7 @@
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="shortcut icon" href="images/logo.jpg">
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/cyberplayer.js"></script>
@@ -50,7 +51,7 @@
         <input type="hidden" id="liveaddress" value="${liveAddress}" >
         <input type="hidden" id="faceaddress" value="${tempPicPath}"> 
         <input type="hidden" id="studentname" value="${userName}"> 
-        <input type="hidden" id="studenthead" value="${Student.head}"> 
+        <input type="hidden" id="studenthead" value="${liveAddress}"> 
         <input type="hidden" id="studentid" value="${Student.id}"> 
         <input type="hidden" id="courseid" value="${courseVo.course.id}"> 
         <input type="hidden" id="ip" value="${ip}"> 
@@ -191,6 +192,8 @@
   	var username = $("#studentname").val();
   	var discuss1 = $("#courseid").val() + "-" + $("#studentid").val() + "-";
   	var discuss2 = "-" + $("#studentname").val() + "-" + $("#studenthead").val();
+  	var courseid = $("#courseid").val();
+  	var userid = $("#studentid").val();
     function logout(){
     	  window.location="login_logout.action";
       }
@@ -263,11 +266,10 @@
       }
       var Console = {};
       Console.callBack = (function(message) {
+    	  alert(message);
       	var results = message.split("-");
       	var studentid = results[4];
       	var course = results[5];
-      	var courseid = $("#courseid").val();
-      	var userid = $("#studentid").val();
       	if(userid != studentid && course == courseid){
       		var div = document.getElementById("discussArea");
           	$(".discuss").append("<div class='discuss-left'><img width='28px' height='28px' src='" + results[1] + "' class='img-circle'><a href='javascript:void(0)''>  "+ results[0] + " </a><div><a class='discuss-left-a'>" + results[2] + ":" + results[3] + "</a></div></div>");
@@ -303,6 +305,7 @@
       Chat.initialize = function(arg) {
       	var ip = $("#ip").val();
           Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
+//           Chat.connect('ws://localhost:8080/CollegeLive/discuss/'+arg);
       };
 
       Chat.sendMessage = (function(arg) {

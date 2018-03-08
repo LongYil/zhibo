@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.lxy.dao.Impl.ExamDaoImpl;
 import cn.lxy.po.Exam;
 import cn.lxy.utils.AssembleExam;
+import cn.lxy.utils.ServerInfo;
 import cn.lxy.vo.AnalysedExam;
 import cn.lxy.vo.ExamVo;
 import jxl.Sheet;
@@ -88,10 +89,10 @@ public class ExamServc extends CommonSevc<Exam, ExamDaoImpl> {
 	}
 	public List<AnalysedExam> analyseExam(String arg) throws BiffException, IOException{
 		exam = this.findById(arg);
-		String fileRealAddress = ServletActionContext.getServletContext().getRealPath("/sourcefile/examfile");
-		System.out.println(fileRealAddress);
+//		String fileRealAddress = ServletActionContext.getServletContext().getRealPath("/CollegeLiveSourcefile/sourcefile/examfile");
 		String[] tempFileAddress = exam.getFileaddress().split("/");
-		Workbook book = Workbook.getWorkbook(new File(fileRealAddress+"/"+tempFileAddress[tempFileAddress.length-1]));	
+//		Workbook book = Workbook.getWorkbook(new File(fileRealAddress+"/"+tempFileAddress[tempFileAddress.length-1]));	
+		Workbook book = Workbook.getWorkbook(new File(ServerInfo.SOURCEFILE_REALPATH + "/examfile/" + tempFileAddress[tempFileAddress.length-1]));	
 		Sheet sheet = book.getSheets()[0];
 		listResult.clear();
 		int j=1;

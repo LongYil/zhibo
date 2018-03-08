@@ -49,7 +49,7 @@ public class FileUtils {
 	
 	public String saveFile(File file,String path,String name) throws Exception {
 		String[] tempnames = name.split("\\.");
-		name = tempnames[0]+"_"+(new SimpleDateFormat("YYYYMMddHHmmss").format(new Date()))+"."+tempnames[1];
+		name = (new SimpleDateFormat("YYYYMMddHHmmss").format(new Date()))+"."+tempnames[1];
 		OutputStream os = new FileOutputStream(new File(path,name));       
         InputStream is = new FileInputStream(file);     
         byte[] buf = new byte[1024];  

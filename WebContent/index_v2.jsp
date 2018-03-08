@@ -12,6 +12,7 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>理学院教学直播</title>
     <!-- Bootstrap -->
+    <link rel="shortcut icon" href="images/logo.jpg">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
