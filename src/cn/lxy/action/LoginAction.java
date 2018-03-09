@@ -63,7 +63,7 @@ public class LoginAction extends BasicAction {
 				this.getSesion().put("tempPicPath",student.getHead());
 				if(student.getBirth()!=null) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					String[] tempBirth = sdf.format(student.getBirth()).split("-");					
+					String[] tempBirth = sdf.format(student.getBirth()).split("-");
 					String[] birth = {tempBirth[0],tempBirth[1],tempBirth[2]};
 					this.getSesion().put("birth", birth);
 				}
@@ -118,7 +118,7 @@ public class LoginAction extends BasicAction {
 	//ajax验证用户登录
 	public String preLogin() throws Exception {	
 		HttpServletRequest request =  ServletActionContext.getRequest();
-		String info = request.getParameter("info");
+		String info = request.getParameter("info").replace("'", "");
 		info = URLDecoder.decode(info,"UTF-8");
 		this.resultinfo = "0";
 		String[] infos = info.split("-");//用户信息  用户类型-用户名-用户密码 用户类型：0 学生 1 教师 2 管理员
@@ -130,7 +130,11 @@ public class LoginAction extends BasicAction {
 			student = studentServc.login(infos[1], infos[2]);
 			if(student.getPassword() != null && student.getPassword() != "") {
 			  //学生存在
-			  this.resultinfo = "1";
+				if(student.getUserstatus() == 0) {
+					this.resultinfo = "2";
+				}else {
+					this.resultinfo = "1";
+				}			  
 			  return "preLogin";
 			}else {
 		      this.resultinfo = "0";

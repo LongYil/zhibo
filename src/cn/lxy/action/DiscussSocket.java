@@ -39,7 +39,6 @@ public class DiscussSocket {
     	//
         this.session = session;
         webSocketMap.put(userId, this);//加入map中
-        System.out.println(userId+"连接加入！当前在线人数为" + getOnlineCount());
     }
 
     /**
@@ -62,6 +61,7 @@ public class DiscussSocket {
     public void onMessage(@PathParam(value="userId") String userId, String message, Session session) throws Exception {
 //        System.out.println("来自客户端---------"+userId+"的消息:" + message);
         // 群发消息
+    	message = message.replace("script", "").replace("<", "").replace(">", "");
         String[] infos = message.split("-");//课程id-学生id-讨论内容 
         String time = "";
         Connection conn = null;

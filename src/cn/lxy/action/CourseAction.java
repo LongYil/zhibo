@@ -431,11 +431,11 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 	}
 	//观看视频
 	public String watch1() throws Exception {
+		student = (Student) this.getSesion().get("Student");
 		listNote.clear();
 		listDiscuss.clear();
 		HttpServletRequest request =  ServletActionContext.getRequest();
 		String tempId = request.getParameter("courseId");
-		student = (Student) this.getSesion().get("Student");
 		course = servc.findByCourseId(tempId);
 		courseVo.setTeacher(course.getTeacher().getName());
 		courseVo.setCourse(course);
@@ -445,10 +445,11 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.getSesion().put("liveAddress",course.getAddress());
 		this.noteSize = listNote.size();
 		this.discussSize = listDiscuss.size();
-		return "watch1";
+		return "watch1";			
 	}
 	//观看视频2
 	public String watch2() throws Exception {
+		
 		listNote.clear();
 		listDiscuss.clear();
 		HttpServletRequest request =  ServletActionContext.getRequest();
@@ -463,6 +464,7 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
 		this.getSesion().put("liveAddress",course.getAddress());
 		this.noteSize = listNote.size();
 		this.discussSize = listDiscuss.size();
+		
 		return "watch2";
 	}
 	//直播回调函数

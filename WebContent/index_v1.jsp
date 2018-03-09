@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         <div class="col-sm-4 col-md-4 col-lg-4" id="logo">
-          <a href="index.jsp"><h1>LOGO理学院直播</h1></a>
+          <a href="index.jsp"><h1>理学院教学直播</h1></a>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">  
          <input type="text" class="form-control input-search" placeholder="请输入教师姓名、课程名称" id="searchbox"/>
@@ -344,16 +344,23 @@
 	  var usertype = $("input[name='usertype']:checked").val().toString();
 	  var tempinfo = (usertype+"-"+username+"-"+password).toString();
 	  var resultinfo = ajaxSubmit("login_preLogin.action",tempinfo);
-	  if(resultinfo == 1){
-		  myRegistForm.submit();  
-	  }else{
-		  $(".loginInfo").html("用户名和密码不匹配").css("color","#e9686b");
-		  $("#username").val("");
-		  $("#password").val("");
-		  setTimeout(function(){
-			  $(".loginInfo").html("手机号登录").css("color","#000000");
-			  }, 2500);
-	  }
+  	  if(resultinfo == 1){
+    		myRegistForm.submit();  
+    	  }else if(resultinfo == 0){
+    		  $(".loginInfo").html("用户名和密码不匹配").css("color","#e9686b");
+    		  $("#username").val("");
+    		  $("#password").val("");
+    		  setTimeout(function(){
+    			  $(".loginInfo").html("手机号登录").css("color","#000000");
+    			  }, 2500);
+    	  }else{
+    		  $(".loginInfo").html("对不起,您的帐号已被禁用,请咨询管理员。").css("color","#e9686b");
+    		  $("#username").val("");
+    		  $("#password").val("");
+    		  setTimeout(function(){
+    			  $(".loginInfo").html("手机号登录").css("color","#000000");
+    		  }, 2500);
+    	  }
   }
 
 
