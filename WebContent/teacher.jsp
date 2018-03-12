@@ -72,6 +72,12 @@
                             <span class="nav-label">我的试题</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="J_menuItem" href="file/exammodel.xls">
+                            <i class="fa fa-book"></i>
+                            <span class="nav-label">试题模板</span>
+                        </a>
+                    </li>
                     <li class="line dk"></li>
 
                     <li class="line dk"></li>

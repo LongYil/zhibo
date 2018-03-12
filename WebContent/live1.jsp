@@ -304,8 +304,8 @@
 
       Chat.initialize = function(arg) {
       	var ip = $("#ip").val();
-          Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
-//           Chat.connect('ws://localhost:8080/CollegeLive/discuss/'+arg);
+//           Chat.connect('ws://'+ip+'/CollegeLive/discuss/'+arg);
+          Chat.connect('ws://localhost:8080/CollegeLive/discuss/'+arg);
       };
 
       Chat.sendMessage = (function(arg) {

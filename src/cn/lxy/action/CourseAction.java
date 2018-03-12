@@ -483,15 +483,22 @@ public class CourseAction extends BasicAction implements ModelDriven<Course> {
        	String tempStreamId = jsonObject.get("channel_id").toString();
        	String streamId = ServerInfo.STREAM_SHORT + tempStreamId + "?" + (jsonObject.get("stream_param").toString());
        	int event_type = Integer.parseInt(jsonObject.get("event_type").toString());
+       	
        	if(event_type==100) {
        		course = servc.findByStreamId(streamId);
        		String address = (String) jsonObject.get("video_url");
        		course.setAddress(address);
        		course.setCoursetype(1);
        		servc.save(course);
+       	}else if(event_type != 1 && event_type != 0 && event_type != 100){
+       		course = servc.findByStreamId(streamId);
+       		String address = (String) jsonObject.get("video_url");
+       		course.setAddress(address);
+       		course.setCoursetype(2);
+       		servc.save(course);
        	}else {
        		;
-       	}		
+       	}
 		return null;
 	}
 	//查看课程信息
